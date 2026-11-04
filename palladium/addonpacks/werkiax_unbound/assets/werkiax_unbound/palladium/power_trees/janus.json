@@ -1,22 +1,22 @@
 {
-  "grid_size": 56,
+  "grid_size": 36,
   "auto_connect": false,
   "node_styles": {
     "default": {
-      "size": 28,
-      "icon_size": 18,
+      "size": 26,
+      "icon_size": 16,
       "overlay": false,
       "show_icon": true
     },
     "root": {
-      "size": 36,
-      "icon_size": 26,
+      "size": 32,
+      "icon_size": 22,
       "overlay": false,
       "show_icon": true
     },
     "hub": {
-      "size": 32,
-      "icon_size": 22,
+      "size": 30,
+      "icon_size": 20,
       "overlay": false,
       "show_icon": true
     }
@@ -36,15 +36,15 @@
   "nodes": {
     "form_switch": {
       "pos": [
-        6,
-        4.5
+        5,
+        3
       ],
       "style": "root"
     },
     "might_form": {
       "pos": [
-        3.5,
-        2.5
+        4,
+        2
       ],
       "style": "hub",
       "title": "Might Form",
@@ -53,8 +53,8 @@
     },
     "bulwark_form": {
       "pos": [
-        8.5,
-        2.5
+        6,
+        2
       ],
       "style": "hub",
       "title": "Bulwark Form",
@@ -62,65 +62,137 @@
       "description": "Slow and highly defensive. Heavy armor and damage reduction, no regeneration, Kinetic Energy gained by taking damage."
     },
     "power_strike": [
-      1.0,
-      1.5
+      3,
+      2
     ],
     "bowling_ball": [
-      2.5,
-      0
+      3.5,
+      1
     ],
     "berserk": [
       4.5,
-      0
+      1
     ],
     "kinetic_repulsion": [
-      7.5,
-      0
+      5.5,
+      1
     ],
     "crater": [
-      9.5,
-      0
+      6.5,
+      1
     ],
     "anchor": [
-      11.0,
-      1.5
+      7,
+      2
     ],
-    "armor_upgrade_1": [
-      3.5,
-      6.5
-    ],
-    "armor_upgrade_2": [
-      2.5,
-      8.0
-    ],
-    "armor_upgrade_3": [
-      1.5,
-      9.5
-    ],
-    "damage_upgrade_1": [
-      6.0,
-      7.0
-    ],
-    "damage_upgrade_2": [
-      6.0,
-      8.5
-    ],
-    "damage_upgrade_3": [
-      6.0,
-      10.0
-    ],
-    "health_upgrade_1": [
-      8.5,
-      6.5
-    ],
-    "health_upgrade_2": [
-      9.5,
-      8.0
-    ],
-    "health_upgrade_3": [
-      10.5,
-      9.5
-    ]
+    "armor_upgrade_1": {
+      "pos": [
+        3.5,
+        4
+      ],
+      "title": "Armor I",
+      "icon": "minecraft:iron_chestplate",
+      "description": "Armor +2 in Might Form, +6 in Bulwark Form."
+    },
+    "armor_upgrade_2": {
+      "pos": [
+        3.5,
+        5
+      ],
+      "title": "Armor II",
+      "icon": "minecraft:iron_chestplate",
+      "description": "Armor +3 in Might Form, +8 in Bulwark Form."
+    },
+    "armor_upgrade_3": {
+      "pos": [
+        3.5,
+        6
+      ],
+      "title": "Armor III",
+      "icon": "minecraft:iron_chestplate",
+      "description": "Armor +4 in Might Form, +10 in Bulwark Form."
+    },
+    "damage_upgrade_1": {
+      "pos": [
+        4.5,
+        4
+      ],
+      "title": "Damage I",
+      "icon": "minecraft:diamond_sword",
+      "description": "Damage +6 in Might Form, +2 in Bulwark Form."
+    },
+    "damage_upgrade_2": {
+      "pos": [
+        4.5,
+        5
+      ],
+      "title": "Damage II",
+      "icon": "minecraft:diamond_sword",
+      "description": "Damage +8 in Might Form, +3 in Bulwark Form."
+    },
+    "damage_upgrade_3": {
+      "pos": [
+        4.5,
+        6
+      ],
+      "title": "Damage III",
+      "icon": "minecraft:diamond_sword",
+      "description": "Damage +10 in Might Form, +4 in Bulwark Form."
+    },
+    "health_upgrade_1": {
+      "pos": [
+        5.5,
+        4
+      ],
+      "title": "Health I",
+      "icon": "minecraft:golden_apple",
+      "description": "Health +2 in Might Form, +6 in Bulwark Form."
+    },
+    "health_upgrade_2": {
+      "pos": [
+        5.5,
+        5
+      ],
+      "title": "Health II",
+      "icon": "minecraft:golden_apple",
+      "description": "Health +3 in Might Form, +8 in Bulwark Form."
+    },
+    "health_upgrade_3": {
+      "pos": [
+        5.5,
+        6
+      ],
+      "title": "Health III",
+      "icon": "minecraft:golden_apple",
+      "description": "Health +4 in Might Form, +10 in Bulwark Form."
+    },
+    "speed_upgrade_1": {
+      "pos": [
+        6.5,
+        4
+      ],
+      "title": "Speed I",
+      "icon": "minecraft:sugar",
+      "description": "Speed +6 in Might Form, +2 in Bulwark Form."
+    },
+    "speed_upgrade_2": {
+      "pos": [
+        6.5,
+        5
+      ],
+      "title": "Speed II",
+      "icon": "minecraft:sugar",
+      "description": "Speed +8 in Might Form, +3 in Bulwark Form."
+    },
+    "speed_upgrade_3": {
+      "pos": [
+        6.5,
+        6
+      ],
+      "title": "Speed III",
+      "icon": "minecraft:sugar",
+      "description": "Speed +10 in Might Form, +4 in Bulwark Form."
+    }
   },
   "connections": [
     {
@@ -190,17 +262,29 @@
     {
       "from": "health_upgrade_2",
       "to": "health_upgrade_3"
+    },
+    {
+      "from": "form_switch",
+      "to": "speed_upgrade_1"
+    },
+    {
+      "from": "speed_upgrade_1",
+      "to": "speed_upgrade_2"
+    },
+    {
+      "from": "speed_upgrade_2",
+      "to": "speed_upgrade_3"
     }
   ],
   "regions": [
     {
       "pos": [
-        0.5,
-        -0.5
+        2.4,
+        0.4
       ],
       "size": [
-        5,
-        4
+        2.5,
+        2.1
       ],
       "label": "Might",
       "label_color": "#D9B3FF",
@@ -208,12 +292,12 @@
     },
     {
       "pos": [
-        6.5,
-        -0.5
+        5.1,
+        0.4
       ],
       "size": [
-        5,
-        4
+        2.5,
+        2.1
       ],
       "label": "Bulwark",
       "label_color": "#B3C4FF",
@@ -221,12 +305,12 @@
     },
     {
       "pos": [
-        1,
-        5.5
+        2.8,
+        3.5
       ],
       "size": [
-        10,
-        5.5
+        4.4,
+        3.0
       ],
       "label": "Upgrades",
       "label_color": "#FFFFFF",

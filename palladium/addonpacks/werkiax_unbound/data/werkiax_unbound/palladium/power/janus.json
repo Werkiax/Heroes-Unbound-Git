@@ -1660,164 +1660,866 @@
       }
     },
     "health_upgrade_1": {
-      "type": "palladium:attribute_modifier",
+      "type": "palladium:dummy",
       "properties": {
         "title": "Health I",
-        "description": "Permanently increases your maximum health by 2 hearts.",
+        "description": "Health +2 in Might Form, +6 in Bulwark Form.",
         "icon": "minecraft:golden_apple",
         "list_index": 5,
         "color": "purple"
-      },
-      "modifiers": [
-        {
-          "attribute": "minecraft:max_health",
-          "amount": 4.0,
-          "operation": "add_value",
-          "id": "werkiax_unbound:upgrade_health_1"
-        }
-      ]
+      }
     },
     "health_upgrade_2": {
-      "type": "palladium:attribute_modifier",
+      "type": "palladium:dummy",
       "properties": {
         "title": "Health II",
-        "description": "Permanently increases your maximum health by 2 hearts. Requires Health I.",
+        "description": "Health +3 in Might Form, +8 in Bulwark Form. Requires Health I.",
         "icon": "minecraft:enchanted_golden_apple",
         "list_index": 6,
         "color": "purple"
-      },
-      "modifiers": [
-        {
-          "attribute": "minecraft:max_health",
-          "amount": 4.0,
-          "operation": "add_value",
-          "id": "werkiax_unbound:upgrade_health_2"
-        }
-      ]
+      }
     },
     "health_upgrade_3": {
-      "type": "palladium:attribute_modifier",
+      "type": "palladium:dummy",
       "properties": {
         "title": "Health III",
-        "description": "Permanently increases your maximum health by 2 hearts. Requires Health II.",
+        "description": "Health +4 in Might Form, +10 in Bulwark Form. Requires Health II.",
         "icon": "minecraft:totem_of_undying",
         "list_index": 7,
         "color": "purple"
+      }
+    },
+    "damage_upgrade_1": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Damage I",
+        "description": "Damage +6 in Might Form, +2 in Bulwark Form.",
+        "icon": "minecraft:iron_sword",
+        "list_index": 8,
+        "color": "purple"
+      }
+    },
+    "damage_upgrade_2": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Damage II",
+        "description": "Damage +8 in Might Form, +3 in Bulwark Form. Requires Damage I.",
+        "icon": "minecraft:diamond_sword",
+        "list_index": 9,
+        "color": "purple"
+      }
+    },
+    "damage_upgrade_3": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Damage III",
+        "description": "Damage +10 in Might Form, +4 in Bulwark Form. Requires Damage II.",
+        "icon": "minecraft:netherite_sword",
+        "list_index": 10,
+        "color": "purple"
+      }
+    },
+    "armor_upgrade_1": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Armor I",
+        "description": "Armor +2 in Might Form, +6 in Bulwark Form.",
+        "icon": "minecraft:iron_chestplate",
+        "list_index": 11,
+        "color": "purple"
+      }
+    },
+    "armor_upgrade_2": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Armor II",
+        "description": "Armor +3 in Might Form, +8 in Bulwark Form. Requires Armor I.",
+        "icon": "minecraft:diamond_chestplate",
+        "list_index": 12,
+        "color": "purple"
+      }
+    },
+    "armor_upgrade_3": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Armor III",
+        "description": "Armor +4 in Might Form, +10 in Bulwark Form. Requires Armor II.",
+        "icon": "minecraft:netherite_chestplate",
+        "list_index": 13,
+        "color": "purple"
+      }
+    },
+    "health_upgrade_1_might": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#health_upgrade_1"
+          }
+        ]
       },
       "modifiers": [
         {
           "attribute": "minecraft:max_health",
-          "amount": 4.0,
+          "amount": 2,
           "operation": "add_value",
-          "id": "werkiax_unbound:upgrade_health_3"
+          "id": "werkiax_unbound:upgrade_health_1_might"
         }
       ]
     },
-    "damage_upgrade_1": {
+    "health_upgrade_1_bulwark": {
       "type": "palladium:attribute_modifier",
       "properties": {
-        "title": "Damage I",
-        "description": "Permanently increases your attack damage by 2.",
-        "icon": "minecraft:iron_sword",
-        "list_index": 8,
-        "color": "purple"
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#health_upgrade_1"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 6,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_health_1_bulwark"
+        }
+      ]
+    },
+    "health_upgrade_2_might": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#health_upgrade_2"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 3,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_health_2_might"
+        }
+      ]
+    },
+    "health_upgrade_2_bulwark": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#health_upgrade_2"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 8,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_health_2_bulwark"
+        }
+      ]
+    },
+    "health_upgrade_3_might": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#health_upgrade_3"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 4,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_health_3_might"
+        }
+      ]
+    },
+    "health_upgrade_3_bulwark": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#health_upgrade_3"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 10,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_health_3_bulwark"
+        }
+      ]
+    },
+    "damage_upgrade_1_might": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#damage_upgrade_1"
+          }
+        ]
       },
       "modifiers": [
         {
           "attribute": "minecraft:attack_damage",
-          "amount": 2.0,
+          "amount": 6,
           "operation": "add_value",
-          "id": "werkiax_unbound:upgrade_damage_1"
+          "id": "werkiax_unbound:upgrade_damage_1_might"
         }
       ]
     },
-    "damage_upgrade_2": {
+    "damage_upgrade_1_bulwark": {
       "type": "palladium:attribute_modifier",
       "properties": {
-        "title": "Damage II",
-        "description": "Permanently increases your attack damage by 2. Requires Damage I.",
-        "icon": "minecraft:diamond_sword",
-        "list_index": 9,
-        "color": "purple"
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#damage_upgrade_1"
+          }
+        ]
       },
       "modifiers": [
         {
           "attribute": "minecraft:attack_damage",
-          "amount": 2.0,
+          "amount": 2,
           "operation": "add_value",
-          "id": "werkiax_unbound:upgrade_damage_2"
+          "id": "werkiax_unbound:upgrade_damage_1_bulwark"
         }
       ]
     },
-    "damage_upgrade_3": {
+    "damage_upgrade_2_might": {
       "type": "palladium:attribute_modifier",
       "properties": {
-        "title": "Damage III",
-        "description": "Permanently increases your attack damage by 2. Requires Damage II.",
-        "icon": "minecraft:netherite_sword",
-        "list_index": 10,
-        "color": "purple"
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#damage_upgrade_2"
+          }
+        ]
       },
       "modifiers": [
         {
           "attribute": "minecraft:attack_damage",
-          "amount": 2.0,
+          "amount": 8,
           "operation": "add_value",
-          "id": "werkiax_unbound:upgrade_damage_3"
+          "id": "werkiax_unbound:upgrade_damage_2_might"
         }
       ]
     },
-    "armor_upgrade_1": {
+    "damage_upgrade_2_bulwark": {
       "type": "palladium:attribute_modifier",
       "properties": {
-        "title": "Armor I",
-        "description": "Permanently increases your armor by 2.",
-        "icon": "minecraft:iron_chestplate",
-        "list_index": 11,
-        "color": "purple"
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#damage_upgrade_2"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 3,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_damage_2_bulwark"
+        }
+      ]
+    },
+    "damage_upgrade_3_might": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#damage_upgrade_3"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 10,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_damage_3_might"
+        }
+      ]
+    },
+    "damage_upgrade_3_bulwark": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#damage_upgrade_3"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 4,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_damage_3_bulwark"
+        }
+      ]
+    },
+    "armor_upgrade_1_might": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#armor_upgrade_1"
+          }
+        ]
       },
       "modifiers": [
         {
           "attribute": "minecraft:armor",
-          "amount": 2.0,
+          "amount": 2,
           "operation": "add_value",
-          "id": "werkiax_unbound:upgrade_armor_1"
+          "id": "werkiax_unbound:upgrade_armor_1_might"
         }
       ]
     },
-    "armor_upgrade_2": {
+    "armor_upgrade_1_bulwark": {
       "type": "palladium:attribute_modifier",
       "properties": {
-        "title": "Armor II",
-        "description": "Permanently increases your armor by 2. Requires Armor I.",
-        "icon": "minecraft:diamond_chestplate",
-        "list_index": 12,
-        "color": "purple"
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#armor_upgrade_1"
+          }
+        ]
       },
       "modifiers": [
         {
           "attribute": "minecraft:armor",
-          "amount": 2.0,
+          "amount": 6,
           "operation": "add_value",
-          "id": "werkiax_unbound:upgrade_armor_2"
+          "id": "werkiax_unbound:upgrade_armor_1_bulwark"
         }
       ]
     },
-    "armor_upgrade_3": {
+    "armor_upgrade_2_might": {
       "type": "palladium:attribute_modifier",
       "properties": {
-        "title": "Armor III",
-        "description": "Permanently increases your armor by 2. Requires Armor II.",
-        "icon": "minecraft:netherite_chestplate",
-        "list_index": 13,
-        "color": "purple"
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#armor_upgrade_2"
+          }
+        ]
       },
       "modifiers": [
         {
           "attribute": "minecraft:armor",
-          "amount": 2.0,
+          "amount": 3,
           "operation": "add_value",
-          "id": "werkiax_unbound:upgrade_armor_3"
+          "id": "werkiax_unbound:upgrade_armor_2_might"
+        }
+      ]
+    },
+    "armor_upgrade_2_bulwark": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#armor_upgrade_2"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:armor",
+          "amount": 8,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_armor_2_bulwark"
+        }
+      ]
+    },
+    "armor_upgrade_3_might": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#armor_upgrade_3"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:armor",
+          "amount": 4,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_armor_3_might"
+        }
+      ]
+    },
+    "armor_upgrade_3_bulwark": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#armor_upgrade_3"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:armor",
+          "amount": 10,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_armor_3_bulwark"
+        }
+      ]
+    },
+    "speed_upgrade_1": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Speed I",
+        "description": "Speed +6% in Might Form, +2% in Bulwark Form.",
+        "icon": "minecraft:sugar",
+        "list_index": 14,
+        "color": "purple"
+      }
+    },
+    "speed_upgrade_1_might": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#speed_upgrade_1"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": 0.06,
+          "operation": "add_multiplied_base",
+          "id": "werkiax_unbound:upgrade_speed_1_might"
+        }
+      ]
+    },
+    "speed_upgrade_1_bulwark": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#speed_upgrade_1"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": 0.02,
+          "operation": "add_multiplied_base",
+          "id": "werkiax_unbound:upgrade_speed_1_bulwark"
+        }
+      ]
+    },
+    "speed_upgrade_2": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Speed II",
+        "description": "Speed +8% in Might Form, +3% in Bulwark Form. Requires Speed I.",
+        "icon": "minecraft:feather",
+        "list_index": 15,
+        "color": "purple"
+      }
+    },
+    "speed_upgrade_2_might": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#speed_upgrade_2"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": 0.08,
+          "operation": "add_multiplied_base",
+          "id": "werkiax_unbound:upgrade_speed_2_might"
+        }
+      ]
+    },
+    "speed_upgrade_2_bulwark": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#speed_upgrade_2"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": 0.03,
+          "operation": "add_multiplied_base",
+          "id": "werkiax_unbound:upgrade_speed_2_bulwark"
+        }
+      ]
+    },
+    "speed_upgrade_3": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Speed III",
+        "description": "Speed +10% in Might Form, +4% in Bulwark Form. Requires Speed II.",
+        "icon": "minecraft:rabbit_foot",
+        "list_index": 16,
+        "color": "purple"
+      }
+    },
+    "speed_upgrade_3_might": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#speed_upgrade_3"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": 0.1,
+          "operation": "add_multiplied_base",
+          "id": "werkiax_unbound:upgrade_speed_3_might"
+        }
+      ]
+    },
+    "speed_upgrade_3_bulwark": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#speed_upgrade_3"
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": 0.04,
+          "operation": "add_multiplied_base",
+          "id": "werkiax_unbound:upgrade_speed_3_bulwark"
         }
       ]
     }
