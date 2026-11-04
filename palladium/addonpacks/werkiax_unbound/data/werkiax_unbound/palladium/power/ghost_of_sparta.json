@@ -1,0 +1,471 @@
+{
+  "name": "Ghost of Sparta",
+  "icon": "minecraft:iron_axe",
+  "energy_bars": {
+    "fury": {
+      "max": 400,
+      "color": "ff3300",
+      "synced_value": {
+        "type": "palladium:integer_data_attachment",
+        "attachment": "werkiax_unbound:fury",
+        "fallback": 0
+      }
+    }
+  },
+  "abilities": {
+    "combo": {
+      "type": "palladium:combo_attack",
+      "required_attacks": 3,
+      "bonus_damage": 8.0,
+      "reset_time": "5s",
+      "on_final_attack": [
+        {
+          "type": "palladium:play_sound",
+          "sound": "minecraft:entity.generic.explode",
+          "volume": 0.6,
+          "pitch": 1.2
+        },
+        {
+          "type": "palladium:run_command",
+          "command": [
+            "execute positioned ^ ^1.2 ^1.5 run particle minecraft:explosion ~ ~ ~ 0 0 0 0 1",
+            "particle minecraft:crit ~ ~1 ~ 0.6 0.6 0.6 0.6 40"
+          ]
+        }
+      ],
+      "properties": {
+        "hidden_in_gui": true
+      }
+    },
+    "combo_shake": {
+      "type": "palladium:screen_shake",
+      "intensity": {
+        "yaw": 1.2,
+        "pitch": 1.2,
+        "roll": 0.4
+      },
+      "frequency": 0.6,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:combo_attack_final",
+            "ability": "werkiax_unbound:ghost_of_sparta#combo"
+          }
+        ]
+      }
+    },
+    "leap": {
+      "type": "palladium:multi_jump",
+      "max_jumps": 1,
+      "jump_velocity": 0.9,
+      "forward_velocity": 0.9,
+      "sound": "minecraft:entity.breeze.jump",
+      "properties": {
+        "hidden_in_gui": true
+      }
+    },
+    "stomp": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Ground Stomp",
+        "icon": {
+          "type": "palladium:texture",
+          "texture": "werkiax_unbound:textures/icons/spartan_stomp.png"
+        },
+        "list_index": 2
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 3
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "charge_leap"
+          }
+        },
+        "enabling": {
+          "type": "palladium:key_bind",
+          "behaviour": "activation",
+          "time": "2s",
+          "cooldown": "5s"
+        }
+      }
+    },
+    "charge_leap": {
+      "type": "palladium:action",
+      "last_tick_action": {
+        "type": "palladium:conditional",
+        "condition": [
+          {
+            "type": "palladium:ability_ticks",
+            "ability": "werkiax_unbound:ghost_of_sparta#charge_leap",
+            "min": 20
+          },
+          {
+            "type": "palladium:on_ground"
+          }
+        ],
+        "on_true": [
+          {
+            "type": "palladium:leap",
+            "velocity_modifier": {
+              "type": "palladium:ability_tick_count",
+              "ability": "werkiax_unbound:ghost_of_sparta#charge_leap",
+              "modify": "math.clamp(1.0 + (this / 20) * 0.75, 1.0, 3.5)"
+            }
+          },
+          {
+            "type": "palladium:play_sound",
+            "sound": "minecraft:entity.wind_charge.wind_burst",
+            "volume": 1.0,
+            "pitch": 0.8
+          },
+          {
+            "type": "palladium:play_sound",
+            "sound": "minecraft:entity.firework_rocket.blast",
+            "volume": 0.7,
+            "pitch": 0.7
+          }
+        ]
+      },
+      "properties": {
+        "title": "Spartan Leap",
+        "icon": {
+          "type": "palladium:texture",
+          "texture": "werkiax_unbound:textures/icons/spartan_leap.png"
+        },
+        "list_index": 1
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 2
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "grab"
+          }
+        },
+        "enabling": {
+          "type": "palladium:key_bind",
+          "behaviour": "held",
+          "cooldown": "5s"
+        }
+      }
+    },
+    "grab": {
+      "type": "argon:carry",
+      "range": 4,
+      "attachment": [
+        0.0,
+        2.3,
+        0.8
+      ],
+      "maximum_distance": 2.0,
+      "allow_players": true,
+      "properties": {
+        "title": "Grab",
+        "icon": {
+          "type": "palladium:texture",
+          "texture": "werkiax_unbound:textures/icons/spartan_grab.png"
+        },
+        "list_index": 0
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 1
+          }
+        },
+        "enabling": {
+          "type": "palladium:key_bind",
+          "behaviour": "held"
+        }
+      }
+    },
+    "stomp_blast": {
+      "type": "argon:explosion",
+      "radius": 3.0,
+      "destroy_environment": false,
+      "damage_self": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_ticks",
+            "ability": "werkiax_unbound:ghost_of_sparta#stomp",
+            "min": 10,
+            "max": 12
+          }
+        ]
+      }
+    },
+    "stomp_quake": {
+      "type": "argon:earthquake",
+      "range": 4,
+      "strength": 0.5,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_ticks",
+            "ability": "werkiax_unbound:ghost_of_sparta#stomp",
+            "min": 10
+          }
+        ]
+      }
+    },
+    "stats": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 30.0,
+          "operation": "add_value"
+        },
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 16.0,
+          "operation": "add_value"
+        },
+        {
+          "attribute": "minecraft:armor",
+          "amount": 20.0,
+          "operation": "add_value"
+        },
+        {
+          "attribute": "minecraft:knockback_resistance",
+          "amount": 0.2,
+          "operation": "add_value"
+        },
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": 0.3,
+          "operation": "add_multiplied_base"
+        }
+      ],
+      "properties": {
+        "hidden_in_gui": true
+      }
+    },
+    "rage": {
+      "type": "palladium:dual_wielding",
+      "properties": {
+        "title": "Rage",
+        "icon": {
+          "type": "palladium:texture",
+          "texture": "werkiax_unbound:textures/icons/spartan_rage.png"
+        },
+        "list_index": 3
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 5
+          },
+          "requires": [
+            {
+              "type": "palladium:ability_unlocked",
+              "ability": "stomp"
+            },
+            {
+              "type": "palladium:energy_bar",
+              "energy_bar": "werkiax_unbound:ghost_of_sparta#fury",
+              "min": 5
+            }
+          ]
+        },
+        "enabling": {
+          "type": "palladium:key_bind",
+          "behaviour": "toggle",
+          "cooldown": "10s"
+        }
+      }
+    },
+    "rage_drain": {
+      "type": "palladium:action",
+      "action": {
+        "type": "palladium:modify_number_data_attachment",
+        "attachment": "werkiax_unbound:fury",
+        "operation": "-",
+        "value": 1
+      },
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:ghost_of_sparta#rage"
+          }
+        ]
+      }
+    },
+    "rage_roar": {
+      "type": "palladium:action",
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": "playsound werkiax_unbound:rage_roar player @a ~ ~ ~ 1 1"
+      },
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:ghost_of_sparta#rage"
+          }
+        ]
+      }
+    },
+    "rage_bonus": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 10.0,
+          "operation": "add_value"
+        },
+        {
+          "attribute": "minecraft:armor",
+          "amount": 10.0,
+          "operation": "add_value"
+        },
+        {
+          "attribute": "minecraft:attack_knockback",
+          "amount": 1.5,
+          "operation": "add_value"
+        }
+      ],
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:ghost_of_sparta#rage"
+          }
+        ]
+      }
+    },
+    "regen": {
+      "type": "palladium:healing",
+      "frequency": 40,
+      "amount": 2.0,
+      "properties": {
+        "color": "red",
+        "hidden_in_gui": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:not",
+            "conditions": {
+              "type": "palladium:ability_enabled",
+              "ability": "werkiax_unbound:ghost_of_sparta#rage"
+            }
+          }
+        ]
+      }
+    },
+    "regen_rage": {
+      "type": "palladium:healing",
+      "frequency": 40,
+      "amount": 1.0,
+      "properties": {
+        "color": "red",
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:ghost_of_sparta#rage"
+          }
+        ]
+      }
+    },
+    "immunities": {
+      "type": "palladium:damage_immunity",
+      "damage_type": "minecraft:fall",
+      "properties": {
+        "hidden_in_gui": true
+      }
+    },
+    "damage_reduction": {
+      "type": "argon:damage_reduction",
+      "percentage": 50,
+      "damage_types": [
+        "minecraft:on_fire",
+        "minecraft:in_fire",
+        "minecraft:lava",
+        "minecraft:explosion",
+        "minecraft:player_explosion"
+      ],
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:not",
+            "conditions": {
+              "type": "palladium:ability_enabled",
+              "ability": "werkiax_unbound:ghost_of_sparta#rage"
+            }
+          }
+        ]
+      }
+    },
+    "damage_reduction_rage": {
+      "type": "argon:damage_reduction",
+      "percentage": 20,
+      "damage_types": [
+        "minecraft:on_fire",
+        "minecraft:in_fire",
+        "minecraft:lava",
+        "minecraft:explosion",
+        "minecraft:player_explosion"
+      ],
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:ghost_of_sparta#rage"
+          }
+        ]
+      }
+    }
+  }
+}

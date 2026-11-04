@@ -1,0 +1,202 @@
+<html>
+<head>
+<title>
+Enabling Handlers</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }.type-badge{display:inline-block;margin-left:10px;padding:2px 8px;border-radius:10px;font-size:0.6em;font-weight:normal;vertical-align:middle;background-color:#42A3FF;color:white;}</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+<style>
+.json-block { background-color: lightgray; display: inline-block; border: 5px solid darkgray; padding: 10px }</style>
+</head>
+<body>
+<h1>
+Enabling Handlers</h1>
+<hr>
+
+<p>
+<h2>
+Overview</h2>
+<h3>
+Palladium</h3>
+<ul>
+<li>
+<a href="#palladium:conditional">
+Conditional</a>
+</li>
+<li>
+<a href="#palladium:key_bind">
+Key Bind</a>
+</li>
+</ul>
+</p>
+<hr>
+
+<div>
+<h2 id="palladium:conditional">
+Conditional</h2>
+<p>
+Enables the ability for as long as the given conditions are fulfilled. You can also skip the handler object and just put the condition(s) straight into the 'enabling' field, it does the same thing.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+conditions</td>
+<td>
+Condition | Condition[]</td>
+<td>
+The condition(s) that need to be fulfilled for the ability to be enabled.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:conditional","conditions":{"type":"palladium:crouching"}}</pre>
+<pre class="json-snippet">
+{"type":"palladium:conditional","conditions":[{"type":"palladium:crouching"},{"type":"palladium:on_ground"}]}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:key_bind">
+Key Bind</h2>
+<p>
+Enables the ability when the player presses a key. What exactly happens on a key press depends on the behaviour.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+cooldown</td>
+<td>
+Integer | Time String ("40s", "2m", etc.) | (Dynamic) Value</td>
+<td>
+Time the player has to wait before the ability can be used again. For 'activation' the cooldown starts right when the key is pressed, for 'toggle' and 'held' it starts once the ability turns off. 0 means no cooldown.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+behaviour</td>
+<td>
+"activation" | "toggle" | "held"</td>
+<td>
+How the ability reacts to the key. 'activation' turns it on for a set time after a single press, 'toggle' switches it on and off with each press, and 'held' keeps it on for as long as the key is held down.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+activation</td>
+</tr>
+<tr>
+<td>
+key_bind</td>
+<td>
+Key Bind Type</td>
+<td>
+The key that is used for the ability. By default this is the ability key matching the ability's slot in the ability bar.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+palladium:ability_key</td>
+</tr>
+<tr>
+<td>
+time</td>
+<td>
+Integer | Time String ("40s", "2m", etc.) | (Dynamic) Value</td>
+<td>
+Depends on the behaviour. For 'activation' it's how long the ability stays on after pressing the key (at least 1 tick). For 'toggle' and 'held' it's the maximum time the ability can stay on before it turns off by itself, 0 means there is no limit.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:key_bind"}</pre>
+<pre class="json-snippet">
+{"type":"palladium:key_bind","behaviour":"toggle","cooldown":100,"time":200}</pre>
+<pre class="json-snippet">
+{"type":"palladium:key_bind","key_bind":{"type":"palladium:jump","cancel_jump":true},"behaviour":"held","cooldown":40}</pre>
+</div>
+<script>
+function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    const elements = document.getElementsByClassName("json-snippet");
+    const amount = elements.length;
+    for (let i = 0; i < amount; i++) {
+        const element = elements[0];
+        const div = document.createElement("pre");
+        div.innerHTML = syntaxHighlight(JSON.stringify(JSON.parse(element.innerText), undefined, 4));
+        element.parentNode.replaceChild(div, element);
+    }</script>
+</body>
+</html>

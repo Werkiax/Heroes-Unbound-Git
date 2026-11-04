@@ -1,0 +1,500 @@
+<html>
+<head>
+<title>
+Dynamic Textures</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }.type-badge{display:inline-block;margin-left:10px;padding:2px 8px;border-radius:10px;font-size:0.6em;font-weight:normal;vertical-align:middle;background-color:#42A3FF;color:white;}</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+<style>
+.json-block { background-color: lightgray; display: inline-block; border: 5px solid darkgray; padding: 10px }</style>
+</head>
+<body>
+<h1>
+Dynamic Textures</h1>
+<hr>
+
+<p>
+<h2>
+Overview</h2>
+<h3>
+Palladium</h3>
+<ul>
+<li>
+<a href="#palladium:configured">
+Configured Texture</a>
+</li>
+<li>
+<a href="#palladium:entity">
+Entity Texture</a>
+</li>
+<li>
+<a href="#palladium:eye_selection">
+Eye Selection Texture</a>
+</li>
+<li>
+<a href="#palladium:static">
+Static Texture</a>
+</li>
+</ul>
+<h3>
+Argon</h3>
+<ul>
+<li>
+<a href="#argon:armor_or_skin">
+Armor Or Skin Texture</a>
+</li>
+<li>
+<a href="#argon:chest_armor">
+Chest Armor Texture</a>
+</li>
+<li>
+<a href="#argon:eye_selection_secondary">
+Secondary Eye Selection Texture</a>
+</li>
+<li>
+<a href="#argon:mouth_selection">
+Mouth Selection Texture</a>
+</li>
+</ul>
+</p>
+<hr>
+
+<div>
+<h2 id="palladium:configured">
+Configured Texture</h2>
+<p>
+The texture type used when no type is given. With only variables it swaps between existing texture files, with transformers it builds a new texture in memory from the base image.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+output</td>
+<td>
+Identifier</td>
+<td>
+Path the generated texture is registered under. Supports variables. If not specified, it is derived from the base path and the used variables.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+variables</td>
+<td>
+Map<String, Path Variable></td>
+<td>
+A map of variables that can be used in the texture path.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+transformers</td>
+<td>
+Texture Transformer | Texture Transformer[]</td>
+<td>
+Texture transformers applied to the base image, in the order they are listed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+base</td>
+<td>
+Identifier</td>
+<td>
+The base texture, as a full texture path including "textures/" and ".png". Can use variables.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:entity">
+Entity Texture</h2>
+<p>
+Starts from the texture the entity is currently rendered with. For players that is their skin, including skins set by abilities or customizations. On its own it is rarely useful; it exists to run transformers on the skin, for example to paint a suit pattern onto it.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+output</td>
+<td>
+Identifier</td>
+<td>
+Path the generated texture is registered under. Supports variables. If not specified, it is derived from the entity texture path and the used variables.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+variables</td>
+<td>
+Map<String, Path Variable></td>
+<td>
+A map of variables that can be used in the output path and transformer paths.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+transformers</td>
+<td>
+Texture Transformer | Texture Transformer[]</td>
+<td>
+Texture transformers applied to the entity texture, in the order they are listed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:entity"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:eye_selection">
+Eye Selection Texture</h2>
+<p>
+Draws the pixels the player picked in the eye selection screen of the customization menu onto an empty 64x64 skin-sized texture, in the given color. On a render layer with "light_emission" set to 15 this gives the player glowing eyes exactly where they chose. The eye selection screen requires the "palladium:customization/eye_selection" feature flag.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color</td>
+<td>
+Color</td>
+<td>
+The color the selected pixels are drawn in.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:eye_selection","color":"#ff0000"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:static">
+Static Texture</h2>
+<p>
+Always returns the same texture file. Exists so that places expecting a dynamic texture can still be given a plain one.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+texture</td>
+<td>
+Identifier</td>
+<td>
+The texture to use.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"texture":"example:textures/example.png"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:armor_or_skin">
+Armor Or Skin Texture</h2>
+<p>
+For models on the body, like claws: uses the worn suit's texture where an active layer from "model_layers" draws over the given region, otherwise the player's skin. Set the region to match the model's UVs.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+regions</td>
+<td>
+List of [u, v, width, height] lists</td>
+<td>
+The areas of the texture sheet to check, each as [u, v, width, height] in pixels (a 64x64 sheet). Should cover the pixels your model samples. Defaults to the bottom of the left arm: [[40, 48, 4, 4]].</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[[40, 48, 4, 4]]</td>
+</tr>
+<tr>
+<td>
+min_coverage</td>
+<td>
+Float</td>
+<td>
+How much of the region must be drawn (0 to 1) for the suit to count as covering it. 1 means every pixel.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+model_layers</td>
+<td>
+List of strings</td>
+<td>
+The model layer names that count as a suit, like "suit_chestplate" in "palladium:player#suit_chestplate".</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[suit_chestplate]</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:armor_or_skin"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:chest_armor">
+Chest Armor Texture</h2>
+<p>
+Uses the texture of the player's active "suit_chestplate" render layer, so an overlay like argon:female_chest always matches the worn suit. Shows the missing texture if no such layer is active.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:chest_armor"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:eye_selection_secondary">
+Secondary Eye Selection Texture</h2>
+<p>
+Like palladium:eye_selection, but for the pixels picked on the eye screen's "Secondary" tab, so a pack can color a second set independently. Needs the argon:customization/secondary_eye_selection flag.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color</td>
+<td>
+Color</td>
+<td>
+The color the secondary pixels are drawn in.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+-1</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:eye_selection_secondary","color":"#00ffff"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:mouth_selection">
+Mouth Selection Texture</h2>
+<p>
+Like palladium:eye_selection, but for the pixels picked on the eye screen's "Mouth" tab. A pixel is an eye or a mouth, never both. Needs the argon:customization/mouth_selection flag.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color</td>
+<td>
+Color</td>
+<td>
+The color the mouth pixels are drawn in.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+-1</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:mouth_selection","color":"#ff8080"}</pre>
+</div>
+<script>
+function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    const elements = document.getElementsByClassName("json-snippet");
+    const amount = elements.length;
+    for (let i = 0; i < amount; i++) {
+        const element = elements[0];
+        const div = document.createElement("pre");
+        div.innerHTML = syntaxHighlight(JSON.stringify(JSON.parse(element.innerText), undefined, 4));
+        element.parentNode.replaceChild(div, element);
+    }</script>
+</body>
+</html>

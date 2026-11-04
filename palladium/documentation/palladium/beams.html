@@ -1,0 +1,860 @@
+<html>
+<head>
+<title>
+Beams</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }.type-badge{display:inline-block;margin-left:10px;padding:2px 8px;border-radius:10px;font-size:0.6em;font-weight:normal;vertical-align:middle;background-color:#42A3FF;color:white;}</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+<style>
+.json-block { background-color: lightgray; display: inline-block; border: 5px solid darkgray; padding: 10px }</style>
+</head>
+<body>
+<h1>
+Beams</h1>
+<hr>
+
+<p>
+<h2>
+Overview</h2>
+<h3>
+Palladium</h3>
+<ul>
+<li>
+<a href="#palladium:flat_textured">
+Flat Textured</a>
+</li>
+<li>
+<a href="#palladium:laser">
+Laser</a>
+</li>
+<li>
+<a href="#palladium:lightning">
+Lightning Beam</a>
+</li>
+<li>
+<a href="#palladium:textured">
+Textured</a>
+</li>
+</ul>
+<h3>
+Argon</h3>
+<ul>
+<li>
+<a href="#argon:boxed_textured">
+Boxed Textured</a>
+</li>
+<li>
+<a href="#argon:cone">
+Cone</a>
+</li>
+<li>
+<a href="#argon:glow_laser">
+Glow Laser</a>
+</li>
+<li>
+<a href="#argon:segmented_textured">
+Segmented Textured</a>
+</li>
+</ul>
+</p>
+<hr>
+
+<div>
+<h2 id="palladium:flat_textured">
+Flat Textured</h2>
+<p>
+Renders a beam between two points as a flat texture that always faces the camera. The texture is repeated along the beam and never stretched; the last repetition is cut off if the remaining length is shorter than one tile.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+light_emission</td>
+<td>
+Integer</td>
+<td>
+The light emission of the beam. Must be within 0 - 15</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+texture</td>
+<td>
+Texture Reference</td>
+<td>
+The texture to use for the beam.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+texture_size</td>
+<td>
+Float</td>
+<td>
+The size of one texture tile: width of the beam and length of one repetition along it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+render_type</td>
+<td>
+"minecraft:entity_translucent" | "minecraft:entity_cutout" | "palladium:glow" | "argon:glow" | "argon:additive" | "argon:glow_no_depth_write" | "argon:glow_emission" | "argon:additive_emission"</td>
+<td>
+The render type to render the beam with.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+minecraft:entity_translucent</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:flat_textured","texture":"namespace:textures/beams/example_beam.png","texture_size":2.0}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:laser">
+Laser</h2>
+<p>
+Renders a laser beam between two points.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+render_settings</td>
+<td>
+Laser Renderer Settings</td>
+<td>
+The render settings for the laser.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:laser","render_settings":{"glow":"#0000ff","size":2.0}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:lightning">
+Lightning Beam</h2>
+<p>
+Renders a fluctuating lightning between two points.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+render_settings</td>
+<td>
+Laser Renderer Settings</td>
+<td>
+The render settings for the lightning.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+segments</td>
+<td>
+Integer</td>
+<td>
+The amount of segments the lightning should have.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+5</td>
+</tr>
+<tr>
+<td>
+frequency</td>
+<td>
+Integer</td>
+<td>
+The frequency of the lightning fluctuation.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+2</td>
+</tr>
+<tr>
+<td>
+spread</td>
+<td>
+Float</td>
+<td>
+The spread of the lightning fluctuation. It defines how "far" the lightning can spread out from the core</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+5.0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:lightning","render_settings":{"glow":"#0000ff","bloom":2,"size":2.0},"segments":10,"frequency":4,"spread":112.0}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:textured">
+Textured</h2>
+<p>
+Renders a beam between two points using a custom texture.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+light_emission</td>
+<td>
+Integer</td>
+<td>
+The light emission of the beam. Must be within 0 - 15</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+size</td>
+<td>
+Float</td>
+<td>
+The size/diameter of the beam.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+texture</td>
+<td>
+Texture Reference</td>
+<td>
+The texture to use for the beam.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+rotation</td>
+<td>
+Float</td>
+<td>
+The initial rotation of the beam in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+rotation_speed</td>
+<td>
+Float</td>
+<td>
+The rotation speed of the beam.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+render_type</td>
+<td>
+"minecraft:entity_translucent" | "minecraft:entity_cutout" | "palladium:glow" | "argon:glow" | "argon:additive" | "argon:glow_no_depth_write" | "argon:glow_emission" | "argon:additive_emission"</td>
+<td>
+The render type to render the beam with.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+minecraft:entity_translucent</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:textured","texture":"namespace:textures/beams/example_beam.png","size":2.0,"rotation":45.0,"rotation_speed":20.0}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:boxed_textured">
+Boxed Textured</h2>
+<p>
+Renders a beam as a stack of textured boxes, like palladium's "textured" renderer, but each face gets its own lighting normal, fixing wrong or flickering brightness on side and bottom faces.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+light_emission</td>
+<td>
+Integer</td>
+<td>
+The light emission of the beam. Must be within 0 - 15</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+size</td>
+<td>
+Number or [width, height]</td>
+<td>
+The cross-section size of each box segment, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0625</td>
+</tr>
+<tr>
+<td>
+texture</td>
+<td>
+Texture Reference</td>
+<td>
+The texture applied to each box segment.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+rotation</td>
+<td>
+Float</td>
+<td>
+A fixed rotation, in degrees, around the beam's own axis.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+texture_length</td>
+<td>
+Float</td>
+<td>
+How many blocks of beam length one full copy of the texture spans, independent of "size" - use this to keep the arm's thickness fixed while controlling how densely (or sparsely) the texture repeats along its length. Defaults to the average of "size"'s width and height, matching the box's own cross-section as before.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+rotation_speed</td>
+<td>
+Float</td>
+<td>
+Degrees per tick to continuously spin the boxes around the beam's own axis.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+render_type</td>
+<td>
+"minecraft:entity_translucent" | "minecraft:entity_cutout" | "palladium:glow" | "argon:glow" | "argon:additive" | "argon:glow_no_depth_write" | "argon:glow_emission" | "argon:additive_emission"</td>
+<td>
+The render type to render the beam with.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+minecraft:entity_cutout</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:boxed_textured","texture":"namespace:textures/beams/example_beam.png","size":3.0}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:cone">
+Cone</h2>
+<p>
+Draws a beam as a cone from "start_size" to "end_size" blocks wide: a soft glow, a brighter core and an optional scrolling texture. Pair it with the "cone" setting of argon:energy_beam.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+core</td>
+<td>
+{ color, opacity, scale }</td>
+<td>
+The brighter core inside the glow, set the same way.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{ "color": "#FFFFFF", "opacity": 0.5, "scale": 0.45 }</td>
+</tr>
+<tr>
+<td>
+end_fade</td>
+<td>
+Float</td>
+<td>
+How opaque the far end of the cone is compared with the start, 0 to 1: lower fades the cone out along its length.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.2</td>
+</tr>
+<tr>
+<td>
+start_size</td>
+<td>
+Float</td>
+<td>
+How wide the cone is where it starts, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.15</td>
+</tr>
+<tr>
+<td>
+glow_layers</td>
+<td>
+Integer</td>
+<td>
+How many nested cones the glow is made of (1-8): more is softer and thicker toward the middle.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+3</td>
+</tr>
+<tr>
+<td>
+texture</td>
+<td>
+{ texture*, color, opacity, scale, texture_length, around, scroll_speed, rotation_speed }</td>
+<td>
+A texture over the cone's surface. Keys: texture*, color, opacity (0.6), scale (1), texture_length (2), around (2), scroll_speed (0.03), rotation_speed (0).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+blend</td>
+<td>
+"additive" | "translucent"</td>
+<td>
+How the cone is blended into the scene: additive glows brighter where layers overlap, translucent is a plain see-through surface.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+ADDITIVE</td>
+</tr>
+<tr>
+<td>
+end_distance</td>
+<td>
+Float</td>
+<td>
+If set, "end_size" is reached this many blocks from the start and the cone keeps that same angle however long the beam is, so a beam stopped short by a wall is a narrower cone. Set it to the ability's max_distance. Without it, "end_size" is the width at wherever the beam ends.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+end_size</td>
+<td>
+Float</td>
+<td>
+How wide the cone is where it ends, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+3.0</td>
+</tr>
+<tr>
+<td>
+glow</td>
+<td>
+{ color, opacity, scale }</td>
+<td>
+The soft outer glow: its colour (hex), its opacity (0 turns it off) and its width compared with the whole cone's. Drawn as "glow_layers" nested cones.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{ "color": "#FFFFFF", "opacity": 0.35, "scale": 1.0 }</td>
+</tr>
+<tr>
+<td>
+segments</td>
+<td>
+Integer</td>
+<td>
+How many flat sides the cone is drawn with (6-64): more is rounder.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+16</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:cone","end_distance":20.0}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:glow_laser">
+Glow Laser</h2>
+<p>
+Palladium's laser beam with brightness settings for its glow and core. Below 1 fades the part; above 1 stacks extra draws for a stronger glow (up to 8). Both are values, so molang can animate them.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+render_settings</td>
+<td>
+Laser Renderer Settings</td>
+<td>
+The render settings for the laser, exactly as for palladium:laser.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+core_intensity</td>
+<td>
+(Dynamic) Value</td>
+<td>
+How bright the core is. 1 is the laser as Palladium draws it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+glow_intensity</td>
+<td>
+(Dynamic) Value</td>
+<td>
+How bright the glow is. 1 is the laser as Palladium draws it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:glow_laser","render_settings":{"bloom":0},"glow_intensity":2,"core_intensity":1}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:segmented_textured">
+Segmented Textured</h2>
+<p>
+Renders a beam as flat textured layers around one axis that can tile, spin and scroll, optionally sagging near the origin and tightening over "sag_duration". Good for drill or corkscrew beams.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+sag_duration</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+How long, in ticks, it takes the beam to tighten from fully loose to fully taut after it starts being drawn for a given entity. Restarts from fully loose again if this beam stops being drawn for that entity (e.g. the swing/grapple ends) and then starts again (a fresh attach). Only matters when "sag_amplitude" is above 0.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+10</td>
+</tr>
+<tr>
+<td>
+light_emission</td>
+<td>
+Integer</td>
+<td>
+The light emission of the beam. Must be within 0 - 15</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+textures</td>
+<td>
+Texture Layer (texture, size, spacing, rotation, rotation_speed, motion_speed, facing, pulse)[]</td>
+<td>
+The texture layers to render simultaneously around the beam axis, each either a sweeping ribbon ("facing": "radial", default) or a stack of flat cards facing down the beam ("along_beam").</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+sag_waves</td>
+<td>
+Float</td>
+<td>
+How many full side-to-side wave cycles the sag bows through along the beam's length, tapering down from full strength at the origin end to none at the target end. Only matters when "sag_amplitude" is above 0.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+2.0</td>
+</tr>
+<tr>
+<td>
+tint</td>
+<td>
+Item Tint (slot, source)</td>
+<td>
+Tints every texture layer by the color a registered source reads off an item in "slot" (first match wins). "source" is an id an addon registered; with no match it stays white. Omit for no tint.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+render_type</td>
+<td>
+"minecraft:entity_translucent" | "minecraft:entity_cutout" | "palladium:glow" | "argon:glow" | "argon:additive" | "argon:glow_no_depth_write" | "argon:glow_emission" | "argon:additive_emission"</td>
+<td>
+The render type to render the beam with.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+minecraft:entity_translucent</td>
+</tr>
+<tr>
+<td>
+sag_amplitude</td>
+<td>
+Float</td>
+<td>
+How far, in blocks, the beam bows sideways from a straight line when loose, at its most bowed point near the origin end. Both ends of the beam always stay pinned to their anchor points regardless of this value. Leave at 0 (default) for a beam that's always perfectly straight.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:segmented_textured","textures":[{"texture":"namespace:textures/beams/example_beam.png","size":2.0,"spacing":1.0,"rotation_speed":20.0,"pulse":{"scale":0.1,"frequency":2.0}},{"texture":"namespace:textures/beams/example_beam.png","size":2.0,"spacing":4.0,"rotation_speed":10.0,"motion_speed":8.0,"facing":"along_beam"}],"sag_amplitude":0.35}</pre>
+</div>
+<script>
+function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    const elements = document.getElementsByClassName("json-snippet");
+    const amount = elements.length;
+    for (let i = 0; i < amount; i++) {
+        const element = elements[0];
+        const div = document.createElement("pre");
+        div.innerHTML = syntaxHighlight(JSON.stringify(JSON.parse(element.innerText), undefined, 4));
+        element.parentNode.replaceChild(div, element);
+    }</script>
+</body>
+</html>

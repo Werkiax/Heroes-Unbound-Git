@@ -1,0 +1,12 @@
+{
+  "texture": {
+    "wide": "werkiax_unbound:textures/entity/scales/might_glow_wide.png",
+    "slim": "werkiax_unbound:textures/entity/scales/might_glow_slim.png"
+  },
+  "render_type": "palladium:glow",
+  "light_emission": {
+    "type": "palladium:energy_bar",
+    "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+    "modify": "math.min(this / 66, 15)"
+  }
+}

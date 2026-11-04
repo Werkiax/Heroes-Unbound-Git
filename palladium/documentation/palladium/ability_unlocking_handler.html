@@ -1,0 +1,236 @@
+<html>
+<head>
+<title>
+Unlocking Handlers</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }.type-badge{display:inline-block;margin-left:10px;padding:2px 8px;border-radius:10px;font-size:0.6em;font-weight:normal;vertical-align:middle;background-color:#42A3FF;color:white;}</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+<style>
+.json-block { background-color: lightgray; display: inline-block; border: 5px solid darkgray; padding: 10px }</style>
+</head>
+<body>
+<h1>
+Unlocking Handlers</h1>
+<hr>
+
+<p>
+<h2>
+Overview</h2>
+<h3>
+Palladium</h3>
+<ul>
+<li>
+<a href="#palladium:buyable">
+Buyable</a>
+</li>
+<li>
+<a href="#palladium:conditional">
+Conditional</a>
+</li>
+</ul>
+<h3>
+Argon</h3>
+<ul>
+<li>
+<a href="#argon:buyables">
+Buyables</a>
+</li>
+</ul>
+</p>
+<hr>
+
+<div>
+<h2 id="palladium:buyable">
+Buyable</h2>
+<p>
+The ability starts out locked. The player can click it in the power screen and pay the cost to unlock it for good.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+cost</td>
+<td>
+Cost</td>
+<td>
+What the player has to pay to unlock the ability. It gets taken away once the ability is bought.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+requires</td>
+<td>
+Condition | Condition[]</td>
+<td>
+Additional condition(s) that need to be fulfilled. Even after the ability was bought, it is only unlocked while these are fulfilled. Like with the conditional handler, an 'Ability unlocked' condition in here will show up as the parent in the power tree.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:buyable","cost":{"type":"palladium:experience_level","xp_level":5}}</pre>
+<pre class="json-snippet">
+{"type":"palladium:buyable","cost":{"type":"palladium:item","ingredient":"minecraft:diamond","amount":3},"requires":{"type":"palladium:ability_unlocked","ability":"example:power#ability_key"}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:conditional">
+Conditional</h2>
+<p>
+Unlocks the ability for as long as the given conditions are fulfilled. You can also skip the handler object and just put the condition(s) straight into the 'unlocking' field, it does the same thing.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+conditions</td>
+<td>
+Condition | Condition[]</td>
+<td>
+The condition(s) that need to be fulfilled for the ability to be unlocked. If one of them is an 'Ability unlocked' condition, the referenced ability will show up as its parent in the power tree.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:conditional","conditions":{"type":"palladium:crouching"}}</pre>
+<pre class="json-snippet">
+{"type":"palladium:conditional","conditions":{"type":"palladium:ability_unlocked","ability":"example:power#ability_key"}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:buyables">
+Buyables</h2>
+<p>
+Like the buyable handler, but the listed abilities must all be unlocked before it can be bought, and each can optionally be left out of the power tree's connection lines.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+cost</td>
+<td>
+Cost</td>
+<td>
+What the player has to pay to unlock the ability.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+requires</td>
+<td>
+Requirement[]</td>
+<td>
+Abilities that have to be unlocked first. Each entry has an "ability" reference and an optional "draw_line" flag.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script>
+function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    const elements = document.getElementsByClassName("json-snippet");
+    const amount = elements.length;
+    for (let i = 0; i < amount; i++) {
+        const element = elements[0];
+        const div = document.createElement("pre");
+        div.innerHTML = syntaxHighlight(JSON.stringify(JSON.parse(element.innerText), undefined, 4));
+        element.parentNode.replaceChild(div, element);
+    }</script>
+</body>
+</html>

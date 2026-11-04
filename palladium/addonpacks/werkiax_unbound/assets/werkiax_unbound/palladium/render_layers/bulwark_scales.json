@@ -1,0 +1,7 @@
+{
+  "texture": {
+    "wide": "werkiax_unbound:textures/entity/scales/bulwark_wide.png",
+    "slim": "werkiax_unbound:textures/entity/scales/bulwark_slim.png"
+  },
+  "render_type": "minecraft:entity_translucent"
+}

@@ -1,0 +1,623 @@
+<html>
+<head>
+<title>
+Tech Table</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+<style>
+.json-block { background-color: lightgray; display: inline-block; border: 5px solid darkgray; padding: 10px }</style>
+</head>
+<body>
+<h1>
+Tech Table</h1>
+<hr>
+
+<p>
+The tech table has three tabs. <b>Craft</b> is timed recipes on a 5x5 grid, <b>Modify</b> is for installing modules onto a suit or a device, and <b>Customize</b> is the old accessory slots (casings, color chips). It's all just JSON, so no Java needed. Recipes go in <code>data/&lt;namespace&gt;/recipe/</code> and modules go in <code>data/&lt;namespace&gt;/argon/suit_modification/</code>.</p>
+<div id="crafting-recipes">
+<h2>
+Crafting recipes</h2>
+<p>
+Set <code>"type": "argon:tech_table_crafting"</code>. Use <code>pattern</code> and <code>key</code> for a shaped recipe, or <code>ingredients</code> for a shapeless one, not both. A shaped pattern can be any size up to 5x5 and gets found anywhere in the grid.</p>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+pattern</td>
+<td>
+List of Strings</td>
+<td>
+Up to 5 rows of up to 5 characters, all the same length. A space is an empty slot.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+key</td>
+<td>
+Map</td>
+<td>
+What each pattern character is. A plain item, a tag like <code>"#c:ingots/iron"</code>, or <code>{"ingredient": ..., "count": 4}</code> if the slot needs a few of them.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+ingredients</td>
+<td>
+List</td>
+<td>
+The shapeless version of pattern and key, up to 25 entries.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+mirror</td>
+<td>
+Boolean</td>
+<td>
+Lets a shaped pattern match flipped too.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+tool</td>
+<td>
+<a href="#tool">Tool</a></td>
+<td>
+Something that has to be in the separate tool slot.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+none</td>
+</tr>
+<tr>
+<td>
+result</td>
+<td>
+<a href="#result">Result</a></td>
+<td>
+What you get.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+name</td>
+<td>
+Text component</td>
+<td>
+The name shown above the preview, handy for suits. Like <code>{"translate": "recipe.mypack.my_suit"}</code>.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+the item's name</td>
+</tr>
+<tr>
+<td>
+time</td>
+<td>
+Integer (ticks)</td>
+<td>
+How long it takes. 20 ticks is a second, 0 is instant.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+100</td>
+</tr>
+</tbody>
+</table>
+<p>
+When you hit Craft, the table takes the ingredients and starts a timer. It keeps going with the screen closed, and the finished items wait in the output slots until you take them.</p>
+</div>
+
+<div id="tool">
+<h3>
+Tool</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ingredient</td>
+<td>
+Ingredient</td>
+<td>
+What has to be in the tool slot.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+mode</td>
+<td>
+"consumed" | "retained" | "damaged"</td>
+<td>
+Used up, left alone, or loses durability.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+retained</td>
+</tr>
+<tr>
+<td>
+amount</td>
+<td>
+Integer</td>
+<td>
+How many get used up, or how much durability is lost.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="result">
+<h3>
+Result</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+item</td>
+<td>
+Item stack</td>
+<td>
+One item, like <code>{"id": "minecraft:diamond", "count": 2}</code>.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+suit_set</td>
+<td>
+Identifier</td>
+<td>
+A Palladium suit set, like <code>fsang:marvel/spiderman/iron_mcu</code>. You get every piece of it. Use one of these two, not both.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+
+<div id="suit-modifications">
+<h2>
+Modules</h2>
+<p>
+A module can go on a complete suit in the four suit slots (<code>suits</code>) or on an item in the device slot (<code>items</code>). The file name is its id.</p>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+category</td>
+<td>
+"active" | "passive" | "cosmetic"</td>
+<td>
+Which column it shows up in. What each one means is up to you.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+name</td>
+<td>
+Text component</td>
+<td>
+Skip it and it looks for the translation key <code>suit_modification.&lt;namespace&gt;.&lt;name&gt;</code>.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+translation key</td>
+</tr>
+<tr>
+<td>
+description</td>
+<td>
+Text component</td>
+<td>
+Same, with <code>.description</code> on the end of the key.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+translation key</td>
+</tr>
+<tr>
+<td>
+icon</td>
+<td>
+Object</td>
+<td>
+<code>{"item": "ns:item"}</code> or <code>{"texture": "ns:textures/gui/x.png"}</code> (16x16).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+placeholder tile</td>
+</tr>
+<tr>
+<td>
+suits</td>
+<td>
+List of Identifiers</td>
+<td>
+Suit sets it can go on.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+none</td>
+</tr>
+<tr>
+<td>
+items</td>
+<td>
+List of Ingredients</td>
+<td>
+Items it can go on in the device slot (an item or a tag). The slot only takes items that a module lists here.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+none</td>
+</tr>
+<tr>
+<td>
+requirements</td>
+<td>
+List</td>
+<td>
+Items taken from the player's inventory each time it's installed, like <code>{"ingredient": ..., "count": 3}</code>.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+none</td>
+</tr>
+<tr>
+<td>
+consume_requirements</td>
+<td>
+Boolean</td>
+<td>
+Set to false and they only need to carry the items.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+prerequisites</td>
+<td>
+List of Identifiers</td>
+<td>
+Modules that need to be installed first.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+none</td>
+</tr>
+<tr>
+<td>
+conflicts</td>
+<td>
+List of Identifiers</td>
+<td>
+Modules it can't go together with. Only one of the two has to list the other.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+none</td>
+</tr>
+<tr>
+<td>
+max_level</td>
+<td>
+Integer</td>
+<td>
+How many times it can be installed. Every install uses the requirements again.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+removal</td>
+<td>
+<a href="#removal">Removal</a></td>
+<td>
+Whether it can be taken back out.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+permanent</td>
+</tr>
+<tr>
+<td>
+effects</td>
+<td>
+List of <a href="#effects">Effects</a></td>
+<td>
+What installing does to the item itself.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+none</td>
+</tr>
+<tr>
+<td>
+highlight</td>
+<td>
+String</td>
+<td>
+A body part to outline on the preview: head, body, arms, left_arm, right_arm, legs, left_leg, right_leg.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+none</td>
+</tr>
+<tr>
+<td>
+preview_layers</td>
+<td>
+List of Identifiers</td>
+<td>
+Render layers to show on the preview while it's installed or selected. Good for cosmetics.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+none</td>
+</tr>
+<tr>
+<td>
+sort_order</td>
+<td>
+Integer</td>
+<td>
+Order in its column, lowest first.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="removal">
+<h3>
+Removal</h3>
+<p>
+Either <code>"permanent"</code> (the default, no Remove button), <code>"removable"</code>, or an object that gives items back: <code>{"mode": "refund", "refund": [{"id": "minecraft:gold_ingot", "count": 1}]}</code>. With levels you get the refund for each level you remove.</p>
+</div>
+<hr>
+
+<div id="effects">
+<h2>
+Effects</h2>
+<p>
+Effects change the item a module is installed on. Each one has a <code>type</code>. They're reapplied for the current level whenever something is installed or removed, so taking everything off puts the item back how it was.</p>
+<table>
+<thead>
+<tr>
+<th>
+Type</th>
+<th>
+Settings</th>
+<th>
+What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+argon:fluid_capacity</td>
+<td>
+per_level (mB)</td>
+<td>
+Adds capacity to a fluid item like the web shooters, up to the item's own max.</td>
+</tr>
+<tr>
+<td>
+argon:energy_capacity</td>
+<td>
+per_level (RF), max</td>
+<td>
+Same thing for an item with energy capacity, like the arc reactor.</td>
+</tr>
+<tr>
+<td>
+argon:integer_component</td>
+<td>
+component, per_level</td>
+<td>
+Sets any whole-number component to per_level times the level.</td>
+</tr>
+<tr>
+<td>
+argon:custom_value</td>
+<td>
+key, values, fallback, tooltip</td>
+<td>
+Writes a named number onto the item, based on which item you used. More below.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+custom_value</h3>
+<p>
+Say a module accepts a few different items, and you want the number to depend on which one got used. That's this. <code>key</code> is the name you give the number, <code>values</code> is a list of <code>{"item": ..., "value": 5}</code> (the first used item that matches wins), and <code>fallback</code> is what you get if nothing matches. <code>tooltip</code> is the line the item shows, with <code>%s</code> where the number goes. It can be a translation key or just the text.</p>
+<p>
+Every level adds its own number, so three cores worth 2, 5 and 10 make 17, and removing a level takes the last one off. To use it in a power, use the <code>argon:item_custom_value</code> value (<code>slot</code>, <code>key</code>, <code>fallback</code>). In Java it's <code>CustomValues.total(stack, key, fallback)</code>.</p>
+</div>
+<hr>
+
+<div id="examples">
+<h2>
+Examples</h2>
+<p>
+A suit recipe that uses up a catalyst in the tool slot:</p>
+<pre>{
+  "type": "argon:tech_table_crafting",
+  "pattern": ["bbbbb", "brrrb", "brsrb", "brrrb", "bbbbb"],
+  "key": {
+    "b": "palladium:blue_fabric",
+    "r": "palladium:red_fabric",
+    "s": "palladium:yellow_fabric"
+  },
+  "tool": { "ingredient": "fsang:beta_molecule_fabric", "mode": "consumed", "amount": 2 },
+  "result": { "suit_set": "fsang:dc/superman_absolute" },
+  "name": { "translate": "recipe.fsang.superman_absolute" },
+  "time": 600
+}</pre>
+<p>
+A module with three levels that adds capacity to a device:</p>
+<pre>{
+  "icon": { "item": "fsang:module_capacity" },
+  "category": "passive",
+  "items": ["fsang:web_shooters"],
+  "requirements": [ { "ingredient": "fsang:module_capacity", "count": 1 } ],
+  "max_level": 3,
+  "removal": { "mode": "refund", "refund": [ { "id": "fsang:module_capacity", "count": 1 } ] },
+  "effects": [ { "type": "argon:fluid_capacity", "per_level": 500 } ]
+}</pre>
+<p>
+A number that depends on which core you use:</p>
+<pre>{
+  "category": "passive",
+  "items": ["fsang:arc_reactor"],
+  "requirements": [
+    { "ingredient": ["minecraft:redstone_block", "minecraft:diamond_block", "minecraft:netherite_ingot"], "count": 1 }
+  ],
+  "max_level": 3,
+  "removal": "removable",
+  "effects": [ {
+    "type": "argon:custom_value",
+    "key": "example:core_power",
+    "values": [
+      { "item": "minecraft:redstone_block", "value": 2 },
+      { "item": "minecraft:diamond_block", "value": 5 },
+      { "item": "minecraft:netherite_ingot", "value": 10 }
+    ],
+    "fallback": 1,
+    "tooltip": "Core Power: %s"
+  } ]
+}</pre>
+<p>
+Using that number in a power (here it's the reach of a beam, 4 blocks without it):</p>
+<pre>"core_beam": {
+  "type": "argon:energy_beam",
+  "beam_renderer": "mypack:core_beam",
+  "max_distance": {
+    "type": "argon:item_custom_value",
+    "slot": "curios:body",
+    "key": "example:core_power",
+    "fallback": 4
+  }
+}</pre>
+<p>
+And turning an ability on only while a module is installed:</p>
+<pre>"state": {
+  "enabling": {
+    "type": "argon:has_suit_modification",
+    "modification": "example:reserve_battery"
+  }
+}</pre>
+<p>
+That condition also takes <code>suit</code>, <code>slot</code> (to check a device instead of a suit) and <code>min_level</code>.</p>
+</div>
+<hr>
+
+<p>
+<b>Where modules are saved:</b> on the items themselves, not on the player, so they go wherever the item goes. A suit only counts as having a module while every piece has it.</p>
+</body>
+</html>

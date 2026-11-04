@@ -1,0 +1,7 @@
+{
+  "texture": {
+    "wide": "werkiax_unbound:textures/entity/scales/might_wide.png",
+    "slim": "werkiax_unbound:textures/entity/scales/might_slim.png"
+  },
+  "render_type": "minecraft:entity_translucent"
+}

@@ -1,0 +1,7 @@
+{
+  "addonpack": {
+    "description": "Werkiax Unbound - heroes, villains and custom powers",
+    "min_format": [2, 0],
+    "max_format": [2, 0]
+  }
+}

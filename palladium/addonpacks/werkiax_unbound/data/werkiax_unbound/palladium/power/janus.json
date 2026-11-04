@@ -1,0 +1,1825 @@
+{
+  "name": "Janus",
+  "icon": "minecraft:shield",
+  "energy_bars": {
+    "kinetic_charge": {
+      "max": 1000,
+      "color": "7404C9",
+      "synced_value": {
+        "type": "palladium:integer_data_attachment",
+        "attachment": "werkiax_unbound:kinetic_charge",
+        "fallback": 0
+      }
+    }
+  },
+  "abilities": {
+    "bowling_ball": {
+      "type": "palladium:action",
+      "properties": {
+        "title": "Bowling Ball",
+        "description": "Dash forward, launch entities in your path to air while dealing damage. Costs a little Kinetic Energy.",
+        "icon": {
+          "type": "palladium:texture",
+          "texture": "werkiax_unbound:textures/icons/bowling_ball.png"
+        },
+        "list_index": 1,
+        "color": "purple"
+      },
+      "action": {
+        "type": "palladium:dash",
+        "velocity_modifier": 1.2
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          },
+          {
+            "type": "palladium:energy_bar",
+            "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+            "min": 10
+          }
+        ],
+        "enabling": {
+          "type": "palladium:key_bind",
+          "behaviour": "activation",
+          "time": 5,
+          "cooldown": "2s"
+        }
+      }
+    },
+    "power_strike": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Power Strike",
+        "description": "Hold up to 6 seconds to charge your fist with Kinetic Energy, then release to deliver a devastating punch. Damage grows with each charge stage (10, 20, 30), and a full charge pierces armor and cracks the ground. You move slower while charging, and the cooldown is twice as long as the time you charged.",
+        "icon": "minecraft:mace",
+        "list_index": 0,
+        "color": "purple"
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          },
+          {
+            "type": "palladium:or",
+            "conditions": [
+              {
+                "type": "palladium:ability_enabled",
+                "ability": "werkiax_unbound:janus#power_strike"
+              },
+              {
+                "type": "palladium:number_data_attachment",
+                "attachment": "werkiax_unbound:strike_charge",
+                "max": 0,
+                "min": 0
+              }
+            ]
+          }
+        ],
+        "enabling": {
+          "type": "palladium:key_bind",
+          "behaviour": "held",
+          "time": 120,
+          "cooldown": 0
+        }
+      }
+    },
+    "strike_cost": {
+      "type": "palladium:action",
+      "first_tick_action": {
+        "type": "palladium:conditional",
+        "condition": {
+          "type": "palladium:energy_bar",
+          "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+          "min": 10,
+          "max": 1000
+        },
+        "on_true": [
+          {
+            "type": "palladium:modify_number_data_attachment",
+            "attachment": "werkiax_unbound:kinetic_charge",
+            "operation": "-",
+            "value": 10
+          },
+          {
+            "type": "palladium:modify_number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "operation": "+",
+            "value": 10
+          }
+        ]
+      },
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_first_tick",
+            "ability": "werkiax_unbound:janus#power_strike"
+          }
+        ]
+      }
+    },
+    "strike_charge": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "action": {
+        "type": "palladium:conditional",
+        "condition": {
+          "type": "palladium:energy_bar",
+          "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+          "min": 3,
+          "max": 1000
+        },
+        "on_true": [
+          {
+            "type": "palladium:modify_number_data_attachment",
+            "attachment": "werkiax_unbound:kinetic_charge",
+            "operation": "-",
+            "value": 3
+          },
+          {
+            "type": "palladium:modify_number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "operation": "+",
+            "value": 2
+          }
+        ]
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#power_strike"
+          }
+        ]
+      }
+    },
+    "strike_t1": {
+      "type": "argon:damage",
+      "range": 2.5,
+      "damage": 10.0,
+      "damage_type": "minecraft:player_attack",
+      "apply_user_damage": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 10,
+            "max": 89
+          }
+        ]
+      }
+    },
+    "strike_t2": {
+      "type": "argon:damage",
+      "range": 3.5,
+      "damage": 20.0,
+      "damage_type": "minecraft:player_attack",
+      "apply_user_damage": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 90,
+            "max": 169
+          }
+        ]
+      }
+    },
+    "strike_t3": {
+      "type": "argon:damage",
+      "range": 5.0,
+      "damage": 30.0,
+      "damage_type": "minecraft:magic",
+      "apply_user_damage": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 170,
+            "max": 1000
+          }
+        ]
+      }
+    },
+    "berserk": {
+      "type": "palladium:dual_wielding",
+      "properties": {
+        "title": "Berserk",
+        "description": "Toggle to harden your scales around both hands and fight with dual-wielded fist. Grants +10 attack damage and +2 attack knockback, but you can't held items.",
+        "icon": {
+          "type": "palladium:texture",
+          "texture": "werkiax_unbound:textures/icons/berserk.png"
+        },
+        "list_index": 2,
+        "color": "purple"
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": {
+          "type": "palladium:key_bind",
+          "key_bind": {
+            "type": "palladium:ability_key"
+          },
+          "behaviour": "toggle",
+          "cooldown": 20
+        }
+      }
+    },
+    "kinetic_gain": {
+      "type": "palladium:combo_attack",
+      "required_attacks": 1,
+      "bonus_damage": 0.0,
+      "reset_time": "5s",
+      "on_final_attack": {
+        "type": "palladium:conditional",
+        "condition": {
+          "type": "palladium:energy_bar",
+          "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+          "max": 974
+        },
+        "on_true": {
+          "type": "palladium:modify_number_data_attachment",
+          "attachment": "werkiax_unbound:kinetic_charge",
+          "operation": "+",
+          "value": 25
+        },
+        "on_false": {
+          "type": "palladium:set_data_attachment",
+          "attachment": "werkiax_unbound:kinetic_charge",
+          "value": 1000
+        }
+      },
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ]
+      }
+    },
+    "base_stats": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 26.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:janus_base_health"
+        }
+      ]
+    },
+    "might_stats": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 24.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:might_attack"
+        },
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": 0.4,
+          "operation": "add_multiplied_base",
+          "id": "werkiax_unbound:might_speed"
+        },
+        {
+          "attribute": "minecraft:armor",
+          "amount": 6.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:might_armor"
+        }
+      ]
+    },
+    "berserk_stats": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "werkiax_unbound:janus#berserk"
+        }
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 10.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:berserk_attack"
+        },
+        {
+          "attribute": "minecraft:attack_knockback",
+          "amount": 2.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:berserk_knockback"
+        }
+      ]
+    },
+    "might_regen": {
+      "type": "palladium:healing",
+      "frequency": 40,
+      "amount": 1.0,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ]
+      }
+    },
+    "berserk_no_mainhand": {
+      "type": "palladium:restrict_slots",
+      "slots": "mainhand",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "werkiax_unbound:janus#berserk"
+        }
+      }
+    },
+    "berserk_no_offhand": {
+      "type": "palladium:restrict_slots",
+      "slots": "offhand",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "werkiax_unbound:janus#berserk"
+        }
+      }
+    },
+    "dash_hit": {
+      "type": "argon:damage_field",
+      "inflation": 1.5,
+      "damage": 20.0,
+      "damage_type": "minecraft:player_attack",
+      "apply_user_damage": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#bowling_ball"
+          }
+        ]
+      }
+    },
+    "kinetic_repulsion": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Kinetic Repulsion",
+        "description": "Unleash a powerful gust of force in the direction you are looking, damaging and shoving back everything in front of you. Crouch while using it to release a weaker pulse in every direction around you instead.",
+        "icon": {
+          "type": "palladium:texture",
+          "texture": "werkiax_unbound:textures/icons/kinetic_repulsion.png"
+        },
+        "list_index": 0,
+        "color": "purple"
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": {
+          "type": "palladium:key_bind",
+          "behaviour": "activation",
+          "time": 3,
+          "cooldown": "4s"
+        }
+      }
+    },
+    "repulsion_cone": {
+      "type": "argon:energy_beam",
+      "beam_renderer": "werkiax_unbound:kinetic_repulsion",
+      "damage": 12.0,
+      "damage_type": "minecraft:player_attack",
+      "max_distance": 8,
+      "max_bounces": 0,
+      "redirect_off_blocks": false,
+      "pierce": true,
+      "cone": {
+        "start_size": 0.5,
+        "end_size": 6.0,
+        "end_distance": 8.0,
+        "rays": 24
+      },
+      "knockback_distance": 5,
+      "lift": 0.4,
+      "visuals": [
+        {
+          "shape": "ring",
+          "particle": {
+            "type": "minecraft:cloud"
+          },
+          "rings": 3,
+          "radius": 6.0,
+          "count": 16,
+          "arc": 40,
+          "anchor": "caster",
+          "height": 0.8,
+          "speed": 0.1
+        },
+        {
+          "shape": "ring",
+          "particle": {
+            "type": "minecraft:cloud"
+          },
+          "rings": 2,
+          "radius": 2.5,
+          "count": 14,
+          "arc": 40,
+          "anchor": "caster",
+          "height": 0.1,
+          "speed": 0.1
+        }
+      ],
+      "pierce_size": {
+        "width": 2.0,
+        "height": 1.5
+      },
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#kinetic_repulsion"
+          },
+          {
+            "type": "palladium:not",
+            "conditions": {
+              "type": "palladium:crouching"
+            }
+          }
+        ]
+      }
+    },
+    "repulsion_ring_push": {
+      "type": "argon:push_field",
+      "mode": "horizontal",
+      "amount": 0.35,
+      "inflation": 6.0,
+      "affect_projectiles": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#kinetic_repulsion"
+          },
+          {
+            "type": "palladium:crouching"
+          }
+        ]
+      }
+    },
+    "repulsion_ring_damage": {
+      "type": "argon:damage",
+      "range": 6.0,
+      "damage": 8.0,
+      "damage_type": "minecraft:player_attack",
+      "apply_user_damage": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_first_tick",
+            "ability": "werkiax_unbound:janus#kinetic_repulsion"
+          },
+          {
+            "type": "palladium:crouching"
+          }
+        ]
+      }
+    },
+    "fx_repulsion_cone": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": [
+        {
+          "type": "palladium:run_command",
+          "command": [
+            "playsound minecraft:entity.warden.sonic_boom master @a ~ ~ ~ 0.6 0.9"
+          ]
+        },
+        {
+          "type": "palladium:extinguish"
+        }
+      ],
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_first_tick",
+            "ability": "werkiax_unbound:janus#kinetic_repulsion"
+          },
+          {
+            "type": "palladium:not",
+            "conditions": {
+              "type": "palladium:crouching"
+            }
+          }
+        ]
+      }
+    },
+    "fx_repulsion_ring": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": [
+        {
+          "type": "palladium:run_command",
+          "command": [
+            "playsound minecraft:entity.warden.sonic_boom master @a ~ ~ ~ 0.6 0.9",
+            "particle minecraft:cloud ~ ~0.3 ~ 3 0.1 3 0.08 120 force",
+            "particle minecraft:poof ~ ~0.8 ~ 2.5 0.3 2.5 0.1 40 force"
+          ]
+        },
+        {
+          "type": "palladium:extinguish"
+        }
+      ],
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_first_tick",
+            "ability": "werkiax_unbound:janus#kinetic_repulsion"
+          },
+          {
+            "type": "palladium:crouching"
+          }
+        ]
+      }
+    },
+    "crater": {
+      "type": "palladium:action",
+      "properties": {
+        "title": "Crater",
+        "description": "Leap into the air and crash down, exploding on impact and slowing enemies within 8 blocks..",
+        "icon": "minecraft:anvil",
+        "list_index": 1,
+        "color": "purple"
+      },
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": "effect give @s minecraft:levitation 1 9 true"
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": {
+          "type": "palladium:key_bind",
+          "behaviour": "activation",
+          "time": 30,
+          "cooldown": "4s"
+        }
+      }
+    },
+    "crater_drop": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": "effect clear @s minecraft:levitation"
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_ticks",
+            "ability": "werkiax_unbound:janus#crater",
+            "min": 8
+          }
+        ]
+      }
+    },
+    "crater_gravity": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:gravity",
+          "amount": 0.3,
+          "operation": "add_value",
+          "id": "werkiax_unbound:crater_gravity"
+        }
+      ],
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_ticks",
+            "ability": "werkiax_unbound:janus#crater",
+            "min": 8
+          }
+        ]
+      }
+    },
+    "crater_no_fall_damage": {
+      "type": "palladium:damage_immunity",
+      "damage_type": "minecraft:fall",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#crater"
+          }
+        ]
+      }
+    },
+    "crater_land": {
+      "type": "argon:explosion",
+      "destroy_environment": false,
+      "damage_self": false,
+      "radius": 4.5,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#crater"
+          },
+          {
+            "type": "palladium:ability_ticks",
+            "ability": "werkiax_unbound:janus#crater",
+            "min": 10
+          },
+          {
+            "type": "palladium:on_ground"
+          }
+        ]
+      }
+    },
+    "crater_slow": {
+      "type": "palladium:area_action",
+      "radius": 8.0,
+      "affect_self": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": "effect give @s minecraft:slowness 5 2"
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#crater"
+          },
+          {
+            "type": "palladium:ability_ticks",
+            "ability": "werkiax_unbound:janus#crater",
+            "min": 10
+          },
+          {
+            "type": "palladium:on_ground"
+          }
+        ]
+      }
+    },
+    "anchor": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Anchor",
+        "description": "Plant yourself for 5 seconds, unable to move or attack. Nearby enemies are slowly pulled toward you like a black hole while you absorb Kinetic Energy at a greatly increased rate. When it ends, all your Kinetic Energy is released in an explosion that grows with the amount stored, and everyone nearby is blasted away.",
+        "icon": "minecraft:turtle_scute",
+        "list_index": 2,
+        "color": "purple"
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": {
+          "type": "palladium:key_bind",
+          "behaviour": "activation",
+          "time": 100,
+          "cooldown": "10s"
+        }
+      }
+    },
+    "anchor_lock": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": -1.0,
+          "operation": "add_multiplied_total",
+          "id": "werkiax_unbound:anchor_no_move"
+        },
+        {
+          "attribute": "minecraft:jump_strength",
+          "amount": -1.0,
+          "operation": "add_multiplied_total",
+          "id": "werkiax_unbound:anchor_no_jump"
+        }
+      ],
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#anchor"
+          }
+        ]
+      }
+    },
+    "anchor_freeze": {
+      "type": "argon:movement_reduction",
+      "mode": "movement",
+      "percentage": 100.0,
+      "reduce_attack_damage": true,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#anchor"
+          }
+        ]
+      }
+    },
+    "anchor_freeze_flight": {
+      "type": "argon:movement_reduction",
+      "mode": "flight",
+      "percentage": 100.0,
+      "reduce_attack_damage": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#anchor"
+          }
+        ]
+      }
+    },
+    "anchor_no_sprint": {
+      "type": "palladium:prevent_sprinting",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#anchor"
+          }
+        ]
+      }
+    },
+    "anchor_nocollide": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": [
+          "team add janus_anchor",
+          "team modify janus_anchor collisionRule never",
+          "team join janus_anchor @s"
+        ]
+      },
+      "last_tick_action": {
+        "type": "palladium:run_command",
+        "command": "team leave @s"
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#anchor"
+          }
+        ]
+      }
+    },
+    "anchor_absorb": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "action": {
+        "type": "palladium:conditional",
+        "condition": {
+          "type": "palladium:energy_bar",
+          "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+          "min": 0,
+          "max": 994
+        },
+        "on_true": {
+          "type": "palladium:modify_number_data_attachment",
+          "attachment": "werkiax_unbound:kinetic_charge",
+          "operation": "+",
+          "value": 6
+        },
+        "on_false": {
+          "type": "palladium:set_data_attachment",
+          "attachment": "werkiax_unbound:kinetic_charge",
+          "value": 1000
+        }
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#anchor"
+          }
+        ]
+      }
+    },
+    "anchor_small": {
+      "type": "argon:explosion",
+      "destroy_environment": false,
+      "damage_self": false,
+      "radius": 2.0,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#anchor"
+          },
+          {
+            "type": "palladium:energy_bar",
+            "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+            "min": 0,
+            "max": 399
+          }
+        ]
+      }
+    },
+    "anchor_medium": {
+      "type": "argon:explosion",
+      "destroy_environment": false,
+      "damage_self": false,
+      "radius": 2.5,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#anchor"
+          },
+          {
+            "type": "palladium:energy_bar",
+            "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+            "min": 400,
+            "max": 799
+          }
+        ]
+      }
+    },
+    "anchor_big": {
+      "type": "argon:explosion",
+      "destroy_environment": false,
+      "damage_self": false,
+      "radius": 3.0,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#anchor"
+          },
+          {
+            "type": "palladium:energy_bar",
+            "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+            "min": 800,
+            "max": 1000
+          }
+        ]
+      }
+    },
+    "anchor_hit_small": {
+      "type": "argon:damage_field",
+      "inflation": 4.5,
+      "damage": 20.0,
+      "damage_type": "minecraft:player_attack",
+      "apply_user_damage": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#anchor"
+          },
+          {
+            "type": "palladium:energy_bar",
+            "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+            "min": 0,
+            "max": 399
+          }
+        ]
+      }
+    },
+    "anchor_hit_medium": {
+      "type": "argon:damage_field",
+      "inflation": 7.0,
+      "damage": 30.0,
+      "damage_type": "minecraft:player_attack",
+      "apply_user_damage": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#anchor"
+          },
+          {
+            "type": "palladium:energy_bar",
+            "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+            "min": 400,
+            "max": 799
+          }
+        ]
+      }
+    },
+    "anchor_hit_big": {
+      "type": "argon:damage_field",
+      "inflation": 10.0,
+      "damage": 40.0,
+      "damage_type": "minecraft:player_attack",
+      "apply_user_damage": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#anchor"
+          },
+          {
+            "type": "palladium:energy_bar",
+            "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+            "min": 800,
+            "max": 1000
+          }
+        ]
+      }
+    },
+    "anchor_reset": {
+      "type": "palladium:action",
+      "first_tick_action": {
+        "type": "palladium:set_data_attachment",
+        "attachment": "werkiax_unbound:kinetic_charge",
+        "value": 0
+      },
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:or",
+            "conditions": [
+              {
+                "type": "palladium:ability_enabled",
+                "ability": "werkiax_unbound:janus#anchor_small"
+              },
+              {
+                "type": "palladium:ability_enabled",
+                "ability": "werkiax_unbound:janus#anchor_medium"
+              },
+              {
+                "type": "palladium:ability_enabled",
+                "ability": "werkiax_unbound:janus#anchor_big"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "bulwark_stats": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ]
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:armor",
+          "amount": 30.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:bulwark_armor"
+        },
+        {
+          "attribute": "minecraft:armor_toughness",
+          "amount": 12.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:bulwark_toughness"
+        },
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 9.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:bulwark_attack"
+        },
+        {
+          "attribute": "minecraft:knockback_resistance",
+          "amount": 1.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:bulwark_knockback_resist"
+        }
+      ]
+    },
+    "bulwark_reduction": {
+      "type": "argon:damage_reduction",
+      "percentage": 70.0,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "bulwark",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:not",
+            "conditions": [
+              {
+                "type": "palladium:ability_enabled",
+                "ability": "werkiax_unbound:janus#anchor"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "anchor_reduction": {
+      "type": "argon:damage_reduction",
+      "percentage": 20.0,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#anchor"
+          }
+        ]
+      }
+    },
+    "fx_crater_land": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": [
+          "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 2.7 1 2.7 0 180 force",
+          "particle minecraft:dragon_breath ~ ~0.3 ~ 2.7 0.3 2.7 0.05 90 force"
+        ]
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_first_tick",
+            "ability": "werkiax_unbound:janus#crater_land"
+          }
+        ]
+      }
+    },
+    "fx_anchor_small": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": [
+          "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 2.7 1 2.7 0 180 force",
+          "particle minecraft:dragon_breath ~ ~0.3 ~ 2.7 0.3 2.7 0.05 90 force"
+        ]
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_first_tick",
+            "ability": "werkiax_unbound:janus#anchor_small"
+          }
+        ]
+      }
+    },
+    "fx_anchor_medium": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": [
+          "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 4.2 1 4.2 0 280 force",
+          "particle minecraft:dragon_breath ~ ~0.3 ~ 4.2 0.3 4.2 0.05 140 force"
+        ]
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_first_tick",
+            "ability": "werkiax_unbound:janus#anchor_medium"
+          }
+        ]
+      }
+    },
+    "fx_anchor_big": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": [
+          "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 6.0 1 6.0 0 400 force",
+          "particle minecraft:dragon_breath ~ ~0.3 ~ 6.0 0.3 6.0 0.05 200 force"
+        ]
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_first_tick",
+            "ability": "werkiax_unbound:janus#anchor_big"
+          }
+        ]
+      }
+    },
+    "fx_transform": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": [
+          "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 0.6 0.9 0.6 0 80 force",
+          "particle minecraft:dragon_breath ~ ~0.3 ~ 0.5 0.3 0.5 0.05 30 force"
+        ]
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_first_tick",
+            "ability": "werkiax_unbound:janus#form_switch"
+          }
+        ]
+      }
+    },
+    "fx_strike_charged": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": [
+          "particle minecraft:crit ~ ~1 ~ 0.5 0.6 0.5 0.2 4 force"
+        ]
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 170,
+            "max": 1000
+          }
+        ]
+      }
+    },
+    "fx_strike_t2": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": [
+          "particle minecraft:poof ~ ~0.2 ~ 1.5 0.1 1.5 0.1 40 force"
+        ]
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 90,
+            "max": 169
+          }
+        ]
+      }
+    },
+    "fx_strike_t3": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": [
+          "particle minecraft:block{block_state:\"minecraft:stone\"} ~ ~0.1 ~ 3 0.1 3 0.2 200 force",
+          "particle minecraft:block{block_state:\"minecraft:dirt\"} ~ ~0.1 ~ 2 0.1 2 0.2 100 force"
+        ]
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 170,
+            "max": 1000
+          }
+        ]
+      }
+    },
+    "fx_berserk_aura": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "action": {
+        "type": "palladium:run_command",
+        "command": [
+          "particle minecraft:dust{color:[0.45,0.02,0.79],scale:1.0} ~ ~1 ~ 0.35 0.8 0.35 0 3 force"
+        ]
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#berserk"
+          }
+        ]
+      }
+    },
+    "form_switch": {
+      "type": "palladium:mode_switch",
+      "modes": {
+        "base": {
+          "title": "Base Form",
+          "conditions": {
+            "type": "palladium:crouching"
+          }
+        },
+        "might": {
+          "title": "Might Form",
+          "conditions": {
+            "type": "palladium:not",
+            "conditions": {
+              "type": "palladium:crouching"
+            }
+          }
+        },
+        "bulwark": {
+          "title": "Bulwark Form",
+          "conditions": {
+            "type": "palladium:not",
+            "conditions": {
+              "type": "palladium:crouching"
+            }
+          }
+        }
+      },
+      "properties": {
+        "title": "Transform",
+        "description": "Cycle between Base, Might and Bulwark Form. Base Form requires crouching; the other forms require standing.",
+        "icon": "minecraft:nether_star",
+        "list_index": 4,
+        "color": "purple"
+      },
+      "state": {
+        "enabling": {
+          "type": "palladium:key_bind",
+          "behaviour": "activation",
+          "cooldown": "1s"
+        }
+      }
+    },
+    "dash_launch": {
+      "type": "argon:push",
+      "mode": "vertical",
+      "amount": 0.7,
+      "range": 2.5,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#bowling_ball"
+          }
+        ]
+      }
+    },
+    "dash_cost": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:modify_number_data_attachment",
+        "attachment": "werkiax_unbound:kinetic_charge",
+        "operation": "-",
+        "value": 10
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_first_tick",
+            "ability": "werkiax_unbound:janus#bowling_ball"
+          }
+        ]
+      }
+    },
+    "strike_slow": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": -0.5,
+          "operation": "add_multiplied_total",
+          "id": "werkiax_unbound:strike_charge_slow"
+        }
+      ],
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#power_strike"
+          }
+        ]
+      }
+    },
+    "strike_cooldown": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "action": {
+        "type": "palladium:modify_number_data_attachment",
+        "attachment": "werkiax_unbound:strike_charge",
+        "operation": "-",
+        "value": 1
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:not",
+            "conditions": {
+              "type": "palladium:ability_enabled",
+              "ability": "werkiax_unbound:janus#power_strike"
+            }
+          },
+          {
+            "type": "palladium:not",
+            "conditions": {
+              "type": "palladium:ability_last_tick",
+              "ability": "werkiax_unbound:janus#power_strike"
+            }
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 1,
+            "max": 100000
+          }
+        ]
+      }
+    },
+    "anchor_pull": {
+      "type": "argon:push_field",
+      "mode": "horizontal",
+      "amount": -0.05,
+      "inflation": 8.0,
+      "affect_projectiles": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#anchor"
+          }
+        ]
+      }
+    },
+    "anchor_release": {
+      "type": "argon:push",
+      "mode": "horizontal",
+      "amount": 1.5,
+      "range": 12,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#anchor"
+          }
+        ]
+      }
+    },
+    "health_upgrade_1": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "title": "Health I",
+        "description": "Permanently increases your maximum health by 2 hearts.",
+        "icon": "minecraft:golden_apple",
+        "list_index": 5,
+        "color": "purple"
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 4.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_health_1"
+        }
+      ]
+    },
+    "health_upgrade_2": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "title": "Health II",
+        "description": "Permanently increases your maximum health by 2 hearts. Requires Health I.",
+        "icon": "minecraft:enchanted_golden_apple",
+        "list_index": 6,
+        "color": "purple"
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 4.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_health_2"
+        }
+      ]
+    },
+    "health_upgrade_3": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "title": "Health III",
+        "description": "Permanently increases your maximum health by 2 hearts. Requires Health II.",
+        "icon": "minecraft:totem_of_undying",
+        "list_index": 7,
+        "color": "purple"
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 4.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_health_3"
+        }
+      ]
+    },
+    "damage_upgrade_1": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "title": "Damage I",
+        "description": "Permanently increases your attack damage by 2.",
+        "icon": "minecraft:iron_sword",
+        "list_index": 8,
+        "color": "purple"
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 2.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_damage_1"
+        }
+      ]
+    },
+    "damage_upgrade_2": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "title": "Damage II",
+        "description": "Permanently increases your attack damage by 2. Requires Damage I.",
+        "icon": "minecraft:diamond_sword",
+        "list_index": 9,
+        "color": "purple"
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 2.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_damage_2"
+        }
+      ]
+    },
+    "damage_upgrade_3": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "title": "Damage III",
+        "description": "Permanently increases your attack damage by 2. Requires Damage II.",
+        "icon": "minecraft:netherite_sword",
+        "list_index": 10,
+        "color": "purple"
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 2.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_damage_3"
+        }
+      ]
+    },
+    "armor_upgrade_1": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "title": "Armor I",
+        "description": "Permanently increases your armor by 2.",
+        "icon": "minecraft:iron_chestplate",
+        "list_index": 11,
+        "color": "purple"
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:armor",
+          "amount": 2.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_armor_1"
+        }
+      ]
+    },
+    "armor_upgrade_2": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "title": "Armor II",
+        "description": "Permanently increases your armor by 2. Requires Armor I.",
+        "icon": "minecraft:diamond_chestplate",
+        "list_index": 12,
+        "color": "purple"
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:armor",
+          "amount": 2.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_armor_2"
+        }
+      ]
+    },
+    "armor_upgrade_3": {
+      "type": "palladium:attribute_modifier",
+      "properties": {
+        "title": "Armor III",
+        "description": "Permanently increases your armor by 2. Requires Armor II.",
+        "icon": "minecraft:netherite_chestplate",
+        "list_index": 13,
+        "color": "purple"
+      },
+      "modifiers": [
+        {
+          "attribute": "minecraft:armor",
+          "amount": 2.0,
+          "operation": "add_value",
+          "id": "werkiax_unbound:upgrade_armor_3"
+        }
+      ]
+    }
+  }
+}

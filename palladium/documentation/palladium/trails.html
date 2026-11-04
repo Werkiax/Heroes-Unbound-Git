@@ -1,0 +1,440 @@
+<html>
+<head>
+<title>
+Trails</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }.type-badge{display:inline-block;margin-left:10px;padding:2px 8px;border-radius:10px;font-size:0.6em;font-weight:normal;vertical-align:middle;background-color:#42A3FF;color:white;}</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+<style>
+.json-block { background-color: lightgray; display: inline-block; border: 5px solid darkgray; padding: 10px }</style>
+</head>
+<body>
+<h1>
+Trails</h1>
+<hr>
+
+<p>
+<h2>
+Overview</h2>
+<h3>
+Palladium</h3>
+<ul>
+<li>
+<a href="#palladium:after_image">
+After Image Trail</a>
+</li>
+<li>
+<a href="#palladium:gradient">
+Gradient Trail</a>
+</li>
+<li>
+<a href="#palladium:lightning">
+Lightning Trail</a>
+</li>
+<li>
+<a href="#palladium:lightning_aura">
+Lightning Aura Trail</a>
+</li>
+</ul>
+</p>
+<hr>
+
+<div>
+<h2 id="palladium:after_image">
+After Image Trail</h2>
+<p>
+Renders copies of the entity behind it.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color</td>
+<td>
+Color</td>
+<td>
+Defines the color/tint of the after image</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+blur_layers</td>
+<td>
+Integer</td>
+<td>
+Amount of times each after image is rendered on top of itself, each layer slightly scaled up, to create a blurry outline</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+flat_color</td>
+<td>
+Boolean</td>
+<td>
+If enabled, the after image is rendered as a flat, fullbright silhouette in the given color instead of a tinted copy of the entity's textures</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+edges</td>
+<td>
+Boolean</td>
+<td>
+If enabled, only high-contrast edges of the entity's textures are rendered as fullbright lines in the given color, the rest is mostly transparent</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+blur_scale</td>
+<td>
+Float</td>
+<td>
+How much each additional blur layer is scaled up</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.05</td>
+</tr>
+<tr>
+<td>
+opacity</td>
+<td>
+Float</td>
+<td>
+Starting opacity of the after image</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.5</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:after_image","color":"#ff0000","opacity":0.2}</pre>
+<pre class="json-snippet">
+{"type":"palladium:after_image","opacity":0.3,"flat_color":true,"edges":true,"blur_layers":3}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:gradient">
+Gradient Trail</h2>
+<p>
+Renders a colored gradient behind the players.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+orientation</td>
+<td>
+"horizontal" | "vertical"</td>
+<td>
+Defines the orientation in relation to the entity in which the gradient will render</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+VERTICAL</td>
+</tr>
+<tr>
+<td>
+color</td>
+<td>
+Color</td>
+<td>
+Defines the color of the gradient</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+offset</td>
+<td>
+Float</td>
+<td>
+Defines where the gradient will start in relation to entity hitbox. 0.5 is equal to the center.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.5</td>
+</tr>
+<tr>
+<td>
+opacity</td>
+<td>
+Float</td>
+<td>
+Starting opacity of the gradient</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.5</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:gradient","color":"#ff0000","opacity":0.7,"orientation":"horizontal","offset":0.2}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:lightning">
+Lightning Trail</h2>
+<p>
+Renders lightning behind the entity.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+area</td>
+<td>
+Vector 3D</td>
+<td>
+Box (in blocks) the lightning spreads within. Scales with the size of the entity. Defaults to the entity hitbox.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[0.6, 1.8, 0.6]</td>
+</tr>
+<tr>
+<td>
+amount</td>
+<td>
+Integer</td>
+<td>
+Defines how many lightnings will follow the player</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+10</td>
+</tr>
+<tr>
+<td>
+render_settings</td>
+<td>
+Laser Renderer Settings</td>
+<td>
+The render settings for the lightning.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:lightning","amount":7,"render_settings":{"glow":"#0000ff","size":2.0}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:lightning_aura">
+Lightning Aura Trail</h2>
+<p>
+Renders independently growing lightning arcs with branches around an entity (inspired by DCEU Flash).</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+amount</td>
+<td>
+Integer</td>
+<td>
+Arcs created per timer event</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+render_settings</td>
+<td>
+Laser Renderer Settings</td>
+<td>
+The render settings for the arcs.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+arc_settings</td>
+<td>
+Anything</td>
+<td>
+Arc range, branch timing, jitter, and block-target search settings. Ranges, distances and jitter scale with the size of the entity.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+ArcSettings[idleRange=4.5, runningRange=8.0, sprintingRange=11.0, sideRangeMultiplier=0.7, rearRangeMultiplier=1.2, branchStartMin=0.22, branchStartMax=0.6, branchDelayMin=0.08, branchDelayMax=0.3, jitterAmount=0.055, jitterSpeed=0.27, searchDirections=64, minimumTargetDistance=0.75]</td>
+</tr>
+<tr>
+<td>
+growth</td>
+<td>
+Integer</td>
+<td>
+Ticks required for an arc to fully grow</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+3</td>
+</tr>
+<tr>
+<td>
+branches</td>
+<td>
+Integer</td>
+<td>
+Branches created for each arc</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+2</td>
+</tr>
+<tr>
+<td>
+segments</td>
+<td>
+Integer</td>
+<td>
+Segments in each arc</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+5</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:lightning_aura","branches":1,"render_settings":{"glow":{"color":"#ff7a1a","opacity":0.75}}}</pre>
+<pre class="json-snippet">
+{"type":"palladium:lightning_aura","amount":2,"branches":3,"segments":8,"growth":4,"render_settings":{"glow":{"color":"#00aaff","opacity":0.8,"rainbow":0.5,"pulse":{"scale":0.25,"frequency":2.0}},"core":{"pulse":{"scale":0.1}},"bloom":3,"size":2.0,"rotation_speed":4.0},"arc_settings":{"search_directions":48}}</pre>
+</div>
+<script>
+function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    const elements = document.getElementsByClassName("json-snippet");
+    const amount = elements.length;
+    for (let i = 0; i < amount; i++) {
+        const element = elements[0];
+        const div = document.createElement("pre");
+        div.innerHTML = syntaxHighlight(JSON.stringify(JSON.parse(element.innerText), undefined, 4));
+        element.parentNode.replaceChild(div, element);
+    }</script>
+</body>
+</html>

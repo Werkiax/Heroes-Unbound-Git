@@ -1,0 +1,1042 @@
+<html>
+<head>
+<title>
+MoLang Queries</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }.type-badge{display:inline-block;margin-left:10px;padding:2px 8px;border-radius:10px;font-size:0.6em;font-weight:normal;vertical-align:middle;background-color:#42A3FF;color:white;}</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+</head>
+<body>
+<h1>
+MoLang Queries</h1>
+<hr>
+
+<div>
+<h2>
+palladium</h2>
+<p>
+Queries added by Palladium, for its own features and for values that are useful in player animations.</p>
+<table>
+<thead>
+<tr>
+<th>
+Query</th>
+<th>
+Returns</th>
+<th>
+Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+palladium.any_animation_finished</td>
+<td>
+Boolean</td>
+<td>
+Whether the animation of the current animation controller state has finished. Only works in animation controller transitions.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_body_yaw</td>
+<td>
+Number</td>
+<td>
+The body twist in degrees during the vanilla attack swing.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_on_left_arm</td>
+<td>
+Boolean</td>
+<td>
+Whether an attack swing is playing and the left arm is the main arm.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_on_right_arm</td>
+<td>
+Boolean</td>
+<td>
+Whether an attack swing is playing and the right arm is the main arm.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_swing_x</td>
+<td>
+Number</td>
+<td>
+The X rotation in degrees the attacking arm gets in the vanilla swing animation. Lets animations recreate the swing.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_swing_y</td>
+<td>
+Number</td>
+<td>
+The Y rotation in degrees the attacking arm gets in the vanilla swing animation.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_swing_z</td>
+<td>
+Number</td>
+<td>
+The Z rotation in degrees the attacking arm gets in the vanilla swing animation.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_time</td>
+<td>
+Number</td>
+<td>
+Progress of the current attack swing, from 0 to 1. 0 when not attacking.</td>
+</tr>
+<tr>
+<td>
+palladium.cape_x_rotation</td>
+<td>
+Number</td>
+<td>
+The X rotation in degrees that the vanilla cape physics add on top of a cape bone. Subtract it in an animation to take full control of the cape.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_limb_pitch</td>
+<td>
+Number</td>
+<td>
+The pitch the arms and legs should follow during flight, in degrees.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_limb_roll</td>
+<td>
+Number</td>
+<td>
+The roll the arms and legs should follow during flight, in degrees.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_phase</td>
+<td>
+Number</td>
+<td>
+The phase of the active flight type. Default flight: 0 none, 1 hovering, 2 moving, 3 propelled, 4 descending, 5 landing. Swinging: 0 none, 1 launching, 2 swinging, 3 released, 4 diving, 5 landing.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_pitch</td>
+<td>
+Number</td>
+<td>
+The pitch of the current flight animation, in degrees. 0 when not flying.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_propulsion_scale</td>
+<td>
+Number</td>
+<td>
+How far the propelled (fast) flight pose is blended in, from 0 to 1.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_roll</td>
+<td>
+Number</td>
+<td>
+The roll of the current flight animation, in degrees. 0 when not flying.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_speed_forward</td>
+<td>
+Number</td>
+<td>
+Forward speed during flight relative to the flight speed, from -1 (backwards) to 1.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_speed_sideways</td>
+<td>
+Number</td>
+<td>
+Sideways speed during flight relative to the flight speed, from -1 to 1.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_yaw</td>
+<td>
+Number</td>
+<td>
+The yaw of the current flight animation, in degrees. 0 when not flying.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_yaw_delta</td>
+<td>
+Number</td>
+<td>
+How fast the flying entity is turning, smoothed. Useful to lean into curves.</td>
+</tr>
+<tr>
+<td>
+palladium.get_animation_timer_eased(ability)</td>
+<td>
+Number</td>
+<td>
+The eased animation timer of an ability, from 0 to 1. 0 if the ability is not found.</td>
+</tr>
+<tr>
+<td>
+palladium.gliding_tick_count</td>
+<td>
+Number</td>
+<td>
+Ticks spent gliding with an elytra. 0 when not gliding.</td>
+</tr>
+<tr>
+<td>
+palladium.grapple_distance</td>
+<td>
+Number</td>
+<td>
+The distance from the entity's shoulders to its grappling hook, in blocks. 0 without a hook.</td>
+</tr>
+<tr>
+<td>
+palladium.grapple_pitch</td>
+<td>
+Number</td>
+<td>
+The pitch from the entity's shoulders to its grappling hook, in degrees. Positive when the hook is above. 0 without a hook.</td>
+</tr>
+<tr>
+<td>
+palladium.grapple_state</td>
+<td>
+Number</td>
+<td>
+The state of the entity's active grappling hook: 0 none, 1 flying out, 2 pulling the entity towards a block, 3 reeling in a hooked entity.</td>
+</tr>
+<tr>
+<td>
+palladium.grapple_yaw</td>
+<td>
+Number</td>
+<td>
+The yaw from the entity's body to its grappling hook, in degrees from -180 to 180. Positive when the hook is to the right. 0 without a hook.</td>
+</tr>
+<tr>
+<td>
+palladium.head_x_rotation</td>
+<td>
+Number</td>
+<td>
+The head pitch in degrees. Negative when looking up.</td>
+</tr>
+<tr>
+<td>
+palladium.head_y_rotation</td>
+<td>
+Number</td>
+<td>
+The head yaw relative to the body, in degrees from -180 to 180. Unlike query.head_y_rotation this is 0 when the player looks straight ahead, which is what a head bone in an animation needs.</td>
+</tr>
+<tr>
+<td>
+palladium.horizontal_speed</td>
+<td>
+Number</td>
+<td>
+The horizontal distance the entity moved since the last tick, in blocks. Vertical movement is ignored.</td>
+</tr>
+<tr>
+<td>
+palladium.is_wall_climbing</td>
+<td>
+Boolean</td>
+<td>
+Whether the player is climbing a wall with Palladium's wall climbing ability.</td>
+</tr>
+<tr>
+<td>
+palladium.model_property(part, property)</td>
+<td>
+Number</td>
+<td>
+A value of a model part. Only works inside the overrides of a render layer, returns 0 everywhere else.</td>
+</tr>
+<tr>
+<td>
+palladium.pos_x</td>
+<td>
+Number</td>
+<td>
+The entity's X position in the world, smoothed between ticks.</td>
+</tr>
+<tr>
+<td>
+palladium.pos_y</td>
+<td>
+Number</td>
+<td>
+The entity's Y position in the world, smoothed between ticks.</td>
+</tr>
+<tr>
+<td>
+palladium.pos_z</td>
+<td>
+Number</td>
+<td>
+The entity's Z position in the world, smoothed between ticks.</td>
+</tr>
+<tr>
+<td>
+palladium.swinging_is_hanging</td>
+<td>
+Boolean</td>
+<td>
+Whether the player hangs still on a web line.</td>
+</tr>
+<tr>
+<td>
+palladium.swinging_left_arm_pitch</td>
+<td>
+Number</td>
+<td>
+A physics based pitch for the left arm while swinging, in degrees. Points up at the anchor when the arm holds the line.</td>
+</tr>
+<tr>
+<td>
+palladium.swinging_limb_vel</td>
+<td>
+Number</td>
+<td>
+How fast the swinging limbs are currently moving. Useful for secondary motion like legs trailing behind.</td>
+</tr>
+<tr>
+<td>
+palladium.swinging_on_left_arm</td>
+<td>
+Boolean</td>
+<td>
+Whether the current web line is attached to the left arm.</td>
+</tr>
+<tr>
+<td>
+palladium.swinging_on_right_arm</td>
+<td>
+Boolean</td>
+<td>
+Whether the current web line is attached to the right arm.</td>
+</tr>
+<tr>
+<td>
+palladium.swinging_right_arm_pitch</td>
+<td>
+Number</td>
+<td>
+A physics based pitch for the right arm while swinging, in degrees. Points up at the anchor when the arm holds the line.</td>
+</tr>
+<tr>
+<td>
+palladium.tick_count</td>
+<td>
+Number</td>
+<td>
+The entity's age in ticks, including the progress to the next tick for smooth motion.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+
+<div>
+<h2>
+query</h2>
+<p>
+Queries modelled after the ones in Bedrock Edition. Also available as "q".</p>
+<table>
+<thead>
+<tr>
+<th>
+Query</th>
+<th>
+Returns</th>
+<th>
+Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+query.actor_count</td>
+<td>
+Number</td>
+<td>
+Always 1. Exists for compatibility with Bedrock animations.</td>
+</tr>
+<tr>
+<td>
+query.blocking</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is blocking with a shield.</td>
+</tr>
+<tr>
+<td>
+query.body_x_rotation</td>
+<td>
+Number</td>
+<td>
+The entity's pitch in degrees.</td>
+</tr>
+<tr>
+<td>
+query.body_y_rotation</td>
+<td>
+Number</td>
+<td>
+The body yaw in degrees. For entities without a separate body rotation this is the view yaw.</td>
+</tr>
+<tr>
+<td>
+query.cardinal_facing</td>
+<td>
+Number</td>
+<td>
+The direction the entity faces as a number: 0 down, 1 up, 2 north, 3 south, 4 west, 5 east.</td>
+</tr>
+<tr>
+<td>
+query.cardinal_facing_2d</td>
+<td>
+Number</td>
+<td>
+Like cardinal_facing, but up and down are reported as 6, so only the four horizontal directions remain.</td>
+</tr>
+<tr>
+<td>
+query.cardinal_player_facing</td>
+<td>
+Number</td>
+<td>
+The direction the entity faces, using the same numbers as cardinal_facing.</td>
+</tr>
+<tr>
+<td>
+query.day</td>
+<td>
+Number</td>
+<td>
+The number of in-game days that have passed, with the time of day as the fraction.</td>
+</tr>
+<tr>
+<td>
+query.death_ticks</td>
+<td>
+Number</td>
+<td>
+Ticks since the entity died. 0 while alive.</td>
+</tr>
+<tr>
+<td>
+query.distance_from_camera</td>
+<td>
+Number</td>
+<td>
+Always 0. Exists for compatibility with Bedrock animations.</td>
+</tr>
+<tr>
+<td>
+query.equipment_count</td>
+<td>
+Number</td>
+<td>
+How many armor slots are filled.</td>
+</tr>
+<tr>
+<td>
+query.frame_alpha</td>
+<td>
+Number</td>
+<td>
+The progress between the last and the next tick, from 0 to 1. Useful for smooth motion.</td>
+</tr>
+<tr>
+<td>
+query.get_actor_info_id</td>
+<td>
+Number</td>
+<td>
+The entity's numeric ID in the current world.</td>
+</tr>
+<tr>
+<td>
+query.ground_speed</td>
+<td>
+Number</td>
+<td>
+The horizontal speed in blocks per tick.</td>
+</tr>
+<tr>
+<td>
+query.has_cape</td>
+<td>
+Boolean</td>
+<td>
+Whether the player has a cape that is visible.</td>
+</tr>
+<tr>
+<td>
+query.has_collision</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity collides with blocks.</td>
+</tr>
+<tr>
+<td>
+query.has_gravity</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is affected by gravity.</td>
+</tr>
+<tr>
+<td>
+query.has_head_gear</td>
+<td>
+Boolean</td>
+<td>
+Whether something is worn in the head slot.</td>
+</tr>
+<tr>
+<td>
+query.has_owner</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is tamed or otherwise owned.</td>
+</tr>
+<tr>
+<td>
+query.has_player_rider</td>
+<td>
+Boolean</td>
+<td>
+Whether a player is riding the entity.</td>
+</tr>
+<tr>
+<td>
+query.has_rider</td>
+<td>
+Boolean</td>
+<td>
+Whether anything is riding the entity.</td>
+</tr>
+<tr>
+<td>
+query.head_x_rotation</td>
+<td>
+Number</td>
+<td>
+The head pitch in degrees. Negative when looking up.</td>
+</tr>
+<tr>
+<td>
+query.head_y_rotation</td>
+<td>
+Number</td>
+<td>
+The head yaw in degrees, in world space.</td>
+</tr>
+<tr>
+<td>
+query.health</td>
+<td>
+Number</td>
+<td>
+The current health.</td>
+</tr>
+<tr>
+<td>
+query.hurt_time</td>
+<td>
+Number</td>
+<td>
+Counts down from 10 after the entity took damage. 0 when not hurt.</td>
+</tr>
+<tr>
+<td>
+query.invulnerable_ticks</td>
+<td>
+Number</td>
+<td>
+Remaining ticks of damage immunity after getting hurt.</td>
+</tr>
+<tr>
+<td>
+query.is_alive</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is alive.</td>
+</tr>
+<tr>
+<td>
+query.is_angry</td>
+<td>
+Boolean</td>
+<td>
+Whether a neutral mob, like a wolf or enderman, is angry.</td>
+</tr>
+<tr>
+<td>
+query.is_baby</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is a baby.</td>
+</tr>
+<tr>
+<td>
+query.is_breathing</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity's air supply is full.</td>
+</tr>
+<tr>
+<td>
+query.is_fire_immune</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity type is immune to fire.</td>
+</tr>
+<tr>
+<td>
+query.is_first_person</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is the local player viewed in first person.</td>
+</tr>
+<tr>
+<td>
+query.is_in_contact_with_water</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is in water or standing in rain.</td>
+</tr>
+<tr>
+<td>
+query.is_in_lava</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is in lava.</td>
+</tr>
+<tr>
+<td>
+query.is_in_water</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is in water.</td>
+</tr>
+<tr>
+<td>
+query.is_in_water_or_rain</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is in water or standing in rain.</td>
+</tr>
+<tr>
+<td>
+query.is_invisible</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is invisible.</td>
+</tr>
+<tr>
+<td>
+query.is_leashed</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is on a lead.</td>
+</tr>
+<tr>
+<td>
+query.is_moving</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity moved since the last tick.</td>
+</tr>
+<tr>
+<td>
+query.is_on_fire</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is burning.</td>
+</tr>
+<tr>
+<td>
+query.is_on_ground</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity stands on the ground.</td>
+</tr>
+<tr>
+<td>
+query.is_riding</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is riding something.</td>
+</tr>
+<tr>
+<td>
+query.is_saddled</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity wears a saddle.</td>
+</tr>
+<tr>
+<td>
+query.is_silent</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is silent.</td>
+</tr>
+<tr>
+<td>
+query.is_sleeping</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is sleeping in a bed.</td>
+</tr>
+<tr>
+<td>
+query.is_sneaking</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is crouching.</td>
+</tr>
+<tr>
+<td>
+query.is_sprinting</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is sprinting.</td>
+</tr>
+<tr>
+<td>
+query.is_swimming</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is swimming.</td>
+</tr>
+<tr>
+<td>
+query.is_using_item</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is using an item, like eating or drawing a bow.</td>
+</tr>
+<tr>
+<td>
+query.is_wall_climbing</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity is on a ladder, vine or another climbable block. For Palladium's wall climbing ability use palladium.is_wall_climbing.</td>
+</tr>
+<tr>
+<td>
+query.life_time</td>
+<td>
+Number</td>
+<td>
+Always 0. Exists for compatibility with Bedrock animations.</td>
+</tr>
+<tr>
+<td>
+query.limb_swing</td>
+<td>
+Number</td>
+<td>
+How far the legs have swung in the walking animation. Grows continuously while walking.</td>
+</tr>
+<tr>
+<td>
+query.limb_swing_amount</td>
+<td>
+Number</td>
+<td>
+How strongly the walking animation plays, from 0 when standing still to about 1 when running.</td>
+</tr>
+<tr>
+<td>
+query.main_hand_item_max_duration</td>
+<td>
+Number</td>
+<td>
+How many ticks the item in the main hand can be used for, like a bow's draw time.</td>
+</tr>
+<tr>
+<td>
+query.main_hand_item_use_duration</td>
+<td>
+Number</td>
+<td>
+How long the item in the main hand has been used, in seconds. 0 when it is not being used.</td>
+</tr>
+<tr>
+<td>
+query.max_health</td>
+<td>
+Number</td>
+<td>
+The maximum health.</td>
+</tr>
+<tr>
+<td>
+query.moon_brightness</td>
+<td>
+Number</td>
+<td>
+The current brightness of the stars, from 0 during the day to 1 at night.</td>
+</tr>
+<tr>
+<td>
+query.moon_phase</td>
+<td>
+Number</td>
+<td>
+The moon phase, from 0 (full moon) to 7.</td>
+</tr>
+<tr>
+<td>
+query.movement_direction</td>
+<td>
+Number</td>
+<td>
+The direction the entity is moving in, using the same numbers as cardinal_facing. 6 when not moving.</td>
+</tr>
+<tr>
+<td>
+query.player_level</td>
+<td>
+Number</td>
+<td>
+The player's experience level. 0 for other entities.</td>
+</tr>
+<tr>
+<td>
+query.rider_body_x_rotation</td>
+<td>
+Number</td>
+<td>
+The pitch of the first rider in degrees. 0 without a rider.</td>
+</tr>
+<tr>
+<td>
+query.rider_body_y_rotation</td>
+<td>
+Number</td>
+<td>
+The body yaw of the first rider in degrees. 0 without a rider.</td>
+</tr>
+<tr>
+<td>
+query.rider_head_x_rotation</td>
+<td>
+Number</td>
+<td>
+The head pitch of the first rider in degrees. 0 without a rider.</td>
+</tr>
+<tr>
+<td>
+query.rider_head_y_rotation</td>
+<td>
+Number</td>
+<td>
+The head yaw of the first rider in degrees. 0 without a rider.</td>
+</tr>
+<tr>
+<td>
+query.scale</td>
+<td>
+Number</td>
+<td>
+The entity's scale, for example from the scale attribute. 1 by default.</td>
+</tr>
+<tr>
+<td>
+query.sleep_rotation</td>
+<td>
+Number</td>
+<td>
+The yaw of the bed the entity sleeps in, in degrees. 0 when not sleeping.</td>
+</tr>
+<tr>
+<td>
+query.time_of_day</td>
+<td>
+Number</td>
+<td>
+The time of day from 0 to 1. 0 is sunrise, 0.25 noon, 0.5 sunset and 0.75 midnight.</td>
+</tr>
+<tr>
+<td>
+query.time_stamp</td>
+<td>
+Number</td>
+<td>
+The total game time in ticks.</td>
+</tr>
+<tr>
+<td>
+query.vertical_speed</td>
+<td>
+Number</td>
+<td>
+The vertical speed in blocks per tick. Positive when moving up.</td>
+</tr>
+<tr>
+<td>
+query.yaw_speed</td>
+<td>
+Number</td>
+<td>
+How far the yaw changed since the last tick, in degrees.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+
+<div>
+<h2>
+argon</h2>
+<p>
+Queries added by Argon.</p>
+<table>
+<thead>
+<tr>
+<th>
+Query</th>
+<th>
+Returns</th>
+<th>
+Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+argon.dodge_direction_forward</td>
+<td>
+Number</td>
+<td>
+How much of the current Dodge points forward, from -1 (backward) to 1, or 0 when not dodging.</td>
+</tr>
+<tr>
+<td>
+argon.dodge_direction_side</td>
+<td>
+Number</td>
+<td>
+How much of the current Dodge points sideways, from -1 to 1, or 0 when not dodging.</td>
+</tr>
+<tr>
+<td>
+argon.facing_block(distance)</td>
+<td>
+Boolean</td>
+<td>
+Whether a block is within the given distance along the entity's line of sight.</td>
+</tr>
+<tr>
+<td>
+argon.item_energy(slot)</td>
+<td>
+Number</td>
+<td>
+The energy stored in the item in the given slot, or 0 if there is none.</td>
+</tr>
+<tr>
+<td>
+argon.item_energy_level(slot, start, step, min_level, max_level)</td>
+<td>
+Number</td>
+<td>
+The stored energy of the item in a slot as a level: min_level at or below start, then one more level for every step of energy, up to max_level.</td>
+</tr>
+<tr>
+<td>
+argon.swing_arm_left</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity's left arm is swinging, counting offhand swings.</td>
+</tr>
+<tr>
+<td>
+argon.swing_arm_right</td>
+<td>
+Boolean</td>
+<td>
+Whether the entity's right arm is swinging, counting offhand swings (unlike palladium.attack_on_right_arm, which only follows the main hand).</td>
+</tr>
+<tr>
+<td>
+argon.swing_arm_yaw</td>
+<td>
+Number</td>
+<td>
+The body twist of the current swing in degrees, doubled like the vanilla arm yaw and signed for whichever arm is swinging, main hand or offhand.</td>
+</tr>
+<tr>
+<td>
+argon.wall_crawl_roll</td>
+<td>
+Number</td>
+<td>
+The roll, in degrees, of the body on the surface Wall Crawling is attached to, following where the entity looks. 0 when not on a surface.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

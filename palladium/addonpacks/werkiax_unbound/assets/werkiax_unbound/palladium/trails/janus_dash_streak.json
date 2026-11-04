@@ -1,0 +1,12 @@
+{
+  "spacing": 0.25,
+  "lifetime": 10,
+  "requires_movement": true,
+  "renderer": {
+    "type": "palladium:gradient",
+    "color": "#7404C9",
+    "opacity": 0.9,
+    "orientation": "vertical",
+    "offset": 0.5
+  }
+}

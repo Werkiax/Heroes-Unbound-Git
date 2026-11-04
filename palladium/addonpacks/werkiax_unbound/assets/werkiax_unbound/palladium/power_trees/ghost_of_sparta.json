@@ -1,0 +1,27 @@
+{
+  "grid_size": 50,
+  "node_styles": {
+    "default": {
+      "size": 28,
+      "overlay": false,
+      "show_icon": true
+    }
+  },
+  "connection_styles": {
+    "default": {
+      "path": "elbow_vertical",
+      "width": 2,
+      "color": {
+        "locked": "#555555",
+        "available": "#FFFFFF",
+        "unlocked": "#00E5FF"
+      }
+    }
+  },
+  "nodes": {
+    "rage": [0, 0],
+    "stomp": [0, 1],
+    "charge_leap": [0, 2],
+    "grab": [0, 3]
+  }
+}

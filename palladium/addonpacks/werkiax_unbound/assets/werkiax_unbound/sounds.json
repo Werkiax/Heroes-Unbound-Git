@@ -1,0 +1,7 @@
+{
+  "rage_roar": {
+    "sounds": [
+      { "name": "werkiax_unbound:rage_roar", "stream": false }
+    ]
+  }
+}

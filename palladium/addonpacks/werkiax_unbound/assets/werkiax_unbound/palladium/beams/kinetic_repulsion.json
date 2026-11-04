@@ -1,0 +1,28 @@
+{
+  "body_part": "body",
+  "offset": [
+    0,
+    0,
+    0
+  ],
+  "renderer": {
+    "type": "argon:cone",
+    "start_size": 0.5,
+    "end_size": 6.0,
+    "end_distance": 8.0,
+    "end_fade": 0.15,
+    "blend": "translucent",
+    "glow_layers": 3,
+    "segments": 24,
+    "glow": {
+      "color": "#7404C9",
+      "opacity": 0.05,
+      "scale": 1.0
+    },
+    "core": {
+      "color": "#FFFFFF",
+      "opacity": 0.0,
+      "scale": 0.35
+    }
+  }
+}

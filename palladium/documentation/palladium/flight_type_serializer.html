@@ -1,0 +1,1112 @@
+<html>
+<head>
+<title>
+Flight Types</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }.type-badge{display:inline-block;margin-left:10px;padding:2px 8px;border-radius:10px;font-size:0.6em;font-weight:normal;vertical-align:middle;background-color:#42A3FF;color:white;}</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+<style>
+.json-block { background-color: lightgray; display: inline-block; border: 5px solid darkgray; padding: 10px }</style>
+</head>
+<body>
+<h1>
+Flight Types</h1>
+<hr>
+
+<p>
+<h2>
+Overview</h2>
+<h3>
+Palladium</h3>
+<ul>
+<li>
+<a href="#palladium:flight">
+Default Flight</a>
+</li>
+<li>
+<a href="#palladium:swinging">
+Swinging</a>
+</li>
+</ul>
+<h3>
+Argon</h3>
+<ul>
+<li>
+<a href="#argon:controlled_flight">
+Controlled Flight</a>
+</li>
+<li>
+<a href="#argon:forced_flight">
+Forced Flight</a>
+</li>
+</ul>
+</p>
+<hr>
+
+<div>
+<h2 id="palladium:flight">
+Default Flight</h2>
+<p>
+Default flying type. If the sprint speed is equal or less than the normal speed, this flight will be levitation-only.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+sound</td>
+<td>
+Identifier</td>
+<td>
+Looping sound played constantly while flying. If propelled_sound is set as well, the two sounds fade between each other depending on whether the entity is in propelled flight.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+sprint_speed</td>
+<td>
+Float</td>
+<td>
+The sprinting flight speed. If not set, it will be equal to the normal speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+screen_shake</td>
+<td>
+Screen Shake</td>
+<td>
+Screen shake applied while the entity is in propelled flight.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+propelled_sound</td>
+<td>
+Identifier</td>
+<td>
+Looping sound played while the entity is fast-flying (sprinting). Volume scales with flight speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+speed</td>
+<td>
+Float</td>
+<td>
+The normal flight speed.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+propelled_start_sound</td>
+<td>
+Identifier</td>
+<td>
+Sound played once when the entity enters propelled flight.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:flight","speed":1,"sprint_speed":2,"screen_shake":{"intensity":{"yaw":0.8,"pitch":0.8,"roll":0.2},"frequency":0.35,"fade_in":12,"fade_out":15,"easing":{"in":"out_sine","out":"out_sine"}},"propelled_sound":"palladium:player.flight.propelled"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:swinging">
+Swinging</h2>
+<p>
+Allows the entity to swing from anchor points, similar to a grappling hook.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+beam_renderer</td>
+<td>
+Identifier | Beam Renderer (right_arm, left_arm)</td>
+<td>
+The beam renderer(s) used for the swinging rope. Can be a single identifier or separate right/left arm identifiers.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+attach_sound</td>
+<td>
+Identifier</td>
+<td>
+Sound played for nearby players each time a new anchor attaches.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+max_anchor_height_type</td>
+<td>
+"absolute" | "relative"</td>
+<td>
+Determines if the maximum height for anchors are relative to the ground, or a fixed y-level.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+RELATIVE</td>
+</tr>
+<tr>
+<td>
+swing_sound</td>
+<td>
+Identifier</td>
+<td>
+Looping sound played while the entity is swinging on an anchor. Volume scales with movement speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+max_anchor_height</td>
+<td>
+Integer</td>
+<td>
+The maximum height for anchor points.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+swing_interval</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+The airborne gap (in ticks) between releasing one web and firing the next. The first web after starting the flight always fires at the apex of the launch boost.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+10</td>
+</tr>
+<tr>
+<td>
+radius</td>
+<td>
+Float | Vector 2D</td>
+<td>
+The web length range: how far ahead anchors are placed and the maximum rope length. A single number or an array of 2 numbers (min/max). While flying, holding jump raises and holding shift lowers the height that new anchors are placed at.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:swinging","max_anchor_height":20,"radius":[5.0,10.0],"beam_renderer":{"right_arm":"namespace:beam_right_id","left_arm":"namespace:beam_left_id"}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:controlled_flight">
+Controlled Flight</h2>
+<p>
+Flight with momentum, banking and a body that leans into its travel direction. Speed still comes from "speed" and "sprint_speed", and toggling, speed levels, landing and takeoff work like palladium:flight.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+flight_entity_collision_damage</td>
+<td>
+Float</td>
+<td>
+Multiplier on the damage dealt to an entity that is flown into.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+flight_response_curve</td>
+<td>
+Float</td>
+<td>
+Shapes acceleration over speed. 1 is constant, above 1 starts slower and pushes harder near top speed (0.1 to 4).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+sound</td>
+<td>
+Identifier</td>
+<td>
+Ambient flight sound.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+enable_flight_collision</td>
+<td>
+Boolean</td>
+<td>
+Whether hitting a block or an entity at speed hurts. Off by default.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+enable_speed_fov</td>
+<td>
+Boolean</td>
+<td>
+Whether the field of view widens with flight speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+gravity_wrap_pitch</td>
+<td>
+Float</td>
+<td>
+How steeply the player has to be flying up or down, in degrees (30 to 80), before gravity turns.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+55.0</td>
+</tr>
+<tr>
+<td>
+enable_gravity_following</td>
+<td>
+Boolean</td>
+<td>
+Whether gravity turns with the flight so loops and vertical flight have no pitch limit: past gravity_wrap_pitch it turns 90 degrees about the player's right side, and returns to normal when flight ends.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+enable_barrel_roll</td>
+<td>
+Boolean</td>
+<td>
+Whether double-tapping left or right while flying performs a barrel roll in that direction. Off by default.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+barrel_roll_min_speed</td>
+<td>
+Float</td>
+<td>
+The fraction of top speed needed to start a roll.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.2</td>
+</tr>
+<tr>
+<td>
+camera_bank_multiplier</td>
+<td>
+Float</td>
+<td>
+The share of the bank the camera rolls by in partial mode.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.15</td>
+</tr>
+<tr>
+<td>
+momentum_retention</td>
+<td>
+Float</td>
+<td>
+How much turning is held back at speed. 0 turns as sharply at speed as when slow, 1 holds the heading the most.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+flight_impact_speed</td>
+<td>
+Float</td>
+<td>
+The impact speed in blocks per tick below which a collision does nothing.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.45</td>
+</tr>
+<tr>
+<td>
+dive_pullout_responsiveness</td>
+<td>
+Float</td>
+<td>
+How much easier it is to turn while above top speed, so pulling out of a dive does not need a huge circle (1 to 4).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.8</td>
+</tr>
+<tr>
+<td>
+gravity_turn_ticks</td>
+<td>
+Integer</td>
+<td>
+How many ticks the camera and model take to turn with gravity.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+8</td>
+</tr>
+<tr>
+<td>
+flight_collision_stop</td>
+<td>
+Boolean</td>
+<td>
+Whether an impact stops the player's speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+propelled_sound</td>
+<td>
+Identifier</td>
+<td>
+Looping sound while propelled.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+barrel_roll_camera_influence</td>
+<td>
+Float</td>
+<td>
+How much of the roll the camera follows, 0 keeps the view steady and 1 rolls with the body.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+landing_speed_threshold</td>
+<td>
+Float</td>
+<td>
+The downward speed in blocks per tick up to which a landing is controlled. Faster than this the flight does not brake and touching the ground is a hard landing.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+profile</td>
+<td>
+"controlled" | "propelled" | "natural" | "gliding"</td>
+<td>
+Presets every setting below: controlled is the balanced default, propelled has heavier momentum and sinks when no direction is held, natural turns and stops quickly with no gravity, gliding keeps momentum and sinks when slow.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+CONTROLLED</td>
+</tr>
+<tr>
+<td>
+lean_full_speed</td>
+<td>
+Float</td>
+<td>
+Fraction of top speed at which the body is fully aligned with the direction of travel.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.6</td>
+</tr>
+<tr>
+<td>
+screen_shake</td>
+<td>
+Screen Shake</td>
+<td>
+Screen shake while propelled.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+air_braking_strength</td>
+<td>
+Float</td>
+<td>
+Fraction of speed lost each tick when no direction is held (0 to 1).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+camera_roll_mode</td>
+<td>
+"none" | "partial" | "full"</td>
+<td>
+How much of the bank the camera follows.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+PARTIAL</td>
+</tr>
+<tr>
+<td>
+barrel_roll_cooldown</td>
+<td>
+Integer</td>
+<td>
+Ticks before another roll can start.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+30</td>
+</tr>
+<tr>
+<td>
+max_bank_angle</td>
+<td>
+Float</td>
+<td>
+The largest bank angle in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+30.0</td>
+</tr>
+<tr>
+<td>
+propelled_start_sound</td>
+<td>
+Identifier</td>
+<td>
+Sound played once when propelled flight starts.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+landing_recovery_duration</td>
+<td>
+Integer</td>
+<td>
+Ticks of recovery on the ground before flight stops after a landing. Moving cancels it early.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+15</td>
+</tr>
+<tr>
+<td>
+hover_stabilization</td>
+<td>
+Float</td>
+<td>
+Extra fraction of speed removed each tick when almost stopped, so the player settles into a hover.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+flight_entity_knockback</td>
+<td>
+Float</td>
+<td>
+How hard a hit entity is knocked away.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.5</td>
+</tr>
+<tr>
+<td>
+barrel_roll_duration</td>
+<td>
+Integer</td>
+<td>
+How many ticks the roll takes.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+14</td>
+</tr>
+<tr>
+<td>
+sprint_speed</td>
+<td>
+Float</td>
+<td>
+The sprinting (propelled) flight speed. Unset, sprinting does nothing special.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+bank_speed_influence</td>
+<td>
+Float</td>
+<td>
+How much the bank scales with speed, 0 banks the same at any speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.7</td>
+</tr>
+<tr>
+<td>
+enable_body_rotation</td>
+<td>
+Boolean</td>
+<td>
+Whether the player's body leans into the direction of travel while flying.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+enable_superhero_landing</td>
+<td>
+Boolean</td>
+<td>
+Whether flight lands by itself when dropping toward the ground: a soft touchdown, upright body, stop after the recovery time and no fall damage. Hitting the ground faster than landing_speed_threshold is a hard landing instead.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+orientation_responsiveness</td>
+<td>
+Float</td>
+<td>
+How quickly the body follows the direction of travel each tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+barrel_roll_lateral_strength</td>
+<td>
+Float</td>
+<td>
+A sideways push in the roll direction, as a fraction of top speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.3</td>
+</tr>
+<tr>
+<td>
+enable_third_person_framing</td>
+<td>
+Boolean</td>
+<td>
+Whether the third-person camera frames the body while flying, so the character sits around the middle of the screen however the body leans, instead of the head staying there. First person is not changed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+bank_responsiveness</td>
+<td>
+Float</td>
+<td>
+How quickly the bank builds each tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.25</td>
+</tr>
+<tr>
+<td>
+bank_recovery_speed</td>
+<td>
+Float</td>
+<td>
+How quickly the bank returns to level each tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.12</td>
+</tr>
+<tr>
+<td>
+speed</td>
+<td>
+Float</td>
+<td>
+The normal flight speed.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+enable_flight_banking</td>
+<td>
+Boolean</td>
+<td>
+Whether the body rolls into turns.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+glide_energy_exchange</td>
+<td>
+Float</td>
+<td>
+For the gliding profile: how much speed is traded for height. Dropping adds speed, climbing costs it (0 to 0.3).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.05</td>
+</tr>
+<tr>
+<td>
+flight_block_collision_damage</td>
+<td>
+Float</td>
+<td>
+Multiplier on the damage from hitting a block, which is worked out from the speed of the impact like elytra damage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+lean_start_speed</td>
+<td>
+Float</td>
+<td>
+Fraction of top speed at which the lean begins.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.15</td>
+</tr>
+<tr>
+<td>
+speed_fov_multiplier</td>
+<td>
+Float</td>
+<td>
+How much the field of view widens at top speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.12</td>
+</tr>
+<tr>
+<td>
+dive_momentum_decay</td>
+<td>
+Float</td>
+<td>
+The fraction of the extra dive speed lost each tick at full retention (0.001 to 0.3). The extra speed never lets the player go faster than the dive speed and always fades.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.015</td>
+</tr>
+<tr>
+<td>
+dive_pitch</td>
+<td>
+Float</td>
+<td>
+How far down the player has to look, in degrees (30 to 85), for a dive to start. It builds up to full at 85.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+45.0</td>
+</tr>
+<tr>
+<td>
+dive_speed_retention</td>
+<td>
+Float</td>
+<td>
+How much of the extra dive speed carries on after the dive. 0 loses it at the normal deceleration, 1 loses it at dive_momentum_decay.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.8</td>
+</tr>
+<tr>
+<td>
+turn_responsiveness</td>
+<td>
+Float</td>
+<td>
+The heading change in degrees per tick when turning at low speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+flight_acceleration</td>
+<td>
+Float</td>
+<td>
+Fraction of the gap to the target speed closed each tick when speeding up (0.001 to 1).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+flight_deceleration</td>
+<td>
+Float</td>
+<td>
+Fraction of the gap closed each tick when slowing down while a direction is held (0.001 to 1).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+hover_velocity_threshold</td>
+<td>
+Float</td>
+<td>
+Speed below which hover stabilization starts, scaled by 3.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.03</td>
+</tr>
+<tr>
+<td>
+glide_lift_speed</td>
+<td>
+Float</td>
+<td>
+For the gliding profile: the fraction of top speed at which gravity is fully cancelled. Slower than this the player sinks (0.05 to 1).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.6</td>
+</tr>
+<tr>
+<td>
+dive_acceleration_multiplier</td>
+<td>
+Float</td>
+<td>
+The top speed of a full dive as a multiple of the normal top speed (1 to 4).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.6</td>
+</tr>
+<tr>
+<td>
+third_person_framing_offset</td>
+<td>
+Float</td>
+<td>
+How far above the middle of the body the third-person camera aims, in blocks. Positive puts the character a little below the middle of the screen, 0 puts the body centre on it (-1 to 2).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.25</td>
+</tr>
+<tr>
+<td>
+landing_damage_reduction</td>
+<td>
+Float</td>
+<td>
+How much of the fall damage from a hard landing is prevented (0 to 1). It is dealt as fall damage, so Palladium's fall protection still applies.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.5</td>
+</tr>
+<tr>
+<td>
+enable_diving</td>
+<td>
+Boolean</td>
+<td>
+Whether looking steeply down while pushing forward is a dive. A dive can reach dive_acceleration_multiplier times top speed, and the extra speed fades slowly after the dive instead of at once, so pulling out carries momentum. There is no key: it follows the look direction.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+gravity_influence</td>
+<td>
+Float</td>
+<td>
+How much gravity pulls while no direction is held, or always for the gliding profile where it fades as speed rises (0 to 1).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:controlled_flight","speed":1.5,"sprint_speed":3,"profile":"natural"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:forced_flight">
+Forced Flight</h2>
+<p>
+A flight type matching Palladium's default movement and animation, except the entity can never land or be manually toggled out, stopping only when the granting ability is disabled.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+sprint_speed</td>
+<td>
+Float</td>
+<td>
+The sprinting flight speed, defaulting to the normal speed when unset.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+propelled_sound</td>
+<td>
+Identifier</td>
+<td>
+Looping sound played while fast-flying (sprinting), its volume scaling with flight speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+screen_shake</td>
+<td>
+Screen Shake</td>
+<td>
+Camera shake while sprinting in flight. Only used when a sprint_speed is set.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+speed</td>
+<td>
+Float</td>
+<td>
+The normal flight speed.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:forced_flight","speed":1,"sprint_speed":2}</pre>
+</div>
+<script>
+function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    const elements = document.getElementsByClassName("json-snippet");
+    const amount = elements.length;
+    for (let i = 0; i < amount; i++) {
+        const element = elements[0];
+        const div = document.createElement("pre");
+        div.innerHTML = syntaxHighlight(JSON.stringify(JSON.parse(element.innerText), undefined, 4));
+        element.parentNode.replaceChild(div, element);
+    }</script>
+</body>
+</html>

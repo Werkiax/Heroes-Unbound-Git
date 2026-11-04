@@ -1,0 +1,736 @@
+<html>
+<head>
+<title>
+Appendage Profiles</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+<style>
+.json-block { background-color: lightgray; display: inline-block; border: 5px solid darkgray; padding: 10px }</style>
+</head>
+<body>
+<h1>
+Appendage Profiles</h1>
+<hr>
+
+<p>
+Defines the shape, count, attachment points, and idle behavior of a set of procedural appendages (arms, tentacles, tails). Loaded from <code>data/&lt;namespace&gt;/argon/appendage_profiles/*.json</code> and referenced by id, mainly via <a href="ability_serializer.html#argon:appendages">argon:appendages</a>'s own <code>profile</code> setting. Other abilities (<code>argon:appendage_climbing</code>, <code>argon:appendage_attack</code>, ...) control what the appendages actually do. How they visually open and close is chosen by the profile's <a href="#deployment">deployment</a> setting.</p>
+
+<div>
+<h2>
+Settings</h2>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+count</td>
+<td>
+Integer (1 - 64)</td>
+<td>
+How many appendages this profile defines.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+segments</td>
+<td>
+Integer (1 - 16)</td>
+<td>
+Joints per appendage; more gives a smoother bend.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+6</td>
+</tr>
+<tr>
+<td>
+length</td>
+<td>
+Decimal (0.1 - 64)</td>
+<td>
+Unused - reach is actually set by each attachment point's "offset"/"idle_offset". Still required by the schema.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+width</td>
+<td>
+Decimal (0.01 - 8)</td>
+<td>
+Beam thickness, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.15</td>
+</tr>
+<tr>
+<td>
+solver</td>
+<td>
+"rigid" | "articulated" | "curved" | "tentacle"</td>
+<td>
+Curve-bending style - see <a href="#solver-modes">Solver Modes</a> below.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+articulated</td>
+</tr>
+<tr>
+<td>
+beam_renderer</td>
+<td>
+Identifier</td>
+<td>
+Beam renderer id used to draw each segment.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+attachment_points</td>
+<td>
+List of Attachment Point</td>
+<td>
+One entry per appendage (see <a href="#attachment-point">Attachment Point</a>); extra appendages reuse the last entry.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+idle</td>
+<td>
+Idle Settings</td>
+<td>
+Idle sway/lag settings - see <a href="#idle-settings">Idle Settings</a> below.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+see Idle Settings</td>
+</tr>
+<tr>
+<td>
+end_model</td>
+<td>
+Item</td>
+<td>
+Tip item (claw, hand, ...); omit for none. Overridable per appendage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+none</td>
+</tr>
+<tr>
+<td>
+curl_strength</td>
+<td>
+Decimal (0 - 1)</td>
+<td>
+How much the idle tip curls toward the wearer's front instead of its own offset direction.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+end_model_offset</td>
+<td>
+[X, Y, Z]</td>
+<td>
+Local offset for the tip item (X sideways, Y up, Z outward). Overridable per appendage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[0.0, 0.0, 0.0]</td>
+</tr>
+<tr>
+<td>
+end_model_scale</td>
+<td>
+Decimal (0 - 64)</td>
+<td>
+Tip item scale. Overridable per appendage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+reach_lag</td>
+<td>
+Decimal (0 - 0.95)</td>
+<td>
+How much the reach point trails its target - 0 snaps instantly, higher eases into a visible travel motion.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.6</td>
+</tr>
+<tr>
+<td>
+deployment</td>
+<td>
+"symbiotic" | "mechanical" | Deployment Settings</td>
+<td>
+How the appendages visually open and close - either just a style name, or an object with the full tuning. See <a href="#deployment">Deployment</a> below.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+"symbiotic" (the original behavior)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+
+<div id="attachment-point">
+<h2>
+Attachment Point</h2>
+<p>
+One appendage's attachment point, idle rest direction, and optional tip-model overrides.</p>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+bone</td>
+<td>
+String</td>
+<td>
+The model part this follows (e.g. body, head, left_arm).</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+offset</td>
+<td>
+[X, Y, Z]</td>
+<td>
+Local offset from the bone, in blocks.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+idle_offset</td>
+<td>
+[X, Y, Z]</td>
+<td>
+Idle reach direction/distance; also biases how other targets bend.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[0.0, 0.0, 0.0]</td>
+</tr>
+<tr>
+<td>
+end_model</td>
+<td>
+Item</td>
+<td>
+Overrides the profile's tip item for this appendage; omit to inherit it, or set an air-like item for none.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+profile's end_model</td>
+</tr>
+<tr>
+<td>
+end_model_offset</td>
+<td>
+[X, Y, Z]</td>
+<td>
+Overrides the profile's tip offset for this appendage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+profile's end_model_offset</td>
+</tr>
+<tr>
+<td>
+end_model_scale</td>
+<td>
+Decimal (0 - 64)</td>
+<td>
+Overrides the profile's tip scale for this appendage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+profile's end_model_scale</td>
+</tr>
+<tr>
+<td>
+stored_direction</td>
+<td>
+[X, Y, Z]</td>
+<td>
+Mechanical deployment only: the direction (same body-local convention as "idle_offset") this appendage is fed out along while it opens, before its joints articulate into the open pose. It does not have to match the open direction - appendages sharing a stored direction nest together along one path until they articulate apart. See <a href="#deployment">Deployment</a>.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+direction of "idle_offset" (or "offset" if that is zero)</td>
+</tr>
+<tr>
+<td>
+stored_bends</td>
+<td>
+List of Decimal (degrees, -180 - 180)</td>
+<td>
+Mechanical deployment only: optional per-joint bend angles of the stored path, so an appendage can be folded up in storage instead of a single straight rod. Entry <code>j</code> bends the stored path at joint <code>j + 1</code>, in the vertical plane containing "stored_direction"; missing entries mean straight.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[] (straight)</td>
+</tr>
+<tr>
+<td>
+segments</td>
+<td>
+Integer (1 - 16)</td>
+<td>
+Overrides the profile's "segments" for just this appendage, so one profile can mix short and long limbs. Each extends and retracts according to its own segment count.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+profile's segments</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+
+<div id="idle-settings">
+<h2>
+Idle Settings</h2>
+<p>
+Idle sway and movement/rotation lag, set once for the whole profile.</p>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+motion_speed</td>
+<td>
+Decimal</td>
+<td>
+How quickly the idle sway animation cycles.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.2</td>
+</tr>
+<tr>
+<td>
+motion_strength</td>
+<td>
+Decimal</td>
+<td>
+How far the idle sway displaces the tip, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.15</td>
+</tr>
+<tr>
+<td>
+spread</td>
+<td>
+Decimal</td>
+<td>
+Multiplier on "idle_offset"'s length - idle reach distance.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.5</td>
+</tr>
+<tr>
+<td>
+movement_lag</td>
+<td>
+Decimal (0 - 0.95)</td>
+<td>
+How much the attachment origin lags behind the wearer's movement.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.3</td>
+</tr>
+<tr>
+<td>
+rotation_lag</td>
+<td>
+Decimal (0 - 0.95)</td>
+<td>
+Same as "movement_lag", but for facing direction.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+
+<div id="deployment">
+<h2>
+Deployment</h2>
+<p>
+How the appendages visually open and close. Set with the profile's "deployment" setting, either as just a style name (<code>"deployment": "mechanical"</code>) or as an object with the settings below. Profiles that don't set it use <b>symbiotic</b>, exactly as before.</p>
+<p>
+Every style runs off one 0-1 timeline: 0 is fully closed, 1 is fully open. <a href="ability_serializer.html#argon:appendages">argon:appendages</a> steps it toward 1 over its "open_time" ticks when enabled and toward 0 over its "close_time" ticks when disabled (so the durations live on the ability, not here). Closing is therefore the same motion as opening run backwards, and reversing part-way simply continues from wherever the timeline currently is. Once fully open, the normal idle/climbing/attack simulation takes over.</p>
+
+<h3>
+Styles</h3>
+<ul>
+<li>
+<p>
+<b>symbiotic</b> (default) - like a living limb growing out of the wearer: the fully-solved curve is revealed along its own length, so the base is always where it will end up and the tip grows outward. Closing retracts it back the same way. Suits tentacles, symbiotes, tails and other biological or magical limbs.</p>
+</li>
+<li>
+<p>
+<b>mechanical</b> - like a piece of machinery deploying from a housing. Rigid sections telescope out along a stored path first (each keeping its true length - a section is never scaled, only more of it is exposed), and only then do the joints articulate from their stored angles into the open pose. Closing folds the joints back into storage alignment, then retracts the sections toward the root. While opening or closing, the appendage is driven purely by this animation (no physics, idle sway or targets act on it), stays attached to the wearer as they move, and hands over to the normal simulation from the exact open pose. Suits robotic arms, Iron-Spider-style legs, powered armor extensions and other machinery. The closed housing itself is part of your model/render layer - at 0 the appendage draws nothing.</p>
+</li>
+</ul>
+
+<h3>
+Deployment Settings</h3>
+<p>
+The object form. Only "style" matters for symbiotic; everything else tunes the mechanical style.</p>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+style</td>
+<td>
+"symbiotic" | "mechanical"</td>
+<td>
+Which deployment style to use.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+symbiotic</td>
+</tr>
+<tr>
+<td>
+extension_phase</td>
+<td>
+Phase Window</td>
+<td>
+The part of the timeline where the rigid sections are fed out along their stored paths. Fast, decelerating actuator movement by default.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+start 0.0, end 0.65, easing out_cubic</td>
+</tr>
+<tr>
+<td>
+articulation_phase</td>
+<td>
+Phase Window</td>
+<td>
+The part of the timeline where the joints rotate from their stored angles into the open pose. May overlap the extension phase slightly so the two read as one continuous motion.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+start 0.55, end 1.0, easing in_out_sine</td>
+</tr>
+<tr>
+<td>
+sequential_segments</td>
+<td>
+Boolean</td>
+<td>
+Whether segments emerge one after another from root to tip (telescoping) instead of all extending at once.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+segment_overlap</td>
+<td>
+Decimal (0 - 1)</td>
+<td>
+When sequential: how much consecutive segments' extension overlaps. 0 = each waits for the previous to finish, 1 = all move together.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.5</td>
+</tr>
+<tr>
+<td>
+extension_hold</td>
+<td>
+Decimal (0 - 1)</td>
+<td>
+An optional pause, as a fraction of the timeline, between extension finishing and articulation starting - the brief "servo staging" beat. 0 uses the articulation window exactly as configured.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+articulation_stagger</td>
+<td>
+Decimal (-0.95 - 0.95)</td>
+<td>
+0 = every joint articulates together. Toward 1: root joints go first and tip joints follow. Toward -1: tip joints go first (outer joints hinge before inner ones).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+tip_model</td>
+<td>
+"when_open" | "follow"</td>
+<td>
+Where the tip item ("end_model") is drawn while not fully open. "when_open": hidden until fully open and gone as soon as it starts closing. "follow": rides the leading edge as the appendage extends and retracts.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+"when_open" for symbiotic, "follow" for mechanical</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="phase-window">
+Phase Window</h3>
+<p>
+A slice of the 0-1 timeline in which one thing happens, and how that thing's own progress is eased within it.</p>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+start</td>
+<td>
+Decimal (0 - 1)</td>
+<td>
+Timeline position where this phase begins.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+end</td>
+<td>
+Decimal (0 - 1)</td>
+<td>
+Timeline position where this phase finishes. Must be greater than "start".</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+easing</td>
+<td>
+Easing</td>
+<td>
+The easing curve for this phase. One of: linear, constant, in_sine, out_sine, in_out_sine, in_cubic, out_cubic, in_out_cubic, in_quad, out_quad, in_out_quad, in_quart, out_quart, in_out_quart, in_quint, out_quint, in_out_quint, in_expo, out_expo, in_out_expo, in_circ, out_circ, in_out_circ, in_back, out_back, in_out_back, in_elastic, out_elastic, in_out_elastic, in_bounce, out_bounce, in_out_bounce. Avoid the back/elastic/bounce curves for mechanical motion unless you want overshoot.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+linear</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<hr>
+
+<div id="solver-modes">
+<h2>
+Solver Modes</h2>
+<p>
+The "solver" setting picks the curve-bending style:</p>
+<ul>
+<li>
+<p>
+<b>rigid</b> - straight line, no bend.</p>
+</li>
+<li>
+<p>
+<b>articulated</b> - gentle bend biased by "idle_offset"/"curl_strength" - default, for mechanical arms.</p>
+</li>
+<li>
+<p>
+<b>curved</b> - smoother, sweeping bend.</p>
+</li>
+<li>
+<p>
+<b>tentacle</b> - loosest, most flowing bend - for tentacles/tails.</p>
+</li>
+</ul>
+</div>
+<hr>
+
+<div>
+<h2>
+Example</h2>
+<p>
+A four-armed profile with mechanical claws:</p>
+<pre class="json-snippet">
+{
+  "count": 4,
+  "segments": 3,
+  "length": 0.1,
+  "width": 0.75,
+  "solver": "articulated",
+  "beam_renderer": "example:appendage_beam",
+  "curl_strength": 0.5,
+  "end_model": "example:claw",
+  "end_model_offset": [0.0, 0.44, 0.15],
+  "end_model_scale": 1.0,
+  "reach_lag": 0.6,
+  "attachment_points": [
+    { "bone": "body", "offset": [-0.1, 0.2, 0.1], "idle_offset": [-7.0, -6.0, 1.0] },
+    { "bone": "body", "offset": [0.1, 0.2, 0.1], "idle_offset": [7.0, -6.0, 1.0] },
+    { "bone": "body", "offset": [-0.1, 0.4, 0.1], "idle_offset": [-7.0, 6.0, 1.0] },
+    { "bone": "body", "offset": [0.1, 0.4, 0.1], "idle_offset": [7.0, 6.0, 1.0] }
+  ],
+  "idle": {
+    "motion_speed": 0.25,
+    "motion_strength": 0.1,
+    "spread": 0.1,
+    "movement_lag": 0.25,
+    "rotation_lag": 0.45
+  }
+}</pre>
+<p>
+The same idea deployed mechanically: the two right-hand limbs share a stored direction so they emerge nested along one path, then articulate apart; the last limb has more segments than the rest:</p>
+<pre class="json-snippet">
+{
+  "count": 4,
+  "segments": 4,
+  "length": 1.75,
+  "width": 0.5,
+  "solver": "curved",
+  "beam_renderer": "example:appendage_beam",
+  "end_model": "example:claw",
+  "deployment": {
+    "style": "mechanical",
+    "extension_phase":    { "start": 0.0,  "end": 0.65, "easing": "out_cubic" },
+    "articulation_phase": { "start": 0.55, "end": 1.0,  "easing": "in_out_sine" },
+    "sequential_segments": true,
+    "segment_overlap": 0.5,
+    "extension_hold": 0.0
+  },
+  "attachment_points": [
+    { "bone": "body", "offset": [-0.1, 0.2, 0.1], "idle_offset": [-7.0, 6.0, 1.0], "stored_direction": [-1.0, 1.1, 0.0] },
+    { "bone": "body", "offset": [0.1, 0.2, 0.1],  "idle_offset": [7.0, 6.0, 1.0],  "stored_direction": [1.0, 1.0, 0.0] },
+    { "bone": "body", "offset": [0.1, 0.2, 0.1],  "idle_offset": [7.0, -2.0, 1.0], "stored_direction": [1.0, 1.0, 0.0] },
+    { "bone": "body", "offset": [-0.1, 0.2, 0.1], "idle_offset": [-7.0, -6.0, 1.0], "stored_direction": [-1.0, -0.3, 0.0], "segments": 6 }
+  ]
+}</pre>
+<p>
+And the minimal way to pick a style, leaving everything else at its defaults:</p>
+<pre class="json-snippet">
+"deployment": "symbiotic"</pre>
+<pre class="json-snippet">
+"deployment": "mechanical"</pre>
+</div>
+</body>
+</html>

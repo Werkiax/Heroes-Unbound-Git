@@ -1,0 +1,708 @@
+<html>
+<head>
+<title>
+Item Types</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }.type-badge{display:inline-block;margin-left:10px;padding:2px 8px;border-radius:10px;font-size:0.6em;font-weight:normal;vertical-align:middle;background-color:#42A3FF;color:white;}</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+<style>
+.json-block { background-color: lightgray; display: inline-block; border: 5px solid darkgray; padding: 10px }</style>
+</head>
+<body>
+<hr>
+
+<p>
+<h2>
+Overview</h2>
+<h3>
+Palladium</h3>
+<ul>
+<li>
+<a href="#palladium:upgrade_template">
+Upgrade Template</a>
+</li>
+</ul>
+<h3>
+Argon</h3>
+<ul>
+<li>
+<a href="#argon:energy_item">
+Energy Item</a>
+</li>
+</ul>
+<h3>
+Minecraft</h3>
+<ul>
+<li>
+<a href="#minecraft:armor">
+Armor</a>
+</li>
+<li>
+<a href="#minecraft:block_item">
+Block Item</a>
+</li>
+<li>
+<a href="#minecraft:item">
+Item</a>
+</li>
+<li>
+<a href="#minecraft:mace">
+Mace</a>
+</li>
+<li>
+<a href="#minecraft:sword">
+Sword</a>
+</li>
+<li>
+<a href="#minecraft:trident">
+Trident</a>
+</li>
+</ul>
+</p>
+<hr>
+
+<div>
+<h2 id="palladium:upgrade_template">
+Upgrade Template</h2>
+<p>
+A smithing template item that applies a Palladium item_upgrade to another item.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+upgrade</td>
+<td>
+Identifier</td>
+<td>
+The item_upgrade this smithing template applies.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+applies_to</td>
+<td>
+Identifier</td>
+<td>
+Item tag restricting which items can be used in the smithing table's base slot.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+Anything</td>
+<td>
+Vanilla and Palladium item properties.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:upgrade_template","upgrade":"examplemod:my_upgrade","applies_to":"minecraft:swords"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:energy_item">
+Energy Item</h2>
+<p>
+An item that stores RF/FE energy through NeoForge's transfer API (chargeable/drainable by any RF-compatible block or item), or infinite energy if given the "argon:creative_energy" data component.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+max_insert</td>
+<td>
+Integer (> 0)</td>
+<td>
+The maximum amount of energy that can be inserted per operation. Defaults to "capacity".</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+max_extract</td>
+<td>
+Integer (> 0)</td>
+<td>
+The maximum amount of energy that can be extracted per operation. Defaults to "max_insert".</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+Anything</td>
+<td>
+Vanilla and Palladium item properties.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+capacity</td>
+<td>
+Integer (> 0)</td>
+<td>
+The maximum amount of energy the item can store.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+10000</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:energy_item","capacity":20000,"max_insert":500,"max_extract":500}</pre>
+<pre class="json-snippet">
+{"type":"argon:energy_item","capacity":20000,"properties":{"components":{"argon:creative_energy":{}}}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="minecraft:armor">
+Armor</h2>
+<p>
+A wearable armor piece.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+armor_type</td>
+<td>
+String</td>
+<td>
+Which equipment slot this piece occupies: helmet, chestplate, leggings, boots or body.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+armor_material</td>
+<td>
+Identifier</td>
+<td>
+The armor material this piece is made of.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+Anything</td>
+<td>
+Vanilla and Palladium item properties.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"minecraft:armor","armor_material":"minecraft:iron","armor_type":"chestplate"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="minecraft:block_item">
+Block Item</h2>
+<p>
+An item that places a block when used.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+block</td>
+<td>
+Identifier</td>
+<td>
+The block this item places.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+Anything</td>
+<td>
+Vanilla and Palladium item properties.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"minecraft:block_item","block":"minecraft:diamond_block"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="minecraft:item">
+Item</h2>
+<p>
+A plain item with no special behavior beyond its properties.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+properties</td>
+<td>
+Anything</td>
+<td>
+Vanilla and Palladium item properties (durability, rarity, data components, creative tab placement, etc.).</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"minecraft:item","properties":{"components":{"minecraft:rarity":"rare"}}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="minecraft:mace">
+Mace</h2>
+<p>
+A mace-behaving item with configurable smash-attack behavior.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+heavy_smash_threshold</td>
+<td>
+Float</td>
+<td>
+Fall distance required for a heavy smash attack.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+5.0</td>
+</tr>
+<tr>
+<td>
+allow_smash_while_fall_flying</td>
+<td>
+Boolean</td>
+<td>
+Whether smash attacks can trigger while elytra flying.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+smash_damage_multiplier</td>
+<td>
+Float</td>
+<td>
+Multiplier applied to smash-attack bonus damage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+smash_fall_threshold</td>
+<td>
+Float</td>
+<td>
+Minimum fall distance required for a smash attack to trigger.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.5</td>
+</tr>
+<tr>
+<td>
+smash_knockback_radius</td>
+<td>
+Float</td>
+<td>
+Radius of the knockback wave on smash attacks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+3.5</td>
+</tr>
+<tr>
+<td>
+smash_knockback_multiplier</td>
+<td>
+Float</td>
+<td>
+Multiplier applied to smash-attack knockback.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+reset_fall_distance</td>
+<td>
+Boolean</td>
+<td>
+Whether fall distance resets after a smash attack.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+density_level</td>
+<td>
+Integer</td>
+<td>
+Density enchantment level baked into the item, adding fall-distance-based bonus damage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+wind_burst_level</td>
+<td>
+Integer</td>
+<td>
+Wind Burst enchantment level baked into the item.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+heavy_knockback_amount</td>
+<td>
+Float</td>
+<td>
+Extra knockback levels applied on a heavy smash.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+2.0</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+Anything</td>
+<td>
+Vanilla and Palladium item properties.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"minecraft:mace","smash_fall_threshold":1.5,"heavy_smash_threshold":5.0}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="minecraft:sword">
+Sword</h2>
+<p>
+A sword-behaving item, with attack sweeping and blocking support.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+attack_damage</td>
+<td>
+Float</td>
+<td>
+Bonus attack damage added on top of the tool material's base damage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+3.0</td>
+</tr>
+<tr>
+<td>
+attack_speed</td>
+<td>
+Float</td>
+<td>
+Attack speed modifier applied to the item.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+-2.4</td>
+</tr>
+<tr>
+<td>
+tool_material</td>
+<td>
+Identifier</td>
+<td>
+The tool material this sword is made of.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+Anything</td>
+<td>
+Vanilla and Palladium item properties.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"minecraft:sword","tool_material":"minecraft:iron","attack_damage":3.0,"attack_speed":-2.4}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="minecraft:trident">
+Trident</h2>
+<p>
+A trident-behaving item that can be thrown and channeled with lightning.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+properties</td>
+<td>
+Anything</td>
+<td>
+Vanilla and Palladium item properties.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"minecraft:trident"}</pre>
+</div>
+<script>
+function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    const elements = document.getElementsByClassName("json-snippet");
+    const amount = elements.length;
+    for (let i = 0; i < amount; i++) {
+        const element = elements[0];
+        const div = document.createElement("pre");
+        div.innerHTML = syntaxHighlight(JSON.stringify(JSON.parse(element.innerText), undefined, 4));
+        element.parentNode.replaceChild(div, element);
+    }</script>
+</body>
+</html>

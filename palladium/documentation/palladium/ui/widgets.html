@@ -1,0 +1,1578 @@
+<html>
+<head>
+<title>
+UI Widgets</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }.type-badge{display:inline-block;margin-left:10px;padding:2px 8px;border-radius:10px;font-size:0.6em;font-weight:normal;vertical-align:middle;background-color:#42A3FF;color:white;}</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+<style>
+.json-block { background-color: lightgray; display: inline-block; border: 5px solid darkgray; padding: 10px }</style>
+</head>
+<body>
+<h1>
+UI Widgets</h1>
+<hr>
+
+<p>
+<h2>
+Overview</h2>
+<h3>
+Palladium</h3>
+<ul>
+<li>
+<a href="#palladium:blit">
+Blit</a>
+</li>
+<li>
+<a href="#palladium:button">
+Button</a>
+</li>
+<li>
+<a href="#palladium:colored_rectangle">
+Colored Rectangle</a>
+</li>
+<li>
+<a href="#palladium:custom_button">
+Custom Button</a>
+</li>
+<li>
+<a href="#palladium:flat_button">
+Flat Button</a>
+</li>
+<li>
+<a href="#palladium:gradient_rectangle">
+Gradient Rectangle</a>
+</li>
+<li>
+<a href="#palladium:icon">
+Icon</a>
+</li>
+<li>
+<a href="#palladium:icon_button">
+Icon Button</a>
+</li>
+<li>
+<a href="#palladium:item">
+Item</a>
+</li>
+<li>
+<a href="#palladium:player_display">
+Player Display</a>
+</li>
+<li>
+<a href="#palladium:power_list">
+Power List</a>
+</li>
+<li>
+<a href="#palladium:power_name">
+Power Name</a>
+</li>
+<li>
+<a href="#palladium:power_tree">
+Power Tree</a>
+</li>
+<li>
+<a href="#palladium:progress_bar">
+Progress Bar</a>
+</li>
+<li>
+<a href="#palladium:text">
+Text</a>
+</li>
+<li>
+<a href="#palladium:text_box">
+Text Box</a>
+</li>
+</ul>
+<h3>
+Argon</h3>
+<ul>
+<li>
+<a href="#argon:ability_bar">
+</a>
+</li>
+</ul>
+</p>
+<hr>
+
+<div>
+<h2 id="palladium:blit">
+Blit</h2>
+<p>
+Renders a simple (piece of a) texture</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+u</td>
+<td>
+Integer / Value</td>
+<td>
+U-position on the texture where to start drawing from</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+texture</td>
+<td>
+Texture Reference</td>
+<td>
+Texture path/dynamic texture</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+v</td>
+<td>
+Integer / Value</td>
+<td>
+V-position on the texture where to start drawing from</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+rotation</td>
+<td>
+Float / Value</td>
+<td>
+Rotation in degrees, applied around the center of the widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+scale</td>
+<td>
+Float / Value</td>
+<td>
+Scale multiplier, applied around the center of the widget. Only affects rendering, the widget keeps its original bounds</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+texture_height</td>
+<td>
+Integer / Value</td>
+<td>
+Total height of the texture file</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+256</td>
+</tr>
+<tr>
+<td>
+opacity</td>
+<td>
+Float / Value</td>
+<td>
+Opacity between 0 (invisible) and 1 (fully opaque)</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+<tr>
+<td>
+texture_width</td>
+<td>
+Integer / Value</td>
+<td>
+Total width of the texture file</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+256</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:blit","texture":"mypack:textures/gui/texture_file.png"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:button">
+Button</h2>
+<p>
+Adds a button.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+close_on_press</td>
+<td>
+Boolean</td>
+<td>
+Whether or not the screen will be closed when pressing the button.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+text</td>
+<td>
+Text Component</td>
+<td>
+Text of the button</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:button","text":"Click me!","close_on_press":true}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:colored_rectangle">
+Colored Rectangle</h2>
+<p>
+Renders a colored rectangle.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color</td>
+<td>
+Color</td>
+<td>
+The color for the rectangle.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:colored_rectangle","color":"#ff0000"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:custom_button">
+Custom Button</h2>
+<p>
+Adds a button with a custom texture.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+close_on_press</td>
+<td>
+Boolean</td>
+<td>
+Whether or not the screen will be closed when pressing the button.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+background</td>
+<td>
+Button Background (enabled*, disabled, highlighted)</td>
+<td>
+The background that is drawn for the button. Can specify separate textures for normal, disabled and highlighted states.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+text</td>
+<td>
+Text Component</td>
+<td>
+Text of the button</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:custom_button","text":"Hello World!","background":{"type":"palladium:sprite","sprite":"palladium:background/default"},"close_on_press":true}</pre>
+<pre class="json-snippet">
+{"type":"palladium:custom_button","text":"Hello World!","background":{"enabled":{"type":"palladium:sprite","sprite":"palladium:background/default"},"disabled":{"type":"palladium:sprite","sprite":"palladium:background/modal_with_header"},"highlighted":{"type":"palladium:sprite","sprite":"palladium:background/modal_with_footer"}},"close_on_press":true}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:flat_button">
+Flat Button</h2>
+<p>
+Adds a flat button.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+close_on_press</td>
+<td>
+Boolean</td>
+<td>
+Whether or not the screen will be closed when pressing the button.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+text</td>
+<td>
+Text Component</td>
+<td>
+Text of the button</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:flat_button","text":"Click me!","close_on_press":true}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:gradient_rectangle">
+Gradient Rectangle</h2>
+<p>
+Renders a gradient rectangle.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color_to</td>
+<td>
+Color</td>
+<td>
+The color for the end of the gradient.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+<tr>
+<td>
+color_from</td>
+<td>
+Color</td>
+<td>
+The color for the start of the gradient.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:gradient_rectangle","color_from":"#ff0000","color_to":"#0000ff"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:icon">
+Icon</h2>
+<p>
+Renders an icon</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+icon</td>
+<td>
+Icon definition</td>
+<td>
+The icon to be rendered</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:icon","icon":{"type":"palladium:item","item":{"id":"minecraft:apple"}}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:icon_button">
+Icon Button</h2>
+<p>
+Adds a button that renders an icon instead of text.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+close_on_press</td>
+<td>
+Boolean</td>
+<td>
+Whether or not the screen will be closed when pressing the button.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+background</td>
+<td>
+Button Background (enabled*, disabled, highlighted)</td>
+<td>
+The background that is drawn for the button. If not specified, the default vanilla button texture is used.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+icon</td>
+<td>
+Icon definition</td>
+<td>
+Icon that is rendered on the button</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:icon_button","icon":{"type":"palladium:item","item":{"id":"minecraft:apple"}},"close_on_press":true}</pre>
+<pre class="json-snippet">
+{"type":"palladium:icon_button","icon":{"type":"palladium:item","item":{"id":"minecraft:apple"}},"background":{"type":"palladium:sprite","sprite":"palladium:background/default"},"close_on_press":true}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:item">
+Item</h2>
+<p>
+Renders an item</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+item</td>
+<td>
+Item / ItemStack</td>
+<td>
+The item stack to be rendered</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+tooltip</td>
+<td>
+Boolean</td>
+<td>
+Whether or not the default tooltip for the item information should be rendered. If enabled, this will override the tooltip of the properties.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+decorations</td>
+<td>
+Boolean</td>
+<td>
+Whether or not item stack "decorations" should be drawn (count, damage, etc.).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:item","item":{"id":"minecraft:apple"}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:player_display">
+Player Display</h2>
+<p>
+Renders your player on the screen</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+follow_mouse</td>
+<td>
+Boolean</td>
+<td>
+When enabled the player will follow the mouse cursor.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+rotation</td>
+<td>
+Vector 3D</td>
+<td>
+The rotation that is applied to the player. If 'follow_mouse' is active, the rotation will be ignored.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+scale</td>
+<td>
+Float (>= 0.0)</td>
+<td>
+Scale of the player.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+30.0</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+<tr>
+<td>
+apply_customization_category_preview</td>
+<td>
+Customization Category ID(s)</td>
+<td>
+ID(s) of customization category that should be previewed</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+mimic_player</td>
+<td>
+Boolean</td>
+<td>
+When enabled the player will copy all of the actual player's properties. Equipment, animation, render layers, etc.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+render_layers</td>
+<td>
+Identifier | Identifier[]</td>
+<td>
+List of/single render layer ID that will be attached to the rendered player.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:player_display"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:power_list">
+Power List</h2>
+<p>
+Renders a scrollable list of all abilities of a power</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+background</td>
+<td>
+UI Background</td>
+<td>
+The background that is drawn behind the list.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+"minecraft:textures/block/red_wool.png"</td>
+</tr>
+<tr>
+<td>
+power</td>
+<td>
+Power ID</td>
+<td>
+The power that will be displayed. If none is specified, it will use the from the current power screen (if this widget is used in one).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:power_list"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:power_name">
+Power Name</h2>
+<p>
+Renders the name of a power.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+overflow</td>
+<td>
+"clamped" | "scrolling"</td>
+<td>
+How to behave if the text is longer than the widget width</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+clamped</td>
+</tr>
+<tr>
+<td>
+color</td>
+<td>
+Color</td>
+<td>
+Color of this text</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+"#404040"</td>
+</tr>
+<tr>
+<td>
+shadow</td>
+<td>
+Boolean</td>
+<td>
+Whether or not this text has a shadow</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+power</td>
+<td>
+Power ID</td>
+<td>
+The power that will be displayed. If none is specified, it will use the from the current power screen (if this widget is used in one).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+alignment</td>
+<td>
+"left" | "center" | "right"</td>
+<td>
+Alignment of this text</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+left</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:power_name"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:power_tree">
+Power Tree</h2>
+<p>
+Renders an interactable tree for a power of a power</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+background</td>
+<td>
+UI Background</td>
+<td>
+The background that is drawn for the power tree.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+"minecraft:textures/block/red_wool.png"</td>
+</tr>
+<tr>
+<td>
+tree</td>
+<td>
+Identifier</td>
+<td>
+The power tree file that defines the layout, from 'assets/<namespace>/palladium/power_trees/'. If none is specified, the tree with the same ID as the power is used. Without any tree file, the layout is generated automatically.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+power</td>
+<td>
+Power ID</td>
+<td>
+The power that will be displayed. If none is specified, it will use the from the current power screen (if this widget is used in one).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:power_tree"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:progress_bar">
+Progress Bar</h2>
+<p>
+Renders a progress bar, where the filled texture is cut off according to the current value.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+direction_texture</td>
+<td>
+"left_to_right" | "right_to_left" | "bottom_to_top" | "top_to_bottom"</td>
+<td>
+The direction in which the bar fills up.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+left_to_right</td>
+</tr>
+<tr>
+<td>
+u</td>
+<td>
+Integer / Value</td>
+<td>
+U-position on the textures where to start drawing from</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+background_texture</td>
+<td>
+Texture Reference</td>
+<td>
+Texture path/dynamic texture drawn behind the filled part. If not set, only the filled part is drawn.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+v</td>
+<td>
+Integer / Value</td>
+<td>
+V-position on the textures where to start drawing from</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+filled</td>
+<td>
+Texture Reference</td>
+<td>
+Texture path/dynamic texture for the filled part of the bar.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+texture_height</td>
+<td>
+Integer / Value</td>
+<td>
+Total height of the texture files</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+256</td>
+</tr>
+<tr>
+<td>
+opacity</td>
+<td>
+Float / Value</td>
+<td>
+Opacity between 0 (invisible) and 1 (fully opaque)</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+value</td>
+<td>
+Integer / Value</td>
+<td>
+The current value of the bar.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+<tr>
+<td>
+texture_width</td>
+<td>
+Integer / Value</td>
+<td>
+Total width of the texture files</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+256</td>
+</tr>
+<tr>
+<td>
+max_value</td>
+<td>
+Integer / Value</td>
+<td>
+The value at which the bar is full. Values of 0 or less leave the bar empty.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:progress_bar","value":0,"max_value":100,"background_texture":"mypack:textures/gui/progress_bar_background.png","filled_texture":"mypack:textures/gui/progress_bar_filled.png"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:text">
+Text</h2>
+<p>
+Renders a text component</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+overflow</td>
+<td>
+"clamped" | "scrolling"</td>
+<td>
+How to behave if the text is longer than the widget width</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+clamped</td>
+</tr>
+<tr>
+<td>
+color</td>
+<td>
+Color</td>
+<td>
+Color of this text</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+"#404040"</td>
+</tr>
+<tr>
+<td>
+shadow</td>
+<td>
+Boolean</td>
+<td>
+Whether or not this text has a shadow</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+text</td>
+<td>
+Text Component / Value</td>
+<td>
+The text to be drawn</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+alignment</td>
+<td>
+"left" | "center" | "right"</td>
+<td>
+Alignment of this text</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+left</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:text","text":"Hello World!"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:text_box">
+Text Box</h2>
+<p>
+Renders a scrollable text box</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+text</td>
+<td>
+Text Component</td>
+<td>
+The text to be drawn</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:text_box","text":"Hello World!"}</pre>
+</div>
+<hr>
+
+<div>
+<p>
+Draws an argon:ability_bar's slots while it is enabled. Left-click a slot to pick its ability (right-click for the crouch variant), use the arrows or dots to switch presets, and the floppy icon to save.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ability_bar</td>
+<td>
+String</td>
+<td>
+Reference to the argon:ability_bar ability to render, e.g. "fsang:marvel/mutant/reality_warping#my_bar".</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+properties</td>
+<td>
+UI Properties</td>
+<td>
+Properties of this widget</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+{"width":50,"height":18}</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script>
+function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    const elements = document.getElementsByClassName("json-snippet");
+    const amount = elements.length;
+    for (let i = 0; i < amount; i++) {
+        const element = elements[0];
+        const div = document.createElement("pre");
+        div.innerHTML = syntaxHighlight(JSON.stringify(JSON.parse(element.innerText), undefined, 4));
+        element.parentNode.replaceChild(div, element);
+    }</script>
+</body>
+</html>

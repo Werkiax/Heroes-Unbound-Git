@@ -1,0 +1,508 @@
+<html>
+<head>
+<title>
+Creative Tab Sections</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }.type-badge{display:inline-block;margin-left:10px;padding:2px 8px;border-radius:10px;font-size:0.6em;font-weight:normal;vertical-align:middle;background-color:#42A3FF;color:white;}</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+<style>
+.json-block { background-color: lightgray; display: inline-block; border: 5px solid darkgray; padding: 10px }</style>
+</head>
+<body>
+<h1>
+Creative Tab Sections</h1>
+<hr>
+
+<p>
+<h2>
+Overview</h2>
+<h3>
+Fancy Tab Sections</h3>
+<ul>
+<li>
+<a href="#fancytabsections:animated_textured">
+Animated Textured</a>
+</li>
+<li>
+<a href="#fancytabsections:colored">
+Colored</a>
+</li>
+<li>
+<a href="#fancytabsections:textured">
+Textured</a>
+</li>
+</ul>
+</p>
+<hr>
+
+<div>
+<h2 id="fancytabsections:animated_textured">
+Animated Textured</h2>
+<p>
+A creative tab section with an animated, multi-frame texture banner.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+vertical_size</td>
+<td>
+Integer</td>
+<td>
+Height of a single frame.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+frames</td>
+<td>
+Integer</td>
+<td>
+Number of vertically stacked frames in the texture.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+texture</td>
+<td>
+Identifier</td>
+<td>
+Texture used for the banner. Defaults to a texture derived from the id.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+texture_offset_x</td>
+<td>
+Integer</td>
+<td>
+Horizontal offset at which the texture is rendered.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+texture_offset_y</td>
+<td>
+Integer</td>
+<td>
+Vertical offset at which the texture is rendered.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+text_outline</td>
+<td>
+Color</td>
+<td>
+Outline color of the title text.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+text_shadow</td>
+<td>
+Boolean</td>
+<td>
+Whether the title text is rendered with a shadow.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+id</td>
+<td>
+Identifier</td>
+<td>
+Unique identifier of the section.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+text_color</td>
+<td>
+Color</td>
+<td>
+Color of the title text.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+horizontal_size</td>
+<td>
+Integer</td>
+<td>
+Width of a single frame.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+items</td>
+<td>
+Item ID or variant group array</td>
+<td>
+Items and/or multiversal variant groups displayed in this section.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+frame_time</td>
+<td>
+Float</td>
+<td>
+Duration of each frame in milliseconds.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fancytabsections:animated_textured","id":"palladium:example"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fancytabsections:colored">
+Colored</h2>
+<p>
+A creative tab section with a flat colored banner.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+banner_color</td>
+<td>
+Color</td>
+<td>
+Color of the banner background.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+text_outline</td>
+<td>
+Color</td>
+<td>
+Outline color of the title text.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+text_shadow</td>
+<td>
+Boolean</td>
+<td>
+Whether the title text is rendered with a shadow.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+id</td>
+<td>
+Identifier</td>
+<td>
+Unique identifier of the section.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+text_color</td>
+<td>
+Color</td>
+<td>
+Color of the title text.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+items</td>
+<td>
+Item ID or variant group array</td>
+<td>
+Items and/or multiversal variant groups displayed in this section.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fancytabsections:colored","id":"palladium:example","text_shadow":true}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fancytabsections:textured">
+Textured</h2>
+<p>
+A creative tab section with a custom texture banner.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+vertical_size</td>
+<td>
+Integer</td>
+<td>
+Height of the banner texture.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+texture</td>
+<td>
+Identifier</td>
+<td>
+Texture used for the banner. Defaults to a texture derived from the id.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+texture_offset_x</td>
+<td>
+Integer</td>
+<td>
+Horizontal offset at which the texture is rendered.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+texture_offset_y</td>
+<td>
+Integer</td>
+<td>
+Vertical offset at which the texture is rendered.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+text_outline</td>
+<td>
+Color</td>
+<td>
+Outline color of the title text.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+text_shadow</td>
+<td>
+Boolean</td>
+<td>
+Whether the title text is rendered with a shadow.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+id</td>
+<td>
+Identifier</td>
+<td>
+Unique identifier of the section.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+text_color</td>
+<td>
+Color</td>
+<td>
+Color of the title text.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+horizontal_size</td>
+<td>
+Integer</td>
+<td>
+Width of the banner texture.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+items</td>
+<td>
+Item ID or variant group array</td>
+<td>
+Items and/or multiversal variant groups displayed in this section.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fancytabsections:textured","id":"palladium:example"}</pre>
+</div>
+<script>
+function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    const elements = document.getElementsByClassName("json-snippet");
+    const amount = elements.length;
+    for (let i = 0; i < amount; i++) {
+        const element = elements[0];
+        const div = document.createElement("pre");
+        div.innerHTML = syntaxHighlight(JSON.stringify(JSON.parse(element.innerText), undefined, 4));
+        element.parentNode.replaceChild(div, element);
+    }</script>
+</body>
+</html>

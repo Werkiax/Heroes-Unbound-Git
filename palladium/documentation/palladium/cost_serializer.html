@@ -1,0 +1,460 @@
+<html>
+<head>
+<title>
+Costs</title>
+<style>
+table{font-family:arial, sans-serif;border-collapse:collapse;}
+td,th{border:1px solid #666666;text-align:left;padding:8px;min-width:45px;}
+th{background-color:#CCCCCC;}
+p{margin:0;}
+tr:nth-child(even){background-color:#D8D8D8;}
+tr:nth-child(odd){background-color:#EEEEEE;}
+td.true{background-color:#72FF85AA;}
+td.false{background-color:#FF6666AA;}
+td.other{background-color:#42A3FFAA;}
+td.error{color:#FF0000;}
+th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;padding:5px;margin:5px;} .string{color:green;} .number{color:cornflowerblue;} .boolean{color:darkorange;} .null{color:orangered;} .key{color:purple;}hr { height: 5px; background-color: black }.type-badge{display:inline-block;margin-left:10px;padding:2px 8px;border-radius:10px;font-size:0.6em;font-weight:normal;vertical-align:middle;background-color:#42A3FF;color:white;}</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/3sx4xJf.png">
+
+<style>
+.json-block { background-color: lightgray; display: inline-block; border: 5px solid darkgray; padding: 10px }</style>
+</head>
+<body>
+<h1>
+Costs</h1>
+<hr>
+
+<p>
+<h2>
+Overview</h2>
+<h3>
+Palladium</h3>
+<ul>
+<li>
+<a href="#palladium:experience_level">
+Experience Level Cost</a>
+</li>
+<li>
+<a href="#palladium:item">
+Item Cost</a>
+</li>
+<li>
+<a href="#palladium:mob_effect">
+Effect Cost</a>
+</li>
+<li>
+<a href="#palladium:multiversal_designation">
+Multiversal Designation Cost</a>
+</li>
+<li>
+<a href="#palladium:number_data_attachment">
+Number Data Attachment Cost</a>
+</li>
+<li>
+<a href="#palladium:score">
+Score Cost</a>
+</li>
+</ul>
+</p>
+<hr>
+
+<div>
+<h2 id="palladium:experience_level">
+Experience Level Cost</h2>
+<p>
+Requires the entity to have a certain number of experience levels.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+xp_level</td>
+<td>
+Integer (> 0)</td>
+<td>
+The number of experience levels to consume.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:experience_level","xp_level":5}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:item">
+Item Cost</h2>
+<p>
+Requires the entity to have a certain item in their inventory.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+amount</td>
+<td>
+Integer (> 0)</td>
+<td>
+How many items to consume. Defaults to 1.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+ingredient</td>
+<td>
+Ingredient / Item</td>
+<td>
+The item(s) accepted as payment.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:item","ingredient":"minecraft:diamond","amount":5}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:mob_effect">
+Effect Cost</h2>
+<p>
+Requires a mob/potion effect of a certain rank/amplifier, which is consumed/reduced by the amount.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+amount</td>
+<td>
+Integer (> 0)</td>
+<td>
+How many levels/amplifier of the effect to consume. Defaults to 1</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+effect</td>
+<td>
+Mob Effect ID</td>
+<td>
+The type of effect required</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:mob_effect","effect":"minecraft:hero_of_the_village"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:multiversal_designation">
+Multiversal Designation Cost</h2>
+<p>
+Requires items that carry a designation of a specific universe, like a Multiversal Extrapolator that has found that universe. The items are consumed.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+amount</td>
+<td>
+Integer (> 0)</td>
+<td>
+How many designated items to consume.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+universe</td>
+<td>
+Universe ID</td>
+<td>
+The universe the items must be designated to.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:multiversal_designation","universe":"example:earth_616"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:number_data_attachment">
+Number Data Attachment Cost</h2>
+<p>
+Requires the entity to have a certain value in a number data attachment, which is consumed.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+amount</td>
+<td>
+Integer (> 0)</td>
+<td>
+The amount consumed from the data attachment.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+attachment</td>
+<td>
+Data Attachment ID</td>
+<td>
+The ID of the data attachment.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+icon</td>
+<td>
+Icon definition</td>
+<td>
+The icon shown in the UI.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+description</td>
+<td>
+Text Component</td>
+<td>
+The display text shown in the UI.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:number_data_attachment","attachment":"example:number_attachment_id","amount":10,"icon":{"type":"palladium:sprite","sprite":"example:sprite_path"},"description":"My Currency"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:score">
+Score Cost</h2>
+<p>
+Requires the entity to have a certain scoreboard score.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+amount</td>
+<td>
+Integer (> 0)</td>
+<td>
+The score amount to consume. Defaults to 1.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+icon</td>
+<td>
+Icon definition</td>
+<td>
+The icon shown in the UI.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+description</td>
+<td>
+Text Component</td>
+<td>
+The display text shown in the UI.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+objective</td>
+<td>
+String</td>
+<td>
+The scoreboard objective name.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:score","objective":"my_score","amount":10,"icon":{"type":"palladium:sprite","sprite":"example:sprite_path"},"description":"My Score"}</pre>
+</div>
+<script>
+function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    const elements = document.getElementsByClassName("json-snippet");
+    const amount = elements.length;
+    for (let i = 0; i < amount; i++) {
+        const element = elements[0];
+        const div = document.createElement("pre");
+        div.innerHTML = syntaxHighlight(JSON.stringify(JSON.parse(element.innerText), undefined, 4));
+        element.parentNode.replaceChild(div, element);
+    }</script>
+</body>
+</html>
