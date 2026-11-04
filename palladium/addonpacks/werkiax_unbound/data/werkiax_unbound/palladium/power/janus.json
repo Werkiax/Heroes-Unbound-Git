@@ -416,6 +416,12 @@
             "mode": "might",
             "ignore_unlocked": false
           }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#regeneration_upgrade"
+          }
         ]
       }
     },
@@ -1247,6 +1253,10 @@
                 "ability": "werkiax_unbound:janus#anchor"
               }
             ]
+          },
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#damage_reduction_upgrade"
           }
         ]
       }
@@ -2522,6 +2532,32 @@
           "id": "werkiax_unbound:upgrade_speed_3_bulwark"
         }
       ]
+    },
+    "regeneration_upgrade": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Regeneration",
+        "description": "Unlocks passive regeneration in Might Form.",
+        "icon": {
+          "type": "palladium:texture",
+          "texture": "werkiax_unbound:textures/icons/regeneration_upgrade.png"
+        },
+        "list_index": 17,
+        "color": "purple"
+      }
+    },
+    "damage_reduction_upgrade": {
+      "type": "palladium:dummy",
+      "properties": {
+        "title": "Damage Reduction",
+        "description": "Unlocks the base damage reduction of Bulwark Form.",
+        "icon": {
+          "type": "palladium:texture",
+          "texture": "werkiax_unbound:textures/icons/damage_reduction_upgrade.png"
+        },
+        "list_index": 18,
+        "color": "purple"
+      }
     }
   }
 }

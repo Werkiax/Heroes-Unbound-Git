@@ -1,0 +1,5 @@
+{
+  "type": "palladium:power/default",
+  "background": "minecraft:textures/block/purple_concrete.png",
+  "display_type": "tree"
+}
