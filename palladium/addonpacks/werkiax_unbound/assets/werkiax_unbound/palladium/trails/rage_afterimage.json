@@ -1,0 +1,12 @@
+{
+  "spacing": 0.3,
+  "lifetime": 8,
+  "requires_movement": true,
+  "renderer": {
+    "type": "palladium:after_image",
+    "color": "#ff4500",
+    "opacity": 0.35,
+    "flat_color": true,
+    "blur_layers": 2
+  }
+}

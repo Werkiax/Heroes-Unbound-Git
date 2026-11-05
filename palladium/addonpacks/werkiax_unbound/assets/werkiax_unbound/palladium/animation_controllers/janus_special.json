@@ -19,6 +19,27 @@
               "type": "palladium:on_ground"
             }
           }
+        ],
+        "repulsion_cone": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#kinetic_repulsion"
+          },
+          {
+            "type": "palladium:not",
+            "conditions": {
+              "type": "palladium:crouching"
+            }
+          }
+        ],
+        "repulsion_ring": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#kinetic_repulsion"
+          },
+          {
+            "type": "palladium:crouching"
+          }
         ]
       }
     },
@@ -62,6 +83,20 @@
         }
       },
       "first_person_animation": "werkiax_unbound:janus_crater_fp"
+    },
+    "repulsion_cone": {
+      "animation": "werkiax_unbound:kinetic_repulsion_cone",
+      "blend_transition": 2,
+      "transitions": {
+        "idle": "palladium.any_animation_finished()"
+      }
+    },
+    "repulsion_ring": {
+      "animation": "werkiax_unbound:kinetic_repulsion_ring",
+      "blend_transition": 2,
+      "transitions": {
+        "idle": "palladium.any_animation_finished()"
+      }
     }
   }
 }

@@ -1,5 +1,20 @@
 {
   "animation_controller": {
     "special": "werkiax_unbound:ghost_of_sparta_special"
+  },
+  "render_layers": {
+    "werkiax_unbound:ghost_ash": [
+      true
+    ],
+    "werkiax_unbound:rage_embers": {
+      "type": "palladium:ability_enabled",
+      "ability": "werkiax_unbound:ghost_of_sparta#rage"
+    }
+  },
+  "trails": {
+    "werkiax_unbound:rage_afterimage": {
+      "type": "palladium:ability_enabled",
+      "ability": "werkiax_unbound:ghost_of_sparta#rage"
+    }
   }
 }

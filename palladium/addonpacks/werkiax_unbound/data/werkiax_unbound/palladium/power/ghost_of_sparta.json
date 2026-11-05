@@ -190,8 +190,34 @@
         },
         "enabling": {
           "type": "palladium:key_bind",
-          "behaviour": "held"
+          "behaviour": "held",
+          "cooldown": "3s"
         }
+      }
+    },
+    "grab_throw": {
+      "type": "argon:held_target",
+      "release_window": 6,
+      "applications": [
+        {
+          "timing": "last_tick",
+          "damage": 14,
+          "damage_type": "minecraft:player_attack",
+          "knockback_distance": 6,
+          "lift": 0.3
+        }
+      ],
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:ghost_of_sparta#grab"
+          }
+        ]
       }
     },
     "stomp_blast": {
@@ -299,6 +325,107 @@
           "behaviour": "toggle",
           "cooldown": "10s"
         }
+      }
+    },
+    "fx_rage_flames": {
+      "type": "palladium:action",
+      "first_tick_action": {
+        "type": "palladium:run_command",
+        "command": [
+          "particle minecraft:flame ~ ~1 ~ 0.4 0.6 0.4 0.05 12 force"
+        ]
+      },
+      "action": {
+        "type": "palladium:run_command",
+        "command": [
+          "execute if predicate {condition:'minecraft:random_chance',chance:0.2} run particle minecraft:flame ~ ~1 ~ 0.3 0.6 0.3 0.01 1 force"
+        ]
+      },
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:ghost_of_sparta#rage"
+          }
+        ]
+      }
+    },
+    "rage_light": {
+      "type": "argon:light_source",
+      "light_level": 12,
+      "particles": [
+        {
+          "color": "#ff5a00",
+          "count": 2,
+          "offset": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "spread": [
+            0.3,
+            0.6,
+            0.3
+          ]
+        }
+      ],
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:ghost_of_sparta#rage"
+          }
+        ]
+      }
+    },
+    "rage_bar_color": {
+      "type": "argon:energy_bar_color",
+      "energy_bar": "werkiax_unbound:ghost_of_sparta#fury",
+      "color": "#ffaa00",
+      "blend": 10,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:ghost_of_sparta#rage"
+          }
+        ]
+      }
+    },
+    "rage_overload": {
+      "type": "argon:sensory_overload",
+      "warp_intensity": 0.0,
+      "drag_strength": 0.0,
+      "shake_base_intensity": 0.0,
+      "shake_max_intensity": 0.0,
+      "pulse_color": "#ff3300",
+      "pulse_opacity": 0.06,
+      "pulse_speed": 1.0,
+      "mute_volume": 0.75,
+      "flash_enabled": false,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:ghost_of_sparta#rage"
+          }
+        ]
       }
     },
     "rage_drain": {

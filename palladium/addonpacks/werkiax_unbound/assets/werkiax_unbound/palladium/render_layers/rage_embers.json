@@ -1,0 +1,11 @@
+{
+  "type": "palladium:render_layer",
+  "texture": {
+    "type": "palladium:entity",
+    "transformers": [
+      { "type": "palladium:color", "color": "ff5a00", "opacity": "0.55" }
+    ]
+  },
+  "render_type": "argon:additive",
+  "light_emission": 15
+}
