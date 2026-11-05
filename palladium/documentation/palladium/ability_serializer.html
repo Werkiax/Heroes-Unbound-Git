@@ -59,6 +59,10 @@ Beam</a>
 Blast</a>
 </li>
 <li>
+<a href="#palladium:breath">
+Breath</a>
+</li>
+<li>
 <a href="#palladium:carry">
 Carry</a>
 </li>
@@ -73,6 +77,10 @@ Command</a>
 <li>
 <a href="#palladium:damage_immunity">
 Damage Immunity</a>
+</li>
+<li>
+<a href="#palladium:drown">
+Drown</a>
 </li>
 <li>
 <a href="#palladium:dual_wielding">
@@ -125,6 +133,10 @@ Healing</a>
 <li>
 <a href="#palladium:hide_model_part">
 Hide Body Part</a>
+</li>
+<li>
+<a href="#palladium:immediate_respawn">
+Immediate Respawn</a>
 </li>
 <li>
 <a href="#palladium:intangibility">
@@ -237,6 +249,10 @@ Step Down</a>
 <li>
 <a href="#palladium:teleport">
 Teleport</a>
+</li>
+<li>
+<a href="#palladium:transformation">
+</a>
 </li>
 <li>
 <a href="#palladium:wall_climbing">
@@ -1297,6 +1313,62 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="palladium:breath">
+Breath</h2>
+<p>
+Changes how much air the entity can hold and how fast it refills when it can breathe. A bigger air supply also makes it last longer underwater, since air is still used up at the normal speed. Multiple active Breath abilities multiply with each other.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+refill_percentage</td>
+<td>
+Float / Value</td>
+<td>
+How fast air refills as a percentage of the normal speed. 200 refills it twice as fast.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+100.0</td>
+</tr>
+<tr>
+<td>
+max_air_percentage</td>
+<td>
+Float / Value</td>
+<td>
+The maximum air as a percentage of the default 300 ticks (15 seconds). 200 doubles it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+100.0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:breath","max_air_percentage":200.0,"refill_percentage":200.0}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="palladium:carry">
 Carry</h2>
 <p>
@@ -1577,6 +1649,88 @@ true</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:damage_immunity","damage_type":"minecraft:cactus"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:drown">
+Drown</h2>
+<p>
+Makes the target lose air as if it was underwater, so it starts drowning once the air runs out. Respiration still slows it down, players in creative mode are not affected.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+range</td>
+<td>
+Float / Value</td>
+<td>
+How far away the looked at entity can be, in blocks. Only used for "looked_at".</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+16.0</td>
+</tr>
+<tr>
+<td>
+drain_percentage</td>
+<td>
+Float / Value</td>
+<td>
+How fast the target loses air as a percentage of normal drowning. 200 drowns it twice as fast. If several Drown abilities hit the same target, the highest value is used.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+100.0</td>
+</tr>
+<tr>
+<td>
+bubbles</td>
+<td>
+Boolean</td>
+<td>
+Whether bubbles rise around the head of the target.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+target</td>
+<td>
+"self" | "looked_at"</td>
+<td>
+Who is drowned. "self" drowns the entity with the ability, "looked_at" drowns the living entity it looks at within the range. That entity stays the target until the ability is disabled or the target dies.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+self</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:drown","range":16.0,"drain_percentage":100.0}</pre>
+<pre class="json-snippet">
+{"type":"palladium:drown","target":"looked_at","range":12.0,"drain_percentage":200.0}</pre>
 </div>
 <hr>
 
@@ -2281,7 +2435,7 @@ The scale of the texture.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@7ff49554</td>
+net.minecraft.world.phys.Vec2@3ef5a416</td>
 </tr>
 <tr>
 <td>
@@ -2329,7 +2483,7 @@ The translation of the texture.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@49438f20</td>
+net.minecraft.world.phys.Vec2@4adb811f</td>
 </tr>
 </tbody>
 </table>
@@ -2449,6 +2603,18 @@ false</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:hide_model_part","body_parts":["head","body"],"affects_first_person":false}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:immediate_respawn">
+Immediate Respawn</h2>
+<p>
+Lets the player skip the death screen and respawn right away, as if the "minecraft:immediate_respawn" game rule was enabled. The ability has to be enabled at the moment the player dies.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:immediate_respawn"}</pre>
 </div>
 <hr>
 
@@ -3961,6 +4127,44 @@ Examples:</h3>
 {"type":"palladium:teleport","range":32.0}</pre>
 <pre class="json-snippet">
 {"type":"palladium:teleport","range":16.0,"require_target":true,"action":{"type":"palladium:run_command","command":"playsound minecraft:entity.enderman.teleport player @a ~ ~ ~"}}</pre>
+</div>
+<hr>
+
+<div>
+<p>
+Transforms the entity into the given transformation while the ability is enabled. If several transformation abilities are enabled at once, the one from the power with the highest priority wins (items before suits before superpowers). If the priority is the same, the one enabled last wins.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+transformation</td>
+<td>
+Identifier</td>
+<td>
+The ID of the transformation, found in data/<namespace>/palladium/transformation/.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
 </div>
 <hr>
 
@@ -6755,7 +6959,7 @@ Who this ability forces to drown, each entry either {"type": "self"} or {"type":
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[Target[mode=SELF, range=net.threetag.palladium.logic.value.StaticValue@172971b7]]</td>
+[Target[mode=SELF, range=net.threetag.palladium.logic.value.StaticValue@5ec6f865]]</td>
 </tr>
 </tbody>
 </table>
@@ -8877,7 +9081,7 @@ Pixel offset applied to the slot strip's on-screen position relative to its defa
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@49438f20</td>
+net.minecraft.world.phys.Vec2@4adb811f</td>
 </tr>
 <tr>
 <td>
@@ -9399,7 +9603,7 @@ Pixel offset applied to the icon/label's on-screen position relative to its defa
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@49438f20</td>
+net.minecraft.world.phys.Vec2@4adb811f</td>
 </tr>
 <tr>
 <td>
@@ -10521,7 +10725,7 @@ Whether the radar should rotate with the player, or be static.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-Rotation[mode=LOOK_DIRECTION, staticAngle=net.threetag.palladium.logic.value.StaticValue@172971b7]</td>
+Rotation[mode=LOOK_DIRECTION, staticAngle=net.threetag.palladium.logic.value.StaticValue@5ec6f865]</td>
 </tr>
 <tr>
 <td>
@@ -10533,7 +10737,7 @@ The radius, in blocks, within which entities are detected and shown on the radar
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.threetag.palladium.logic.value.StaticValue@250c5892</td>
+net.threetag.palladium.logic.value.StaticValue@fed510f</td>
 </tr>
 <tr>
 <td>
@@ -10545,7 +10749,7 @@ The X/Y onscreen position of the radar relative to the alignment.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-Translate[x=net.threetag.palladium.logic.value.StaticValue@172971b7, y=net.threetag.palladium.logic.value.StaticValue@172971b7]</td>
+Translate[x=net.threetag.palladium.logic.value.StaticValue@5ec6f865, y=net.threetag.palladium.logic.value.StaticValue@5ec6f865]</td>
 </tr>
 <tr>
 <td>
@@ -12107,7 +12311,7 @@ The [x, y] scale of the text.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@7ff49554</td>
+net.minecraft.world.phys.Vec2@3ef5a416</td>
 </tr>
 <tr>
 <td>
@@ -12143,7 +12347,7 @@ A [x, y] pixel offset applied to the text's position.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@49438f20</td>
+net.minecraft.world.phys.Vec2@4adb811f</td>
 </tr>
 </tbody>
 </table>

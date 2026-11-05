@@ -171,6 +171,18 @@ Fallback Value</th>
 <tbody>
 <tr>
 <td>
+filter</td>
+<td>
+String</td>
+<td>
+Only pixels with exactly this color (as hex, like "ff0000") are tinted, every other pixel stays untouched. Useful to recolor just one part of a texture. Can use variables.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
 color</td>
 <td>
 String</td>
@@ -199,6 +211,8 @@ false</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:tint","color":"ffd24a"}</pre>
+<pre class="json-snippet">
+{"type":"palladium:tint","color":"3c8dff","filter":"ff0000"}</pre>
 </div>
 <script>
 function syntaxHighlight(json) {

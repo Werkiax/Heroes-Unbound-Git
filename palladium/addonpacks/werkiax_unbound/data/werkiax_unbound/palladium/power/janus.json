@@ -55,7 +55,7 @@
       "type": "palladium:dummy",
       "properties": {
         "title": "Power Strike",
-        "description": "Hold up to 6 seconds to charge your fist with Kinetic Energy, then release to deliver a devastating punch. Damage grows with each charge stage (10, 20, 30), and a full charge pierces armor and cracks the ground. You move slower while charging, and the cooldown is twice as long as the time you charged.",
+        "description": "Hold up to 6 seconds to charge your fist with Kinetic Energy, then release to punch. Damage grows with each charge stage (10, 20, 30) and consumes 100 / 200 / 300 Kinetic Energy. Higher stages launch enemies further into the air, and a full charge pierces armor and cracks the ground. You move slower while charging, and the cooldown is twice as long as the time you charged.",
         "icon": "minecraft:mace",
         "list_index": 0,
         "color": "purple"
@@ -82,6 +82,11 @@
                 "min": 0
               }
             ]
+          },
+          {
+            "type": "palladium:energy_bar",
+            "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+            "min": 100
           }
         ],
         "enabling": {
@@ -99,23 +104,15 @@
         "condition": {
           "type": "palladium:energy_bar",
           "energy_bar": "werkiax_unbound:janus#kinetic_charge",
-          "min": 10,
+          "min": 100,
           "max": 1000
         },
-        "on_true": [
-          {
-            "type": "palladium:modify_number_data_attachment",
-            "attachment": "werkiax_unbound:kinetic_charge",
-            "operation": "-",
-            "value": 10
-          },
-          {
-            "type": "palladium:modify_number_data_attachment",
-            "attachment": "werkiax_unbound:strike_charge",
-            "operation": "+",
-            "value": 10
-          }
-        ]
+        "on_true": {
+          "type": "palladium:modify_number_data_attachment",
+          "attachment": "werkiax_unbound:strike_charge",
+          "operation": "+",
+          "value": 10
+        }
       },
       "properties": {
         "hidden_in_gui": true,
@@ -125,44 +122,6 @@
         "enabling": [
           {
             "type": "palladium:ability_first_tick",
-            "ability": "werkiax_unbound:janus#power_strike"
-          }
-        ]
-      }
-    },
-    "strike_charge": {
-      "type": "palladium:action",
-      "properties": {
-        "hidden_in_gui": true,
-        "hidden_in_bar": true
-      },
-      "action": {
-        "type": "palladium:conditional",
-        "condition": {
-          "type": "palladium:energy_bar",
-          "energy_bar": "werkiax_unbound:janus#kinetic_charge",
-          "min": 3,
-          "max": 1000
-        },
-        "on_true": [
-          {
-            "type": "palladium:modify_number_data_attachment",
-            "attachment": "werkiax_unbound:kinetic_charge",
-            "operation": "-",
-            "value": 3
-          },
-          {
-            "type": "palladium:modify_number_data_attachment",
-            "attachment": "werkiax_unbound:strike_charge",
-            "operation": "+",
-            "value": 2
-          }
-        ]
-      },
-      "state": {
-        "enabling": [
-          {
-            "type": "palladium:ability_enabled",
             "ability": "werkiax_unbound:janus#power_strike"
           }
         ]
@@ -247,7 +206,7 @@
       "type": "palladium:dual_wielding",
       "properties": {
         "title": "Berserk",
-        "description": "Toggle to harden your scales around both hands and fight with dual-wielded fist. Grants +10 attack damage and +2 attack knockback, but you can't held items.",
+        "description": "Toggle to harden your scales around both hands and fight with dual-wielded fists. Grants +10 attack damage and +2 attack knockback, but you take 20% more damage in total (15% base + 5%) and can't hold items.",
         "icon": {
           "type": "palladium:texture",
           "texture": "werkiax_unbound:textures/icons/berserk.png"
@@ -359,7 +318,7 @@
         },
         {
           "attribute": "minecraft:armor",
-          "amount": 6.0,
+          "amount": 10.0,
           "operation": "add_value",
           "id": "werkiax_unbound:might_armor"
         }
@@ -403,7 +362,7 @@
     "might_regen": {
       "type": "palladium:healing",
       "frequency": 40,
-      "amount": 1.0,
+      "amount": 2.0,
       "properties": {
         "hidden_in_gui": true,
         "hidden_in_bar": true
@@ -538,7 +497,18 @@
         {
           "shape": "ring",
           "particle": {
-            "type": "minecraft:cloud"
+            "type": "minecraft:dust_color_transition",
+            "from_color": [
+              0.45,
+              0.02,
+              0.79
+            ],
+            "to_color": [
+              0.85,
+              0.45,
+              1.0
+            ],
+            "scale": 1.6
           },
           "rings": 3,
           "radius": 6.0,
@@ -551,7 +521,18 @@
         {
           "shape": "ring",
           "particle": {
-            "type": "minecraft:cloud"
+            "type": "minecraft:dust_color_transition",
+            "from_color": [
+              0.45,
+              0.02,
+              0.79
+            ],
+            "to_color": [
+              0.85,
+              0.45,
+              1.0
+            ],
+            "scale": 1.6
           },
           "rings": 2,
           "radius": 2.5,
@@ -672,8 +653,9 @@
           "type": "palladium:run_command",
           "command": [
             "playsound minecraft:entity.warden.sonic_boom master @a ~ ~ ~ 0.6 0.9",
-            "particle minecraft:cloud ~ ~0.3 ~ 3 0.1 3 0.08 120 force",
-            "particle minecraft:poof ~ ~0.8 ~ 2.5 0.3 2.5 0.1 40 force"
+            "particle minecraft:dust_color_transition{from_color:[0.45,0.02,0.79],to_color:[0.85,0.45,1.0],scale:1.6} ~ ~0.3 ~ 3 0.1 3 0.08 160 force",
+            "particle minecraft:dragon_breath ~ ~0.8 ~ 2.5 0.3 2.5 0.05 60 force",
+            "particle minecraft:witch ~ ~0.6 ~ 3 0.4 3 0.1 50 force"
           ]
         },
         {
@@ -841,7 +823,7 @@
       "type": "palladium:dummy",
       "properties": {
         "title": "Anchor",
-        "description": "Plant yourself for 5 seconds, unable to move or attack. Nearby enemies are slowly pulled toward you like a black hole while you absorb Kinetic Energy at a greatly increased rate. When it ends, all your Kinetic Energy is released in an explosion that grows with the amount stored, and everyone nearby is blasted away.",
+        "description": "Plant yourself for 5 seconds, unable to move or attack. Nearby enemies are slowly pulled toward you like a black hole while you absorb Kinetic Energy at a greatly increased rate. When it ends, all your Kinetic Energy is released in an explosion that grows with the amount stored, and everyone nearby is blasted away. Damage reduction rises from 30% to 80% while anchored.",
         "icon": "minecraft:turtle_scute",
         "list_index": 2,
         "color": "purple"
@@ -1204,19 +1186,19 @@
       "modifiers": [
         {
           "attribute": "minecraft:armor",
-          "amount": 30.0,
+          "amount": 24.0,
           "operation": "add_value",
           "id": "werkiax_unbound:bulwark_armor"
         },
         {
           "attribute": "minecraft:armor_toughness",
-          "amount": 12.0,
+          "amount": 8.0,
           "operation": "add_value",
           "id": "werkiax_unbound:bulwark_toughness"
         },
         {
           "attribute": "minecraft:attack_damage",
-          "amount": 9.0,
+          "amount": 10.0,
           "operation": "add_value",
           "id": "werkiax_unbound:bulwark_attack"
         },
@@ -1287,7 +1269,9 @@
         "type": "palladium:run_command",
         "command": [
           "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 2.7 1 2.7 0 180 force",
-          "particle minecraft:dragon_breath ~ ~0.3 ~ 2.7 0.3 2.7 0.05 90 force"
+          "particle minecraft:dragon_breath ~ ~0.3 ~ 2.7 0.3 2.7 0.05 90 force",
+          "particle minecraft:witch ~ ~0.6 ~ 2.7 0.5 2.7 0.1 90 force",
+          "particle minecraft:portal ~ ~1 ~ 2.7 0.8 2.7 0.5 90 force"
         ]
       },
       "state": {
@@ -1309,7 +1293,9 @@
         "type": "palladium:run_command",
         "command": [
           "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 2.7 1 2.7 0 180 force",
-          "particle minecraft:dragon_breath ~ ~0.3 ~ 2.7 0.3 2.7 0.05 90 force"
+          "particle minecraft:dragon_breath ~ ~0.3 ~ 2.7 0.3 2.7 0.05 90 force",
+          "particle minecraft:witch ~ ~0.6 ~ 2.7 0.5 2.7 0.1 90 force",
+          "particle minecraft:portal ~ ~1 ~ 2.7 0.8 2.7 0.5 90 force"
         ]
       },
       "state": {
@@ -1331,7 +1317,9 @@
         "type": "palladium:run_command",
         "command": [
           "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 4.2 1 4.2 0 280 force",
-          "particle minecraft:dragon_breath ~ ~0.3 ~ 4.2 0.3 4.2 0.05 140 force"
+          "particle minecraft:dragon_breath ~ ~0.3 ~ 4.2 0.3 4.2 0.05 140 force",
+          "particle minecraft:witch ~ ~0.6 ~ 4.2 0.5 4.2 0.1 140 force",
+          "particle minecraft:portal ~ ~1 ~ 4.2 0.8 4.2 0.5 140 force"
         ]
       },
       "state": {
@@ -1353,7 +1341,9 @@
         "type": "palladium:run_command",
         "command": [
           "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 6.0 1 6.0 0 400 force",
-          "particle minecraft:dragon_breath ~ ~0.3 ~ 6.0 0.3 6.0 0.05 200 force"
+          "particle minecraft:dragon_breath ~ ~0.3 ~ 6.0 0.3 6.0 0.05 200 force",
+          "particle minecraft:witch ~ ~0.6 ~ 6.0 0.5 6.0 0.1 200 force",
+          "particle minecraft:portal ~ ~1 ~ 6.0 0.8 6.0 0.5 200 force"
         ]
       },
       "state": {
@@ -1396,7 +1386,8 @@
       "first_tick_action": {
         "type": "palladium:run_command",
         "command": [
-          "particle minecraft:crit ~ ~1 ~ 0.5 0.6 0.5 0.2 4 force"
+          "particle minecraft:witch ~ ~1 ~ 0.5 0.6 0.5 0.2 4 force",
+          "particle minecraft:dust_color_transition{from_color:[0.45,0.02,0.79],to_color:[0.85,0.45,1.0],scale:1.6} ~ ~1 ~ 0.4 0.6 0.4 0 3 force"
         ]
       },
       "state": {
@@ -1423,7 +1414,8 @@
       "first_tick_action": {
         "type": "palladium:run_command",
         "command": [
-          "particle minecraft:poof ~ ~0.2 ~ 1.5 0.1 1.5 0.1 40 force"
+          "particle minecraft:dust_color_transition{from_color:[0.45,0.02,0.79],to_color:[0.85,0.45,1.0],scale:1.6} ~ ~0.3 ~ 1.5 0.2 1.5 0 60 force",
+          "particle minecraft:dragon_breath ~ ~0.2 ~ 1.5 0.1 1.5 0.05 40 force"
         ]
       },
       "state": {
@@ -1451,7 +1443,10 @@
         "type": "palladium:run_command",
         "command": [
           "particle minecraft:block{block_state:\"minecraft:stone\"} ~ ~0.1 ~ 3 0.1 3 0.2 200 force",
-          "particle minecraft:block{block_state:\"minecraft:dirt\"} ~ ~0.1 ~ 2 0.1 2 0.2 100 force"
+          "particle minecraft:block{block_state:\"minecraft:dirt\"} ~ ~0.1 ~ 2 0.1 2 0.2 100 force",
+          "particle minecraft:dust_color_transition{from_color:[0.45,0.02,0.79],to_color:[0.85,0.45,1.0],scale:1.6} ~ ~0.3 ~ 3 0.3 3 0 160 force",
+          "particle minecraft:dragon_breath ~ ~0.3 ~ 3 0.2 3 0.08 80 force",
+          "particle minecraft:witch ~ ~0.5 ~ 3 0.5 3 0.1 60 force"
         ]
       },
       "state": {
@@ -1478,7 +1473,8 @@
       "action": {
         "type": "palladium:run_command",
         "command": [
-          "particle minecraft:dust{color:[0.45,0.02,0.79],scale:1.0} ~ ~1 ~ 0.35 0.8 0.35 0 3 force"
+          "particle minecraft:dust{color:[0.45,0.02,0.79],scale:1.0} ~ ~1 ~ 0.35 0.8 0.35 0 3 force",
+          "particle minecraft:witch ~ ~1 ~ 0.35 0.8 0.35 0.05 1 force"
         ]
       },
       "state": {
@@ -2721,6 +2717,306 @@
             "xp_level": 2
           }
         }
+      }
+    },
+    "might_vulnerability": {
+      "type": "argon:damage_reduction",
+      "percentage": 115.0,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:not",
+            "conditions": {
+              "type": "palladium:ability_enabled",
+              "ability": "werkiax_unbound:janus#berserk"
+            }
+          }
+        ]
+      }
+    },
+    "berserk_vulnerability": {
+      "type": "argon:damage_reduction",
+      "percentage": 120.0,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#berserk"
+          }
+        ]
+      }
+    },
+    "strike_charge_t1": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "action": {
+        "type": "palladium:modify_number_data_attachment",
+        "attachment": "werkiax_unbound:strike_charge",
+        "operation": "+",
+        "value": 2
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:energy_bar",
+            "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+            "min": 100
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 0,
+            "max": 87
+          }
+        ]
+      }
+    },
+    "strike_charge_t2": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "action": {
+        "type": "palladium:modify_number_data_attachment",
+        "attachment": "werkiax_unbound:strike_charge",
+        "operation": "+",
+        "value": 2
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:energy_bar",
+            "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+            "min": 200
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 88,
+            "max": 167
+          }
+        ]
+      }
+    },
+    "strike_charge_t3": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "action": {
+        "type": "palladium:modify_number_data_attachment",
+        "attachment": "werkiax_unbound:strike_charge",
+        "operation": "+",
+        "value": 2
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:energy_bar",
+            "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+            "min": 300
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 168,
+            "max": 1000
+          }
+        ]
+      }
+    },
+    "strike_drain_t1": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:modify_number_data_attachment",
+        "attachment": "werkiax_unbound:kinetic_charge",
+        "operation": "-",
+        "value": 100
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 10,
+            "max": 89
+          }
+        ]
+      }
+    },
+    "strike_launch_t1": {
+      "type": "argon:push",
+      "mode": "vertical",
+      "amount": 0.5,
+      "range": 2.5,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 10,
+            "max": 89
+          }
+        ]
+      }
+    },
+    "strike_drain_t2": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:modify_number_data_attachment",
+        "attachment": "werkiax_unbound:kinetic_charge",
+        "operation": "-",
+        "value": 200
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 90,
+            "max": 169
+          }
+        ]
+      }
+    },
+    "strike_launch_t2": {
+      "type": "argon:push",
+      "mode": "vertical",
+      "amount": 0.9,
+      "range": 3.5,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 90,
+            "max": 169
+          }
+        ]
+      }
+    },
+    "strike_drain_t3": {
+      "type": "palladium:action",
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "first_tick_action": {
+        "type": "palladium:modify_number_data_attachment",
+        "attachment": "werkiax_unbound:kinetic_charge",
+        "operation": "-",
+        "value": 300
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 170,
+            "max": 1000
+          }
+        ]
+      }
+    },
+    "strike_launch_t3": {
+      "type": "argon:push",
+      "mode": "vertical",
+      "amount": 1.3,
+      "range": 5.0,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "enabling": [
+          {
+            "type": "palladium:ability_last_tick",
+            "ability": "werkiax_unbound:janus#power_strike"
+          },
+          {
+            "type": "palladium:number_data_attachment",
+            "attachment": "werkiax_unbound:strike_charge",
+            "min": 170,
+            "max": 1000
+          }
+        ]
       }
     }
   }
