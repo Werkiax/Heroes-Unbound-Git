@@ -3,6 +3,14 @@
     "special": "werkiax_unbound:janus_special"
   },
   "render_layers": {
+    "werkiax_unbound:berserk_glow": {
+      "type": "palladium:ability_enabled",
+      "ability": "werkiax_unbound:janus#berserk"
+    },
+    "werkiax_unbound:berserk_sparks": {
+      "type": "palladium:ability_enabled",
+      "ability": "werkiax_unbound:janus#berserk"
+    },
     "werkiax_unbound:might_scales": [
       {
         "type": "palladium:mode_active",

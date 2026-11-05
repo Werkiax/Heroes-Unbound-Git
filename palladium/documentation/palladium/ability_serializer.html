@@ -108,7 +108,7 @@ Fluid Walking</a>
 </li>
 <li>
 <a href="#palladium:forced_perspective">
-palladium.ability.palladium.forced_perspective</a>
+Forced Perspective</a>
 </li>
 <li>
 <a href="#palladium:gliding">
@@ -1073,7 +1073,7 @@ cause_fire</td>
 <td>
 Boolean</td>
 <td>
-If the beam should cause fire on blocks</td>
+If the beam should cause fire on blocks. Claim protection, spawn protection and the mobGriefing gamerule (for non-players) are respected</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1109,7 +1109,7 @@ smelt_blocks</td>
 <td>
 Boolean</td>
 <td>
-If the beam should smelt hit blocks</td>
+If the beam should smelt hit blocks. Claim protection, spawn protection and the mobGriefing gamerule (for non-players) are respected</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1213,7 +1213,7 @@ cause_fire</td>
 <td>
 Boolean</td>
 <td>
-If the blast should cause fire on blocks</td>
+If the blast should cause fire on blocks. Claim protection, spawn protection and the mobGriefing gamerule (for non-players) are respected</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1261,7 +1261,7 @@ smelt_blocks</td>
 <td>
 Boolean</td>
 <td>
-If the blast should smelt hit blocks</td>
+If the blast should smelt hit blocks. Claim protection, spawn protection and the mobGriefing gamerule (for non-players) are respected</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -2008,7 +2008,7 @@ Examples:</h3>
 
 <div>
 <h2 id="palladium:forced_perspective">
-palladium.ability.palladium.forced_perspective</h2>
+Forced Perspective</h2>
 <p>
 Locks the camera of the player into a perspective while enabled. The perspective the player had before is restored afterwards.</p>
 <h3>
@@ -2435,7 +2435,7 @@ The scale of the texture.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@3ef5a416</td>
+net.minecraft.world.phys.Vec2@60629eda</td>
 </tr>
 <tr>
 <td>
@@ -2483,7 +2483,7 @@ The translation of the texture.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@4adb811f</td>
+net.minecraft.world.phys.Vec2@64fbbc48</td>
 </tr>
 </tbody>
 </table>
@@ -2760,7 +2760,7 @@ Examples:</h3>
 <h2 id="palladium:mode_switch">
 Mode Switch</h2>
 <p>
-Cycles through a map of modes each time it is activated, switching to the next one whose conditions are met and briefly showing it on screen.</p>
+Switches between a map of modes. By default it cycles to the next mode whose conditions are met each time it is activated. With the menu selection, holding the ability's key opens a row of all available modes next to the ability in the ability bar instead. Scroll to pick one, then let go of the key (or click, see "confirm") to switch to it. The menu works with every key behaviour, but "held" is recommended, since the ability then also counts as enabled while the menu is open.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -2781,15 +2781,51 @@ Fallback Value</th>
 <tbody>
 <tr>
 <td>
+confirm</td>
+<td>
+"release" | "left_click" | "right_click"</td>
+<td>
+Only used by the menu. "release" switches to the picked mode when the key is let go. "left_click" and "right_click" switch when clicking while the menu is open, and letting go of the key without clicking closes the menu without changing anything.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+RELEASE</td>
+</tr>
+<tr>
+<td>
 modes</td>
 <td>
 Anything</td>
 <td>
-A map of mode key -> mode (at least one). Each mode has a required "title", an optional "icon" texture, and optional "conditions" (a mode is only switchable-to while its conditions are met). The key is the unique id used by the mode condition and value.</td>
+A map of mode key -> mode (at least one). Each mode has a required "title", an optional "icon" texture, and optional "conditions" (a mode is only switchable-to while its conditions are met, and it is hidden from the menu otherwise). "on_selected" and "on_unselected" are optional actions, run on the server when the mode becomes the active one or stops being it. They only run on an actual change, so the first mode, which is active from the start, doesn't run "on_selected" until it is switched back to. The key is the unique id used by the mode condition and value.</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>
 /</td>
+</tr>
+<tr>
+<td>
+selection</td>
+<td>
+"cycle" | "menu"</td>
+<td>
+How a mode is picked. "cycle" switches to the next mode on every activation, "menu" opens a selection menu while the key is held. The menu needs a key that can be held, so it does not work with scroll or GUI button key binds.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+CYCLE</td>
+</tr>
+<tr>
+<td>
+show_popup</td>
+<td>
+Boolean</td>
+<td>
+If the new mode is briefly shown in the middle of the screen after switching.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
 </tr>
 </tbody>
 </table>
@@ -2797,6 +2833,8 @@ true</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:mode_switch","modes":{"mode_a":{"title":"Mode A"}}}</pre>
+<pre class="json-snippet">
+{"type":"palladium:mode_switch","modes":{"mode_a":{"title":"Mode A"},"mode_b":{"title":"Mode B"}},"selection":"menu","show_popup":false}</pre>
 </div>
 <hr>
 
@@ -6959,7 +6997,7 @@ Who this ability forces to drown, each entry either {"type": "self"} or {"type":
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[Target[mode=SELF, range=net.threetag.palladium.logic.value.StaticValue@5ec6f865]]</td>
+[Target[mode=SELF, range=net.threetag.palladium.logic.value.StaticValue@5d6d7c8b]]</td>
 </tr>
 </tbody>
 </table>
@@ -9081,7 +9119,7 @@ Pixel offset applied to the slot strip's on-screen position relative to its defa
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@4adb811f</td>
+net.minecraft.world.phys.Vec2@64fbbc48</td>
 </tr>
 <tr>
 <td>
@@ -9603,7 +9641,7 @@ Pixel offset applied to the icon/label's on-screen position relative to its defa
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@4adb811f</td>
+net.minecraft.world.phys.Vec2@64fbbc48</td>
 </tr>
 <tr>
 <td>
@@ -10725,7 +10763,7 @@ Whether the radar should rotate with the player, or be static.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-Rotation[mode=LOOK_DIRECTION, staticAngle=net.threetag.palladium.logic.value.StaticValue@5ec6f865]</td>
+Rotation[mode=LOOK_DIRECTION, staticAngle=net.threetag.palladium.logic.value.StaticValue@5d6d7c8b]</td>
 </tr>
 <tr>
 <td>
@@ -10737,7 +10775,7 @@ The radius, in blocks, within which entities are detected and shown on the radar
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.threetag.palladium.logic.value.StaticValue@fed510f</td>
+net.threetag.palladium.logic.value.StaticValue@731819a0</td>
 </tr>
 <tr>
 <td>
@@ -10749,7 +10787,7 @@ The X/Y onscreen position of the radar relative to the alignment.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-Translate[x=net.threetag.palladium.logic.value.StaticValue@5ec6f865, y=net.threetag.palladium.logic.value.StaticValue@5ec6f865]</td>
+Translate[x=net.threetag.palladium.logic.value.StaticValue@5d6d7c8b, y=net.threetag.palladium.logic.value.StaticValue@5d6d7c8b]</td>
 </tr>
 <tr>
 <td>
@@ -12311,7 +12349,7 @@ The [x, y] scale of the text.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@3ef5a416</td>
+net.minecraft.world.phys.Vec2@60629eda</td>
 </tr>
 <tr>
 <td>
@@ -12347,7 +12385,7 @@ A [x, y] pixel offset applied to the text's position.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@4adb811f</td>
+net.minecraft.world.phys.Vec2@64fbbc48</td>
 </tr>
 </tbody>
 </table>

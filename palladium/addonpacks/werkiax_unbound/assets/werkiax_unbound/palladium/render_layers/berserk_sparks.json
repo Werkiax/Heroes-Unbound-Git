@@ -1,0 +1,20 @@
+{
+  "type": "argon:anchored_lightning_sparks",
+  "frequency": 0.35,
+  "amount": 3,
+  "anchors": [
+    "right_arm",
+    "left_arm"
+  ],
+  "anchor_size": 0.3,
+  "offset": [
+    0.0,
+    -0.35,
+    0.0
+  ],
+  "render_settings": {
+    "glow": "#9B32FF",
+    "bloom": 2,
+    "size": 1.0
+  }
+}

@@ -35,6 +35,10 @@ Palladium</h3>
 Alpha Mask</a>
 </li>
 <li>
+<a href="#palladium:color">
+Color</a>
+</li>
+<li>
 <a href="#palladium:overlay">
 Overlay</a>
 </li>
@@ -87,6 +91,76 @@ true</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:alpha_mask","mask":"example:mask"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:color">
+Color</h2>
+<p>
+Paints a color over the base image, keeping its transparency. Unlike Tint, which multiplies and can only make pixels darker, this mixes every pixel towards the color, so it also works on dark textures and can brighten them. At an opacity of 1 every pixel becomes the exact color, lower values blend it with the original. Both settings can use variables, with the same note about generated textures as Tint.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+filter</td>
+<td>
+String</td>
+<td>
+Only pixels with exactly this color (as hex, like "ff0000") are recolored, every other pixel stays untouched. Can use variables.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+color</td>
+<td>
+String</td>
+<td>
+The color as hex, like "ffd24a" or "#ffd24a". Can use variables.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+opacity</td>
+<td>
+String</td>
+<td>
+How much of the color is mixed in, from 0 (no change) to 1 (only the color). Can use variables.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:color","color":"ff0000","opacity":"0.5"}</pre>
+<pre class="json-snippet">
+{"type":"palladium:color","color":"3c8dff","filter":"ff0000"}</pre>
 </div>
 <hr>
 

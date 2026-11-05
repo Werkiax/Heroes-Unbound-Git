@@ -428,6 +428,53 @@
         }
       }
     },
+    "berserk_sweep": {
+      "type": "argon:sweeping_edge",
+      "damage_multiplier": 0.5,
+      "radius": 1.5,
+      "max_distance": 2.5,
+      "knockback": 0.4,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "werkiax_unbound:janus#berserk"
+        }
+      }
+    },
+    "berserk_armor_pen": {
+      "type": "argon:melee_armor_penetration",
+      "penetration": 0.2,
+      "properties": {
+        "hidden_in_gui": true,
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": [
+          {
+            "type": "palladium:mode_active",
+            "ability": "werkiax_unbound:janus#form_switch",
+            "mode": "might",
+            "ignore_unlocked": false
+          }
+        ],
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "werkiax_unbound:janus#berserk"
+        }
+      }
+    },
     "dash_hit": {
       "type": "argon:damage_field",
       "inflation": 1.5,
@@ -679,13 +726,16 @@
       "properties": {
         "title": "Crater",
         "description": "Leap into the air and crash down, exploding on impact and slowing enemies within 8 blocks..",
-        "icon": "minecraft:anvil",
+        "icon": {
+          "type": "palladium:texture",
+          "texture": "werkiax_unbound:textures/icons/crater.png"
+        },
         "list_index": 1,
         "color": "purple"
       },
       "first_tick_action": {
-        "type": "palladium:run_command",
-        "command": "effect give @s minecraft:levitation 1 9 true"
+        "type": "argon:jump",
+        "velocity": 0.8
       },
       "state": {
         "unlocking": [
@@ -702,26 +752,6 @@
           "time": 30,
           "cooldown": "4s"
         }
-      }
-    },
-    "crater_drop": {
-      "type": "palladium:action",
-      "properties": {
-        "hidden_in_gui": true,
-        "hidden_in_bar": true
-      },
-      "first_tick_action": {
-        "type": "palladium:run_command",
-        "command": "effect clear @s minecraft:levitation"
-      },
-      "state": {
-        "enabling": [
-          {
-            "type": "palladium:ability_ticks",
-            "ability": "werkiax_unbound:janus#crater",
-            "min": 8
-          }
-        ]
       }
     },
     "crater_gravity": {
@@ -791,16 +821,21 @@
       }
     },
     "crater_slow": {
-      "type": "palladium:area_action",
-      "radius": 8.0,
-      "affect_self": false,
+      "type": "argon:effect",
+      "applications": [
+        {
+          "mode": "area",
+          "effect": "minecraft:slowness",
+          "duration": "5s",
+          "amplifier": 2,
+          "range": 8.0,
+          "affect_self": false,
+          "particles": false
+        }
+      ],
       "properties": {
         "hidden_in_gui": true,
         "hidden_in_bar": true
-      },
-      "first_tick_action": {
-        "type": "palladium:run_command",
-        "command": "effect give @s minecraft:slowness 5 2"
       },
       "state": {
         "enabling": [
