@@ -1674,9 +1674,21 @@
       "properties": {
         "title": "Health I",
         "description": "Health +2 in Might Form, +6 in Bulwark Form.",
-        "icon": "minecraft:golden_apple",
+        "icon": {
+          "type": "palladium:texture",
+          "texture": "werkiax_unbound:textures/icons/health_upgrade_1.png"
+        },
         "list_index": 5,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 1
+          }
+        }
       }
     },
     "health_upgrade_2": {
@@ -1684,9 +1696,25 @@
       "properties": {
         "title": "Health II",
         "description": "Health +3 in Might Form, +8 in Bulwark Form. Requires Health I.",
-        "icon": "minecraft:enchanted_golden_apple",
+        "icon": {
+          "type": "palladium:texture",
+          "texture": "werkiax_unbound:textures/icons/health_upgrade_2.png"
+        },
         "list_index": 6,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 2
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:janus#health_upgrade_1"
+          }
+        }
       }
     },
     "health_upgrade_3": {
@@ -1697,6 +1725,19 @@
         "icon": "minecraft:totem_of_undying",
         "list_index": 7,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 3
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:janus#health_upgrade_2"
+          }
+        }
       }
     },
     "damage_upgrade_1": {
@@ -1707,6 +1748,15 @@
         "icon": "minecraft:iron_sword",
         "list_index": 8,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 1
+          }
+        }
       }
     },
     "damage_upgrade_2": {
@@ -1717,6 +1767,19 @@
         "icon": "minecraft:diamond_sword",
         "list_index": 9,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 2
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:janus#damage_upgrade_1"
+          }
+        }
       }
     },
     "damage_upgrade_3": {
@@ -1727,6 +1790,19 @@
         "icon": "minecraft:netherite_sword",
         "list_index": 10,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 3
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:janus#damage_upgrade_2"
+          }
+        }
       }
     },
     "armor_upgrade_1": {
@@ -1737,6 +1813,15 @@
         "icon": "minecraft:iron_chestplate",
         "list_index": 11,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 1
+          }
+        }
       }
     },
     "armor_upgrade_2": {
@@ -1747,6 +1832,19 @@
         "icon": "minecraft:diamond_chestplate",
         "list_index": 12,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 2
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:janus#armor_upgrade_1"
+          }
+        }
       }
     },
     "armor_upgrade_3": {
@@ -1757,6 +1855,19 @@
         "icon": "minecraft:netherite_chestplate",
         "list_index": 13,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 2
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:janus#armor_upgrade_2"
+          }
+        }
       }
     },
     "health_upgrade_1_might": {
@@ -2325,6 +2436,15 @@
         "icon": "minecraft:sugar",
         "list_index": 14,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 1
+          }
+        }
       }
     },
     "speed_upgrade_1_might": {
@@ -2397,6 +2517,19 @@
         "icon": "minecraft:feather",
         "list_index": 15,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 2
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:janus#speed_upgrade_1"
+          }
+        }
       }
     },
     "speed_upgrade_2_might": {
@@ -2469,6 +2602,19 @@
         "icon": "minecraft:rabbit_foot",
         "list_index": 16,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 3
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:janus#speed_upgrade_2"
+          }
+        }
       }
     },
     "speed_upgrade_3_might": {
@@ -2544,6 +2690,15 @@
         },
         "list_index": 17,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 2
+          }
+        }
       }
     },
     "damage_reduction_upgrade": {
@@ -2557,6 +2712,15 @@
         },
         "list_index": 18,
         "color": "purple"
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 2
+          }
+        }
       }
     }
   }

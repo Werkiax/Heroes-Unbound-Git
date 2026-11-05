@@ -1,8 +1,22 @@
 {
-  "grid_size": 50,
+  "grid_size": 38,
+  "auto_connect": false,
   "node_styles": {
     "default": {
       "size": 28,
+      "icon_size": 18,
+      "overlay": false,
+      "show_icon": true
+    },
+    "root": {
+      "size": 34,
+      "icon_size": 24,
+      "overlay": false,
+      "show_icon": true
+    },
+    "hub": {
+      "size": 32,
+      "icon_size": 22,
       "overlay": false,
       "show_icon": true
     }
@@ -11,17 +25,157 @@
     "default": {
       "path": "elbow_vertical",
       "width": 2,
+      "outline_width": 0,
       "color": {
-        "locked": "#555555",
+        "locked": "#FFFFFF",
         "available": "#FFFFFF",
-        "unlocked": "#00E5FF"
+        "unlocked": "#FFFFFF"
       }
     }
   },
   "nodes": {
-    "rage": [0, 0],
-    "stomp": [0, 1],
-    "charge_leap": [0, 2],
-    "grab": [0, 3]
-  }
+    "grab": {
+      "pos": [
+        3,
+        3
+      ],
+      "style": "root"
+    },
+    "charge_leap": [
+      3,
+      2
+    ],
+    "stomp": [
+      3,
+      1
+    ],
+    "rage": [
+      3,
+      0
+    ],
+    "upgrades": {
+      "pos": [
+        3,
+        4.3
+      ],
+      "style": "hub",
+      "title": "Spartan Upgrades",
+      "icon": "minecraft:iron_axe",
+      "description": "Permanent stat upgrades. Requires Grab."
+    },
+    "health_upgrade_1": [
+      1.5,
+      5.3
+    ],
+    "health_upgrade_2": [
+      1.5,
+      6.3
+    ],
+    "health_upgrade_3": [
+      1.5,
+      7.3
+    ],
+    "damage_upgrade_1": [
+      2.5,
+      5.3
+    ],
+    "damage_upgrade_2": [
+      2.5,
+      6.3
+    ],
+    "damage_upgrade_3": [
+      2.5,
+      7.3
+    ],
+    "armor_upgrade_1": [
+      3.5,
+      5.3
+    ],
+    "armor_upgrade_2": [
+      3.5,
+      6.3
+    ],
+    "armor_upgrade_3": [
+      3.5,
+      7.3
+    ],
+    "speed_upgrade_1": [
+      4.5,
+      5.3
+    ],
+    "speed_upgrade_2": [
+      4.5,
+      6.3
+    ],
+    "speed_upgrade_3": [
+      4.5,
+      7.3
+    ]
+  },
+  "connections": [
+    {
+      "from": "grab",
+      "to": "charge_leap"
+    },
+    {
+      "from": "charge_leap",
+      "to": "stomp"
+    },
+    {
+      "from": "stomp",
+      "to": "rage"
+    },
+    {
+      "from": "grab",
+      "to": "upgrades"
+    },
+    {
+      "from": "upgrades",
+      "to": "health_upgrade_1"
+    },
+    {
+      "from": "health_upgrade_1",
+      "to": "health_upgrade_2"
+    },
+    {
+      "from": "health_upgrade_2",
+      "to": "health_upgrade_3"
+    },
+    {
+      "from": "upgrades",
+      "to": "damage_upgrade_1"
+    },
+    {
+      "from": "damage_upgrade_1",
+      "to": "damage_upgrade_2"
+    },
+    {
+      "from": "damage_upgrade_2",
+      "to": "damage_upgrade_3"
+    },
+    {
+      "from": "upgrades",
+      "to": "armor_upgrade_1"
+    },
+    {
+      "from": "armor_upgrade_1",
+      "to": "armor_upgrade_2"
+    },
+    {
+      "from": "armor_upgrade_2",
+      "to": "armor_upgrade_3"
+    },
+    {
+      "from": "upgrades",
+      "to": "speed_upgrade_1"
+    },
+    {
+      "from": "speed_upgrade_1",
+      "to": "speed_upgrade_2"
+    },
+    {
+      "from": "speed_upgrade_2",
+      "to": "speed_upgrade_3"
+    }
+  ]
 }

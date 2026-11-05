@@ -87,7 +87,7 @@
           },
           "requires": {
             "type": "palladium:ability_unlocked",
-            "ability": "charge_leap"
+            "ability": "werkiax_unbound:ghost_of_sparta#charge_leap"
           }
         },
         "enabling": {
@@ -152,7 +152,7 @@
           },
           "requires": {
             "type": "palladium:ability_unlocked",
-            "ability": "grab"
+            "ability": "werkiax_unbound:ghost_of_sparta#grab"
           }
         },
         "enabling": {
@@ -285,7 +285,7 @@
           "requires": [
             {
               "type": "palladium:ability_unlocked",
-              "ability": "stomp"
+              "ability": "werkiax_unbound:ghost_of_sparta#stomp"
             },
             {
               "type": "palladium:energy_bar",
@@ -465,6 +465,390 @@
             "ability": "werkiax_unbound:ghost_of_sparta#rage"
           }
         ]
+      }
+    },
+    "health_upgrade_1": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 4,
+          "operation": "add_value",
+          "id": "werkiax_unbound:spartan_health_1"
+        }
+      ],
+      "properties": {
+        "title": "Health I",
+        "description": "Health +4.",
+        "icon": "minecraft:golden_apple",
+        "list_index": 4,
+        "color": "red",
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 1
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:ghost_of_sparta#grab"
+          }
+        }
+      }
+    },
+    "health_upgrade_2": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 6,
+          "operation": "add_value",
+          "id": "werkiax_unbound:spartan_health_2"
+        }
+      ],
+      "properties": {
+        "title": "Health II",
+        "description": "Health +6. Requires Health I.",
+        "icon": "minecraft:enchanted_golden_apple",
+        "list_index": 5,
+        "color": "red",
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 2
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:ghost_of_sparta#health_upgrade_1"
+          }
+        }
+      }
+    },
+    "health_upgrade_3": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:max_health",
+          "amount": 8,
+          "operation": "add_value",
+          "id": "werkiax_unbound:spartan_health_3"
+        }
+      ],
+      "properties": {
+        "title": "Health III",
+        "description": "Health +8. Requires Health II.",
+        "icon": "minecraft:totem_of_undying",
+        "list_index": 6,
+        "color": "red",
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 3
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:ghost_of_sparta#health_upgrade_2"
+          }
+        }
+      }
+    },
+    "damage_upgrade_1": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 3,
+          "operation": "add_value",
+          "id": "werkiax_unbound:spartan_damage_1"
+        }
+      ],
+      "properties": {
+        "title": "Damage I",
+        "description": "Damage +3.",
+        "icon": "minecraft:iron_sword",
+        "list_index": 7,
+        "color": "red",
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 1
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:ghost_of_sparta#grab"
+          }
+        }
+      }
+    },
+    "damage_upgrade_2": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 4,
+          "operation": "add_value",
+          "id": "werkiax_unbound:spartan_damage_2"
+        }
+      ],
+      "properties": {
+        "title": "Damage II",
+        "description": "Damage +4. Requires Damage I.",
+        "icon": "minecraft:diamond_sword",
+        "list_index": 8,
+        "color": "red",
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 2
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:ghost_of_sparta#damage_upgrade_1"
+          }
+        }
+      }
+    },
+    "damage_upgrade_3": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "amount": 5,
+          "operation": "add_value",
+          "id": "werkiax_unbound:spartan_damage_3"
+        }
+      ],
+      "properties": {
+        "title": "Damage III",
+        "description": "Damage +5. Requires Damage II.",
+        "icon": "minecraft:netherite_sword",
+        "list_index": 9,
+        "color": "red",
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 3
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:ghost_of_sparta#damage_upgrade_2"
+          }
+        }
+      }
+    },
+    "armor_upgrade_1": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:armor",
+          "amount": 2,
+          "operation": "add_value",
+          "id": "werkiax_unbound:spartan_armor_1"
+        }
+      ],
+      "properties": {
+        "title": "Armor I",
+        "description": "Armor +2.",
+        "icon": "minecraft:iron_chestplate",
+        "list_index": 10,
+        "color": "red",
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 1
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:ghost_of_sparta#grab"
+          }
+        }
+      }
+    },
+    "armor_upgrade_2": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:armor",
+          "amount": 3,
+          "operation": "add_value",
+          "id": "werkiax_unbound:spartan_armor_2"
+        }
+      ],
+      "properties": {
+        "title": "Armor II",
+        "description": "Armor +3. Requires Armor I.",
+        "icon": "minecraft:diamond_chestplate",
+        "list_index": 11,
+        "color": "red",
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 2
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:ghost_of_sparta#armor_upgrade_1"
+          }
+        }
+      }
+    },
+    "armor_upgrade_3": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:armor",
+          "amount": 4,
+          "operation": "add_value",
+          "id": "werkiax_unbound:spartan_armor_3"
+        }
+      ],
+      "properties": {
+        "title": "Armor III",
+        "description": "Armor +4. Requires Armor II.",
+        "icon": "minecraft:netherite_chestplate",
+        "list_index": 12,
+        "color": "red",
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 3
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:ghost_of_sparta#armor_upgrade_2"
+          }
+        }
+      }
+    },
+    "speed_upgrade_1": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": 0.03,
+          "operation": "add_multiplied_base",
+          "id": "werkiax_unbound:spartan_speed_1"
+        }
+      ],
+      "properties": {
+        "title": "Speed I",
+        "description": "Speed +3%.",
+        "icon": "minecraft:sugar",
+        "list_index": 13,
+        "color": "red",
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 1
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:ghost_of_sparta#grab"
+          }
+        }
+      }
+    },
+    "speed_upgrade_2": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": 0.04,
+          "operation": "add_multiplied_base",
+          "id": "werkiax_unbound:spartan_speed_2"
+        }
+      ],
+      "properties": {
+        "title": "Speed II",
+        "description": "Speed +4%. Requires Speed I.",
+        "icon": "minecraft:feather",
+        "list_index": 14,
+        "color": "red",
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 2
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:ghost_of_sparta#speed_upgrade_1"
+          }
+        }
+      }
+    },
+    "speed_upgrade_3": {
+      "type": "palladium:attribute_modifier",
+      "modifiers": [
+        {
+          "attribute": "minecraft:movement_speed",
+          "amount": 0.05,
+          "operation": "add_multiplied_base",
+          "id": "werkiax_unbound:spartan_speed_3"
+        }
+      ],
+      "properties": {
+        "title": "Speed III",
+        "description": "Speed +5%. Requires Speed II.",
+        "icon": "minecraft:rabbit_foot",
+        "list_index": 15,
+        "color": "red",
+        "hidden_in_bar": true
+      },
+      "state": {
+        "unlocking": {
+          "type": "palladium:buyable",
+          "cost": {
+            "type": "palladium:experience_level",
+            "xp_level": 3
+          },
+          "requires": {
+            "type": "palladium:ability_unlocked",
+            "ability": "werkiax_unbound:ghost_of_sparta#speed_upgrade_2"
+          }
+        }
       }
     }
   }
