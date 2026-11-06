@@ -1,0 +1,27 @@
+{
+  "initial_state": "idle",
+  "blend_transition": 3,
+  "states": {
+    "idle": {
+      "transitions": {
+        "negative_beam": {
+          "type": "palladium:ability_enabled",
+          "ability": "werkiax_unbound:negative_spirit#negative_beam"
+        }
+      }
+    },
+    "negative_beam": {
+      "animation": "werkiax_unbound:negative_beam_hold",
+      "first_person_animation": "werkiax_unbound:negative_beam_hold_fp",
+      "transitions": {
+        "idle": {
+          "type": "palladium:not",
+          "conditions": {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:negative_spirit#negative_beam"
+          }
+        }
+      }
+    }
+  }
+}

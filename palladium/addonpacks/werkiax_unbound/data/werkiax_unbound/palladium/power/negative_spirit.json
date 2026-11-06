@@ -1,0 +1,126 @@
+{
+    "name": "Negative Spirit",
+    "icon": "minecraft:ender_eye",
+    "energy_bars": {
+        "negative_energy": {
+            "max": 1000,
+            "color": "F2F2F2",
+            "synced_value": {
+                "type": "palladium:integer_data_attachment",
+                "attachment": "werkiax_unbound:negative_energy",
+                "fallback": 0
+            }
+        }
+    },
+    "abilities": {
+        "negative_beam": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Negative Beam",
+                "description": "Hold to fire a piercing beam of negative energy from your hand. It deals Wither damage to everything it passes through and withers them for 2 seconds. Drains Negative Energy while it fires.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/negative_beam.png"
+                },
+                "list_index": 0,
+                "color": "white"
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:energy_bar",
+                    "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
+                    "min": 10
+                },
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "behaviour": "held"
+                }
+            }
+        },
+        "negative_beam_shot": {
+            "type": "argon:energy_beam",
+            "beam_renderer": "werkiax_unbound:negative_beam",
+            "damage": 6.0,
+            "damage_type": "minecraft:wither",
+            "max_distance": 24,
+            "max_bounces": 0,
+            "redirect_off_blocks": false,
+            "pierce": true,
+            "pierce_size": {
+                "width": 0.4,
+                "height": 0.4
+            },
+            "entity_effects": [
+                {
+                    "effect": "minecraft:wither",
+                    "duration": "2s",
+                    "amplifier": 4
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#negative_beam"
+                }
+            }
+        },
+        "negative_beam_cost": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:negative_energy",
+                "operation": "-",
+                "value": 5
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#negative_beam"
+                }
+            }
+        },
+        "negative_energy_regen": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:conditional",
+                "condition": {
+                    "type": "palladium:energy_bar",
+                    "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
+                    "max": 998
+                },
+                "on_true": {
+                    "type": "palladium:modify_number_data_attachment",
+                    "attachment": "werkiax_unbound:negative_energy",
+                    "operation": "+",
+                    "value": 2
+                },
+                "on_false": {
+                    "type": "palladium:set_data_attachment",
+                    "attachment": "werkiax_unbound:negative_energy",
+                    "value": 1000
+                }
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:not",
+                    "conditions": {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:negative_spirit#negative_beam"
+                    }
+                }
+            }
+        }
+    }
+}
