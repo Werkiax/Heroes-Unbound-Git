@@ -87,6 +87,89 @@
                 }
             }
         },
+        "negative_beam_lock": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:movement_speed",
+                    "amount": -1.0,
+                    "operation": "add_multiplied_total",
+                    "id": "werkiax_unbound:negative_beam_no_move"
+                },
+                {
+                    "attribute": "minecraft:jump_strength",
+                    "amount": -1.0,
+                    "operation": "add_multiplied_total",
+                    "id": "werkiax_unbound:negative_beam_no_jump"
+                },
+                {
+                    "attribute": "minecraft:knockback_resistance",
+                    "amount": 1.0,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_beam_no_knockback"
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#negative_beam"
+                }
+            }
+        },
+        "negative_beam_no_sprint": {
+            "type": "palladium:prevent_sprinting",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#negative_beam"
+                }
+            }
+        },
+        "negative_beam_no_flight": {
+            "type": "argon:movement_reduction",
+            "mode": "flight",
+            "percentage": 100.0,
+            "reduce_attack_damage": false,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#negative_beam"
+                }
+            }
+        },
+        "negative_beam_sound": {
+            "type": "palladium:action",
+            "first_tick_action": {
+                "type": "palladium:run_command",
+                "command": "execute as @a[distance=..8] run playsound minecraft:block.bell.resonate player @a[distance=..5] ~ ~ ~ 0.5 0"
+            },
+            "action": {
+                "type": "palladium:run_command",
+                "command": "execute as @a[distance=..8] run playsound minecraft:block.bell.resonate player @a[distance=..5] ~ ~ ~ 0.25 2"
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#negative_beam"
+                }
+            }
+        },
         "negative_energy_regen": {
             "type": "palladium:action",
             "action": {

@@ -3,7 +3,7 @@
     "offset": [
         0,
         -4,
-        3
+        0
     ],
     "renderer": {
         "type": "argon:glow_laser",
