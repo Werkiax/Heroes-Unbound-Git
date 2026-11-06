@@ -214,7 +214,11 @@
         "strike_drain_t2": [0.0, 0.0],
         "strike_launch_t2": [0.0, 0.0],
         "strike_drain_t3": [0.0, 0.0],
-        "strike_launch_t3": [0.0, 0.0]
+        "strike_launch_t3": [0.0, 0.0],
+        "fx_strike_charge_sound": [0.0, 0.0],
+        "fx_bowling_ball_barrier": [0.0, 0.0],
+        "fx_berserk_activate_sound": [0.0, 0.0],
+        "fx_berserk_glow_sound": [0.0, 0.0]
     },
     "connections": [
         {

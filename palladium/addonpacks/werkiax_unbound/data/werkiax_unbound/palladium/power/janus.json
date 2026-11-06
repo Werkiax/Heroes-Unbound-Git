@@ -867,6 +867,57 @@
                 ]
             }
         },
+        "crater_quake": {
+            "type": "argon:earthquake",
+            "range": 3,
+            "strength": 0.25,
+            "ticks_per_block": 1.0,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:janus#crater"
+                    },
+                    {
+                        "type": "palladium:ability_ticks",
+                        "ability": "werkiax_unbound:janus#crater",
+                        "min": 10
+                    },
+                    {
+                        "type": "palladium:on_ground"
+                    }
+                ]
+            }
+        },
+        "crater_shake": {
+            "type": "argon:screen_shake",
+            "base_intensity": 0.3,
+            "max_intensity": 1.0,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:janus#crater"
+                    },
+                    {
+                        "type": "palladium:ability_ticks",
+                        "ability": "werkiax_unbound:janus#crater",
+                        "min": 10
+                    },
+                    {
+                        "type": "palladium:on_ground"
+                    }
+                ]
+            }
+        },
         "crater_slow": {
             "type": "argon:effect",
             "applications": [
@@ -1084,81 +1135,9 @@
                 ]
             }
         },
-        "anchor_small": {
-            "type": "argon:explosion",
-            "destroy_environment": false,
-            "damage_self": false,
-            "radius": 2.0,
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": [
-                    {
-                        "type": "palladium:ability_last_tick",
-                        "ability": "werkiax_unbound:janus#anchor"
-                    },
-                    {
-                        "type": "palladium:energy_bar",
-                        "energy_bar": "werkiax_unbound:janus#kinetic_charge",
-                        "min": 0,
-                        "max": 399
-                    }
-                ]
-            }
-        },
-        "anchor_medium": {
-            "type": "argon:explosion",
-            "destroy_environment": false,
-            "damage_self": false,
-            "radius": 2.5,
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": [
-                    {
-                        "type": "palladium:ability_last_tick",
-                        "ability": "werkiax_unbound:janus#anchor"
-                    },
-                    {
-                        "type": "palladium:energy_bar",
-                        "energy_bar": "werkiax_unbound:janus#kinetic_charge",
-                        "min": 400,
-                        "max": 799
-                    }
-                ]
-            }
-        },
-        "anchor_big": {
-            "type": "argon:explosion",
-            "destroy_environment": false,
-            "damage_self": false,
-            "radius": 3.0,
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": [
-                    {
-                        "type": "palladium:ability_last_tick",
-                        "ability": "werkiax_unbound:janus#anchor"
-                    },
-                    {
-                        "type": "palladium:energy_bar",
-                        "energy_bar": "werkiax_unbound:janus#kinetic_charge",
-                        "min": 800,
-                        "max": 1000
-                    }
-                ]
-            }
-        },
-        "anchor_hit_small": {
+        "anchor_hit_far": {
             "type": "argon:damage_field",
-            "inflation": 4.5,
+            "inflation": 10.0,
             "damage": 20.0,
             "damage_type": "minecraft:player_attack",
             "apply_user_damage": false,
@@ -1171,12 +1150,6 @@
                     {
                         "type": "palladium:ability_last_tick",
                         "ability": "werkiax_unbound:janus#anchor"
-                    },
-                    {
-                        "type": "palladium:energy_bar",
-                        "energy_bar": "werkiax_unbound:janus#kinetic_charge",
-                        "min": 0,
-                        "max": 399
                     }
                 ]
             }
@@ -1196,6 +1169,79 @@
                     {
                         "type": "palladium:ability_last_tick",
                         "ability": "werkiax_unbound:janus#anchor"
+                    }
+                ]
+            }
+        },
+        "anchor_hit_close": {
+            "type": "argon:damage_field",
+            "inflation": 4.5,
+            "damage": 40.0,
+            "damage_type": "minecraft:player_attack",
+            "apply_user_damage": false,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_last_tick",
+                        "ability": "werkiax_unbound:janus#anchor"
+                    }
+                ]
+            }
+        },
+        "fx_anchor_small": {
+            "type": "palladium:action",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "first_tick_action": {
+                "type": "palladium:run_command",
+                "command": [
+                    "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 2.7 1 2.7 0 180 force",
+                    "particle minecraft:dragon_breath ~ ~0.3 ~ 2.7 0.3 2.7 0.05 90 force",
+                    "particle minecraft:witch ~ ~0.6 ~ 2.7 0.5 2.7 0.1 90 force",
+                    "particle minecraft:portal ~ ~1 ~ 2.7 0.8 2.7 0.5 90 force"
+                ]
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_last_tick",
+                        "ability": "werkiax_unbound:janus#anchor"
+                    },
+                    {
+                        "type": "palladium:energy_bar",
+                        "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+                        "min": 0,
+                        "max": 399
+                    }
+                ]
+            }
+        },
+        "fx_anchor_medium": {
+            "type": "palladium:action",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "first_tick_action": {
+                "type": "palladium:run_command",
+                "command": [
+                    "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 4.2 1 4.2 0 280 force",
+                    "particle minecraft:dragon_breath ~ ~0.3 ~ 4.2 0.3 4.2 0.05 140 force",
+                    "particle minecraft:witch ~ ~0.6 ~ 4.2 0.5 4.2 0.1 140 force",
+                    "particle minecraft:portal ~ ~1 ~ 4.2 0.8 4.2 0.5 140 force"
+                ]
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_last_tick",
+                        "ability": "werkiax_unbound:janus#anchor"
                     },
                     {
                         "type": "palladium:energy_bar",
@@ -1206,15 +1252,20 @@
                 ]
             }
         },
-        "anchor_hit_big": {
-            "type": "argon:damage_field",
-            "inflation": 10.0,
-            "damage": 40.0,
-            "damage_type": "minecraft:player_attack",
-            "apply_user_damage": false,
+        "fx_anchor_big": {
+            "type": "palladium:action",
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
+            },
+            "first_tick_action": {
+                "type": "palladium:run_command",
+                "command": [
+                    "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 6.0 1 6.0 0 400 force",
+                    "particle minecraft:dragon_breath ~ ~0.3 ~ 6.0 0.3 6.0 0.05 200 force",
+                    "particle minecraft:witch ~ ~0.6 ~ 6.0 0.5 6.0 0.1 200 force",
+                    "particle minecraft:portal ~ ~1 ~ 6.0 0.8 6.0 0.5 200 force"
+                ]
             },
             "state": {
                 "enabling": [
@@ -1245,21 +1296,8 @@
             "state": {
                 "enabling": [
                     {
-                        "type": "palladium:or",
-                        "conditions": [
-                            {
-                                "type": "palladium:ability_enabled",
-                                "ability": "werkiax_unbound:janus#anchor_small"
-                            },
-                            {
-                                "type": "palladium:ability_enabled",
-                                "ability": "werkiax_unbound:janus#anchor_medium"
-                            },
-                            {
-                                "type": "palladium:ability_enabled",
-                                "ability": "werkiax_unbound:janus#anchor_big"
-                            }
-                        ]
+                        "type": "palladium:ability_last_tick",
+                        "ability": "werkiax_unbound:janus#anchor"
                     }
                 ]
             }
@@ -1375,79 +1413,7 @@
                 "enabling": [
                     {
                         "type": "palladium:ability_first_tick",
-                        "ability": "werkiax_unbound:janus#crater_land"
-                    }
-                ]
-            }
-        },
-        "fx_anchor_small": {
-            "type": "palladium:action",
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "first_tick_action": {
-                "type": "palladium:run_command",
-                "command": [
-                    "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 2.7 1 2.7 0 180 force",
-                    "particle minecraft:dragon_breath ~ ~0.3 ~ 2.7 0.3 2.7 0.05 90 force",
-                    "particle minecraft:witch ~ ~0.6 ~ 2.7 0.5 2.7 0.1 90 force",
-                    "particle minecraft:portal ~ ~1 ~ 2.7 0.8 2.7 0.5 90 force"
-                ]
-            },
-            "state": {
-                "enabling": [
-                    {
-                        "type": "palladium:ability_first_tick",
-                        "ability": "werkiax_unbound:janus#anchor_small"
-                    }
-                ]
-            }
-        },
-        "fx_anchor_medium": {
-            "type": "palladium:action",
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "first_tick_action": {
-                "type": "palladium:run_command",
-                "command": [
-                    "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 4.2 1 4.2 0 280 force",
-                    "particle minecraft:dragon_breath ~ ~0.3 ~ 4.2 0.3 4.2 0.05 140 force",
-                    "particle minecraft:witch ~ ~0.6 ~ 4.2 0.5 4.2 0.1 140 force",
-                    "particle minecraft:portal ~ ~1 ~ 4.2 0.8 4.2 0.5 140 force"
-                ]
-            },
-            "state": {
-                "enabling": [
-                    {
-                        "type": "palladium:ability_first_tick",
-                        "ability": "werkiax_unbound:janus#anchor_medium"
-                    }
-                ]
-            }
-        },
-        "fx_anchor_big": {
-            "type": "palladium:action",
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "first_tick_action": {
-                "type": "palladium:run_command",
-                "command": [
-                    "particle minecraft:dust{color:[0.45,0.02,0.79],scale:2.0} ~ ~1 ~ 6.0 1 6.0 0 400 force",
-                    "particle minecraft:dragon_breath ~ ~0.3 ~ 6.0 0.3 6.0 0.05 200 force",
-                    "particle minecraft:witch ~ ~0.6 ~ 6.0 0.5 6.0 0.1 200 force",
-                    "particle minecraft:portal ~ ~1 ~ 6.0 0.8 6.0 0.5 200 force"
-                ]
-            },
-            "state": {
-                "enabling": [
-                    {
-                        "type": "palladium:ability_first_tick",
-                        "ability": "werkiax_unbound:janus#anchor_big"
+                        "ability": "werkiax_unbound:janus#crater_quake"
                     }
                 ]
             }
@@ -1573,6 +1539,94 @@
                     "particle minecraft:dust{color:[0.45,0.02,0.79],scale:1.0} ~ ~1 ~ 0.35 0.8 0.35 0 3 force",
                     "particle minecraft:witch ~ ~1 ~ 0.35 0.8 0.35 0.05 1 force"
                 ]
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:janus#berserk"
+                    }
+                ]
+            }
+        },
+        "fx_strike_charge_sound": {
+            "type": "palladium:play_sound",
+            "sound": "werkiax_unbound:power_strike_charge",
+            "volume": 0.8,
+            "pitch": 1.0,
+            "looping": true,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:janus#power_strike"
+                    }
+                ]
+            }
+        },
+        "fx_bowling_ball_barrier": {
+            "type": "palladium:action",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "first_tick_action": [
+                {
+                    "type": "palladium:play_sound",
+                    "sound": "werkiax_unbound:bowling_ball_barrier",
+                    "volume": 1.0,
+                    "pitch": 1.0
+                },
+                {
+                    "type": "palladium:play_sound",
+                    "sound": "minecraft:entity.firework_rocket.large_blast",
+                    "volume": 0.9,
+                    "pitch": 0.8
+                }
+            ],
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_first_tick",
+                        "ability": "werkiax_unbound:janus#bowling_ball"
+                    }
+                ]
+            }
+        },
+        "fx_berserk_activate_sound": {
+            "type": "palladium:action",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "first_tick_action": {
+                "type": "palladium:play_sound",
+                "sound": "werkiax_unbound:berserk_activate",
+                "volume": 0.7,
+                "pitch": 1.0
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_first_tick",
+                        "ability": "werkiax_unbound:janus#berserk"
+                    }
+                ]
+            }
+        },
+        "fx_berserk_glow_sound": {
+            "type": "palladium:play_sound",
+            "sound": "werkiax_unbound:berserk_glow",
+            "volume": 0.5,
+            "pitch": 1.0,
+            "looping": true,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
             },
             "state": {
                 "enabling": [
@@ -1814,6 +1868,30 @@
                     {
                         "type": "palladium:ability_last_tick",
                         "ability": "werkiax_unbound:janus#anchor"
+                    }
+                ]
+            }
+        },
+        "anchor_end_push": {
+            "type": "argon:push_field",
+            "mode": "horizontal",
+            "amount": 0.6,
+            "inflation": 10.0,
+            "affect_projectiles": false,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:janus#anchor"
+                    },
+                    {
+                        "type": "palladium:ability_ticks",
+                        "ability": "werkiax_unbound:janus#anchor",
+                        "min": 95
                     }
                 ]
             }

@@ -1,7 +1,50 @@
 {
-  "rage_roar": {
-    "sounds": [
-      { "name": "werkiax_unbound:rage_roar", "stream": false }
-    ]
-  }
+    "rage_roar": {
+        "sounds": [
+            {
+                "name": "werkiax_unbound:rage_roar",
+                "stream": false
+            }
+        ]
+    },
+    "power_strike_charge": {
+        "sounds": [
+            {
+                "name": "minecraft:block.beacon.ambient",
+                "type": "event",
+                "volume": 0.8,
+                "pitch": 0.6
+            }
+        ]
+    },
+    "bowling_ball_barrier": {
+        "sounds": [
+            {
+                "name": "minecraft:entity.warden.sonic_boom",
+                "type": "event",
+                "volume": 0.8,
+                "pitch": 1.4
+            }
+        ]
+    },
+    "berserk_activate": {
+        "sounds": [
+            {
+                "name": "minecraft:entity.ravager.roar",
+                "type": "event",
+                "volume": 0.7,
+                "pitch": 0.7
+            }
+        ]
+    },
+    "berserk_glow": {
+        "sounds": [
+            {
+                "name": "minecraft:block.respawn_anchor.ambient",
+                "type": "event",
+                "volume": 0.5,
+                "pitch": 1.2
+            }
+        ]
+    }
 }
