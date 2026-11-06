@@ -1,15 +1,15 @@
 {
-    "body_part": "right_arm",
+    "body_part": "body",
     "offset": [
-        4,
-        2,
-        0
+        0,
+        -4,
+        3
     ],
     "renderer": {
         "type": "argon:glow_laser",
         "render_settings": {
             "glow": "#FFFFFF",
-            "size": 1.0,
+            "size": 2.0,
             "bloom": 1
         },
         "glow_intensity": 2.0,
