@@ -1,7 +1,30 @@
 {
-  "addonpack": {
-    "description": "Werkiax Unbound - heroes, villains and custom powers",
-    "min_format": [2, 0],
-    "max_format": [2, 0]
-  }
+    "addonpack": {
+        "description": "Werkiax Unbound - heroes, villains and custom powers",
+        "min_format": [
+            2,
+            0
+        ],
+        "max_format": [
+            2,
+            0
+        ]
+    },
+    "features": {
+        "enabled": [
+            "palladium:mechanic/tailoring",
+            "palladium:mechanic/multiversal_variants",
+            "palladium:customization/eye_selection",
+            "palladium:worldgen/meteorite_biome",
+            "palladium:worldgen/ruined_multiverse_portals",
+            "palladium:material/circuits",
+            "palladium:material/lead",
+            "palladium:material/titanium",
+            "palladium:material/vibranium",
+            "palladium:material/redstone_flux_crystals",
+            "palladium:item/vials",
+            "palladium:block/heart_shaped_herb",
+            "argon:customization/secondary_eye_selection"
+        ]
+    }
 }

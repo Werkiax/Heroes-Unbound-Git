@@ -1,66 +1,70 @@
 {
-  "animation_controller": {
-    "special": "werkiax_unbound:janus_special"
-  },
-  "render_layers": {
-    "werkiax_unbound:berserk_glow": {
-      "type": "palladium:ability_enabled",
-      "ability": "werkiax_unbound:janus#berserk"
+    "animation_controller": {
+        "special": "werkiax_unbound:janus_special"
     },
-    "werkiax_unbound:berserk_sparks": {
-      "type": "palladium:ability_enabled",
-      "ability": "werkiax_unbound:janus#berserk"
+    "render_layers": {
+        "werkiax_unbound:berserk_glow": {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#berserk"
+        },
+        "werkiax_unbound:berserk_sparks": {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#berserk"
+        },
+        "werkiax_unbound:might_scales": [
+            {
+                "type": "palladium:mode_active",
+                "ability": "werkiax_unbound:janus#form_switch",
+                "mode": "might",
+                "ignore_unlocked": false
+            }
+        ],
+        "werkiax_unbound:berserk_eyes": {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#berserk"
+        },
+        "werkiax_unbound:might_glow": [
+            {
+                "type": "palladium:mode_active",
+                "ability": "werkiax_unbound:janus#form_switch",
+                "mode": "might",
+                "ignore_unlocked": false
+            },
+            {
+                "type": "palladium:energy_bar",
+                "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+                "min": 50,
+                "max": 1000
+            }
+        ],
+        "werkiax_unbound:bulwark_scales": [
+            {
+                "type": "palladium:mode_active",
+                "ability": "werkiax_unbound:janus#form_switch",
+                "mode": "bulwark",
+                "ignore_unlocked": false
+            }
+        ],
+        "werkiax_unbound:bulwark_glow": [
+            {
+                "type": "palladium:mode_active",
+                "ability": "werkiax_unbound:janus#form_switch",
+                "mode": "bulwark",
+                "ignore_unlocked": false
+            },
+            {
+                "type": "palladium:energy_bar",
+                "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+                "min": 50,
+                "max": 1000
+            }
+        ]
     },
-    "werkiax_unbound:might_scales": [
-      {
-        "type": "palladium:mode_active",
-        "ability": "werkiax_unbound:janus#form_switch",
-        "mode": "might",
-        "ignore_unlocked": false
-      }
-    ],
-    "werkiax_unbound:might_glow": [
-      {
-        "type": "palladium:mode_active",
-        "ability": "werkiax_unbound:janus#form_switch",
-        "mode": "might",
-        "ignore_unlocked": false
-      },
-      {
-        "type": "palladium:energy_bar",
-        "energy_bar": "werkiax_unbound:janus#kinetic_charge",
-        "min": 50,
-        "max": 1000
-      }
-    ],
-    "werkiax_unbound:bulwark_scales": [
-      {
-        "type": "palladium:mode_active",
-        "ability": "werkiax_unbound:janus#form_switch",
-        "mode": "bulwark",
-        "ignore_unlocked": false
-      }
-    ],
-    "werkiax_unbound:bulwark_glow": [
-      {
-        "type": "palladium:mode_active",
-        "ability": "werkiax_unbound:janus#form_switch",
-        "mode": "bulwark",
-        "ignore_unlocked": false
-      },
-      {
-        "type": "palladium:energy_bar",
-        "energy_bar": "werkiax_unbound:janus#kinetic_charge",
-        "min": 50,
-        "max": 1000
-      }
-    ]
-  },
-  "trails": {
-    "werkiax_unbound:janus_dash_streak": {
-      "type": "argon:ability_enabled_activation",
-      "ability": "werkiax_unbound:janus#bowling_ball",
-      "duration": 5
+    "trails": {
+        "werkiax_unbound:janus_dash_streak": {
+            "type": "argon:ability_enabled_activation",
+            "ability": "werkiax_unbound:janus#bowling_ball",
+            "duration": 5
+        }
     }
-  }
 }
