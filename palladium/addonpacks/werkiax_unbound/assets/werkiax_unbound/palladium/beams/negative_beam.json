@@ -8,11 +8,28 @@
     "renderer": {
         "type": "argon:glow_laser",
         "render_settings": {
-            "glow": "#FFFFFF",
+            "glow": {
+                "color": "#B9E7FF",
+                "opacity": 0.85,
+                "pulse": {
+                    "scale": 0.25,
+                    "frequency": 2.5
+                }
+            },
+            "core": {
+                "color": "#000000",
+                "pulse": {
+                    "scale": 0.3
+                }
+            },
             "size": 2.0,
-            "bloom": 1
+            "bloom": 3,
+            "rotation_speed": 6.0
         },
-        "glow_intensity": 2.0,
-        "core_intensity": 1.0
+        "glow_intensity": {
+            "type": "palladium:molang_float",
+            "molang": "2.2 + math.sin(palladium.tick_count * 40) * 0.6"
+        },
+        "core_intensity": 1.5
     }
 }
