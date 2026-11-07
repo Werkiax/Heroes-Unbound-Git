@@ -3,7 +3,7 @@
     "icon": "minecraft:ender_eye",
     "energy_bars": {
         "negative_energy": {
-            "max": 1000,
+            "max": 10000,
             "color": "F2F2F2",
             "synced_value": {
                 "type": "palladium:integer_data_attachment",
@@ -30,7 +30,7 @@
                     {
                         "type": "palladium:energy_bar",
                         "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
-                        "min": 10
+                        "min": 100
                     }
                 ],
                 "enabling": {
@@ -122,7 +122,7 @@
             ],
             "properties": {
                 "title": "Phase Dash",
-                "description": "Instantly blink up to 8 blocks forward, slipping through glass and other see-through blocks. Costs 150 Negative Energy.",
+                "description": "Instantly blink up to 8 blocks forward, slipping through glass and other see-through blocks. Costs 1500 Negative Energy.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/phase_dash.png"
@@ -134,7 +134,7 @@
                 "unlocking": {
                     "type": "palladium:energy_bar",
                     "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
-                    "min": 150
+                    "min": 1500
                 },
                 "enabling": {
                     "type": "palladium:key_bind",
@@ -150,7 +150,7 @@
                 "type": "palladium:modify_number_data_attachment",
                 "attachment": "werkiax_unbound:negative_energy",
                 "operation": "-",
-                "value": 150
+                "value": 1500
             },
             "properties": {
                 "hidden_in_gui": true,
@@ -169,7 +169,7 @@
                 "type": "palladium:modify_number_data_attachment",
                 "attachment": "werkiax_unbound:negative_energy",
                 "operation": "-",
-                "value": 5
+                "value": 50
             },
             "properties": {
                 "hidden_in_gui": true,
@@ -270,20 +270,19 @@
             "action": {
                 "type": "palladium:conditional",
                 "condition": {
-                    "type": "palladium:energy_bar",
-                    "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
-                    "max": 998
+                    "type": "palladium:number_comparison",
+                    "value": {
+                        "type": "palladium:entity_tick_count",
+                        "modify": "math.mod(this, 9)"
+                    },
+                    "operator": "=",
+                    "target": 0
                 },
                 "on_true": {
                     "type": "palladium:modify_number_data_attachment",
                     "attachment": "werkiax_unbound:negative_energy",
                     "operation": "+",
-                    "value": 2
-                },
-                "on_false": {
-                    "type": "palladium:set_data_attachment",
-                    "attachment": "werkiax_unbound:negative_energy",
-                    "value": 1000
+                    "value": 5
                 }
             },
             "properties": {
@@ -300,6 +299,51 @@
                         }
                     }
                 ]
+            }
+        },
+        "energy_clamp": {
+            "type": "palladium:action",
+            "action": [
+                {
+                    "type": "palladium:conditional",
+                    "condition": {
+                        "type": "palladium:number_comparison",
+                        "value": {
+                            "type": "palladium:integer_data_attachment",
+                            "attachment": "werkiax_unbound:negative_energy",
+                            "fallback": 0
+                        },
+                        "operator": ">",
+                        "target": 10000
+                    },
+                    "on_true": {
+                        "type": "palladium:set_data_attachment",
+                        "attachment": "werkiax_unbound:negative_energy",
+                        "value": 10000
+                    }
+                },
+                {
+                    "type": "palladium:conditional",
+                    "condition": {
+                        "type": "palladium:number_comparison",
+                        "value": {
+                            "type": "palladium:integer_data_attachment",
+                            "attachment": "werkiax_unbound:negative_energy",
+                            "fallback": 0
+                        },
+                        "operator": "<",
+                        "target": 0
+                    },
+                    "on_true": {
+                        "type": "palladium:set_data_attachment",
+                        "attachment": "werkiax_unbound:negative_energy",
+                        "value": 0
+                    }
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
             }
         },
         "possess": {
@@ -342,24 +386,19 @@
                 "unlocking": {
                     "type": "palladium:energy_bar",
                     "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
-                    "min": 100
+                    "min": 1000
                 },
                 "enabling": {
                     "type": "palladium:key_bind",
                     "behaviour": "activation",
-                    "time": 2
+                    "time": 2,
+                    "cooldown": "1s"
                 }
             },
-            "last_tick_action": [
-                {
-                    "type": "palladium:add_superpower",
-                    "power": "werkiax_unbound:spirit_wander"
-                },
-                {
-                    "type": "palladium:remove_superpower",
-                    "powers": "werkiax_unbound:negative_spirit"
-                }
-            ]
+            "last_tick_action": {
+                "type": "palladium:set_superpower",
+                "power": "werkiax_unbound:spirit_wander"
+            }
         },
         "wall_immunity": {
             "type": "palladium:damage_immunity",

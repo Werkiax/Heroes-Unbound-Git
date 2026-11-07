@@ -3,7 +3,7 @@
     "icon": "minecraft:ender_eye",
     "energy_bars": {
         "negative_energy": {
-            "max": 1000,
+            "max": 10000,
             "color": "F2F2F2",
             "synced_value": {
                 "type": "palladium:integer_data_attachment",
@@ -15,16 +15,10 @@
     "abilities": {
         "spirit_return": {
             "type": "palladium:action",
-            "last_tick_action": [
-                {
-                    "type": "palladium:add_superpower",
-                    "power": "werkiax_unbound:negative_spirit"
-                },
-                {
-                    "type": "palladium:remove_superpower",
-                    "powers": "werkiax_unbound:spirit_wander"
-                }
-            ],
+            "last_tick_action": {
+                "type": "palladium:set_superpower",
+                "power": "werkiax_unbound:negative_spirit"
+            },
             "properties": {
                 "title": "Spirit Return",
                 "description": "Return to your body and get your normal Negative Spirit powers back.",
@@ -50,23 +44,6 @@
                 "hidden_in_bar": true
             }
         },
-        "spirit_swap_in": {
-            "type": "palladium:action",
-            "first_tick_action": {
-                "type": "palladium:remove_superpower",
-                "powers": "werkiax_unbound:negative_spirit"
-            },
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_first_tick",
-                    "ability": "werkiax_unbound:spirit_wander#spirit_marker"
-                }
-            }
-        },
         "spirit_exhausted": {
             "type": "palladium:dummy",
             "properties": {
@@ -74,25 +51,26 @@
                 "hidden_in_bar": true
             },
             "state": {
-                "enabling": {
-                    "type": "palladium:energy_bar",
-                    "energy_bar": "werkiax_unbound:spirit_wander#negative_energy",
-                    "max": 0
-                }
+                "enabling": [
+                    {
+                        "type": "palladium:ability_ticks",
+                        "ability": "werkiax_unbound:spirit_wander#spirit_marker",
+                        "min": 20
+                    },
+                    {
+                        "type": "palladium:energy_bar",
+                        "energy_bar": "werkiax_unbound:spirit_wander#negative_energy",
+                        "max": 0
+                    }
+                ]
             }
         },
         "spirit_exhausted_return": {
             "type": "palladium:action",
-            "first_tick_action": [
-                {
-                    "type": "palladium:add_superpower",
-                    "power": "werkiax_unbound:negative_spirit"
-                },
-                {
-                    "type": "palladium:remove_superpower",
-                    "powers": "werkiax_unbound:spirit_wander"
-                }
-            ],
+            "first_tick_action": {
+                "type": "palladium:set_superpower",
+                "power": "werkiax_unbound:negative_spirit"
+            },
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
@@ -154,11 +132,68 @@
         "spirit_cost": {
             "type": "palladium:action",
             "action": {
-                "type": "palladium:modify_number_data_attachment",
-                "attachment": "werkiax_unbound:negative_energy",
-                "operation": "-",
-                "value": 2
+                "type": "palladium:conditional",
+                "condition": {
+                    "type": "palladium:number_comparison",
+                    "value": {
+                        "type": "palladium:entity_tick_count",
+                        "modify": "math.mod(this, 3)"
+                    },
+                    "operator": "=",
+                    "target": 0
+                },
+                "on_true": {
+                    "type": "palladium:modify_number_data_attachment",
+                    "attachment": "werkiax_unbound:negative_energy",
+                    "operation": "-",
+                    "value": 5
+                }
             },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "energy_clamp": {
+            "type": "palladium:action",
+            "action": [
+                {
+                    "type": "palladium:conditional",
+                    "condition": {
+                        "type": "palladium:number_comparison",
+                        "value": {
+                            "type": "palladium:integer_data_attachment",
+                            "attachment": "werkiax_unbound:negative_energy",
+                            "fallback": 0
+                        },
+                        "operator": ">",
+                        "target": 10000
+                    },
+                    "on_true": {
+                        "type": "palladium:set_data_attachment",
+                        "attachment": "werkiax_unbound:negative_energy",
+                        "value": 10000
+                    }
+                },
+                {
+                    "type": "palladium:conditional",
+                    "condition": {
+                        "type": "palladium:number_comparison",
+                        "value": {
+                            "type": "palladium:integer_data_attachment",
+                            "attachment": "werkiax_unbound:negative_energy",
+                            "fallback": 0
+                        },
+                        "operator": "<",
+                        "target": 0
+                    },
+                    "on_true": {
+                        "type": "palladium:set_data_attachment",
+                        "attachment": "werkiax_unbound:negative_energy",
+                        "value": 0
+                    }
+                }
+            ],
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
