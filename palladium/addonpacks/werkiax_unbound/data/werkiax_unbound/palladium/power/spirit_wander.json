@@ -37,6 +37,25 @@
                 }
             }
         },
+        "spirit_sense": {
+            "type": "argon:highlight",
+            "mode": "others",
+            "color": "#B9E7FF",
+            "opacity": 0.35,
+            "distance": 24,
+            "highlight_entities": true,
+            "properties": {
+                "title": "Spirit Sense",
+                "description": "Your spirit senses the life around you. Nearby living entities glow ice-blue, even through walls.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/spirit_sense.png"
+                },
+                "list_index": 1,
+                "color": "white",
+                "hidden_in_bar": true
+            }
+        },
         "spirit_marker": {
             "type": "palladium:dummy",
             "properties": {
@@ -140,7 +159,7 @@
                         "modify": "math.mod(this, 3)"
                     },
                     "operator": "=",
-                    "target": 0
+                    "compare_to": 0
                 },
                 "on_true": {
                     "type": "palladium:modify_number_data_attachment",
@@ -167,7 +186,7 @@
                             "fallback": 0
                         },
                         "operator": ">",
-                        "target": 10000
+                        "compare_to": 10000
                     },
                     "on_true": {
                         "type": "palladium:set_data_attachment",
@@ -185,7 +204,7 @@
                             "fallback": 0
                         },
                         "operator": "<",
-                        "target": 0
+                        "compare_to": 0
                     },
                     "on_true": {
                         "type": "palladium:set_data_attachment",

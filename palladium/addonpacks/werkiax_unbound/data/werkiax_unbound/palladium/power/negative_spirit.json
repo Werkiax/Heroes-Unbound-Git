@@ -292,7 +292,7 @@
                         "modify": "math.mod(this, 9)"
                     },
                     "operator": "=",
-                    "target": 0
+                    "compare_to": 0
                 },
                 "on_true": {
                     "type": "palladium:modify_number_data_attachment",
@@ -330,7 +330,7 @@
                             "fallback": 0
                         },
                         "operator": ">",
-                        "target": 10000
+                        "compare_to": 10000
                     },
                     "on_true": {
                         "type": "palladium:set_data_attachment",
@@ -348,7 +348,7 @@
                             "fallback": 0
                         },
                         "operator": "<",
-                        "target": 0
+                        "compare_to": 0
                     },
                     "on_true": {
                         "type": "palladium:set_data_attachment",
