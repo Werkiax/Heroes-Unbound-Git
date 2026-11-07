@@ -15,10 +15,16 @@
     "abilities": {
         "spirit_return": {
             "type": "palladium:action",
-            "last_tick_action": {
-                "type": "palladium:set_superpower",
-                "power": "werkiax_unbound:negative_spirit"
-            },
+            "last_tick_action": [
+                {
+                    "type": "palladium:run_command",
+                    "command": "tag @s remove negative_spirit_wandering"
+                },
+                {
+                    "type": "palladium:set_superpower",
+                    "power": "werkiax_unbound:negative_spirit"
+                }
+            ],
             "properties": {
                 "title": "Spirit Return",
                 "description": "Return to your body and get your normal Negative Spirit powers back.",
@@ -86,10 +92,16 @@
         },
         "spirit_exhausted_return": {
             "type": "palladium:action",
-            "first_tick_action": {
-                "type": "palladium:set_superpower",
-                "power": "werkiax_unbound:negative_spirit"
-            },
+            "first_tick_action": [
+                {
+                    "type": "palladium:run_command",
+                    "command": "tag @s remove negative_spirit_wandering"
+                },
+                {
+                    "type": "palladium:set_superpower",
+                    "power": "werkiax_unbound:negative_spirit"
+                }
+            ],
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
@@ -143,6 +155,10 @@
                         {
                             "type": "palladium:ability_first_tick",
                             "ability": "werkiax_unbound:spirit_wander#spirit_exhausted"
+                        },
+                        {
+                            "type": "palladium:ability_first_tick",
+                            "ability": "werkiax_unbound:spirit_wander#spirit_body_hit"
                         }
                     ]
                 }
@@ -250,6 +266,10 @@
                         {
                             "type": "palladium:ability_first_tick",
                             "ability": "werkiax_unbound:spirit_wander#spirit_exhausted"
+                        },
+                        {
+                            "type": "palladium:ability_first_tick",
+                            "ability": "werkiax_unbound:spirit_wander#spirit_body_hit"
                         }
                     ]
                 }
@@ -358,6 +378,61 @@
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
+            }
+        },
+        "spirit_tag": {
+            "type": "palladium:action",
+            "first_tick_action": {
+                "type": "palladium:run_command",
+                "command": "tag @s add negative_spirit_wandering"
+            },
+            "last_tick_action": {
+                "type": "palladium:run_command",
+                "command": "tag @s remove negative_spirit_wandering"
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "spirit_body_hit": {
+            "type": "palladium:dummy",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:has_tag",
+                    "tag": "negative_spirit_body_hit"
+                }
+            }
+        },
+        "spirit_body_hit_return": {
+            "type": "palladium:action",
+            "first_tick_action": [
+                {
+                    "type": "palladium:run_command",
+                    "command": [
+                        "tag @s remove negative_spirit_body_hit",
+                        "tag @s remove negative_spirit_wandering"
+                    ]
+                },
+                {
+                    "type": "palladium:set_superpower",
+                    "power": "werkiax_unbound:negative_spirit"
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_ticks",
+                    "ability": "werkiax_unbound:spirit_wander#spirit_body_hit",
+                    "min": 3
+                }
             }
         }
     }

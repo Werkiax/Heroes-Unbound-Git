@@ -52,6 +52,70 @@
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
             }
+        },
+        "body_reaction": {
+            "type": "argon:damage_reaction",
+            "reactions": [
+                {
+                    "id": "hit",
+                    "kind": "any",
+                    "damage_multiplier": 1.0
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "body_alert": {
+            "type": "palladium:action",
+            "first_tick_action": {
+                "type": "palladium:run_command",
+                "command": [
+                    "tag @a[tag=negative_spirit_wandering,sort=nearest,limit=1] add negative_spirit_body_hit",
+                    "particle minecraft:dust{color:[0.66,0.9,1.0],scale:1.5} ~ ~1 ~ 1.5 0.8 1.5 0 80 force",
+                    "particle minecraft:end_rod ~ ~1 ~ 1.5 0.8 1.5 0.05 40 force",
+                    "particle minecraft:large_smoke ~ ~0.5 ~ 1.5 0.5 1.5 0.02 30 force",
+                    "playsound minecraft:entity.warden.sonic_boom master @a ~ ~ ~ 0.5 1.6"
+                ]
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "argon:reacted",
+                    "ability": "werkiax_unbound:spirit_body#body_reaction",
+                    "within": 2
+                }
+            }
+        },
+        "body_burst": {
+            "type": "argon:area_burst",
+            "radius": 4,
+            "damage": 6,
+            "damage_type": "minecraft:magic",
+            "knockback_distance": 3,
+            "lift": 0.3,
+            "falloff": 0.3,
+            "effects": [
+                {
+                    "effect": "minecraft:slowness",
+                    "duration": "2s",
+                    "amplifier": 1
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:spirit_body#body_alert"
+                }
+            }
         }
     }
 }
