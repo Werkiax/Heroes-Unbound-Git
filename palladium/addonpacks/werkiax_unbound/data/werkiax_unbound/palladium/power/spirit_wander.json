@@ -50,6 +50,23 @@
                 "hidden_in_bar": true
             }
         },
+        "spirit_swap_in": {
+            "type": "palladium:action",
+            "first_tick_action": {
+                "type": "palladium:remove_superpower",
+                "powers": "werkiax_unbound:negative_spirit"
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:spirit_wander#spirit_marker"
+                }
+            }
+        },
         "spirit_exhausted": {
             "type": "palladium:dummy",
             "properties": {
