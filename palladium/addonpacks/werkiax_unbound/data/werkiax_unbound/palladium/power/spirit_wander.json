@@ -280,15 +280,8 @@
                 "unlocking": [
                     {
                         "type": "palladium:energy_bar",
-                        "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
+                        "energy_bar": "werkiax_unbound:spirit_wander#negative_energy",
                         "min": 800
-                    },
-                    {
-                        "type": "palladium:not",
-                        "conditions": {
-                            "type": "palladium:ability_enabled",
-                            "ability": "werkiax_unbound:negative_spirit#possess"
-                        }
                     }
                 ],
                 "enabling": {
