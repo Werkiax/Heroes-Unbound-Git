@@ -31,6 +31,13 @@
                         "type": "palladium:energy_bar",
                         "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
                         "min": 100
+                    },
+                    {
+                        "type": "palladium:not",
+                        "conditions": {
+                            "type": "palladium:ability_enabled",
+                            "ability": "werkiax_unbound:negative_spirit#possess"
+                        }
                     }
                 ],
                 "enabling": {
@@ -131,11 +138,20 @@
                 "color": "white"
             },
             "state": {
-                "unlocking": {
-                    "type": "palladium:energy_bar",
-                    "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
-                    "min": 1500
-                },
+                "unlocking": [
+                    {
+                        "type": "palladium:energy_bar",
+                        "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
+                        "min": 1500
+                    },
+                    {
+                        "type": "palladium:not",
+                        "conditions": {
+                            "type": "palladium:ability_enabled",
+                            "ability": "werkiax_unbound:negative_spirit#possess"
+                        }
+                    }
+                ],
                 "enabling": {
                     "type": "palladium:key_bind",
                     "behaviour": "activation",
@@ -383,11 +399,20 @@
                 "color": "white"
             },
             "state": {
-                "unlocking": {
-                    "type": "palladium:energy_bar",
-                    "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
-                    "min": 1000
-                },
+                "unlocking": [
+                    {
+                        "type": "palladium:energy_bar",
+                        "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
+                        "min": 1000
+                    },
+                    {
+                        "type": "palladium:not",
+                        "conditions": {
+                            "type": "palladium:ability_enabled",
+                            "ability": "werkiax_unbound:negative_spirit#possess"
+                        }
+                    }
+                ],
                 "enabling": {
                     "type": "palladium:key_bind",
                     "behaviour": "activation",
