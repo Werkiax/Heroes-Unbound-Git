@@ -282,6 +282,11 @@
                         "type": "palladium:energy_bar",
                         "energy_bar": "werkiax_unbound:spirit_wander#negative_energy",
                         "min": 800
+                    },
+                    {
+                        "type": "palladium:number_data_attachment",
+                        "attachment": "werkiax_unbound:negative_burst_unlocked",
+                        "min": 1
                     }
                 ],
                 "enabling": {

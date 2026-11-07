@@ -10,9 +10,170 @@
                 "attachment": "werkiax_unbound:negative_energy",
                 "fallback": 0
             }
+        },
+        "heal_charge": {
+            "max": 1200,
+            "color": "FF5F7E",
+            "synced_value": {
+                "type": "palladium:integer_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "fallback": 0
+            }
         }
     },
     "abilities": {
+        "beam_unlock": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Negative Beam",
+                "description": "Unlocks Negative Beam: hold to fire a piercing beam of negative energy.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/negative_beam.png"
+                },
+                "hidden_in_bar": true,
+                "list_index": 10,
+                "color": "white"
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 1
+                    }
+                }
+            }
+        },
+        "phase_dash_unlock": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Phase Dash",
+                "description": "Unlocks Phase Dash: blink up to 8 blocks forward, slipping through see-through blocks.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/phase_dash.png"
+                },
+                "hidden_in_bar": true,
+                "list_index": 11,
+                "color": "white"
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#beam_unlock"
+                    }
+                }
+            }
+        },
+        "possess_unlock": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Possess",
+                "description": "Unlocks Possess: take over a living creature within 10 blocks.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/possess.png"
+                },
+                "hidden_in_bar": true,
+                "list_index": 12,
+                "color": "white"
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#beam_unlock"
+                    }
+                }
+            }
+        },
+        "spirit_form_unlock": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Spirit Form",
+                "description": "Unlocks Spirit Form: leave your body behind and wander as a spirit. Requires Phase Dash and Possess.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/spirit_form.png"
+                },
+                "hidden_in_bar": true,
+                "list_index": 13,
+                "color": "white"
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 4
+                    },
+                    "requires": [
+                        {
+                            "type": "palladium:ability_unlocked",
+                            "ability": "werkiax_unbound:negative_spirit#phase_dash_unlock"
+                        },
+                        {
+                            "type": "palladium:ability_unlocked",
+                            "ability": "werkiax_unbound:negative_spirit#possess_unlock"
+                        }
+                    ]
+                }
+            }
+        },
+        "negative_burst_unlock": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Negative Burst",
+                "description": "Unlocks Negative Burst, usable while in Spirit Form: a shockwave of negative energy around you.",
+                "icon": "minecraft:echo_shard",
+                "hidden_in_bar": true,
+                "list_index": 14,
+                "color": "white"
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#spirit_form_unlock"
+                    }
+                }
+            }
+        },
+        "burst_unlock_sync": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:set_data_attachment",
+                "attachment": "werkiax_unbound:negative_burst_unlocked",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#negative_burst_unlock"
+                }
+            }
+        },
         "negative_beam": {
             "type": "palladium:dummy",
             "properties": {
@@ -27,6 +188,10 @@
             },
             "state": {
                 "unlocking": [
+                    {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#beam_unlock"
+                    },
                     {
                         "type": "palladium:energy_bar",
                         "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
@@ -139,6 +304,10 @@
             },
             "state": {
                 "unlocking": [
+                    {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#phase_dash_unlock"
+                    },
                     {
                         "type": "palladium:energy_bar",
                         "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
@@ -380,6 +549,12 @@
                 "color": "white"
             },
             "state": {
+                "unlocking": [
+                    {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#possess_unlock"
+                    }
+                ],
                 "enabling": {
                     "type": "palladium:key_bind",
                     "behaviour": "toggle"
@@ -400,6 +575,10 @@
             },
             "state": {
                 "unlocking": [
+                    {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#spirit_form_unlock"
+                    },
                     {
                         "type": "palladium:energy_bar",
                         "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
@@ -454,6 +633,676 @@
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
+            }
+        },
+        "health_upgrade_1": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:max_health",
+                    "amount": 2,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_spirit_health_1"
+                }
+            ],
+            "properties": {
+                "title": "Health I",
+                "description": "Health +2.",
+                "icon": "minecraft:golden_apple",
+                "list_index": 20,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 1
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#beam_unlock"
+                    }
+                }
+            }
+        },
+        "health_upgrade_2": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:max_health",
+                    "amount": 2,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_spirit_health_2"
+                }
+            ],
+            "properties": {
+                "title": "Health II",
+                "description": "Health +2. Requires Health I.",
+                "icon": "minecraft:golden_apple",
+                "list_index": 21,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#health_upgrade_1"
+                    }
+                }
+            }
+        },
+        "health_upgrade_3": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:max_health",
+                    "amount": 3,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_spirit_health_3"
+                }
+            ],
+            "properties": {
+                "title": "Health III",
+                "description": "Health +3. Requires Health II.",
+                "icon": "minecraft:golden_apple",
+                "list_index": 22,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#health_upgrade_2"
+                    }
+                }
+            }
+        },
+        "health_upgrade_4": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:max_health",
+                    "amount": 3,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_spirit_health_4"
+                }
+            ],
+            "properties": {
+                "title": "Health IV",
+                "description": "Health +3. Requires Health III.",
+                "icon": "minecraft:golden_apple",
+                "list_index": 23,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 4
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#health_upgrade_3"
+                    }
+                }
+            }
+        },
+        "damage_upgrade_1": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:attack_damage",
+                    "amount": 1.5,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_spirit_damage_1"
+                }
+            ],
+            "properties": {
+                "title": "Damage I",
+                "description": "Damage +1.5.",
+                "icon": "minecraft:iron_sword",
+                "list_index": 24,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 1
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#beam_unlock"
+                    }
+                }
+            }
+        },
+        "damage_upgrade_2": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:attack_damage",
+                    "amount": 1.5,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_spirit_damage_2"
+                }
+            ],
+            "properties": {
+                "title": "Damage II",
+                "description": "Damage +1.5. Requires Damage I.",
+                "icon": "minecraft:iron_sword",
+                "list_index": 25,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#damage_upgrade_1"
+                    }
+                }
+            }
+        },
+        "damage_upgrade_3": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:attack_damage",
+                    "amount": 1.5,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_spirit_damage_3"
+                }
+            ],
+            "properties": {
+                "title": "Damage III",
+                "description": "Damage +1.5. Requires Damage II.",
+                "icon": "minecraft:iron_sword",
+                "list_index": 26,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#damage_upgrade_2"
+                    }
+                }
+            }
+        },
+        "damage_upgrade_4": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:attack_damage",
+                    "amount": 1.5,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_spirit_damage_4"
+                }
+            ],
+            "properties": {
+                "title": "Damage IV",
+                "description": "Damage +1.5. Requires Damage III.",
+                "icon": "minecraft:iron_sword",
+                "list_index": 27,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 4
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#damage_upgrade_3"
+                    }
+                }
+            }
+        },
+        "armor_upgrade_1": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:armor",
+                    "amount": 2,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_spirit_armor_1"
+                }
+            ],
+            "properties": {
+                "title": "Armor I",
+                "description": "Armor +2.",
+                "icon": "minecraft:iron_chestplate",
+                "list_index": 28,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 1
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#beam_unlock"
+                    }
+                }
+            }
+        },
+        "armor_upgrade_2": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:armor",
+                    "amount": 2,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_spirit_armor_2"
+                }
+            ],
+            "properties": {
+                "title": "Armor II",
+                "description": "Armor +2. Requires Armor I.",
+                "icon": "minecraft:iron_chestplate",
+                "list_index": 29,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#armor_upgrade_1"
+                    }
+                }
+            }
+        },
+        "armor_upgrade_3": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:armor",
+                    "amount": 2,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_spirit_armor_3"
+                }
+            ],
+            "properties": {
+                "title": "Armor III",
+                "description": "Armor +2. Requires Armor II.",
+                "icon": "minecraft:iron_chestplate",
+                "list_index": 30,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#armor_upgrade_2"
+                    }
+                }
+            }
+        },
+        "armor_upgrade_4": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:armor",
+                    "amount": 2,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:negative_spirit_armor_4"
+                }
+            ],
+            "properties": {
+                "title": "Armor IV",
+                "description": "Armor +2. Requires Armor III.",
+                "icon": "minecraft:iron_chestplate",
+                "list_index": 31,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 4
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#armor_upgrade_3"
+                    }
+                }
+            }
+        },
+        "speed_upgrade_1": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:movement_speed",
+                    "amount": 0.05,
+                    "operation": "add_multiplied_base",
+                    "id": "werkiax_unbound:negative_spirit_speed_1"
+                }
+            ],
+            "properties": {
+                "title": "Speed I",
+                "description": "Speed +5%.",
+                "icon": "minecraft:sugar",
+                "list_index": 32,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 1
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#beam_unlock"
+                    }
+                }
+            }
+        },
+        "speed_upgrade_2": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:movement_speed",
+                    "amount": 0.05,
+                    "operation": "add_multiplied_base",
+                    "id": "werkiax_unbound:negative_spirit_speed_2"
+                }
+            ],
+            "properties": {
+                "title": "Speed II",
+                "description": "Speed +5%. Requires Speed I.",
+                "icon": "minecraft:sugar",
+                "list_index": 33,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#speed_upgrade_1"
+                    }
+                }
+            }
+        },
+        "speed_upgrade_3": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:movement_speed",
+                    "amount": 0.05,
+                    "operation": "add_multiplied_base",
+                    "id": "werkiax_unbound:negative_spirit_speed_3"
+                }
+            ],
+            "properties": {
+                "title": "Speed III",
+                "description": "Speed +5%. Requires Speed II.",
+                "icon": "minecraft:sugar",
+                "list_index": 34,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#speed_upgrade_2"
+                    }
+                }
+            }
+        },
+        "speed_upgrade_4": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:movement_speed",
+                    "amount": 0.05,
+                    "operation": "add_multiplied_base",
+                    "id": "werkiax_unbound:negative_spirit_speed_4"
+                }
+            ],
+            "properties": {
+                "title": "Speed IV",
+                "description": "Speed +5%. Requires Speed III.",
+                "icon": "minecraft:sugar",
+                "list_index": 35,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 4
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#speed_upgrade_3"
+                    }
+                }
+            }
+        },
+        "regen_upgrade_1": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 6
+            },
+            "properties": {
+                "title": "Regeneration I",
+                "description": "Heal 1 heart every 10 seconds.",
+                "icon": "minecraft:glistering_melon_slice",
+                "list_index": 36,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 1
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#beam_unlock"
+                    }
+                }
+            }
+        },
+        "regen_upgrade_2": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 2
+            },
+            "properties": {
+                "title": "Regeneration II",
+                "description": "Heal 1 heart every 7.5 seconds. Requires Regeneration I.",
+                "icon": "minecraft:glistering_melon_slice",
+                "list_index": 37,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#regen_upgrade_1"
+                    }
+                }
+            }
+        },
+        "regen_upgrade_3": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 4
+            },
+            "properties": {
+                "title": "Regeneration III",
+                "description": "Heal 1 heart every 5 seconds. Requires Regeneration II.",
+                "icon": "minecraft:glistering_melon_slice",
+                "list_index": 38,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#regen_upgrade_2"
+                    }
+                }
+            }
+        },
+        "regen_upgrade_4": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 3
+            },
+            "properties": {
+                "title": "Regeneration IV",
+                "description": "Heal 1 heart every 4 seconds. Requires Regeneration III.",
+                "icon": "minecraft:glistering_melon_slice",
+                "list_index": 39,
+                "color": "white",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 4
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#regen_upgrade_3"
+                    }
+                }
+            }
+        },
+        "regen_pulse": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:conditional",
+                "condition": {
+                    "type": "palladium:number_comparison",
+                    "value": {
+                        "type": "palladium:integer_data_attachment",
+                        "attachment": "werkiax_unbound:heal_charge",
+                        "fallback": 0
+                    },
+                    "operator": ">=",
+                    "compare_to": 1200
+                },
+                "on_true": [
+                    {
+                        "type": "palladium:heal",
+                        "amount": 2
+                    },
+                    {
+                        "type": "palladium:modify_number_data_attachment",
+                        "attachment": "werkiax_unbound:heal_charge",
+                        "operation": "-",
+                        "value": 1200
+                    }
+                ]
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#regen_upgrade_1"
+                }
             }
         }
     }
