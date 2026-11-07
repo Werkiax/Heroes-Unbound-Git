@@ -51,11 +51,11 @@
         ],
         "spirit_form_unlock": [
             2.5,
-            2.6
+            3.9
         ],
         "negative_burst_unlock": [
             2.5,
-            3.9
+            2.6
         ],
         "upgrades": {
             "pos": [
@@ -65,7 +65,7 @@
             "style": "hub",
             "title": "Negative Upgrades",
             "icon": "minecraft:ender_eye",
-            "description": "Permanent stat upgrades. Requires Negative Beam."
+            "description": "Permanent stat upgrades and passive regeneration."
         },
         "health_upgrade_1": [
             5.5,
@@ -142,22 +142,6 @@
             "to": "possess_unlock"
         },
         {
-            "from": "phase_dash_unlock",
-            "to": "spirit_form_unlock"
-        },
-        {
-            "from": "possess_unlock",
-            "to": "spirit_form_unlock"
-        },
-        {
-            "from": "spirit_form_unlock",
-            "to": "negative_burst_unlock"
-        },
-        {
-            "from": "beam_unlock",
-            "to": "upgrades"
-        },
-        {
             "from": "upgrades",
             "to": "health_upgrade_1"
         },
@@ -220,6 +204,18 @@
         {
             "from": "speed_upgrade_3",
             "to": "speed_upgrade_4"
+        },
+        {
+            "from": "phase_dash_unlock",
+            "to": "negative_burst_unlock"
+        },
+        {
+            "from": "possess_unlock",
+            "to": "negative_burst_unlock"
+        },
+        {
+            "from": "negative_burst_unlock",
+            "to": "spirit_form_unlock"
         }
     ]
 }
