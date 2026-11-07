@@ -64,65 +64,85 @@
             "title": "Damage Reduction",
             "description": "Unlocks the base damage reduction of Bulwark Form."
         },
-        "armor_upgrade_1": {
-            "pos": [2.25, 4.0],
-            "title": "Armor I",
-            "description": "Armor +2 in Might Form, +6 in Bulwark Form."
-        },
-        "armor_upgrade_2": {
-            "pos": [2.25, 5.0],
-            "title": "Armor II",
-            "description": "Armor +3 in Might Form, +8 in Bulwark Form."
-        },
-        "armor_upgrade_3": {
-            "pos": [2.25, 6.0],
-            "title": "Armor III",
-            "description": "Armor +4 in Might Form, +10 in Bulwark Form."
-        },
-        "damage_upgrade_1": {
-            "pos": [3.75, 4.0],
-            "title": "Damage I",
-            "description": "Damage +6 in Might Form, +2 in Bulwark Form."
-        },
-        "damage_upgrade_2": {
-            "pos": [3.75, 5.0],
-            "title": "Damage II",
-            "description": "Damage +8 in Might Form, +3 in Bulwark Form."
-        },
-        "damage_upgrade_3": {
-            "pos": [3.75, 6.0],
-            "title": "Damage III",
-            "description": "Damage +10 in Might Form, +4 in Bulwark Form."
-        },
         "health_upgrade_1": {
             "pos": [5.25, 4.0],
             "title": "Health I",
-            "description": "Health +2 in Might Form, +6 in Bulwark Form."
+            "description": "Health +6 in Might Form, +6 in Bulwark Form."
         },
         "health_upgrade_2": {
             "pos": [5.25, 5.0],
             "title": "Health II",
-            "description": "Health +3 in Might Form, +8 in Bulwark Form."
+            "description": "Health +6 in Might Form, +6 in Bulwark Form. Requires Health I."
         },
         "health_upgrade_3": {
             "pos": [5.25, 6.0],
             "title": "Health III",
-            "description": "Health +4 in Might Form, +10 in Bulwark Form."
+            "description": "Health +7 in Might Form, +7 in Bulwark Form. Requires Health II."
+        },
+        "health_upgrade_4": {
+            "pos": [5.25, 7.0],
+            "title": "Health IV",
+            "description": "Health +7 in Might Form, +7 in Bulwark Form. Requires Health III."
+        },
+        "damage_upgrade_1": {
+            "pos": [3.75, 4.0],
+            "title": "Damage I",
+            "description": "Damage +5 in Might Form, +1 in Bulwark Form."
+        },
+        "damage_upgrade_2": {
+            "pos": [3.75, 5.0],
+            "title": "Damage II",
+            "description": "Damage +6 in Might Form, +2 in Bulwark Form. Requires Damage I."
+        },
+        "damage_upgrade_3": {
+            "pos": [3.75, 6.0],
+            "title": "Damage III",
+            "description": "Damage +6 in Might Form, +2 in Bulwark Form. Requires Damage II."
+        },
+        "damage_upgrade_4": {
+            "pos": [3.75, 7.0],
+            "title": "Damage IV",
+            "description": "Damage +6 in Might Form, +2 in Bulwark Form. Requires Damage III."
+        },
+        "armor_upgrade_1": {
+            "pos": [2.25, 4.0],
+            "title": "Armor I",
+            "description": "Armor +2 in Might Form, +5 in Bulwark Form."
+        },
+        "armor_upgrade_2": {
+            "pos": [2.25, 5.0],
+            "title": "Armor II",
+            "description": "Armor +2 in Might Form, +5 in Bulwark Form. Requires Armor I."
+        },
+        "armor_upgrade_3": {
+            "pos": [2.25, 6.0],
+            "title": "Armor III",
+            "description": "Armor +3 in Might Form, +6 in Bulwark Form. Requires Armor II."
+        },
+        "armor_upgrade_4": {
+            "pos": [2.25, 7.0],
+            "title": "Armor IV",
+            "description": "Armor +3 in Might Form, +6 in Bulwark Form. Requires Armor III."
         },
         "speed_upgrade_1": {
             "pos": [6.75, 4.0],
             "title": "Speed I",
-            "description": "Speed +6 in Might Form, +2 in Bulwark Form."
+            "description": "Speed +15% in Might Form, +5% in Bulwark Form."
         },
         "speed_upgrade_2": {
             "pos": [6.75, 5.0],
             "title": "Speed II",
-            "description": "Speed +8 in Might Form, +3 in Bulwark Form."
+            "description": "Speed +15% in Might Form, +5% in Bulwark Form. Requires Speed I."
         },
         "speed_upgrade_3": {
             "pos": [6.75, 6.0],
             "title": "Speed III",
-            "description": "Speed +10 in Might Form, +4 in Bulwark Form."
+            "description": "Speed +15% in Might Form, +5% in Bulwark Form. Requires Speed II."
+        },
+        "speed_upgrade_4": {
+            "pos": [6.75, 7.0],
+            "title": "Speed IV",
+            "description": "Speed +15% in Might Form, +5% in Bulwark Form. Requires Speed III."
         },
         "bowling_ball": [0.0, 0.0],
         "power_strike": [0.0, 0.0],
@@ -131,8 +151,6 @@
         "strike_t2": [0.0, 0.0],
         "strike_t3": [0.0, 0.0],
         "kinetic_gain": [0.0, 0.0],
-        "base_stats": [0.0, 0.0],
-        "might_stats": [0.0, 0.0],
         "berserk_stats": [0.0, 0.0],
         "might_regen": [0.0, 0.0],
         "berserk_no_mainhand": [0.0, 0.0],
@@ -186,24 +204,32 @@
         "health_upgrade_2_bulwark": [0.0, 0.0],
         "health_upgrade_3_might": [0.0, 0.0],
         "health_upgrade_3_bulwark": [0.0, 0.0],
+        "health_upgrade_4_might": [0.0, 0.0],
+        "health_upgrade_4_bulwark": [0.0, 0.0],
         "damage_upgrade_1_might": [0.0, 0.0],
         "damage_upgrade_1_bulwark": [0.0, 0.0],
         "damage_upgrade_2_might": [0.0, 0.0],
         "damage_upgrade_2_bulwark": [0.0, 0.0],
         "damage_upgrade_3_might": [0.0, 0.0],
         "damage_upgrade_3_bulwark": [0.0, 0.0],
+        "damage_upgrade_4_might": [0.0, 0.0],
+        "damage_upgrade_4_bulwark": [0.0, 0.0],
         "armor_upgrade_1_might": [0.0, 0.0],
         "armor_upgrade_1_bulwark": [0.0, 0.0],
         "armor_upgrade_2_might": [0.0, 0.0],
         "armor_upgrade_2_bulwark": [0.0, 0.0],
         "armor_upgrade_3_might": [0.0, 0.0],
         "armor_upgrade_3_bulwark": [0.0, 0.0],
+        "armor_upgrade_4_might": [0.0, 0.0],
+        "armor_upgrade_4_bulwark": [0.0, 0.0],
         "speed_upgrade_1_might": [0.0, 0.0],
         "speed_upgrade_1_bulwark": [0.0, 0.0],
         "speed_upgrade_2_might": [0.0, 0.0],
         "speed_upgrade_2_bulwark": [0.0, 0.0],
         "speed_upgrade_3_might": [0.0, 0.0],
         "speed_upgrade_3_bulwark": [0.0, 0.0],
+        "speed_upgrade_4_might": [0.0, 0.0],
+        "speed_upgrade_4_bulwark": [0.0, 0.0],
         "might_vulnerability": [0.0, 0.0],
         "berserk_vulnerability": [0.0, 0.0],
         "strike_charge_t1": [0.0, 0.0],
@@ -271,15 +297,19 @@
         },
         {
             "from": "form_switch",
-            "to": "armor_upgrade_1"
+            "to": "health_upgrade_1"
         },
         {
-            "from": "armor_upgrade_1",
-            "to": "armor_upgrade_2"
+            "from": "health_upgrade_1",
+            "to": "health_upgrade_2"
         },
         {
-            "from": "armor_upgrade_2",
-            "to": "armor_upgrade_3"
+            "from": "health_upgrade_2",
+            "to": "health_upgrade_3"
+        },
+        {
+            "from": "health_upgrade_3",
+            "to": "health_upgrade_4"
         },
         {
             "from": "form_switch",
@@ -294,16 +324,24 @@
             "to": "damage_upgrade_3"
         },
         {
+            "from": "damage_upgrade_3",
+            "to": "damage_upgrade_4"
+        },
+        {
             "from": "form_switch",
-            "to": "health_upgrade_1"
+            "to": "armor_upgrade_1"
         },
         {
-            "from": "health_upgrade_1",
-            "to": "health_upgrade_2"
+            "from": "armor_upgrade_1",
+            "to": "armor_upgrade_2"
         },
         {
-            "from": "health_upgrade_2",
-            "to": "health_upgrade_3"
+            "from": "armor_upgrade_2",
+            "to": "armor_upgrade_3"
+        },
+        {
+            "from": "armor_upgrade_3",
+            "to": "armor_upgrade_4"
         },
         {
             "from": "form_switch",
@@ -316,6 +354,10 @@
         {
             "from": "speed_upgrade_2",
             "to": "speed_upgrade_3"
+        },
+        {
+            "from": "speed_upgrade_3",
+            "to": "speed_upgrade_4"
         }
     ]
 }
