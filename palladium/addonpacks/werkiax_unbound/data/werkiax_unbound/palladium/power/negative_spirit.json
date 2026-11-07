@@ -12,7 +12,7 @@
             }
         },
         "heal_charge": {
-            "max": 1200,
+            "max": 1280,
             "color": "FF5F7E",
             "synced_value": {
                 "type": "palladium:integer_data_attachment",
@@ -1147,123 +1147,307 @@
                 }
             }
         },
-        "regen_upgrade_1": {
+        "regen_from_health_1": {
             "type": "palladium:action",
             "action": {
                 "type": "palladium:modify_number_data_attachment",
                 "attachment": "werkiax_unbound:heal_charge",
                 "operation": "+",
-                "value": 6
+                "value": 1
             },
             "properties": {
-                "title": "Regeneration I",
-                "description": "Heal 1 heart every 10 seconds.",
-                "icon": "minecraft:glistering_melon_slice",
-                "list_index": 36,
-                "color": "white",
+                "hidden_in_gui": true,
                 "hidden_in_bar": true
             },
             "state": {
-                "unlocking": {
-                    "type": "palladium:buyable",
-                    "cost": {
-                        "type": "palladium:experience_level",
-                        "xp_level": 1
-                    },
-                    "requires": {
-                        "type": "palladium:ability_unlocked",
-                        "ability": "werkiax_unbound:negative_spirit#beam_unlock"
-                    }
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#health_upgrade_1"
                 }
             }
         },
-        "regen_upgrade_2": {
+        "regen_from_health_2": {
             "type": "palladium:action",
             "action": {
                 "type": "palladium:modify_number_data_attachment",
                 "attachment": "werkiax_unbound:heal_charge",
                 "operation": "+",
-                "value": 2
+                "value": 1
             },
             "properties": {
-                "title": "Regeneration II",
-                "description": "Heal 1 heart every 7.5 seconds. Requires Regeneration I.",
-                "icon": "minecraft:glistering_melon_slice",
-                "list_index": 37,
-                "color": "white",
+                "hidden_in_gui": true,
                 "hidden_in_bar": true
             },
             "state": {
-                "unlocking": {
-                    "type": "palladium:buyable",
-                    "cost": {
-                        "type": "palladium:experience_level",
-                        "xp_level": 2
-                    },
-                    "requires": {
-                        "type": "palladium:ability_unlocked",
-                        "ability": "werkiax_unbound:negative_spirit#regen_upgrade_1"
-                    }
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#health_upgrade_2"
                 }
             }
         },
-        "regen_upgrade_3": {
+        "regen_from_health_3": {
             "type": "palladium:action",
             "action": {
                 "type": "palladium:modify_number_data_attachment",
                 "attachment": "werkiax_unbound:heal_charge",
                 "operation": "+",
-                "value": 4
+                "value": 1
             },
             "properties": {
-                "title": "Regeneration III",
-                "description": "Heal 1 heart every 5 seconds. Requires Regeneration II.",
-                "icon": "minecraft:glistering_melon_slice",
-                "list_index": 38,
-                "color": "white",
+                "hidden_in_gui": true,
                 "hidden_in_bar": true
             },
             "state": {
-                "unlocking": {
-                    "type": "palladium:buyable",
-                    "cost": {
-                        "type": "palladium:experience_level",
-                        "xp_level": 3
-                    },
-                    "requires": {
-                        "type": "palladium:ability_unlocked",
-                        "ability": "werkiax_unbound:negative_spirit#regen_upgrade_2"
-                    }
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#health_upgrade_3"
                 }
             }
         },
-        "regen_upgrade_4": {
+        "regen_from_health_4": {
             "type": "palladium:action",
             "action": {
                 "type": "palladium:modify_number_data_attachment",
                 "attachment": "werkiax_unbound:heal_charge",
                 "operation": "+",
-                "value": 3
+                "value": 1
             },
             "properties": {
-                "title": "Regeneration IV",
-                "description": "Heal 1 heart every 4 seconds. Requires Regeneration III.",
-                "icon": "minecraft:glistering_melon_slice",
-                "list_index": 39,
-                "color": "white",
+                "hidden_in_gui": true,
                 "hidden_in_bar": true
             },
             "state": {
-                "unlocking": {
-                    "type": "palladium:buyable",
-                    "cost": {
-                        "type": "palladium:experience_level",
-                        "xp_level": 4
-                    },
-                    "requires": {
-                        "type": "palladium:ability_unlocked",
-                        "ability": "werkiax_unbound:negative_spirit#regen_upgrade_3"
-                    }
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#health_upgrade_4"
+                }
+            }
+        },
+        "regen_from_damage_1": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#damage_upgrade_1"
+                }
+            }
+        },
+        "regen_from_damage_2": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#damage_upgrade_2"
+                }
+            }
+        },
+        "regen_from_damage_3": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#damage_upgrade_3"
+                }
+            }
+        },
+        "regen_from_damage_4": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#damage_upgrade_4"
+                }
+            }
+        },
+        "regen_from_armor_1": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#armor_upgrade_1"
+                }
+            }
+        },
+        "regen_from_armor_2": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#armor_upgrade_2"
+                }
+            }
+        },
+        "regen_from_armor_3": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#armor_upgrade_3"
+                }
+            }
+        },
+        "regen_from_armor_4": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#armor_upgrade_4"
+                }
+            }
+        },
+        "regen_from_speed_1": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#speed_upgrade_1"
+                }
+            }
+        },
+        "regen_from_speed_2": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#speed_upgrade_2"
+                }
+            }
+        },
+        "regen_from_speed_3": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#speed_upgrade_3"
+                }
+            }
+        },
+        "regen_from_speed_4": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:heal_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#speed_upgrade_4"
                 }
             }
         },
@@ -1279,7 +1463,7 @@
                         "fallback": 0
                     },
                     "operator": ">=",
-                    "compare_to": 1200
+                    "compare_to": 1280
                 },
                 "on_true": [
                     {
@@ -1290,19 +1474,13 @@
                         "type": "palladium:modify_number_data_attachment",
                         "attachment": "werkiax_unbound:heal_charge",
                         "operation": "-",
-                        "value": 1200
+                        "value": 1280
                     }
                 ]
             },
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_unlocked",
-                    "ability": "werkiax_unbound:negative_spirit#regen_upgrade_1"
-                }
             }
         }
     }

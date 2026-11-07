@@ -130,22 +130,6 @@
         "speed_upgrade_4": [
             8.5,
             5.6
-        ],
-        "regen_upgrade_1": [
-            9.5,
-            2.6
-        ],
-        "regen_upgrade_2": [
-            9.5,
-            3.6
-        ],
-        "regen_upgrade_3": [
-            9.5,
-            4.6
-        ],
-        "regen_upgrade_4": [
-            9.5,
-            5.6
         ]
     },
     "connections": [
@@ -236,22 +220,6 @@
         {
             "from": "speed_upgrade_3",
             "to": "speed_upgrade_4"
-        },
-        {
-            "from": "upgrades",
-            "to": "regen_upgrade_1"
-        },
-        {
-            "from": "regen_upgrade_1",
-            "to": "regen_upgrade_2"
-        },
-        {
-            "from": "regen_upgrade_2",
-            "to": "regen_upgrade_3"
-        },
-        {
-            "from": "regen_upgrade_3",
-            "to": "regen_upgrade_4"
         }
     ]
 }
