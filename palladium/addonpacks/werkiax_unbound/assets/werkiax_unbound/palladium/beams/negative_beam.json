@@ -6,7 +6,7 @@
         0
     ],
     "renderer": {
-        "type": "argon:glow_laser",
+        "type": "palladium:lightning",
         "render_settings": {
             "glow": {
                 "color": "#B9E7FF",
@@ -22,14 +22,12 @@
                     "scale": 0.3
                 }
             },
-            "size": 2.0,
+            "size": 1.5,
             "bloom": 3,
             "rotation_speed": 6.0
         },
-        "glow_intensity": {
-            "type": "palladium:molang_float",
-            "molang": "2.2 + math.sin(palladium.tick_count * 40) * 0.6"
-        },
-        "core_intensity": 1.5
+        "segments": 16,
+        "frequency": 1,
+        "spread": 1.0
     }
 }

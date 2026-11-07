@@ -1,5 +1,11 @@
 {
     "animation_controller": {
         "special": "werkiax_unbound:negative_spirit_special"
+    },
+    "render_layers": {
+        "werkiax_unbound:spirit_sparks": {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:negative_spirit#spirit_form"
+        }
     }
 }

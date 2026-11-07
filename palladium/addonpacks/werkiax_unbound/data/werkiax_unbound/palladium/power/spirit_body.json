@@ -1,0 +1,57 @@
+{
+    "name": "Spirit Body",
+    "icon": "minecraft:ender_eye",
+    "abilities": {
+        "body_lock": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:movement_speed",
+                    "amount": -1.0,
+                    "operation": "add_multiplied_total",
+                    "id": "werkiax_unbound:spirit_body_no_move"
+                },
+                {
+                    "attribute": "minecraft:jump_strength",
+                    "amount": -1.0,
+                    "operation": "add_multiplied_total",
+                    "id": "werkiax_unbound:spirit_body_no_jump"
+                },
+                {
+                    "attribute": "minecraft:attack_damage",
+                    "amount": -1.0,
+                    "operation": "add_multiplied_total",
+                    "id": "werkiax_unbound:spirit_body_no_damage"
+                },
+                {
+                    "attribute": "minecraft:knockback_resistance",
+                    "amount": 1.0,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:spirit_body_no_knockback"
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "body_no_sprint": {
+            "type": "palladium:prevent_sprinting",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "body_freeze": {
+            "type": "palladium:action",
+            "first_tick_action": {
+                "type": "palladium:run_command",
+                "command": "data merge entity @s {NoAI:1b}"
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        }
+    }
+}

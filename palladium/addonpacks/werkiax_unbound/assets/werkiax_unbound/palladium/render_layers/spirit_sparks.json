@@ -1,0 +1,18 @@
+{
+    "type": "palladium:lightning_sparks",
+    "frequency": 0.5,
+    "amount": 8,
+    "model_parts": [
+        "head",
+        "body",
+        "right_arm",
+        "left_arm",
+        "right_leg",
+        "left_leg"
+    ],
+    "render_settings": {
+        "glow": "#B9E7FF",
+        "bloom": 2,
+        "size": 5.0
+    }
+}

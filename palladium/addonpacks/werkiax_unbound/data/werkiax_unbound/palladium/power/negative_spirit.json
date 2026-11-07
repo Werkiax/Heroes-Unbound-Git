@@ -17,7 +17,7 @@
             "type": "palladium:dummy",
             "properties": {
                 "title": "Negative Beam",
-                "description": "Hold to fire a piercing beam of negative energy from your hand. It deals Wither damage to everything it passes through and withers them for 2 seconds. Drains Negative Energy while it fires.",
+                "description": "Hold to fire a piercing beam of negative energy from your hand. It deals poison damage to everything it passes through and poisons them for 2 seconds. Drains Negative Energy while it fires.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/negative_beam.png"
@@ -26,11 +26,20 @@
                 "color": "white"
             },
             "state": {
-                "unlocking": {
-                    "type": "palladium:energy_bar",
-                    "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
-                    "min": 10
-                },
+                "unlocking": [
+                    {
+                        "type": "palladium:energy_bar",
+                        "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
+                        "min": 10
+                    },
+                    {
+                        "type": "palladium:not",
+                        "conditions": {
+                            "type": "palladium:ability_enabled",
+                            "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                        }
+                    }
+                ],
                 "enabling": {
                     "type": "palladium:key_bind",
                     "behaviour": "held"
@@ -41,7 +50,7 @@
             "type": "argon:energy_beam",
             "beam_renderer": "werkiax_unbound:negative_beam",
             "damage": 6.0,
-            "damage_type": "minecraft:wither",
+            "damage_type": "minecraft:poison",
             "max_distance": 24,
             "max_bounces": 0,
             "redirect_off_blocks": false,
@@ -52,9 +61,9 @@
             },
             "entity_effects": [
                 {
-                    "effect": "minecraft:wither",
+                    "effect": "minecraft:poison",
                     "duration": "2s",
-                    "amplifier": 4
+                    "amplifier": 3
                 }
             ],
             "properties": {
@@ -65,6 +74,99 @@
                 "enabling": {
                     "type": "palladium:ability_enabled",
                     "ability": "werkiax_unbound:negative_spirit#negative_beam"
+                }
+            }
+        },
+        "phase_dash": {
+            "type": "argon:blink",
+            "distance": 8,
+            "allow_see_through": true,
+            "particles": [
+                {
+                    "particle": {
+                        "type": "minecraft:large_smoke"
+                    },
+                    "count": 25,
+                    "spread": 0.4,
+                    "speed": 0.02,
+                    "offset": [
+                        0,
+                        1,
+                        0
+                    ]
+                },
+                {
+                    "particle": {
+                        "type": "minecraft:end_rod"
+                    },
+                    "count": 20,
+                    "spread": 0.4,
+                    "speed": 0.05,
+                    "offset": [
+                        0,
+                        1,
+                        0
+                    ]
+                },
+                {
+                    "particle": {
+                        "type": "minecraft:dust",
+                        "color": [
+                            0.66,
+                            0.9,
+                            1.0
+                        ],
+                        "scale": 1.5
+                    },
+                    "count": 30,
+                    "spread": 0.4,
+                    "offset": [
+                        0,
+                        1,
+                        0
+                    ]
+                }
+            ],
+            "properties": {
+                "title": "Phase Dash",
+                "description": "Instantly blink up to 8 blocks forward, slipping through glass and other see-through blocks. Costs 150 Negative Energy.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/phase_dash.png"
+                },
+                "list_index": 1,
+                "color": "white"
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:energy_bar",
+                    "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
+                    "min": 150
+                },
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "behaviour": "activation",
+                    "time": 1,
+                    "cooldown": "3s"
+                }
+            }
+        },
+        "phase_dash_cost": {
+            "type": "palladium:action",
+            "first_tick_action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:negative_energy",
+                "operation": "-",
+                "value": 150
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:negative_spirit#phase_dash"
                 }
             }
         },
@@ -196,13 +298,295 @@
                 "hidden_in_bar": true
             },
             "state": {
-                "enabling": {
-                    "type": "palladium:not",
-                    "conditions": {
-                        "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:negative_spirit#negative_beam"
+                "enabling": [
+                    {
+                        "type": "palladium:not",
+                        "conditions": {
+                            "type": "palladium:ability_enabled",
+                            "ability": "werkiax_unbound:negative_spirit#negative_beam"
+                        }
+                    },
+                    {
+                        "type": "palladium:not",
+                        "conditions": {
+                            "type": "palladium:ability_enabled",
+                            "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                        }
                     }
+                ]
+            }
+        },
+        "possess": {
+            "type": "argon:possess",
+            "range": 10.0,
+            "jumps": 2,
+            "distance_from_body": 50.0,
+            "control_target_movement": true,
+            "end_on_damage": true,
+            "properties": {
+                "title": "Possess",
+                "description": "Take over a living creature within 10 blocks: see through its eyes and control its movement. You can jump to up to 2 more targets. The possession ends if your body takes damage or the target gets more than 50 blocks away from your body. Press again to return.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/possess.png"
+                },
+                "list_index": 2,
+                "color": "white"
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "behaviour": "toggle"
                 }
+            }
+        },
+        "spirit_form": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Spirit Form",
+                "description": "Leave your body behind and wander as a negative-energy spirit that flies, phases through blocks and cannot be seen. Your body stays where it was. Press again to return. Drains Negative Energy while active.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/spirit_form.png"
+                },
+                "list_index": 3,
+                "color": "white"
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:energy_bar",
+                    "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
+                    "min": 100
+                },
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "behaviour": "toggle"
+                }
+            }
+        },
+        "spirit_clone": {
+            "type": "argon:clone",
+            "summon_count": 1,
+            "max_active": 1,
+            "clone_modifiers": [
+                {
+                    "powers": [
+                        "werkiax_unbound:spirit_body"
+                    ]
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                }
+            }
+        },
+        "spirit_clone_remove": {
+            "type": "argon:clone_remove",
+            "order": "nearest",
+            "count": 1,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_last_tick",
+                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                }
+            }
+        },
+        "spirit_cost": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:negative_energy",
+                "operation": "-",
+                "value": 2
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                }
+            }
+        },
+        "spirit_save_body": {
+            "type": "argon:save_location",
+            "namespace": "negative_spirit_body",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                }
+            }
+        },
+        "spirit_phase": {
+            "type": "palladium:intangibility",
+            "vertical": true,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                }
+            }
+        },
+        "spirit_invisible": {
+            "type": "argon:invisibility",
+            "opacity": 0.0,
+            "opacity_self": 0.2,
+            "mob_visibility_modifier": 0.0,
+            "fade": "energy",
+            "energy_color": "#B9E7FF",
+            "energy_additional_textures": [],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                }
+            }
+        },
+        "spirit_flight": {
+            "type": "palladium:flight",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                }
+            }
+        },
+        "spirit_start_flight": {
+            "type": "argon:force_start_flight",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_ticks",
+                    "ability": "werkiax_unbound:negative_spirit#spirit_form",
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
+        "spirit_return": {
+            "type": "argon:teleport_to_location",
+            "namespace": "negative_spirit_body",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_last_tick",
+                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                }
+            }
+        },
+        "spirit_no_damage_taken": {
+            "type": "argon:damage_reduction",
+            "percentage": 0.0,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                }
+            }
+        },
+        "spirit_no_damage_dealt": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:attack_damage",
+                    "amount": -1.0,
+                    "operation": "add_multiplied_total",
+                    "id": "werkiax_unbound:spirit_form_no_damage"
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                }
+            }
+        },
+        "spirit_untargetable": {
+            "type": "argon:untargetable",
+            "mode": "whitelist",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
+                }
+            }
+        },
+        "wall_immunity": {
+            "type": "palladium:damage_immunity",
+            "damage_type": "minecraft:in_wall",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "effect_immunity": {
+            "type": "argon:immunity",
+            "effects": [
+                {
+                    "effect": "minecraft:poison"
+                },
+                {
+                    "effect": "minecraft:wither"
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "fall_immunity": {
+            "type": "palladium:damage_immunity",
+            "damage_type": "minecraft:fall",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
             }
         }
     }
