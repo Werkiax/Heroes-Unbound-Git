@@ -1,0 +1,8 @@
+{
+    "screen_layout": "werkiax_unbound:power/spirit_wander",
+    "render_layers": {
+        "werkiax_unbound:spirit_sparks": [
+            true
+        ]
+    }
+}

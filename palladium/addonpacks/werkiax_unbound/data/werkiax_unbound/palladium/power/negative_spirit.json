@@ -31,13 +31,6 @@
                         "type": "palladium:energy_bar",
                         "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
                         "min": 10
-                    },
-                    {
-                        "type": "palladium:not",
-                        "conditions": {
-                            "type": "palladium:ability_enabled",
-                            "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                        }
                     }
                 ],
                 "enabling": {
@@ -305,13 +298,6 @@
                             "type": "palladium:ability_enabled",
                             "ability": "werkiax_unbound:negative_spirit#negative_beam"
                         }
-                    },
-                    {
-                        "type": "palladium:not",
-                        "conditions": {
-                            "type": "palladium:ability_enabled",
-                            "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                        }
                     }
                 ]
             }
@@ -341,10 +327,10 @@
             }
         },
         "spirit_form": {
-            "type": "palladium:dummy",
+            "type": "palladium:action",
             "properties": {
                 "title": "Spirit Form",
-                "description": "Leave your body behind and wander as a negative-energy spirit that flies, phases through blocks and cannot be seen. Your body stays where it was. Press again to return. Drains Negative Energy while active.",
+                "description": "Leave your body behind and wander as a negative-energy spirit. You swap to the Spirit Form powerset (flying, phasing, invisible). Your body stays where it was. Press the Spirit Return ability to come back. Drains Negative Energy while active.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/spirit_form.png"
@@ -360,203 +346,20 @@
                 },
                 "enabling": {
                     "type": "palladium:key_bind",
-                    "behaviour": "toggle"
+                    "behaviour": "activation",
+                    "time": 2
                 }
-            }
-        },
-        "spirit_clone": {
-            "type": "argon:clone",
-            "summon_count": 1,
-            "max_active": 1,
-            "clone_modifiers": [
+            },
+            "last_tick_action": [
                 {
-                    "powers": [
-                        "werkiax_unbound:spirit_body"
-                    ]
-                }
-            ],
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_first_tick",
-                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                }
-            }
-        },
-        "spirit_clone_remove": {
-            "type": "argon:clone_remove",
-            "order": "nearest",
-            "count": 1,
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_last_tick",
-                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                }
-            }
-        },
-        "spirit_cost": {
-            "type": "palladium:action",
-            "action": {
-                "type": "palladium:modify_number_data_attachment",
-                "attachment": "werkiax_unbound:negative_energy",
-                "operation": "-",
-                "value": 2
-            },
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                }
-            }
-        },
-        "spirit_save_body": {
-            "type": "argon:save_location",
-            "namespace": "negative_spirit_body",
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_first_tick",
-                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                }
-            }
-        },
-        "spirit_phase": {
-            "type": "palladium:intangibility",
-            "vertical": true,
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                }
-            }
-        },
-        "spirit_invisible": {
-            "type": "argon:invisibility",
-            "opacity": 0.0,
-            "opacity_self": 0.2,
-            "mob_visibility_modifier": 0.0,
-            "fade": "energy",
-            "energy_color": "#B9E7FF",
-            "energy_additional_textures": [],
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                }
-            }
-        },
-        "spirit_flight": {
-            "type": "palladium:flight",
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                }
-            }
-        },
-        "spirit_start_flight": {
-            "type": "argon:force_start_flight",
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_ticks",
-                    "ability": "werkiax_unbound:negative_spirit#spirit_form",
-                    "min": 2,
-                    "max": 2
-                }
-            }
-        },
-        "spirit_return": {
-            "type": "argon:teleport_to_location",
-            "namespace": "negative_spirit_body",
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_last_tick",
-                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                }
-            }
-        },
-        "spirit_no_damage_taken": {
-            "type": "argon:damage_reduction",
-            "percentage": 0.0,
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                }
-            }
-        },
-        "spirit_no_damage_dealt": {
-            "type": "palladium:attribute_modifier",
-            "modifiers": [
+                    "type": "palladium:add_superpower",
+                    "power": "werkiax_unbound:spirit_wander"
+                },
                 {
-                    "attribute": "minecraft:attack_damage",
-                    "amount": -1.0,
-                    "operation": "add_multiplied_total",
-                    "id": "werkiax_unbound:spirit_form_no_damage"
+                    "type": "palladium:remove_superpower",
+                    "powers": "werkiax_unbound:negative_spirit"
                 }
-            ],
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                }
-            }
-        },
-        "spirit_untargetable": {
-            "type": "argon:untargetable",
-            "mode": "whitelist",
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:negative_spirit#spirit_form"
-                }
-            }
+            ]
         },
         "wall_immunity": {
             "type": "palladium:damage_immunity",

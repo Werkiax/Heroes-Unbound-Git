@@ -1,0 +1,293 @@
+{
+    "name": "Spirit Form",
+    "icon": "minecraft:ender_eye",
+    "energy_bars": {
+        "negative_energy": {
+            "max": 1000,
+            "color": "F2F2F2",
+            "synced_value": {
+                "type": "palladium:integer_data_attachment",
+                "attachment": "werkiax_unbound:negative_energy",
+                "fallback": 0
+            }
+        }
+    },
+    "abilities": {
+        "spirit_return": {
+            "type": "palladium:action",
+            "last_tick_action": [
+                {
+                    "type": "palladium:add_superpower",
+                    "power": "werkiax_unbound:negative_spirit"
+                },
+                {
+                    "type": "palladium:remove_superpower",
+                    "powers": "werkiax_unbound:spirit_wander"
+                }
+            ],
+            "properties": {
+                "title": "Spirit Return",
+                "description": "Return to your body and get your normal Negative Spirit powers back.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/spirit_return.png"
+                },
+                "list_index": 0,
+                "color": "white"
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "behaviour": "activation",
+                    "time": 3
+                }
+            }
+        },
+        "spirit_marker": {
+            "type": "palladium:dummy",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "spirit_exhausted": {
+            "type": "palladium:dummy",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:energy_bar",
+                    "energy_bar": "werkiax_unbound:spirit_wander#negative_energy",
+                    "max": 0
+                }
+            }
+        },
+        "spirit_exhausted_return": {
+            "type": "palladium:action",
+            "first_tick_action": [
+                {
+                    "type": "palladium:add_superpower",
+                    "power": "werkiax_unbound:negative_spirit"
+                },
+                {
+                    "type": "palladium:remove_superpower",
+                    "powers": "werkiax_unbound:spirit_wander"
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_ticks",
+                    "ability": "werkiax_unbound:spirit_wander#spirit_exhausted",
+                    "min": 3
+                }
+            }
+        },
+        "spirit_clone": {
+            "type": "argon:clone",
+            "summon_count": 1,
+            "max_active": 1,
+            "clone_modifiers": [
+                {
+                    "powers": [
+                        "werkiax_unbound:spirit_body"
+                    ]
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:spirit_wander#spirit_marker"
+                }
+            }
+        },
+        "spirit_clone_remove": {
+            "type": "argon:clone_remove",
+            "order": "nearest",
+            "count": 1,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:or",
+                    "conditions": [
+                        {
+                            "type": "palladium:ability_first_tick",
+                            "ability": "werkiax_unbound:spirit_wander#spirit_return"
+                        },
+                        {
+                            "type": "palladium:ability_first_tick",
+                            "ability": "werkiax_unbound:spirit_wander#spirit_exhausted"
+                        }
+                    ]
+                }
+            }
+        },
+        "spirit_cost": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:negative_energy",
+                "operation": "-",
+                "value": 2
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "spirit_save_body": {
+            "type": "argon:save_location",
+            "namespace": "negative_spirit_body",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:spirit_wander#spirit_marker"
+                }
+            }
+        },
+        "spirit_back_to_body": {
+            "type": "argon:teleport_to_location",
+            "namespace": "negative_spirit_body",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:or",
+                    "conditions": [
+                        {
+                            "type": "palladium:ability_first_tick",
+                            "ability": "werkiax_unbound:spirit_wander#spirit_return"
+                        },
+                        {
+                            "type": "palladium:ability_first_tick",
+                            "ability": "werkiax_unbound:spirit_wander#spirit_exhausted"
+                        }
+                    ]
+                }
+            }
+        },
+        "spirit_phase": {
+            "type": "palladium:intangibility",
+            "vertical": true,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "spirit_invisible": {
+            "type": "argon:invisibility",
+            "opacity": 0.0,
+            "opacity_self": 0.2,
+            "mob_visibility_modifier": 0.0,
+            "fade": "energy",
+            "energy_color": "#B9E7FF",
+            "energy_additional_textures": [],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "spirit_flight": {
+            "type": "palladium:flight",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "spirit_start_flight": {
+            "type": "argon:force_start_flight",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_ticks",
+                    "ability": "werkiax_unbound:spirit_wander#spirit_marker",
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
+        "spirit_no_damage_taken": {
+            "type": "argon:damage_reduction",
+            "percentage": 0.0,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "spirit_no_damage_dealt": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:attack_damage",
+                    "amount": -1.0,
+                    "operation": "add_multiplied_total",
+                    "id": "werkiax_unbound:spirit_form_no_damage"
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "spirit_untargetable": {
+            "type": "argon:untargetable",
+            "mode": "whitelist",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "wall_immunity": {
+            "type": "palladium:damage_immunity",
+            "damage_type": "minecraft:in_wall",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "effect_immunity": {
+            "type": "argon:immunity",
+            "effects": [
+                {
+                    "effect": "minecraft:poison"
+                },
+                {
+                    "effect": "minecraft:wither"
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "fall_immunity": {
+            "type": "palladium:damage_immunity",
+            "damage_type": "minecraft:fall",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        }
+    }
+}
