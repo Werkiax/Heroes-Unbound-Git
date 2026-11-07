@@ -28,6 +28,22 @@ Render Layers</h1>
 <h2>
 Overview</h2>
 <h3>
+FSang18's Heroes</h3>
+<ul>
+<li>
+<a href="#fsang:sunstone_barrier">
+Sunstone Barrier Render Layer</a>
+</li>
+<li>
+<a href="#fsang:sunstone_blade">
+Sunstone Blade Render Layer</a>
+</li>
+<li>
+<a href="#fsang:sunstone_cape">
+Sunstone Cape Render Layer</a>
+</li>
+</ul>
+<h3>
 Palladium</h3>
 <ul>
 <li>
@@ -72,6 +88,738 @@ Fade Render Layer</a>
 </li>
 </ul>
 </p>
+<hr>
+
+<div>
+<h2 id="fsang:sunstone_barrier">
+Sunstone Barrier Render Layer</h2>
+<p>
+A shell of sunstone grains around the wearer, the same material as fsang:sunstone_cape used as a protective mass. How much of it there is comes from "amount", a value meant to follow an ability's animation timer: at 0 nothing is drawn, and as it rises the grains appear one by one while the shell grows out from the body to its full radius. Driven from the same timer as a sunstone cape's "dispersion", it reads as the cape's material moving out to surround the wearer. It is purely visual.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+sparkle</td>
+<td>
+Float</td>
+<td>
+0-1: the share of grains that catch the light as a bright glint.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.08</td>
+</tr>
+<tr>
+<td>
+amount</td>
+<td>
+Float / Value</td>
+<td>
+(Dynamic) 0-1: how much of the barrier is present. 0 draws nothing.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+light_emission</td>
+<td>
+Integer / Value</td>
+<td>
+(Dynamic) 0-15: makes the grains glow. With one of Argon's glow render types (argon:glow_emission, argon:additive_emission) it is the brightness itself; with any other render type it is a light level they are lit to at least. 0 leaves the world light alone.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+thickness</td>
+<td>
+Float</td>
+<td>
+0-1: how deep the shell is, as a share of its radius. Grains sit at random depths within it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.25</td>
+</tr>
+<tr>
+<td>
+texture</td>
+<td>
+Identifier | Dynamic Texture | Texture Reference</td>
+<td>
+The texture the grains take their color from; each grain uses a random spot on it. Use the same texture as the cape.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+shrink_player_parts</td>
+<td>
+string[]</td>
+<td>
+As for every pack render layer: player model parts to shrink while this layer renders.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+center_height</td>
+<td>
+Float</td>
+<td>
+Height of the shell's centre above the wearer's feet, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.9</td>
+</tr>
+<tr>
+<td>
+tint</td>
+<td>
+Color</td>
+<td>
+Multiplied onto the grains' color.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#FFFFFF</td>
+</tr>
+<tr>
+<td>
+grain_size</td>
+<td>
+Vector 2D</td>
+<td>
+[smallest, largest] size of a grain, in blocks. Most are near the smallest.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[0.03, 0.09]</td>
+</tr>
+<tr>
+<td>
+grains</td>
+<td>
+Integer</td>
+<td>
+0-1024: how many grains make up the shell. Fewer are drawn with distance.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+240</td>
+</tr>
+<tr>
+<td>
+spin_speed</td>
+<td>
+Float</td>
+<td>
+0-8: how fast the grains turn around the wearer.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+radius</td>
+<td>
+Float</td>
+<td>
+Radius of the shell at full amount, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.1</td>
+</tr>
+<tr>
+<td>
+render_type</td>
+<td>
+"minecraft:entity_translucent" | "minecraft:entity_cutout" | "palladium:glow" | "argon:glow" | "argon:additive" | "argon:glow_no_depth_write" | "argon:glow_emission" | "argon:additive_emission"</td>
+<td>
+The render type the grains are drawn with.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+minecraft:entity_translucent</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sunstone_barrier","texture":"example:textures/models/capes/sunstone_cape.png","amount":1,"light_emission":0}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:sunstone_blade">
+Sunstone Blade Render Layer</h2>
+<p>
+A blade of sunstone grains held in the wearer's hand, the same material as fsang:sunstone_cape. How much of it there is comes from "amount", a value meant to follow an ability's animation timer: at 0 nothing is drawn and as it rises the blade grows out of the fist. It moves with the hand and is drawn in first person too. It is purely visual.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+sparkle</td>
+<td>
+Float</td>
+<td>
+0-1: the share of grains that catch the light as a bright glint.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.1</td>
+</tr>
+<tr>
+<td>
+amount</td>
+<td>
+Float / Value</td>
+<td>
+(Dynamic) 0-1: how much of the blade is present. 0 draws nothing.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+length</td>
+<td>
+Float</td>
+<td>
+Length of the blade at full amount, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.25</td>
+</tr>
+<tr>
+<td>
+width</td>
+<td>
+Float</td>
+<td>
+Width of the blade at the fist, in blocks; it narrows to a point.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.16</td>
+</tr>
+<tr>
+<td>
+left_hand</td>
+<td>
+Boolean</td>
+<td>
+Whether the blade is in the left hand instead of the right.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+tint</td>
+<td>
+Color</td>
+<td>
+Multiplied onto the grains' color.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#FFFFFF</td>
+</tr>
+<tr>
+<td>
+grain_size</td>
+<td>
+Vector 2D</td>
+<td>
+[smallest, largest] size of a grain, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[0.025, 0.07]</td>
+</tr>
+<tr>
+<td>
+grains</td>
+<td>
+Integer</td>
+<td>
+0-1024: how many grains make up the blade. Fewer are drawn with distance.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+150</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sunstone_blade","amount":1}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:sunstone_cape">
+Sunstone Cape Render Layer</h2>
+<p>
+A cape made of Kryptonian sunstone dust. It takes every setting of argon:cloth (texture, size, segments, material, attach, wrap and the rest) and uses Argon's cloth simulation for all of its shape and motion, but draws it as a coherent surface that breaks into grains toward the hem and outer corners, with a small number of free grains that come loose, trail behind and sometimes rejoin. The breakup uses the cape's own coordinates, so it stays with the cape, and it grows with how fast the wearer moves and how hard the cape is bent.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+edge_fragmentation</td>
+<td>
+Float</td>
+<td>
+0-4: how much more the hem and outer corners break up than the shoulders.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+sparkle</td>
+<td>
+Float</td>
+<td>
+0-1: the share of grains that catch the light as a bright glint.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.06</td>
+</tr>
+<tr>
+<td>
+reveal</td>
+<td>
+Float / Value</td>
+<td>
+(Dynamic) grows the cape in from the shoulders down and takes it back up again. 0 is no cape and reveal_ticks is the whole cape. Meant for an openable chestplate's palladium:item_open_timer, so the cape grows in as it opens and runs back as it closes. When the cape is fully gone the layer draws nothing.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+curvature_fragmentation</td>
+<td>
+Float</td>
+<td>
+0-4: how much the parts of the cape that are bent hard shed extra. It is subtle by design. 0 turns it off.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+material_amount</td>
+<td>
+Float / Value</td>
+<td>
+(Dynamic) 0-1: how much of the cape's material is present. 1 is the full cape, lower leaves a sparser, more broken cape and sheds more dust, 0 is dispersed entirely.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+fragmentation</td>
+<td>
+Float</td>
+<td>
+Overall strength of the procedural breakup, 0-4. 0 is no breakup at all.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+segments</td>
+<td>
+Vector 2D</td>
+<td>
+As for argon:cloth: [segments_x, segments_y] of the physics grid.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[4, 8]</td>
+</tr>
+<tr>
+<td>
+motion_fragmentation</td>
+<td>
+Float</td>
+<td>
+0-4: how much moving (walking, sprinting, flying, turning) adds to the breakup. 0 makes it ignore movement.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+attachment</td>
+<td>
+"back" | "left_arm" | "right_arm" | "waist"</td>
+<td>
+As for argon:cloth.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+back</td>
+</tr>
+<tr>
+<td>
+reveal_ticks</td>
+<td>
+Float</td>
+<td>
+The reveal value that means fully revealed, and so the number of ticks the cape takes to grow in or out. Set it to the openable's time.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+recoalesce</td>
+<td>
+Float</td>
+<td>
+0-1: the share of grains that drift back to where they came off and rejoin the cape instead of just fading.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.4</td>
+</tr>
+<tr>
+<td>
+attach</td>
+<td>
+Vector 3D</td>
+<td>
+As for argon:cloth: [x, y, z] of the attach point from the neck. Y increases downward and a positive Z is behind the wearer; a smaller Z hangs closer to the back.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[0.0, 0.1, 0.4]</td>
+</tr>
+<tr>
+<td>
+dust_tint</td>
+<td>
+Color</td>
+<td>
+Multiplied onto the grains' color, which they otherwise take from the cape texture where they came off.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#FFFFFF</td>
+</tr>
+<tr>
+<td>
+pitch_influence</td>
+<td>
+Float</td>
+<td>
+As for argon:cloth (waist attachment only).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.6</td>
+</tr>
+<tr>
+<td>
+dust_density</td>
+<td>
+Float</td>
+<td>
+0-8: how many free grains come off. 0 turns them off.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+hem_pitch_fraction</td>
+<td>
+Float</td>
+<td>
+Unused, as for argon:cloth.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.25</td>
+</tr>
+<tr>
+<td>
+solidity</td>
+<td>
+Float</td>
+<td>
+0-1: how much of the cape stays one coherent surface. Higher is more like an ordinary cape, lower breaks up sooner.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.75</td>
+</tr>
+<tr>
+<td>
+max_dust</td>
+<td>
+Integer</td>
+<td>
+0-512: the most free grains one cape has at once. Fewer are used with distance.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+160</td>
+</tr>
+<tr>
+<td>
+light_emission</td>
+<td>
+Integer / Value</td>
+<td>
+(Dynamic) 0-15: makes the cape and its grains glow. With one of Argon's glow render types (argon:glow_emission, argon:additive_emission) it is the brightness itself; with any other render type it is a light level they are lit to at least. 0 leaves the world light alone.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+texture</td>
+<td>
+Identifier | Dynamic Texture | Texture Reference</td>
+<td>
+The cape texture, exactly as for argon:cloth. Free grains take their color from it too.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+shrink_player_parts</td>
+<td>
+string[]</td>
+<td>
+As for every pack render layer: player model parts to shrink while this layer renders.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+dust_trail_strength</td>
+<td>
+Float</td>
+<td>
+0-8: how far grains carry their speed and so trail behind the wearer. Higher trails further.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+grain_size</td>
+<td>
+Vector 2D</td>
+<td>
+[smallest, largest] size of a free grain, in blocks. Most are near the smallest.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[0.022, 0.075]</td>
+</tr>
+<tr>
+<td>
+noise_speed</td>
+<td>
+Float</td>
+<td>
+0-10: how fast the breakup pattern evolves.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+depth</td>
+<td>
+Float</td>
+<td>
+As for argon:cloth (waist attachment only).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+material</td>
+<td>
+Identifier | Inline Material Object</td>
+<td>
+As for argon:cloth: a registered cloth material or an inline object. Setting "collision" to false lets the cape hang right against the back instead of staying outside the torso collision capsule.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+argon:standard</td>
+</tr>
+<tr>
+<td>
+size</td>
+<td>
+Vector 2D</td>
+<td>
+As for argon:cloth: [length, width] of the cape at rest, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[1.8, 1.0]</td>
+</tr>
+<tr>
+<td>
+detail</td>
+<td>
+Integer</td>
+<td>
+1-8: surface cells per physics cell along each axis, so how fine the grains of the cape surface are. Higher is finer and costs more. It is reduced automatically with distance.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+4</td>
+</tr>
+<tr>
+<td>
+dispersion</td>
+<td>
+Float / Value</td>
+<td>
+(Dynamic) 0-1: material taken away from the cape, so it has material_amount * (1 - dispersion). Meant to be driven by an ability's animation timer, e.g. to send the material off to a fsang:sunstone_barrier layer.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+wrap</td>
+<td>
+Float</td>
+<td>
+As for argon:cloth.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+render_type</td>
+<td>
+"minecraft:entity_translucent" | "minecraft:entity_cutout" | "palladium:glow" | "argon:glow" | "argon:additive" | "argon:glow_no_depth_write" | "argon:glow_emission" | "argon:additive_emission"</td>
+<td>
+The render type the cape surface and its grains are drawn with.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+minecraft:entity_translucent</td>
+</tr>
+<tr>
+<td>
+dust_lifetime</td>
+<td>
+Float</td>
+<td>
+How long a free grain lasts, in seconds.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.7</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sunstone_cape","texture":"example:textures/models/capes/sunstone_cape.png"}</pre>
+</div>
 <hr>
 
 <div>
@@ -413,7 +1161,7 @@ Scale for the thruster</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[I@1806e543</td>
+[I@1f299fc3</td>
 </tr>
 <tr>
 <td>
@@ -425,7 +1173,7 @@ Bones of the player model where the thruster will be attached to</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[Ljava.lang.Object;@3f3eb7b8</td>
+[Ljava.lang.Object;@b997735</td>
 </tr>
 </tbody>
 </table>

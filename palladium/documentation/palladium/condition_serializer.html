@@ -28,6 +28,26 @@ Conditions</h1>
 <h2>
 Overview</h2>
 <h3>
+FSang18's Heroes</h3>
+<ul>
+<li>
+<a href="#fsang:pocket_dimension">
+Pocket Dimension</a>
+</li>
+<li>
+<a href="#fsang:sol">
+SOL</a>
+</li>
+<li>
+<a href="#fsang:sol_reserve">
+SOL Solar Reserve</a>
+</li>
+<li>
+<a href="#fsang:sunstone_can_use">
+Sunstone Can Use</a>
+</li>
+</ul>
+<h3>
 Palladium</h3>
 <ul>
 <li>
@@ -524,6 +544,178 @@ Y Level</a>
 </li>
 </ul>
 </p>
+<hr>
+
+<div>
+<h2 id="fsang:pocket_dimension">
+Pocket Dimension</h2>
+<p>
+Checks whether the user is currently inside a pocket dimension (any player's - each player who travels there gets their own).</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:pocket_dimension"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:sol">
+SOL</h2>
+<p>
+True while the user's SOL is online (the Absolute suit is worn and SOL is not on standby) and, optionally, in one of the given operating modes, at or above an autonomy level, and with the solar reserves between two percentages. Lets an ability or render layer depend on what SOL is doing.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+modes</td>
+<td>
+String</td>
+<td>
+Operating mode ids that are accepted: normal, conservation, combat, recovery, emergency. Empty accepts any.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+tornado</td>
+<td>
+Boolean</td>
+<td>
+If given, requires Tornado Mode to be active (true) or not active (false), for example to switch an armor render layer.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+configurations</td>
+<td>
+String</td>
+<td>
+Suit configuration ids that are accepted: standard, lightweight, defensive, combat, rescue, solar. Empty accepts any.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+min_autonomy</td>
+<td>
+Integer</td>
+<td>
+Lowest autonomy level accepted (0 manual to 4 advanced).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+solar_max</td>
+<td>
+Integer</td>
+<td>
+Highest solar reserve percentage accepted (0-100).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+100</td>
+</tr>
+<tr>
+<td>
+solar_min</td>
+<td>
+Integer</td>
+<td>
+Lowest solar reserve percentage accepted (0-100).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sol","modes":["conservation","emergency"],"configurations":["combat"],"tornado":false}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:sol_reserve">
+SOL Solar Reserve</h2>
+<p>
+True unless the user's SOL is keeping the solar reserve the user set: the suit is worn, SOL is not on standby, a reserve is set, the solar pool has fallen to it, and SOL is not in emergency mode. Use it in the unlocking list of an ability that spends solar energy so it stays locked while the reserve is held. Anyone not wearing the suit is never affected.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sol_reserve"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:sunstone_can_use">
+Sunstone Can Use</h2>
+<p>
+True while the user's Sunstone can supply a construct of this kind: enough free material beyond the reserve, not locked out after collapsing or a recall, or a held construct of the kind already out. Use it in an ability's unlocking list so a Sunstone ability cannot start without material.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+kind</td>
+<td>
+String</td>
+<td>
+One of barrier, blade, restraint, barrage, ward, shield, cushion.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sunstone_can_use","kind":"barrier"}</pre>
+</div>
 <hr>
 
 <div>

@@ -28,6 +28,18 @@ Dynamic Textures</h1>
 <h2>
 Overview</h2>
 <h3>
+FSang18's Heroes</h3>
+<ul>
+<li>
+<a href="#fsang:player_skin">
+Player Skin Texture</a>
+</li>
+<li>
+<a href="#fsang:reactor_tint">
+Reactor Tint Texture</a>
+</li>
+</ul>
+<h3>
 Palladium</h3>
 <ul>
 <li>
@@ -68,6 +80,78 @@ Mouth Selection Texture</a>
 </li>
 </ul>
 </p>
+<hr>
+
+<div>
+<h2 id="fsang:player_skin">
+Player Skin Texture</h2>
+<p>
+The skin of the rendered player (or mannequin), or the default skin for any other entity. Safe to use in render layers worn by that same entity, unlike palladium:entity.</p>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:reactor_tint">
+Reactor Tint Texture</h2>
+<p>
+A texture multiplied by a colour saved onto the item in the given slot (fsang:reactor_color by default, or the given component), or left untinted if none is set.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+component</td>
+<td>
+Identifier</td>
+<td>
+The colour data component to tint by (e.g. fsang:jacket_primary_color).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+fsang:reactor_color</td>
+</tr>
+<tr>
+<td>
+texture</td>
+<td>
+Identifier</td>
+<td>
+The texture to tint.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+slot</td>
+<td>
+"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+<td>
+The slot the coloured item is read from.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+curios:body</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 
 <div>

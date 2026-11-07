@@ -28,6 +28,62 @@ Abilities</h1>
 <h2>
 Overview</h2>
 <h3>
+FSang18's Heroes</h3>
+<ul>
+<li>
+<a href="#fsang:galvanize">
+Galvanize</a>
+</li>
+<li>
+<a href="#fsang:pocket_dimension_travel">
+Pocket Dimension Travel</a>
+</li>
+<li>
+<a href="#fsang:procedural_pose">
+palladium.ability.fsang.procedural_pose</a>
+</li>
+<li>
+<a href="#fsang:selective_hearing">
+Selective Hearing</a>
+</li>
+<li>
+<a href="#fsang:sol_interface">
+palladium.ability.fsang.sol_interface</a>
+</li>
+<li>
+<a href="#fsang:sol_wheel">
+palladium.ability.fsang.sol_wheel</a>
+</li>
+<li>
+<a href="#fsang:sunstone_barrage">
+palladium.ability.fsang.sunstone_barrage</a>
+</li>
+<li>
+<a href="#fsang:sunstone_burn">
+palladium.ability.fsang.sunstone_burn</a>
+</li>
+<li>
+<a href="#fsang:sunstone_construct">
+palladium.ability.fsang.sunstone_construct</a>
+</li>
+<li>
+<a href="#fsang:sunstone_restraint">
+palladium.ability.fsang.sunstone_restraint</a>
+</li>
+<li>
+<a href="#fsang:sunstone_tornado">
+palladium.ability.fsang.sunstone_tornado</a>
+</li>
+<li>
+<a href="#fsang:web_blossom">
+palladium.ability.fsang.web_blossom</a>
+</li>
+<li>
+<a href="#fsang:web_sling">
+Web Sling Shot</a>
+</li>
+</ul>
+<h3>
 Palladium</h3>
 <ul>
 <li>
@@ -672,6 +728,930 @@ Zoom</a>
 </li>
 </ul>
 </p>
+<hr>
+
+<div>
+<h2 id="fsang:galvanize">
+Galvanize</h2>
+<p>
+On activation, pins the first living entity the caster is looking at (within "range") to the nearest surface around it (within "surface_search_range" - ground, wall, or ceiling, whichever is closer), pulling it in at "pull_speed" and holding it fully immobilized there for "pin_duration" ticks. Starting the instant "lock_delay" elapses - not waiting for the target to actually arrive and be pinned - every "blast" interval it discharges a chain-lightning-style blast (the same targeting/falloff algorithm as argon:blast_chain) from the target outward. Purely releases the target with no extra effect once pin_duration ends, the target dies/unloads, or this ability is disabled early.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+surface_search_range</td>
+<td>
+Double</td>
+<td>
+How far, in blocks, from the target to search in every direction for the nearest valid surface to pin it to.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+8.0</td>
+</tr>
+<tr>
+<td>
+pull_speed</td>
+<td>
+Double</td>
+<td>
+How fast, in blocks/tick, the target is reeled in toward the anchor before it's pinned.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+beam_renderer</td>
+<td>
+Identifier</td>
+<td>
+The default beam renderer used for both the persistent tether and the discharge segments, unless overridden by "tether_renderer"/"blast_renderer".</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+pin_duration</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+How long, in ticks, the target stays pinned before being released.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+pull_in_range</td>
+<td>
+Double</td>
+<td>
+How far, in blocks, from the target to continuously pull in every other living entity, via the same tether renderer, for the entire engagement (starting the instant lock_delay begins, not just once pinned). 0 (the default) disables this entirely.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+range</td>
+<td>
+Double</td>
+<td>
+How far, in blocks, the initial look-direction raytrace for a target can reach.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+pull_in_speed</td>
+<td>
+Double</td>
+<td>
+How fast, in blocks/tick, entities caught by "pull_in_range" are reeled toward the target. Defaults to whatever "pull_speed" is set to if left unset.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+lock_delay</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+How long, in ticks, to wait after acquiring a target before searching for a surface and starting to pull/pin it at all - during this window the target is left completely untouched, so e.g. a push ability's own launch can carry it somewhere new first instead of Galvanize immediately overriding its velocity.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+tether_renderer</td>
+<td>
+Identifier</td>
+<td>
+Overrides "beam_renderer" for the persistent surface tether only.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+blast_renderer</td>
+<td>
+Identifier</td>
+<td>
+Overrides "beam_renderer" for the discharge segments only.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+blast</td>
+<td>
+Blast Settings (range, interval, max_targets, chain_range, damage, damage_falloff*, can_hit_caster*, effects*, speed*, length*, damage_type*)</td>
+<td>
+Settings for the periodic discharge while pinned. "range" is how far from the pinned target to find the first secondary target; "interval" is how often (in ticks) a discharge happens; "max_targets" is the maximum number of chain jumps after the first hit; "chain_range" is the search radius for each subsequent jump; "effects" uses the same entry format as "potion_hit"'s "effects" list; "damage_type" is the damage type ID the blast deals its damage as, leaving it unset keeps the default attack damage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+GalvanizeBlast[range=8.0, interval=20, maxTargets=3, chainRange=6.0, damage=0.0, damageFalloff=1.0, canHitCaster=false, effects=[], speed=2.0, length=4.0, damageType=Optional.empty]</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:galvanize","range":12.0,"pin_duration":100,"beam_renderer":"example:tether_beam_id","blast_renderer":"example:blast_beam_id","blast":{"effects":{"effect":"minecraft:poison","duration":100,"max_amplifier":3}}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:pocket_dimension_travel">
+Pocket Dimension Travel</h2>
+<p>
+Toggles between the player's own personal pocket dimension and wherever they were standing before they left it. The first time a player travels in, their own dimension is created for them; further visits return to that same one, and anything built there is retained permanently. Any other entity (players, mobs, items, etc.) within "bring_along_radius" that doesn't already have a stored return position is brought along on the way in as a one-time guest - it doesn't get a pocket dimension of its own from this, it's simply returned to where it came from on the way out, alongside anything else nearby that does have a stored return position.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+bring_along_radius</td>
+<td>
+Double</td>
+<td>
+How close another entity needs to be to get pulled along when this ability activates, in either direction. Set to 0 to disable bringing others along.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+8.0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:pocket_dimension_travel"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:procedural_pose">
+palladium.ability.fsang.procedural_pose</h2>
+<p>
+While enabled, layers a live, physics-flavoured pose over the entity's normal one on the client, driven by the chosen driver's state instead of an authored animation clip. Every bone eases toward its target through a damped spring, so limbs lag and overshoot when the target moves suddenly. Has no effect of its own beyond marking the entity as using that driver - the pose is built by a client animation layer that blends in and out with the driver's own activity (for web_swing: while swinging, and fading out after release).</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+driver</td>
+<td>
+"web_swing"</td>
+<td>
+What drives the pose. "web_swing" reads Argon's web swing telemetry: the web arm aims at the anchor, the body leans along the rope, and the legs trail.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+WEB_SWING</td>
+</tr>
+<tr>
+<td>
+springs</td>
+<td>
+Map of bone name to {stiffness, damping}</td>
+<td>
+Overrides the driver's default spring feel for individual bones (head, torso, waist, right_arm, left_arm, right_leg, left_leg). "stiffness" (1-2000) is how hard the bone is pulled toward its target; "damping" (0-4) is the damping ratio - 1 settles with no overshoot, lower values overshoot and wobble more. Bones not listed keep the driver's defaults.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+flips</td>
+<td>
+Object: enabled, chance, min_speed, min_height, min_duration, max_duration, bank_degrees, invert_roll</td>
+<td>
+web_swing only. Aerial flips after a release. Decided once per free-flight, a moment after the web lets go, and only if the entity is still going fast enough ("min_speed", 0-1 of a full-speed swing) and has enough clear air beneath it ("min_height", blocks): then it flips with probability "chance". Mostly a front or back flip (back if moving backwards relative to the body), or a side roll if the release was strongly sideways; either way leaning off-axis by up to "bank_degrees" on the other axis. The axis is chosen once, at the start. It takes between "min_duration" (fast) and "max_duration" (slow) seconds, tucking toward the middle and opening back up. If a new web attaches mid-flip the body finishes the nearest turn quickly and blends into the swing. Set "invert_roll" if the roll leans the wrong way. Defaults: enabled, chance 0.45, min_speed 0.3, min_height 6, durations 0.5 to 0.8, bank 30.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+release_styles</td>
+<td>
+List of style names, or {style, weight} objects</td>
+<td>
+web_swing only. The airborne poses to pick between after a web is released: a new one is chosen at random every time a web lets go (never the same one twice in a row), and it is held until the entity lands or swings again. Same entry format as "styles"; the names are dive, float, soar and tumble. By default dive, float and soar (the everyday ones) have weight 10 and the rare, dramatic tumble 2. Leave unset to use all of them with their default weights.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+styles</td>
+<td>
+List of style names, or {style, weight} objects</td>
+<td>
+web_swing only. The swing styles to pick between: a new one is chosen at random every time a web attaches (never the same one twice in a row, when there's more than one), and mirrors to whichever hand is swinging. Each entry is a style name - glide, lounge, stretch, reach, hang, tuck, kick, crouch, spread or coil - or {"style": name, "weight": n} to set how likely it is relative to the others. By default glide and lounge (the everyday, streamlined swings) have weight 10 and the other eight (the special, more dramatic ones) 0.35, which makes roughly one swing in eight a special one. While turning in a swing, every style blends toward the banked, arm-out turning pose. Leave unset to use all of them with their default weights.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:procedural_pose"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:selective_hearing">
+Selective Hearing</h2>
+<p>
+Identical to argon:hearing and takes all the same settings, but several can live in one power (e.g. one per sound category, switched between by unlocking conditions) without the disabled ones shutting off the enabled one.</p>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:sol_interface">
+palladium.ability.fsang.sol_interface</h2>
+<p>
+When it switches on, opens SOL's interface screen for the user (read-outs, settings and the terminal). Give it a key bind of behaviour "activation" so each press opens it once. SOL itself only exists while the Absolute suit is worn, so put this on that suit's power.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sol_interface"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:sol_wheel">
+palladium.ability.fsang.sol_wheel</h2>
+<p>
+Opens SOL's radial quick-action wheel for the user while it is switched on: eight actions that run SOL commands (shield, recall, scan, analyze, combat mode, conserve, guide home, heal). Give it a key bind of behaviour "held": hold the key, point at a segment, let go. SOL only exists while the Absolute suit is worn, so put this on that suit's power.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sol_wheel"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:sunstone_barrage">
+palladium.ability.fsang.sunstone_barrage</h2>
+<p>
+Throws a series of sunstone shards out from behind the user, one every "interval" ticks for "count" shards. Each shard is a real projectile that curves onto one of the nearby enemies (hostile mobs, and anything that has the user as its target), dealt out in turn nearest first, and damages it on impact; with no enemy in range the shards fly straight ahead. Drawn in the same material as the sunstone cape. Give it a key bind of behaviour "activation" whose time is at least count * interval so it stays on for the whole series.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+damage</td>
+<td>
+Float</td>
+<td>
+Damage one shard deals on impact.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+4.0</td>
+</tr>
+<tr>
+<td>
+count</td>
+<td>
+Integer</td>
+<td>
+How many shards are thrown in one series (1-64).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+12</td>
+</tr>
+<tr>
+<td>
+range</td>
+<td>
+Double</td>
+<td>
+How far away, in blocks, an enemy can be to be targeted (4-128).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+28.0</td>
+</tr>
+<tr>
+<td>
+interval</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+Ticks between one shard and the next, as ticks or a time like "0.1s".</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+2</td>
+</tr>
+<tr>
+<td>
+speed</td>
+<td>
+Double</td>
+<td>
+A shard's top speed, in blocks per tick (0.2-4).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.5</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sunstone_barrage"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:sunstone_burn">
+palladium.ability.fsang.sunstone_burn</h2>
+<p>
+A switch that has SOL burn the wearer's free Sunstone into solar energy while it is on: two units of Sunstone a second become 400 solar units each in open sunlight (half elsewhere). The burned material becomes damaged Sunstone that mends slowly, and the reserve slice is never touched. It stops by itself when the solar pool is full or the free material is gone. Use a toggle key bind.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sunstone_burn"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:sunstone_construct">
+palladium.ability.fsang.sunstone_construct</h2>
+<p>
+A toggle that, while on, holds one kind of Sunstone construct out of the wearer's shared Sunstone pool: switching it on draws the kind's cost, switching it off returns it. A barrier also absorbs damage and stops projectiles, wearing away as it does. Combine with a fsang:sunstone_can_use unlocking condition for the same kind.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+kind</td>
+<td>
+String</td>
+<td>
+Which construct this is: barrier or blade (any held kind).</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sunstone_construct","kind":"barrier"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:sunstone_restraint">
+palladium.ability.fsang.sunstone_restraint</h2>
+<p>
+When it starts, holds the living entity under the user's crosshair in place with sunstone for "duration": it cannot walk, jump or fly, and sunstone dust is wound around it, drawn in the same material as the sunstone cape. Pair it with a key bind of behaviour "activation" so it fires once per press.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+duration</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+How long the target is held, as ticks or a time like "6s".</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+120</td>
+</tr>
+<tr>
+<td>
+range</td>
+<td>
+Double</td>
+<td>
+How far away, in blocks, the target can be (1-128).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+24.0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sunstone_restraint"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:sunstone_tornado">
+palladium.ability.fsang.sunstone_tornado</h2>
+<p>
+A switch for Tornado Mode: switching it on has SOL wind 60 units of the wearer's Sunstone into a storm for up to 45 seconds (absorbing damage, striking nearby enemies, and burning solar energy), and switching it off stands the storm down. It needs a fifth of the solar reserve to start, and cannot be raised again for 90 seconds after it ends. Use a toggle key bind.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:sunstone_tornado"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:web_blossom">
+palladium.ability.fsang.web_blossom</h2>
+<p>
+Launches the entity a short distance upward, holds it there briefly while spinning its body/head rotation (never the player's own look/camera rotation) through a number of rotations, and fires a batch of projectiles - the same kind an argon:projectile_effect ability would use - outward in evenly distributed spherical directions, released in waves spread across the spin so each wave's slight rotation offset fills the previous wave's gaps.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+waves</td>
+<td>
+Integer</td>
+<td>
+How many separate volleys shot_count is divided up into.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+6</td>
+</tr>
+<tr>
+<td>
+shot_count</td>
+<td>
+Integer</td>
+<td>
+Total number of projectiles fired across the whole spin, spread evenly over a full sphere and divided up evenly across the waves.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+24</td>
+</tr>
+<tr>
+<td>
+inaccuracy</td>
+<td>
+Float (>= 0.0)</td>
+<td>
+Inaccuracy applied to each shot that isn't homing in on a target.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.15</td>
+</tr>
+<tr>
+<td>
+velocity</td>
+<td>
+Float (>= 0.0)</td>
+<td>
+Velocity each projectile is fired at.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.2</td>
+</tr>
+<tr>
+<td>
+airborne_launch_strength</td>
+<td>
+Double</td>
+<td>
+Upward velocity applied when activated while already airborne, to prevent using this for unlimited altitude.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.3</td>
+</tr>
+<tr>
+<td>
+time_between_waves</td>
+<td>
+Integer</td>
+<td>
+Ticks between the start of one wave and the next.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+4</td>
+</tr>
+<tr>
+<td>
+launch_strength</td>
+<td>
+Double</td>
+<td>
+Upward velocity applied when activated while on the ground.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.65</td>
+</tr>
+<tr>
+<td>
+entity_type</td>
+<td>
+Entity Type ID</td>
+<td>
+ID of the projectile entity type to fire (must be a projectile).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+entity.minecraft.snowball</td>
+</tr>
+<tr>
+<td>
+entity_data</td>
+<td>
+NBT</td>
+<td>
+Additional NBT data for the projectile entity, identical in shape to argon:projectile_effect's entity_data.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+homing</td>
+<td>
+Homing Settings (range, accuracy)</td>
+<td>
+If present, each wave looks for the nearest living entity (other than the caster) within "range" blocks and aims that wave's shots at it instead of their normal spherical direction. "accuracy" (0-100, defaults to 100) controls how precisely: 100 aims dead-on, lower values add proportionally more random spread. Waves with no valid target in range simply fall back to firing normally.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+hit_effects</td>
+<td>
+List of Hit Effects</td>
+<td>
+Same shape and behaviour as argon:projectile_effect's hit_effects - each entry grants an effect to whatever living entity a shot hits.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+rotations</td>
+<td>
+Float</td>
+<td>
+Number of full 360 degree body/head rotations performed over spin_ticks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+2.5</td>
+</tr>
+<tr>
+<td>
+spin_ticks</td>
+<td>
+Integer</td>
+<td>
+Ticks the body/head rotation takes to complete its "rotations" turns. If waves/time_between_waves need longer than this to all fire, the hover is extended to fit them and the rotation simply holds its final angle for the remainder.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+25</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:web_blossom"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="fsang:web_sling">
+Web Sling Shot</h2>
+<p>
+Each press fires a web at the block the user is looking at; a second press fires another, and a third calls them off. With both set, the user can walk away from them: the webs stretch like elastic, pulling back harder the further the user is from the point midway between the two anchors (up to "max_stretch", where they can go no further). Jumping then lets go, and shoots the user toward that midpoint at a speed proportional to how far back they stretched it. Needs a key bind that fires once per press (the "activation" behaviour with a short time).</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+beam_renderer_right</td>
+<td>
+Identifier</td>
+<td>
+The beam renderer drawn from the right hand to whichever web is on the user's right.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+launch_requires_ground</td>
+<td>
+Boolean</td>
+<td>
+Whether the user must be on the ground to launch with a jump.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+beam_renderer_left</td>
+<td>
+Identifier</td>
+<td>
+The beam renderer drawn from the left hand to whichever web is on the user's left.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+fluid_cost</td>
+<td>
+Object: slot, fluid, per_web, per_launch</td>
+<td>
+Fluid taken from the fluid item in "slot" (default curios:hands): "per_web" for each web fired (the web isn't fired without it) and "per_launch" when launching (taking whatever is left if short). Leave unset for no cost.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+max_stretch</td>
+<td>
+Double</td>
+<td>
+The furthest, in blocks, the user can pull back past where they stood when the second web was fired.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+6.0</td>
+</tr>
+<tr>
+<td>
+elasticity</td>
+<td>
+Double</td>
+<td>
+How hard the webs pull back, as acceleration (blocks per tick squared) per block of stretch. Higher means the user can't pull back as far by walking.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.025</td>
+</tr>
+<tr>
+<td>
+range</td>
+<td>
+Double</td>
+<td>
+How far away, in blocks, a web can be fired.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+fall_damage_grace_ticks</td>
+<td>
+Integer</td>
+<td>
+Ticks after a launch during which landing causes no fall damage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+100</td>
+</tr>
+<tr>
+<td>
+launch_lift</td>
+<td>
+Double</td>
+<td>
+Extra upward speed, in blocks per tick, added to a launch.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.15</td>
+</tr>
+<tr>
+<td>
+min_stretch</td>
+<td>
+Double</td>
+<td>
+The least stretch, in blocks, a jump needs in order to launch.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.5</td>
+</tr>
+<tr>
+<td>
+launch_speed_per_block</td>
+<td>
+Double</td>
+<td>
+Launch speed, in blocks per tick, for each block of stretch.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.4</td>
+</tr>
+<tr>
+<td>
+timeout_ticks</td>
+<td>
+Integer</td>
+<td>
+Ticks after the first web before the sling calls itself off.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1200</td>
+</tr>
+<tr>
+<td>
+max_launch_speed</td>
+<td>
+Double</td>
+<td>
+The fastest, in blocks per tick, a launch can be.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+3.2</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"fsang:web_sling","range":40.0,"beam_renderer_left":"example:beam_left","beam_renderer_right":"example:beam_right","fluid_cost":{"fluid":"minecraft:water","per_web":5,"per_launch":20}}</pre>
+</div>
 <hr>
 
 <div>
@@ -2435,7 +3415,7 @@ The scale of the texture.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@5949f399</td>
+net.minecraft.world.phys.Vec2@1c974d91</td>
 </tr>
 <tr>
 <td>
@@ -2483,7 +3463,7 @@ The translation of the texture.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@56ac39da</td>
+net.minecraft.world.phys.Vec2@1c68972c</td>
 </tr>
 </tbody>
 </table>
@@ -6997,7 +7977,7 @@ Who this ability forces to drown, each entry either {"type": "self"} or {"type":
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[Target[mode=SELF, range=net.threetag.palladium.logic.value.StaticValue@1371c238]]</td>
+[Target[mode=SELF, range=net.threetag.palladium.logic.value.StaticValue@2b3b8cc2]]</td>
 </tr>
 </tbody>
 </table>
@@ -9119,7 +10099,7 @@ Pixel offset applied to the slot strip's on-screen position relative to its defa
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@56ac39da</td>
+net.minecraft.world.phys.Vec2@1c68972c</td>
 </tr>
 <tr>
 <td>
@@ -9641,7 +10621,7 @@ Pixel offset applied to the icon/label's on-screen position relative to its defa
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@56ac39da</td>
+net.minecraft.world.phys.Vec2@1c68972c</td>
 </tr>
 <tr>
 <td>
@@ -10763,7 +11743,7 @@ Whether the radar should rotate with the player, or be static.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-Rotation[mode=LOOK_DIRECTION, staticAngle=net.threetag.palladium.logic.value.StaticValue@1371c238]</td>
+Rotation[mode=LOOK_DIRECTION, staticAngle=net.threetag.palladium.logic.value.StaticValue@2b3b8cc2]</td>
 </tr>
 <tr>
 <td>
@@ -10775,7 +11755,7 @@ The radius, in blocks, within which entities are detected and shown on the radar
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.threetag.palladium.logic.value.StaticValue@7b82ffe5</td>
+net.threetag.palladium.logic.value.StaticValue@4a9e6ea7</td>
 </tr>
 <tr>
 <td>
@@ -10787,7 +11767,7 @@ The X/Y onscreen position of the radar relative to the alignment.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-Translate[x=net.threetag.palladium.logic.value.StaticValue@1371c238, y=net.threetag.palladium.logic.value.StaticValue@1371c238]</td>
+Translate[x=net.threetag.palladium.logic.value.StaticValue@2b3b8cc2, y=net.threetag.palladium.logic.value.StaticValue@2b3b8cc2]</td>
 </tr>
 <tr>
 <td>
@@ -12349,7 +13329,7 @@ The [x, y] scale of the text.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@5949f399</td>
+net.minecraft.world.phys.Vec2@1c974d91</td>
 </tr>
 <tr>
 <td>
@@ -12385,7 +13365,7 @@ A [x, y] pixel offset applied to the text's position.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@56ac39da</td>
+net.minecraft.world.phys.Vec2@1c68972c</td>
 </tr>
 </tbody>
 </table>
