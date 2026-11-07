@@ -28,18 +28,6 @@ Dynamic Textures</h1>
 <h2>
 Overview</h2>
 <h3>
-FSang18's Heroes</h3>
-<ul>
-<li>
-<a href="#fsang:player_skin">
-Player Skin Texture</a>
-</li>
-<li>
-<a href="#fsang:reactor_tint">
-Reactor Tint Texture</a>
-</li>
-</ul>
-<h3>
 Palladium</h3>
 <ul>
 <li>
@@ -83,78 +71,6 @@ Mouth Selection Texture</a>
 <hr>
 
 <div>
-<h2 id="fsang:player_skin">
-Player Skin Texture</h2>
-<p>
-The skin of the rendered player (or mannequin), or the default skin for any other entity. Safe to use in render layers worn by that same entity, unlike palladium:entity.</p>
-</div>
-<hr>
-
-<div>
-<h2 id="fsang:reactor_tint">
-Reactor Tint Texture</h2>
-<p>
-A texture multiplied by a colour saved onto the item in the given slot (fsang:reactor_color by default, or the given component), or left untinted if none is set.</p>
-<h3>
-Settings:</h3>
-<table>
-<thead>
-<tr>
-<th>
-Setting</th>
-<th>
-Type</th>
-<th>
-Description</th>
-<th>
-Required</th>
-<th>
-Fallback Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-component</td>
-<td>
-Identifier</td>
-<td>
-The colour data component to tint by (e.g. fsang:jacket_primary_color).</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-fsang:reactor_color</td>
-</tr>
-<tr>
-<td>
-texture</td>
-<td>
-Identifier</td>
-<td>
-The texture to tint.</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
-</tr>
-<tr>
-<td>
-slot</td>
-<td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
-<td>
-The slot the coloured item is read from.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-curios:body</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-
-<div>
 <h2 id="palladium:configured">
 Configured Texture</h2>
 <p>
@@ -183,7 +99,7 @@ output</td>
 <td>
 Identifier</td>
 <td>
-Path the generated texture is registered under. Supports variables. If not specified, it is derived from the base path and the used variables.</td>
+Path the generated texture is registered under. Supports variables. If not specified, it is derived from the base path, the used variables and the transformers.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -259,7 +175,7 @@ output</td>
 <td>
 Identifier</td>
 <td>
-Path the generated texture is registered under. Supports variables. If not specified, it is derived from the entity texture path and the used variables.</td>
+Path the generated texture is registered under. Supports variables. If not specified, it is derived from the entity texture path, the used variables and the transformers.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -390,7 +306,7 @@ Examples:</h3>
 <h2 id="argon:armor_or_skin">
 Armor Or Skin Texture</h2>
 <p>
-For models on the body, like claws: uses the worn suit's texture where an active layer from "model_layers" draws over the given region, otherwise the player's skin. Set the region to match the model's UVs.</p>
+For models on the body, like claws. Uses the worn suit's texture where an active layer from "model_layers" draws over the given region, otherwise the skin. Match the region to the model's UVs.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -470,7 +386,7 @@ Examples:</h3>
 <h2 id="argon:eye_selection_secondary">
 Secondary Eye Selection Texture</h2>
 <p>
-Like palladium:eye_selection, but for the pixels picked on the eye screen's "Secondary" tab, so a pack can color a second set independently. Needs the argon:customization/secondary_eye_selection flag.</p>
+Like palladium:eye_selection, but for the pixels picked on the eye screen's "Secondary" tab, so a pack can color a second set on its own. Needs the argon:customization/secondary_eye_selection flag.</p>
 <h3>
 Settings:</h3>
 <table>

@@ -63,6 +63,10 @@ Cone</a>
 Glow Laser</a>
 </li>
 <li>
+<a href="#argon:ring">
+Ring</a>
+</li>
+<li>
 <a href="#argon:segmented_textured">
 Segmented Textured</a>
 </li>
@@ -109,7 +113,7 @@ false</td>
 <td>
 texture</td>
 <td>
-Texture Reference</td>
+Texture Reference | Dynamic Texture</td>
 <td>
 The texture to use for the beam.</td>
 <td style="background-color: lightgreen">
@@ -325,7 +329,7 @@ false</td>
 <td>
 texture</td>
 <td>
-Texture Reference</td>
+Texture Reference | Dynamic Texture</td>
 <td>
 The texture to use for the beam.</td>
 <td style="background-color: lightgreen">
@@ -382,7 +386,7 @@ Examples:</h3>
 <h2 id="argon:boxed_textured">
 Boxed Textured</h2>
 <p>
-Renders a beam as a stack of textured boxes, like palladium's "textured" renderer, but each face gets its own lighting normal, fixing wrong or flickering brightness on side and bottom faces.</p>
+Renders a beam as a stack of textured boxes like palladium's "textured" renderer, but each face has its own lighting normal. That fixes wrong or flickering brightness on side and bottom faces.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -407,7 +411,7 @@ light_emission</td>
 <td>
 Integer</td>
 <td>
-The light emission of the beam. Must be within 0 - 15</td>
+The light emission of the beam, from 0 to 15.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -455,7 +459,7 @@ texture_length</td>
 <td>
 Float</td>
 <td>
-How many blocks of beam length one full copy of the texture spans, independent of "size" - use this to keep the arm's thickness fixed while controlling how densely (or sparsely) the texture repeats along its length. Defaults to the average of "size"'s width and height, matching the box's own cross-section as before.</td>
+How many blocks of beam one full copy of the texture covers, separate from "size". Keeps the arm's thickness fixed while you control how dense the texture is. Defaults to the average of "size"'s width and height.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -498,7 +502,7 @@ Examples:</h3>
 <h2 id="argon:cone">
 Cone</h2>
 <p>
-Draws a beam as a cone from "start_size" to "end_size" blocks wide: a soft glow, a brighter core and an optional scrolling texture. Pair it with the "cone" setting of argon:energy_beam.</p>
+Draws a beam as a cone from "start_size" to "end_size" blocks wide, with a soft glow, a brighter core and an optional scrolling texture. Pair it with the "cone" setting of argon:energy_beam.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -535,7 +539,7 @@ end_fade</td>
 <td>
 Float</td>
 <td>
-How opaque the far end of the cone is compared with the start, 0 to 1: lower fades the cone out along its length.</td>
+How opaque the far end of the cone is compared to the start, 0 to 1. Lower fades the cone out along its length.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -595,7 +599,7 @@ end_distance</td>
 <td>
 Float</td>
 <td>
-If set, "end_size" is reached this many blocks from the start and the cone keeps that same angle however long the beam is, so a beam stopped short by a wall is a narrower cone. Set it to the ability's max_distance. Without it, "end_size" is the width at wherever the beam ends.</td>
+If set, "end_size" is reached this many blocks from the start and the cone keeps that angle however long the beam is, so a beam stopped by a wall is narrower. Set it to the ability's max_distance. Without it, "end_size" is the width wherever the beam ends.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -650,7 +654,7 @@ Examples:</h3>
 <h2 id="argon:glow_laser">
 Glow Laser</h2>
 <p>
-Palladium's laser beam with brightness settings for its glow and core. Below 1 fades the part; above 1 stacks extra draws for a stronger glow (up to 8). Both are values, so molang can animate them.</p>
+Palladium's laser beam with brightness settings for its glow and core. Below 1 fades the part, above 1 stacks extra draws for a stronger glow (up to 8). Both are values, so molang can animate them.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -715,10 +719,198 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="argon:ring">
+Ring</h2>
+<p>
+Draws a flat textured disc around the start of the beam, as wide as the beam is long, with bands that travel outward like shockwave rings. Only the beam's length matters, so it suits argon:anchored_beam, whose animation_timer fades it in and out.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color</td>
+<td>
+Color</td>
+<td>
+A color multiplied with the texture.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#FFFFFF</td>
+</tr>
+<tr>
+<td>
+texture</td>
+<td>
+Identifier</td>
+<td>
+The ring texture. Its U axis runs around the ring and its V axis outward.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+blend</td>
+<td>
+"additive" | "translucent"</td>
+<td>
+How the ring is blended into the scene.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+TRANSLUCENT</td>
+</tr>
+<tr>
+<td>
+around</td>
+<td>
+Integer</td>
+<td>
+How many times the texture repeats around the ring.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+3</td>
+</tr>
+<tr>
+<td>
+rotation_speed</td>
+<td>
+Float</td>
+<td>
+How many degrees per tick the ring spins.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+inner_radius</td>
+<td>
+Float</td>
+<td>
+Radius of the empty hole in the middle, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.3</td>
+</tr>
+<tr>
+<td>
+segments</td>
+<td>
+Integer</td>
+<td>
+How many flat sides the ring is drawn with (8-96).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+48</td>
+</tr>
+<tr>
+<td>
+scroll_speed</td>
+<td>
+Float</td>
+<td>
+How many texture repeats the bands travel outward per tick; negative pulls them inward.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.25</td>
+</tr>
+<tr>
+<td>
+end_fade</td>
+<td>
+Float</td>
+<td>
+How opaque the outer edge is compared with the inner one, 0 to 1.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+opacity</td>
+<td>
+Float</td>
+<td>
+How opaque the ring is, 0 to 1.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.8</td>
+</tr>
+<tr>
+<td>
+texture_length</td>
+<td>
+Float</td>
+<td>
+How many blocks outward one repeat of the texture covers.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+4.0</td>
+</tr>
+<tr>
+<td>
+twist</td>
+<td>
+Float</td>
+<td>
+How many degrees the ring is twisted between its inner and outer edge, which curves the bands into spirals.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+height</td>
+<td>
+Float</td>
+<td>
+How far above the start of the beam the ring is drawn, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.05</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:ring","texture":"example:textures/beams/ring.png"}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="argon:segmented_textured">
 Segmented Textured</h2>
 <p>
-Renders a beam as flat textured layers around one axis that can tile, spin and scroll, optionally sagging near the origin and tightening over "sag_duration". Good for drill or corkscrew beams.</p>
+Renders a beam as flat textured layers around one axis that can tile, spin and scroll. Can sag near the origin and tighten over "sag_duration". Good for drill or corkscrew beams.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -743,7 +935,7 @@ sag_duration</td>
 <td>
 Integer | Time String ("40s", "2m", etc.)</td>
 <td>
-How long, in ticks, it takes the beam to tighten from fully loose to fully taut after it starts being drawn for a given entity. Restarts from fully loose again if this beam stops being drawn for that entity (e.g. the swing/grapple ends) and then starts again (a fresh attach). Only matters when "sag_amplitude" is above 0.</td>
+Ticks for the beam to go from loose to taut after it starts being drawn for an entity. It starts loose again after a fresh attach (e.g. a new swing or grapple). Only matters when "sag_amplitude" is above 0.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -755,7 +947,7 @@ light_emission</td>
 <td>
 Integer</td>
 <td>
-The light emission of the beam. Must be within 0 - 15</td>
+The light emission of the beam, from 0 to 15.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -779,7 +971,7 @@ sag_waves</td>
 <td>
 Float</td>
 <td>
-How many full side-to-side wave cycles the sag bows through along the beam's length, tapering down from full strength at the origin end to none at the target end. Only matters when "sag_amplitude" is above 0.</td>
+How many full side-to-side wave cycles the sag has along the beam, fading from full strength at the origin to none at the target. Only matters when "sag_amplitude" is above 0.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -815,7 +1007,7 @@ sag_amplitude</td>
 <td>
 Float</td>
 <td>
-How far, in blocks, the beam bows sideways from a straight line when loose, at its most bowed point near the origin end. Both ends of the beam always stay pinned to their anchor points regardless of this value. Leave at 0 (default) for a beam that's always perfectly straight.</td>
+How far, in blocks, the beam bows sideways from a straight line when loose, at its most bowed point near the origin. Both ends always stay pinned to their anchors. 0 (default) keeps the beam perfectly straight.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>

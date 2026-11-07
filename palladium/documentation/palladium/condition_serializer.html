@@ -28,26 +28,6 @@ Conditions</h1>
 <h2>
 Overview</h2>
 <h3>
-FSang18's Heroes</h3>
-<ul>
-<li>
-<a href="#fsang:pocket_dimension">
-Pocket Dimension</a>
-</li>
-<li>
-<a href="#fsang:sol">
-SOL</a>
-</li>
-<li>
-<a href="#fsang:sol_reserve">
-SOL Solar Reserve</a>
-</li>
-<li>
-<a href="#fsang:sunstone_can_use">
-Sunstone Can Use</a>
-</li>
-</ul>
-<h3>
 Palladium</h3>
 <ul>
 <li>
@@ -165,6 +145,10 @@ Entity Scale</a>
 <li>
 <a href="#palladium:entity_type">
 Entity Type</a>
+</li>
+<li>
+<a href="#palladium:event_id">
+Event ID</a>
 </li>
 <li>
 <a href="#palladium:fall_distance">
@@ -411,6 +395,14 @@ Carried</a>
 Carrying</a>
 </li>
 <li>
+<a href="#argon:chat_activation">
+Chat Activation</a>
+</li>
+<li>
+<a href="#argon:chat_toggled">
+Chat Toggled</a>
+</li>
+<li>
 <a href="#argon:danger_sense_active">
 Danger Sense Active</a>
 </li>
@@ -453,6 +445,10 @@ Has Energy</a>
 <li>
 <a href="#argon:has_fluid">
 Has Fluid</a>
+</li>
+<li>
+<a href="#argon:has_input">
+Has Input</a>
 </li>
 <li>
 <a href="#argon:has_item">
@@ -515,12 +511,20 @@ Nearby Entities</a>
 Perspective</a>
 </li>
 <li>
+<a href="#argon:reacted">
+Reacted</a>
+</li>
+<li>
 <a href="#argon:recently_attacked">
 Recently Attacked</a>
 </li>
 <li>
 <a href="#argon:saturation">
 Saturation</a>
+</li>
+<li>
+<a href="#argon:sky_access">
+Sky Access</a>
 </li>
 <li>
 <a href="#argon:targeted_by_mob">
@@ -544,178 +548,6 @@ Y Level</a>
 </li>
 </ul>
 </p>
-<hr>
-
-<div>
-<h2 id="fsang:pocket_dimension">
-Pocket Dimension</h2>
-<p>
-Checks whether the user is currently inside a pocket dimension (any player's - each player who travels there gets their own).</p>
-<h3>
-Examples:</h3>
-<pre class="json-snippet">
-{"type":"fsang:pocket_dimension"}</pre>
-</div>
-<hr>
-
-<div>
-<h2 id="fsang:sol">
-SOL</h2>
-<p>
-True while the user's SOL is online (the Absolute suit is worn and SOL is not on standby) and, optionally, in one of the given operating modes, at or above an autonomy level, and with the solar reserves between two percentages. Lets an ability or render layer depend on what SOL is doing.</p>
-<h3>
-Settings:</h3>
-<table>
-<thead>
-<tr>
-<th>
-Setting</th>
-<th>
-Type</th>
-<th>
-Description</th>
-<th>
-Required</th>
-<th>
-Fallback Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-modes</td>
-<td>
-String</td>
-<td>
-Operating mode ids that are accepted: normal, conservation, combat, recovery, emergency. Empty accepts any.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-[]</td>
-</tr>
-<tr>
-<td>
-tornado</td>
-<td>
-Boolean</td>
-<td>
-If given, requires Tornado Mode to be active (true) or not active (false), for example to switch an armor render layer.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-/</td>
-</tr>
-<tr>
-<td>
-configurations</td>
-<td>
-String</td>
-<td>
-Suit configuration ids that are accepted: standard, lightweight, defensive, combat, rescue, solar. Empty accepts any.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-[]</td>
-</tr>
-<tr>
-<td>
-min_autonomy</td>
-<td>
-Integer</td>
-<td>
-Lowest autonomy level accepted (0 manual to 4 advanced).</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-0</td>
-</tr>
-<tr>
-<td>
-solar_max</td>
-<td>
-Integer</td>
-<td>
-Highest solar reserve percentage accepted (0-100).</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-100</td>
-</tr>
-<tr>
-<td>
-solar_min</td>
-<td>
-Integer</td>
-<td>
-Lowest solar reserve percentage accepted (0-100).</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-0</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Examples:</h3>
-<pre class="json-snippet">
-{"type":"fsang:sol","modes":["conservation","emergency"],"configurations":["combat"],"tornado":false}</pre>
-</div>
-<hr>
-
-<div>
-<h2 id="fsang:sol_reserve">
-SOL Solar Reserve</h2>
-<p>
-True unless the user's SOL is keeping the solar reserve the user set: the suit is worn, SOL is not on standby, a reserve is set, the solar pool has fallen to it, and SOL is not in emergency mode. Use it in the unlocking list of an ability that spends solar energy so it stays locked while the reserve is held. Anyone not wearing the suit is never affected.</p>
-<h3>
-Examples:</h3>
-<pre class="json-snippet">
-{"type":"fsang:sol_reserve"}</pre>
-</div>
-<hr>
-
-<div>
-<h2 id="fsang:sunstone_can_use">
-Sunstone Can Use</h2>
-<p>
-True while the user's Sunstone can supply a construct of this kind: enough free material beyond the reserve, not locked out after collapsing or a recall, or a held construct of the kind already out. Use it in an ability's unlocking list so a Sunstone ability cannot start without material.</p>
-<h3>
-Settings:</h3>
-<table>
-<thead>
-<tr>
-<th>
-Setting</th>
-<th>
-Type</th>
-<th>
-Description</th>
-<th>
-Required</th>
-<th>
-Fallback Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-kind</td>
-<td>
-String</td>
-<td>
-One of barrier, blade, restraint, barrage, ward, shield, cushion.</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Examples:</h3>
-<pre class="json-snippet">
-{"type":"fsang:sunstone_can_use","kind":"barrier"}</pre>
-</div>
 <hr>
 
 <div>
@@ -1170,7 +1002,7 @@ Examples:</h3>
 <h2 id="palladium:advancement">
 Advancement</h2>
 <p>
-Checks if the player has completed a specific advancement.</p>
+Checks if the player has completed a specific advancement. Works on the server, and on the client only for your own player.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -1272,7 +1104,7 @@ Examples:</h3>
 <h2 id="palladium:as_client_player">
 As Client Player</h2>
 <p>
-Evaluates the given conditions against the client player (the player viewing the game) instead of the context entity. Useful for render layers that should only appear based on the viewing player's state. On the server, this condition always returns false.</p>
+Evaluates the given conditions against the client player (the player viewing the game) instead of the context entity. Useful for render layers that should only appear based on the viewing player's state. Only works on the client. On the server, this condition always returns false.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -1337,18 +1169,6 @@ Fallback Value</th>
 <tbody>
 <tr>
 <td>
-comparator</td>
-<td>
-"=" | "!=" | "<" | ">" | "<=" | ">="</td>
-<td>
-Comparison operator being used</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
-</tr>
-<tr>
-<td>
 attribute</td>
 <td>
 Attribute ID</td>
@@ -1371,12 +1191,24 @@ true</td>
 <td>
 /</td>
 </tr>
+<tr>
+<td>
+operator</td>
+<td>
+"=" | "!=" | "<" | ">" | "<=" | ">="</td>
+<td>
+Comparison operator being used</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
 </tbody>
 </table>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:attribute","attribute":"minecraft:armor","comparator":">=","compare_to":10}</pre>
+{"type":"palladium:attribute","attribute":"minecraft:armor","operator":">=","compare_to":10}</pre>
 </div>
 <hr>
 
@@ -1608,7 +1440,7 @@ Examples:</h3>
 <h2 id="palladium:command_result">
 Command Result</h2>
 <p>
-Executes command(s) and compares the output to a number.</p>
+Executes command(s) and compares the result to a number. If there are multiple commands, the result of the last one is used. Only works on the server.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -1658,8 +1490,8 @@ command</td>
 String | String[]</td>
 <td>
 The command(s) that are being executed.</td>
-<td style="background-color: lightgreen">
-true</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -2067,6 +1899,52 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="palladium:event_id">
+Event ID</h2>
+<p>
+Checks the ID of the custom event that started the current automation. Always false outside of custom event automations.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+id</td>
+<td>
+ID Predicate</td>
+<td>
+The event ID to match. A full ID matches exactly, a namespace on its own (e.g. "mypack") matches every event in that namespace.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:event_id","id":{"namespace":"mypack","path":"side_chosen"}}</pre>
+<pre class="json-snippet">
+{"type":"palladium:event_id","id":{"namespace":"mypack"}}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="palladium:fall_distance">
 Fall Distance</h2>
 <p>
@@ -2272,7 +2150,7 @@ Examples:</h3>
 <h2 id="palladium:has_movement_input">
 Has Movement Input</h2>
 <p>
-Checks if a player is currently pressing keys to move.</p>
+Checks if a player is currently pressing keys to move. Works on the server, and on the client only for your own player.</p>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
@@ -2305,7 +2183,7 @@ Fallback Value</th>
 <tbody>
 <tr>
 <td>
-power</td>
+powers</td>
 <td>
 Power ID(s) / Tag</td>
 <td>
@@ -2320,9 +2198,9 @@ true</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:has_power","power":"#palladium:is_mechanical"}</pre>
+{"type":"palladium:has_power","powers":"#palladium:is_mechanical"}</pre>
 <pre class="json-snippet">
-{"type":"palladium:has_power","power":{"type":"neoforge:or","values":["#palladium:is_genetic","#palladium:is_magical"]}}</pre>
+{"type":"palladium:has_power","powers":{"type":"neoforge:or","values":["#palladium:is_genetic","#palladium:is_magical"]}}</pre>
 </div>
 <hr>
 
@@ -2330,7 +2208,7 @@ Examples:</h3>
 <h2 id="palladium:has_tag">
 Has Tag</h2>
 <p>
-Checks if the entity has a specific tag. These tags are added to entities via /tag command.</p>
+Checks if the entity has a specific tag. These tags are added to entities via /tag command. Only works on the server.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -2403,7 +2281,7 @@ The minimum required health of the entity.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-/</td>
+0.0</td>
 </tr>
 <tr>
 <td>
@@ -2454,7 +2332,7 @@ Examples:</h3>
 <h2 id="palladium:is_creative_flying">
 Is Creative Flying</h2>
 <p>
-Checks if the entity is currently flying in creative mode.</p>
+Checks if the entity is currently flying in creative mode. Works on the server, and on the client only for your own player.</p>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
@@ -2877,11 +2755,11 @@ ignore_unlocked</td>
 <td>
 Boolean</td>
 <td>
-If true, the condition will check the active mode even if the ability is locked. Defaults to false.</td>
-<td style="background-color: lightgreen">
-true</td>
+If true, the condition will check the active mode even if the ability is locked.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
-/</td>
+false</td>
 </tr>
 <tr>
 <td>
@@ -2908,7 +2786,39 @@ Examples:</h3>
 <h2 id="palladium:molang">
 MoLang</h2>
 <p>
-Uses a MoLang query as a condition</p>
+Uses a MoLang query as a condition. Instead of the full object you can also just write the expression as a string.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+molang</td>
+<td>
+String</td>
+<td>
+The MoLang expression. The condition is met when it evaluates to anything other than 0.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
@@ -3167,6 +3077,18 @@ true</td>
 </tr>
 <tr>
 <td>
+compare_to</td>
+<td>
+(Dynamic) Value</td>
+<td>
+The value that the main value is being compared against</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
 operator</td>
 <td>
 "=" | "!=" | "<" | ">" | "<=" | ">="</td>
@@ -3177,26 +3099,14 @@ true</td>
 <td>
 /</td>
 </tr>
-<tr>
-<td>
-target</td>
-<td>
-(Dynamic) Value</td>
-<td>
-The value that the main value is being compared against</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
-</tr>
 </tbody>
 </table>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:number_comparison","value":5,"operator":">","target":3}</pre>
+{"type":"palladium:number_comparison","value":5,"operator":">","compare_to":3}</pre>
 <pre class="json-snippet">
-{"type":"palladium:number_comparison","value":{"type":"palladium:entity_tick_count"},"operator":"<=","target":20}</pre>
+{"type":"palladium:number_comparison","value":{"type":"palladium:entity_tick_count"},"operator":"<=","compare_to":20}</pre>
 </div>
 <hr>
 
@@ -3259,6 +3169,18 @@ false</td>
 <td>
 /</td>
 </tr>
+<tr>
+<td>
+fallback</td>
+<td>
+Double</td>
+<td>
+The value used when the entity has no value for the data attachment.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
 </tbody>
 </table>
 <h3>
@@ -3272,7 +3194,7 @@ Examples:</h3>
 <h2 id="palladium:objective_score">
 Objective Score</h2>
 <p>
-Checks if the player has a score in a specific objective.</p>
+Checks if the player has a score in a specific objective. Only works on the server.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -3483,7 +3405,7 @@ The minimum required size (inclusive).</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-/</td>
+0.0</td>
 </tr>
 <tr>
 <td>
@@ -3613,6 +3535,18 @@ true</td>
 </tr>
 <tr>
 <td>
+compare_to</td>
+<td>
+(Dynamic) Value</td>
+<td>
+The value that the main value is being compared against</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
 operator</td>
 <td>
 "equals" | "equals_ignore_case" | "starts_with" | "ends_with" | "contains" | "contains_ignore_case"</td>
@@ -3623,26 +3557,14 @@ true</td>
 <td>
 /</td>
 </tr>
-<tr>
-<td>
-target</td>
-<td>
-(Dynamic) Value</td>
-<td>
-The value that the main value is being compared against</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
-</tr>
 </tbody>
 </table>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:string_comparison","value":"example","operator":"contains","target":"amp"}</pre>
+{"type":"palladium:string_comparison","value":"example","operator":"contains","compare_to":"amp"}</pre>
 <pre class="json-snippet">
-{"type":"palladium:string_comparison","value":{"type":"palladium:string_data_attachment","attachment":"example:string_attachment_id"},"operator":"equals","target":"example_content"}</pre>
+{"type":"palladium:string_comparison","value":{"type":"palladium:string_data_attachment","attachment":"example:string_attachment_id"},"operator":"equals","compare_to":"example_content"}</pre>
 </div>
 <hr>
 
@@ -3834,7 +3756,7 @@ Examples:</h3>
 <h2 id="argon:ability_bar_active">
 Ability Bar Active</h2>
 <p>
-True while this ability is assigned to a slot of the given argon:ability_bar, using the crouch variant (ability_bar_active_crouch) instead if that slot has one and the entity is crouching.</p>
+True while this ability sits in a slot of the given argon:ability_bar. Uses the crouch variant of the slot if it has one and the entity is crouching.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -3859,7 +3781,7 @@ ability_bar</td>
 <td>
 String</td>
 <td>
-Reference to the argon:ability_bar ability whose slot assignments to check, e.g. "fsang:marvel/mutant/reality_warping#my_bar".</td>
+The argon:ability_bar ability to check, e.g. "fsang:marvel/mutant/reality_warping#my_bar".</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>
@@ -3878,7 +3800,7 @@ Examples:</h3>
 <h2 id="argon:ability_bar_active_crouch">
 Ability Bar Active (Crouch)</h2>
 <p>
-True while the entity is crouching and this ability is assigned to a crouch slot of the given argon:ability_bar, for abilities that should take over while crouching.</p>
+True while the entity is crouching and this ability sits in a crouch slot of the given argon:ability_bar.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -3903,7 +3825,7 @@ ability_bar</td>
 <td>
 String</td>
 <td>
-Reference to the argon:ability_bar ability whose crouch slot assignments to check, e.g. "fsang:marvel/mutant/reality_warping#my_bar".</td>
+The argon:ability_bar ability to check, e.g. "fsang:marvel/mutant/reality_warping#my_bar".</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>
@@ -3922,7 +3844,7 @@ Examples:</h3>
 <h2 id="argon:ability_enabled_activation">
 Ability Enabled Activation</h2>
 <p>
-Like the vanilla "Ability enabled" condition, but sticky: once the referenced ability is seen enabled, it keeps passing for the given duration after that ability stops.</p>
+Like the vanilla "Ability enabled" condition, but sticky. Once the ability is seen enabled, it keeps passing for the given time after it stops.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -3978,7 +3900,7 @@ Examples:</h3>
 <h2 id="argon:ability_type_enabled_activation">
 Ability Type Enabled Activation</h2>
 <p>
-Like the vanilla "Ability type enabled" condition, but sticky: once any ability of "ability_type" is seen enabled, it keeps passing for the given duration after they stop.</p>
+Like the vanilla "Ability type enabled" condition, but sticky. Once any ability of "ability_type" is seen enabled, it keeps passing for the given time after they stop.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4034,7 +3956,7 @@ Examples:</h3>
 <h2 id="argon:advancement">
 Advancement</h2>
 <p>
-Checks whether the user has unlocked a specific advancement, by its id. Server-side only, like advancement data itself - always false on the client, so don't use this from a render_layer's own conditions.</p>
+Checks if the user has a given advancement. Server only, so it is always false on the client. Don't use it in a render_layer's conditions.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4078,7 +4000,7 @@ Examples:</h3>
 <h2 id="argon:beam_firing">
 Beam Firing</h2>
 <p>
-True while a charged Energy Beam is showing a shot, and for "lead" ticks before its next shot of a multi-shot beam. Use it to raise an arm for each shot.</p>
+True while a charged Energy Beam is showing a shot, and for "lead" ticks before the next shot of a multi-shot beam. Use it to raise an arm for each shot.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4103,7 +4025,7 @@ duration</td>
 <td>
 Integer | Time String ("40s", "2m", etc.)</td>
 <td>
-If set, this is only true for this long after each shot instead of for the whole time the shot shows.</td>
+If set, only true for this long after each shot instead of the whole time it shows.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -4190,7 +4112,7 @@ Examples:</h3>
 <h2 id="argon:biome_swap_area">
 Biome Swap Area</h2>
 <p>
-Checks whether the user is currently standing inside an active argon:biome_swap area, optionally restricted to one generated with a specific biome.</p>
+Checks if the user stands inside an active argon:biome_swap area, optionally one made with a specific biome.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4215,7 +4137,7 @@ biome</td>
 <td>
 Identifier</td>
 <td>
-Optional biome a biome_swap area must have been generated with to count, otherwise any active area counts.</td>
+A biome the area must have been made with to count. Otherwise any active area counts.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -4234,7 +4156,7 @@ Examples:</h3>
 <h2 id="argon:carriable">
 Carriable</h2>
 <p>
-True while you look at something palladium:carry could pick up: any other living entity within "range" blocks. Handy for showing an icon or prompt only when there is a target.</p>
+True while you look at something palladium:carry could pick up: any other living entity within "range" blocks. Handy for showing a prompt only when there is a target.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4259,7 +4181,7 @@ range</td>
 <td>
 Double</td>
 <td>
-How far along the user's look direction to search for a carriable target, in blocks. Left out, it is the referenced argon:carry ability's own range, or 3 blocks without one.</td>
+How far along the look direction to search, in blocks. Left out, it uses the referenced argon:carry ability's range, or 3 blocks without one.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -4271,7 +4193,7 @@ ability</td>
 <td>
 Ability Reference</td>
 <td>
-An "argon:carry" ability to check on behalf of, in the form "namespace:power#ability". With it, a target counts only if that ability could grab it: in clear line of sight, not already part of a carry, and allowed by its allow_mobs / allow_players settings. Anything else (or left out) uses Palladium's own carry rules.</td>
+An argon:carry ability ("namespace:power#ability") to check for. A target only counts if that ability could grab it: clear line of sight, not already carried, allowed by allow_mobs / allow_players. Left out, Palladium's own carry rules apply.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -4290,7 +4212,7 @@ Examples:</h3>
 <h2 id="argon:carried">
 Carried</h2>
 <p>
-True while the entity is being held by someone else's "argon:carry" ability (the carrier's side is the "argon:carrying" condition). It works for any living entity that can be carried.</p>
+True while the entity is held by someone's "argon:carry" ability (the carrier's side is "argon:carrying"). Works for any living entity that can be carried.</p>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
@@ -4302,7 +4224,7 @@ Examples:</h3>
 <h2 id="argon:carrying">
 Carrying</h2>
 <p>
-True while the entity is holding something with argon:carry. Unlike palladium:carrying, which only sees palladium:carry, this works for any living carrier, not just players.</p>
+True while the entity holds something with argon:carry. Unlike palladium:carrying, which only sees palladium:carry, this works for any living carrier.</p>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
@@ -4311,10 +4233,174 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="argon:chat_activation">
+Chat Activation</h2>
+<p>
+Passes briefly after the player says one of the phrases in chat. Works like a key bind in activation mode, but the key is a spoken incantation. Put it straight in the enabling condition. Inside an "and" it only runs while the conditions before it pass.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+duration</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+How long it stays true after the phrase is said.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+cooldown</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+The cooldown the ability gets after a cast. It uses the ability's cooldown component, so cooldown control abilities and the cooldown condition work with it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+phrases</td>
+<td>
+List of strings</td>
+<td>
+Extra fixed phrases that always work, whatever the mastery tier. Letters are compared without case, accents or punctuation, and Greek letters are read as their Latin spelling.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+incantation</td>
+<td>
+Identifier</td>
+<td>
+A spell definition from data/<namespace>/incantations/<name>.json. It holds the phrases for each mastery tier, the always-accepted fallback phrases and the cast thresholds. Casting counts toward its mastery.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:chat_toggled">
+Chat Toggled</h2>
+<p>
+Turns on when the player says a start phrase in chat. Stays on until they say a stop phrase or the maximum duration runs out. The cooldown starts when it turns off. Put it straight in the enabling condition.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+stop_phrases</td>
+<td>
+List of strings</td>
+<td>
+Extra phrases that turn it off.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+cooldown</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+Cooldown the ability gets once it turns off.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+phrases</td>
+<td>
+List of strings</td>
+<td>
+Extra start phrases that always work, whatever the mastery tier.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+incantation</td>
+<td>
+Identifier</td>
+<td>
+A spell definition from data/<namespace>/incantations/<name>.json. Its tiers hold the start phrases and its "stop" list holds the stop phrases. Casting counts toward its mastery.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+max_duration</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+Turns itself off after this long. 0 means it never does.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+
+<div>
 <h2 id="argon:danger_sense_active">
 Danger Sense Active</h2>
 <p>
-Checks whether the user has an enabled argon:danger_sense ability that is currently detecting at least one danger - a nearby hostile/aggressive mob, or a player who recently dealt damage to the user.</p>
+Checks if the user has an enabled argon:danger_sense ability that is detecting at least one danger: a nearby hostile mob or a player who recently hurt the user.</p>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
@@ -4326,7 +4412,7 @@ Examples:</h3>
 <h2 id="argon:danger_sense_count">
 Danger Sense Count</h2>
 <p>
-Checks how many dangers the user's enabled argon:danger_sense ability is currently detecting (the largest count if there are several), for example to trigger an overload once enough threats are around.</p>
+Checks how many dangers the user's enabled argon:danger_sense ability is detecting (the largest count if there are several). Useful for triggering an overload once enough threats are around.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4382,7 +4468,7 @@ Examples:</h3>
 <h2 id="argon:dodge_direction">
 Dodge Direction</h2>
 <p>
-Checks if the referenced dodge ability is showing its dodge pose right now and the dodge went mostly in the given direction relative to where the entity faces. Diagonals count as whichever axis is stronger.</p>
+Checks if the referenced dodge ability is showing its dodge pose and the dodge went mostly in the given direction relative to where the entity faces. Diagonals count as whichever axis is stronger.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4482,7 +4568,7 @@ Examples:</h3>
 <h2 id="argon:durability">
 Durability</h2>
 <p>
-Checks whether the item worn/held in the given slot has remaining durability, as a percentage, between min and max, failing for an empty slot or a non-damageable item.</p>
+Checks if the item worn or held in the given slot has durability left, as a percentage, between min and max. Fails for an empty slot or an item that can't be damaged.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4550,7 +4636,7 @@ Examples:</h3>
 <h2 id="argon:falling">
 Falling</h2>
 <p>
-Checks whether the user is airborne and moving downward, meaning not on the ground and not currently ascending.</p>
+Checks if the user is in the air and moving downward, so not on the ground and not rising.</p>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
@@ -4562,7 +4648,7 @@ Examples:</h3>
 <h2 id="argon:flight_speed_percent">
 Flight Speed Percent</h2>
 <p>
-True while the referenced argon:flight_speed_adjuster dial sits within min-max (inclusive). The flight counterpart of argon:movement_speed_percent.</p>
+True while the referenced argon:flight_speed_adjuster dial is within min and max (inclusive). The flight version of argon:movement_speed_percent.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4630,7 +4716,7 @@ Examples:</h3>
 <h2 id="argon:grappling">
 Grappling</h2>
 <p>
-Checks whether the referenced grapple ability - either argon:grapple or palladium:grapple - is currently grappled to a block, an entity, or either, depending on the configured mode.</p>
+Checks if the referenced grapple ability (argon:grapple or palladium:grapple) is currently grappled to a block, an entity or either, depending on the mode.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4686,7 +4772,7 @@ Examples:</h3>
 <h2 id="argon:ground_distance">
 Ground Distance</h2>
 <p>
-Checks whether the user is on the ground or within max_distance blocks of solid ground directly below them.</p>
+Checks if the user is on the ground or within max_distance blocks of solid ground directly below.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4730,7 +4816,7 @@ Examples:</h3>
 <h2 id="argon:has_energy">
 Has Energy</h2>
 <p>
-Checks whether the item in the given slot has stored energy between min and max, with infinite/creative-energy items always passing.</p>
+Checks if the item in the given slot has stored energy between min and max. Infinite and creative energy items always pass.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4863,10 +4949,22 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="argon:has_input">
+Has Input</h2>
+<p>
+Checks if the user is holding a movement key (forward, back, left or right). Unlike palladium:has_movement_input it also works while a world is loading and in single player's built-in server.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:has_input"}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="argon:has_item">
 Has Item</h2>
 <p>
-Checks whether the user possesses at least one matching item anywhere on them, including inventory, worn equipment, and Curios slots where applicable.</p>
+Checks if the user has at least one matching item anywhere on them: inventory, worn equipment and Curios slots where they apply.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -4910,7 +5008,7 @@ Examples:</h3>
 <h2 id="argon:has_power">
 Has Power</h2>
 <p>
-Checks whether the user holds a matching power - "include" (default) requires at least one to be present, "exclude" requires all of them to be absent.</p>
+Checks if the user has a matching power. "include" (default) needs at least one present, "exclude" needs all of them absent.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5010,7 +5108,7 @@ Examples:</h3>
 <h2 id="argon:has_stored_item">
 Has Stored Item</h2>
 <p>
-Checks whether at least one matching item is currently stored in any of the referenced argon:item_storage ability's slots.</p>
+Checks if at least one matching item is stored in any slot of the referenced argon:item_storage ability.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5035,7 +5133,7 @@ item_storage</td>
 <td>
 String</td>
 <td>
-Reference to the argon:item_storage ability whose stored slots to check, e.g. "fsang:example#my_storage".</td>
+The argon:item_storage ability whose slots to check, e.g. "fsang:example#my_storage".</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>
@@ -5066,7 +5164,7 @@ Examples:</h3>
 <h2 id="argon:has_suit_modification">
 Has Suit Modification</h2>
 <p>
-Checks whether the entity wears a complete Palladium suit with the given Tech Table modification installed on every piece. Optionally only for one suit set.</p>
+Checks if the entity wears a complete Palladium suit with the given Tech Table modification installed on every piece. Can be limited to one suit set.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5146,7 +5244,7 @@ Examples:</h3>
 <h2 id="argon:health">
 Health</h2>
 <p>
-Checks if the user's current health, as a percentage of their current max health (accounting for any active max-health modifiers), is between min and max (inclusive).</p>
+Checks if the user's current health, as a percentage of their current max health (with max health modifiers), is between min and max (inclusive).</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5202,7 +5300,7 @@ Examples:</h3>
 <h2 id="argon:is_female">
 Is Female</h2>
 <p>
-True if the wearer picked "Female" in the argon:body customization. A shorthand for palladium:customization_selected, handy for scoping a body overlay to one chestplate.</p>
+True if the wearer picked "Female" in the argon:body customization. A shorthand for palladium:customization_selected, handy for limiting a body overlay to one chestplate.</p>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
@@ -5214,7 +5312,7 @@ Examples:</h3>
 <h2 id="argon:item_component">
 Item Component</h2>
 <p>
-Checks whether the item in the given slot has a specific data component currently set to a specific text value.</p>
+Checks if the item in the given slot has a specific data component set to a specific text value.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5282,7 +5380,7 @@ Examples:</h3>
 <h2 id="argon:jumping">
 Jumping</h2>
 <p>
-Checks if the user is currently airborne and moving upward, rather than standing on the ground or descending.</p>
+Checks if the user is in the air and moving upward, not standing on the ground or falling.</p>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
@@ -5294,7 +5392,7 @@ Examples:</h3>
 <h2 id="argon:key_press_on_block">
 Key Press On Block</h2>
 <p>
-True while the referenced ability's key is held and you look at a block matching "blocks" within "range", e.g. to gate climbing on both the key and a climbable surface.</p>
+True while the referenced ability's key is held and you look at a block matching "blocks" within "range". Handy for climbing, which needs both the key and a climbable surface.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5362,7 +5460,7 @@ Examples:</h3>
 <h2 id="argon:main_hand">
 Main Hand</h2>
 <p>
-Checks the player's main-hand handedness setting (not which hand currently holds an item), which is always false for non-player entities.</p>
+Checks the player's main hand setting (left or right handed), not which hand holds an item. Always false for non-players.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5406,7 +5504,7 @@ Examples:</h3>
 <h2 id="argon:movement_speed_percent">
 Movement Speed Percent</h2>
 <p>
-True while the referenced movement_speed_adjuster ability's dial sits within "min"-"max" (inclusive), e.g. to gate a speed tier on the dial being turned up.</p>
+True while the referenced movement_speed_adjuster dial is within "min" and "max" (inclusive). Handy for gating a speed tier on the dial being turned up.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5474,7 +5572,7 @@ Examples:</h3>
 <h2 id="argon:nearby_block">
 Nearby Block</h2>
 <p>
-Checks whether at least one block matching "blocks" exists within "radius" of the user, scanning every block in range on each check.</p>
+Checks if at least one block matching "blocks" is within "radius" of the user. Scans every block in range on each check.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5530,7 +5628,7 @@ Examples:</h3>
 <h2 id="argon:nearby_entities">
 Nearby Entities</h2>
 <p>
-Checks whether at least one other entity is within range of the entity, optionally restricted to only living or only non-living entities and/or to entities that do or don't hold specific powers.</p>
+Checks if at least one other entity is within range, optionally only living or only non-living ones, and/or ones that do or don't have specific powers.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5600,7 +5698,7 @@ Examples:</h3>
 <h2 id="argon:perspective">
 Perspective</h2>
 <p>
-Checks whether the entity's owning player is in first or third person, synced from the client to the server, defaulting to first-person and always false for non-players.</p>
+Checks if the owning player is in first or third person, synced from the client to the server. Defaults to first person and is always false for non-players.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5641,10 +5739,78 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="argon:reacted">
+Reacted</h2>
+<p>
+Checks if the referenced argon:damage_reaction ability reacted to a hit within the given time, optionally to one specific reaction.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+reaction</td>
+<td>
+String</td>
+<td>
+Only count the reaction with this id.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+within</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+How recently the reaction must have happened.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+20</td>
+</tr>
+<tr>
+<td>
+ability</td>
+<td>
+Ability Reference</td>
+<td>
+The damage reaction ability to check.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:reacted","ability":"example:power#reaction"}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="argon:recently_attacked">
 Recently Attacked</h2>
 <p>
-Checks whether the entity has dealt damage to anything - melee, ranged, or ability-dealt alike - within the given time.</p>
+Checks if the entity dealt damage to anything (melee, ranged or from an ability) within the given time.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5675,6 +5841,18 @@ true</td>
 <td>
 /</td>
 </tr>
+<tr>
+<td>
+or_hurt_by_hostile</td>
+<td>
+Boolean</td>
+<td>
+If true, the condition also passes when a hostile mob damaged the entity within that time.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
 </tbody>
 </table>
 <h3>
@@ -5688,7 +5866,7 @@ Examples:</h3>
 <h2 id="argon:saturation">
 Saturation</h2>
 <p>
-Checks if the user's saturation level is at least the given amount, always false for non-player entities.</p>
+Checks if the user's saturation level is at least the given amount. Always false for non-players.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5729,10 +5907,22 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="argon:sky_access">
+Sky Access</h2>
+<p>
+Passes while nothing solid is above the user's head, so they can see the open sky. Combine with a not condition to detect being underground or under a roof.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:sky_access"}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="argon:targeted_by_mob">
 Targeted By Mob</h2>
 <p>
-Checks whether at least one mob within range currently has the user as its AI attack target, by scanning nearby mobs' targets rather than any global registry.</p>
+Checks if at least one mob within range has the user as its AI attack target. Scans nearby mobs' targets rather than a global registry.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5776,7 +5966,7 @@ Examples:</h3>
 <h2 id="argon:time_of_day">
 Time Of Day</h2>
 <p>
-Checks if the overworld's current time of day is between min and max inclusive, wrapping around midnight if max is smaller than min.</p>
+Checks if the overworld's time of day is between min and max inclusive. Wraps around midnight if max is smaller than min.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -5876,7 +6066,7 @@ Examples:</h3>
 <h2 id="argon:wall_crawling_active">
 Wall Crawling Active</h2>
 <p>
-Checks whether the user has an enabled argon:wall_crawling ability that is currently attached to a wall or ceiling - true only while actually on a surface, not just whenever the ability is enabled.</p>
+Checks if the user has an enabled argon:wall_crawling ability that is attached to a wall or ceiling. Only true while on a surface, not whenever the ability is enabled.</p>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">

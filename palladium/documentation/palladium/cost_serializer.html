@@ -28,14 +28,6 @@ Costs</h1>
 <h2>
 Overview</h2>
 <h3>
-FSang18's Heroes</h3>
-<ul>
-<li>
-<a href="#fsang:skill_points">
-Power Skill Points</a>
-</li>
-</ul>
-<h3>
 Palladium</h3>
 <ul>
 <li>
@@ -64,62 +56,6 @@ Score Cost</a>
 </li>
 </ul>
 </p>
-<hr>
-
-<div>
-<h2 id="fsang:skill_points">
-Power Skill Points</h2>
-<p>
-Requires and spends skill points from the given power's own skill point pool. Use as the "cost" of a palladium:buyable unlocking handler to make an ability purchasable.</p>
-<h3>
-Settings:</h3>
-<table>
-<thead>
-<tr>
-<th>
-Setting</th>
-<th>
-Type</th>
-<th>
-Description</th>
-<th>
-Required</th>
-<th>
-Fallback Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-amount</td>
-<td>
-Integer (> 0)</td>
-<td>
-How many skill points this ability costs to unlock.</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
-</tr>
-<tr>
-<td>
-power</td>
-<td>
-String</td>
-<td>
-The identifier of the power whose skill points to spend, e.g. "fsang:marvel/mutant/reality_warping".</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Examples:</h3>
-<pre class="json-snippet">
-{"type":"fsang:skill_points","power":"fsang:marvel/mutant/reality_warping","amount":1}</pre>
-</div>
 <hr>
 
 <div>
@@ -195,11 +131,11 @@ amount</td>
 <td>
 Integer (> 0)</td>
 <td>
-How many items to consume. Defaults to 1.</td>
-<td style="background-color: lightgreen">
-true</td>
+How many items to consume.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
-/</td>
+1</td>
 </tr>
 <tr>
 <td>
@@ -251,11 +187,11 @@ amount</td>
 <td>
 Integer (> 0)</td>
 <td>
-How many levels/amplifier of the effect to consume. Defaults to 1</td>
-<td style="background-color: lightgreen">
-true</td>
+How many levels/amplifier of the effect to consume.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
-/</td>
+1</td>
 </tr>
 <tr>
 <td>
@@ -443,11 +379,11 @@ amount</td>
 <td>
 Integer (> 0)</td>
 <td>
-The score amount to consume. Defaults to 1.</td>
-<td style="background-color: lightgreen">
-true</td>
+The score amount to consume.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
-/</td>
+1</td>
 </tr>
 <tr>
 <td>

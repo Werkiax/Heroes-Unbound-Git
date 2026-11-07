@@ -28,34 +28,6 @@ UI Widgets</h1>
 <h2>
 Overview</h2>
 <h3>
-FSang18's Heroes</h3>
-<ul>
-<li>
-<a href="#fsang:power_exp_bar">
-</a>
-</li>
-<li>
-<a href="#fsang:power_level">
-</a>
-</li>
-<li>
-<a href="#fsang:power_skill_points">
-</a>
-</li>
-<li>
-<a href="#fsang:power_stats">
-</a>
-</li>
-<li>
-<a href="#fsang:skill_point_purchase_button">
-Skill Point Purchase Button</a>
-</li>
-<li>
-<a href="#fsang:web_fluid_bar">
-</a>
-</li>
-</ul>
-<h3>
 Palladium</h3>
 <ul>
 <li>
@@ -135,300 +107,6 @@ Argon</h3>
 <hr>
 
 <div>
-<p>
-Renders the current power's EXP bar using textures/gui/ability_bars/exp_bar.png (dark container on the left half, yellow fill on the right half, revealed bottom-up), with a current/max tooltip on hover.</p>
-<h3>
-Settings:</h3>
-<table>
-<thead>
-<tr>
-<th>
-Setting</th>
-<th>
-Type</th>
-<th>
-Description</th>
-<th>
-Required</th>
-<th>
-Fallback Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-properties</td>
-<td>
-UI Properties</td>
-<td>
-Properties of this widget</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-{"width":50,"height":18}</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-
-<div>
-<p>
-Renders the current power's level as a boxed number, with a tooltip on hover.</p>
-<h3>
-Settings:</h3>
-<table>
-<thead>
-<tr>
-<th>
-Setting</th>
-<th>
-Type</th>
-<th>
-Description</th>
-<th>
-Required</th>
-<th>
-Fallback Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-properties</td>
-<td>
-UI Properties</td>
-<td>
-Properties of this widget</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-{"width":50,"height":18}</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-
-<div>
-<p>
-Renders the current power's skill point count as a boxed number, with a tooltip on hover.</p>
-<h3>
-Settings:</h3>
-<table>
-<thead>
-<tr>
-<th>
-Setting</th>
-<th>
-Type</th>
-<th>
-Description</th>
-<th>
-Required</th>
-<th>
-Fallback Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-properties</td>
-<td>
-UI Properties</td>
-<td>
-Properties of this widget</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-{"width":50,"height":18}</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-
-<div>
-<p>
-Renders the row of vanilla combat stats (speed, attack, armor, toughness, health, healing) as icons with their current values, evenly gapped, with per-stat hover tooltips.</p>
-<h3>
-Settings:</h3>
-<table>
-<thead>
-<tr>
-<th>
-Setting</th>
-<th>
-Type</th>
-<th>
-Description</th>
-<th>
-Required</th>
-<th>
-Fallback Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-color</td>
-<td>
-Color</td>
-<td>
-Color of the stat value text.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-#ffffff</td>
-</tr>
-<tr>
-<td>
-scale</td>
-<td>
-Float</td>
-<td>
-How much bigger or smaller the icons and text render, relative to their normal size.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-1.0</td>
-</tr>
-<tr>
-<td>
-properties</td>
-<td>
-UI Properties</td>
-<td>
-Properties of this widget</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-{"width":50,"height":18}</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-
-<div>
-<h2 id="fsang:skill_point_purchase_button">
-Skill Point Purchase Button</h2>
-<p>
-A button that spends the player's own vanilla experience levels to grant 1 skill point for the given power. Clicking it asks the server to check the player's experience, then opens a confirmation prompt (or an insufficient-experience alert) before anything is spent.</p>
-<h3>
-Settings:</h3>
-<table>
-<thead>
-<tr>
-<th>
-Setting</th>
-<th>
-Type</th>
-<th>
-Description</th>
-<th>
-Required</th>
-<th>
-Fallback Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-level_cost</td>
-<td>
-Integer (> 0)</td>
-<td>
-How many experience levels this costs.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-60</td>
-</tr>
-<tr>
-<td>
-text</td>
-<td>
-Text Component</td>
-<td>
-Text of the button</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
-</tr>
-<tr>
-<td>
-power</td>
-<td>
-String</td>
-<td>
-The identifier of the power to grant the skill point to.</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
-</tr>
-<tr>
-<td>
-properties</td>
-<td>
-UI Properties</td>
-<td>
-Properties of this widget</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-{"width":50,"height":18}</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Examples:</h3>
-<pre class="json-snippet">
-{"type":"fsang:skill_point_purchase_button","text":"+1 SP","power":"example:power"}</pre>
-</div>
-<hr>
-
-<div>
-<p>
-Renders a bar (vertical if taller than wide, horizontal otherwise) tracking the fluid stored on whatever fluid item is currently worn in the curios:hands slot, filled with that fluid's own texture and tint, with a current/max tooltip on hover.</p>
-<h3>
-Settings:</h3>
-<table>
-<thead>
-<tr>
-<th>
-Setting</th>
-<th>
-Type</th>
-<th>
-Description</th>
-<th>
-Required</th>
-<th>
-Fallback Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-properties</td>
-<td>
-UI Properties</td>
-<td>
-Properties of this widget</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-{"width":50,"height":18}</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-
-<div>
 <h2 id="palladium:blit">
 Blit</h2>
 <p>
@@ -467,7 +145,7 @@ false</td>
 <td>
 texture</td>
 <td>
-Texture Reference</td>
+Texture Reference | Dynamic Texture</td>
 <td>
 Texture path/dynamic texture</td>
 <td style="background-color: lightgreen">
@@ -597,7 +275,19 @@ close_on_press</td>
 <td>
 Boolean</td>
 <td>
-Whether or not the screen will be closed when pressing the button.</td>
+Whether or not the screen will be closed when pressing the button. This also closes the screens it was opened from. Combined with "palladium:open_screen", the new screen replaces this one.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+action</td>
+<td>
+Dialog Action</td>
+<td>
+Action that is run when the button is pressed, in the vanilla dialog action format. "palladium:open_screen" opens the new screen right away, pressing Escape there returns to this screen.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -633,6 +323,8 @@ false</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:button","text":"Click me!","close_on_press":true}</pre>
+<pre class="json-snippet">
+{"type":"palladium:button","text":"Next page","action":{"type":"palladium:open_screen","screen":"mypack:next_page"}}</pre>
 </div>
 <hr>
 
@@ -721,11 +413,11 @@ close_on_press</td>
 <td>
 Boolean</td>
 <td>
-Whether or not the screen will be closed when pressing the button.</td>
+Whether or not the screen will be closed when pressing the button. This also closes the screens it was opened from. Combined with "palladium:open_screen", the new screen replaces this one.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-/</td>
+false</td>
 </tr>
 <tr>
 <td>
@@ -736,6 +428,18 @@ Button Background (enabled*, disabled, highlighted)</td>
 The background that is drawn for the button. Can specify separate textures for normal, disabled and highlighted states.</td>
 <td style="background-color: lightgreen">
 true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+action</td>
+<td>
+Dialog Action</td>
+<td>
+Action that is run when the button is pressed, in the vanilla dialog action format. "palladium:open_screen" opens the new screen right away, pressing Escape there returns to this screen.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -803,7 +507,19 @@ close_on_press</td>
 <td>
 Boolean</td>
 <td>
-Whether or not the screen will be closed when pressing the button.</td>
+Whether or not the screen will be closed when pressing the button. This also closes the screens it was opened from. Combined with "palladium:open_screen", the new screen replaces this one.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+action</td>
+<td>
+Dialog Action</td>
+<td>
+Action that is run when the button is pressed, in the vanilla dialog action format. "palladium:open_screen" opens the new screen right away, pressing Escape there returns to this screen.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -995,11 +711,11 @@ close_on_press</td>
 <td>
 Boolean</td>
 <td>
-Whether or not the screen will be closed when pressing the button.</td>
+Whether or not the screen will be closed when pressing the button. This also closes the screens it was opened from. Combined with "palladium:open_screen", the new screen replaces this one.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-/</td>
+false</td>
 </tr>
 <tr>
 <td>
@@ -1022,6 +738,18 @@ Icon definition</td>
 Icon that is rendered on the button</td>
 <td style="background-color: lightgreen">
 true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+action</td>
+<td>
+Dialog Action</td>
+<td>
+Action that is run when the button is pressed, in the vanilla dialog action format. "palladium:open_screen" opens the new screen right away, pressing Escape there returns to this screen.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -1521,15 +1249,15 @@ Fallback Value</th>
 <tbody>
 <tr>
 <td>
-direction_texture</td>
+filled_texture</td>
 <td>
-"left_to_right" | "right_to_left" | "bottom_to_top" | "top_to_bottom"</td>
+Texture Reference | Dynamic Texture</td>
 <td>
-The direction in which the bar fills up.</td>
-<td style="background-color: lightcoral">
-false</td>
+Texture path/dynamic texture for the filled part of the bar.</td>
+<td style="background-color: lightgreen">
+true</td>
 <td>
-left_to_right</td>
+/</td>
 </tr>
 <tr>
 <td>
@@ -1547,7 +1275,7 @@ false</td>
 <td>
 background_texture</td>
 <td>
-Texture Reference</td>
+Texture Reference | Dynamic Texture</td>
 <td>
 Texture path/dynamic texture drawn behind the filled part. If not set, only the filled part is drawn.</td>
 <td style="background-color: lightcoral">
@@ -1566,18 +1294,6 @@ V-position on the textures where to start drawing from</td>
 false</td>
 <td>
 0</td>
-</tr>
-<tr>
-<td>
-filled</td>
-<td>
-Texture Reference</td>
-<td>
-Texture path/dynamic texture for the filled part of the bar.</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
 </tr>
 <tr>
 <td>
@@ -1650,6 +1366,18 @@ The value at which the bar is full. Values of 0 or less leave the bar empty.</td
 true</td>
 <td>
 /</td>
+</tr>
+<tr>
+<td>
+direction</td>
+<td>
+"left_to_right" | "right_to_left" | "bottom_to_top" | "top_to_bottom"</td>
+<td>
+The direction in which the bar fills up.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+left_to_right</td>
 </tr>
 </tbody>
 </table>
@@ -1822,7 +1550,7 @@ Examples:</h3>
 
 <div>
 <p>
-Draws an argon:ability_bar's slots while it is enabled. Left-click a slot to pick its ability (right-click for the crouch variant), use the arrows or dots to switch presets, and the floppy icon to save.</p>
+Draws the slots of an argon:ability_bar while it is enabled. Left-click picks an ability, right-click picks the crouch variant. Arrows and dots switch presets, the floppy icon saves.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -1847,7 +1575,7 @@ ability_bar</td>
 <td>
 String</td>
 <td>
-Reference to the argon:ability_bar ability to render, e.g. "fsang:marvel/mutant/reality_warping#my_bar".</td>
+The argon:ability_bar ability to draw, e.g. "fsang:marvel/mutant/reality_warping#my_bar".</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>

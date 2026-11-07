@@ -159,6 +159,18 @@ false</td>
 <td>
 0</td>
 </tr>
+<tr>
+<td>
+conditions</td>
+<td>
+Condition | Condition[]</td>
+<td>
+Condition(s) that need to be fulfilled to use the key. While they are not fulfilled, key presses are ignored and the ability pauses, so a toggled ability turns back on once they are fulfilled again. Timers keep counting down in the meantime. Unlike unlocking conditions, the ability does not show a lock in the ability bar, its icon is just dimmed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
 </tbody>
 </table>
 <h3>
@@ -169,6 +181,8 @@ Examples:</h3>
 {"type":"palladium:key_bind","behaviour":"toggle","cooldown":100,"time":200}</pre>
 <pre class="json-snippet">
 {"type":"palladium:key_bind","key_bind":{"type":"palladium:jump","cancel_jump":true},"behaviour":"held","cooldown":40}</pre>
+<pre class="json-snippet">
+{"type":"palladium:key_bind","behaviour":"toggle","conditions":{"type":"palladium:on_ground"}}</pre>
 </div>
 <script>
 function syntaxHighlight(json) {

@@ -24,348 +24,6 @@ MoLang Queries</h1>
 
 <div>
 <h2>
-palladium</h2>
-<p>
-Queries added by Palladium, for its own features and for values that are useful in player animations.</p>
-<table>
-<thead>
-<tr>
-<th>
-Query</th>
-<th>
-Returns</th>
-<th>
-Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-palladium.any_animation_finished</td>
-<td>
-Boolean</td>
-<td>
-Whether the animation of the current animation controller state has finished. Only works in animation controller transitions.</td>
-</tr>
-<tr>
-<td>
-palladium.attack_body_yaw</td>
-<td>
-Number</td>
-<td>
-The body twist in degrees during the vanilla attack swing.</td>
-</tr>
-<tr>
-<td>
-palladium.attack_on_left_arm</td>
-<td>
-Boolean</td>
-<td>
-Whether an attack swing is playing and the left arm is the main arm.</td>
-</tr>
-<tr>
-<td>
-palladium.attack_on_right_arm</td>
-<td>
-Boolean</td>
-<td>
-Whether an attack swing is playing and the right arm is the main arm.</td>
-</tr>
-<tr>
-<td>
-palladium.attack_swing_x</td>
-<td>
-Number</td>
-<td>
-The X rotation in degrees the attacking arm gets in the vanilla swing animation. Lets animations recreate the swing.</td>
-</tr>
-<tr>
-<td>
-palladium.attack_swing_y</td>
-<td>
-Number</td>
-<td>
-The Y rotation in degrees the attacking arm gets in the vanilla swing animation.</td>
-</tr>
-<tr>
-<td>
-palladium.attack_swing_z</td>
-<td>
-Number</td>
-<td>
-The Z rotation in degrees the attacking arm gets in the vanilla swing animation.</td>
-</tr>
-<tr>
-<td>
-palladium.attack_time</td>
-<td>
-Number</td>
-<td>
-Progress of the current attack swing, from 0 to 1. 0 when not attacking.</td>
-</tr>
-<tr>
-<td>
-palladium.cape_x_rotation</td>
-<td>
-Number</td>
-<td>
-The X rotation in degrees that the vanilla cape physics add on top of a cape bone. Subtract it in an animation to take full control of the cape.</td>
-</tr>
-<tr>
-<td>
-palladium.flight_limb_pitch</td>
-<td>
-Number</td>
-<td>
-The pitch the arms and legs should follow during flight, in degrees.</td>
-</tr>
-<tr>
-<td>
-palladium.flight_limb_roll</td>
-<td>
-Number</td>
-<td>
-The roll the arms and legs should follow during flight, in degrees.</td>
-</tr>
-<tr>
-<td>
-palladium.flight_phase</td>
-<td>
-Number</td>
-<td>
-The phase of the active flight type. Default flight: 0 none, 1 hovering, 2 moving, 3 propelled, 4 descending, 5 landing. Swinging: 0 none, 1 launching, 2 swinging, 3 released, 4 diving, 5 landing.</td>
-</tr>
-<tr>
-<td>
-palladium.flight_pitch</td>
-<td>
-Number</td>
-<td>
-The pitch of the current flight animation, in degrees. 0 when not flying.</td>
-</tr>
-<tr>
-<td>
-palladium.flight_propulsion_scale</td>
-<td>
-Number</td>
-<td>
-How far the propelled (fast) flight pose is blended in, from 0 to 1.</td>
-</tr>
-<tr>
-<td>
-palladium.flight_roll</td>
-<td>
-Number</td>
-<td>
-The roll of the current flight animation, in degrees. 0 when not flying.</td>
-</tr>
-<tr>
-<td>
-palladium.flight_speed_forward</td>
-<td>
-Number</td>
-<td>
-Forward speed during flight relative to the flight speed, from -1 (backwards) to 1.</td>
-</tr>
-<tr>
-<td>
-palladium.flight_speed_sideways</td>
-<td>
-Number</td>
-<td>
-Sideways speed during flight relative to the flight speed, from -1 to 1.</td>
-</tr>
-<tr>
-<td>
-palladium.flight_yaw</td>
-<td>
-Number</td>
-<td>
-The yaw of the current flight animation, in degrees. 0 when not flying.</td>
-</tr>
-<tr>
-<td>
-palladium.flight_yaw_delta</td>
-<td>
-Number</td>
-<td>
-How fast the flying entity is turning, smoothed. Useful to lean into curves.</td>
-</tr>
-<tr>
-<td>
-palladium.get_animation_timer_eased(ability)</td>
-<td>
-Number</td>
-<td>
-The eased animation timer of an ability, from 0 to 1. 0 if the ability is not found.</td>
-</tr>
-<tr>
-<td>
-palladium.gliding_tick_count</td>
-<td>
-Number</td>
-<td>
-Ticks spent gliding with an elytra. 0 when not gliding.</td>
-</tr>
-<tr>
-<td>
-palladium.grapple_distance</td>
-<td>
-Number</td>
-<td>
-The distance from the entity's shoulders to its grappling hook, in blocks. 0 without a hook.</td>
-</tr>
-<tr>
-<td>
-palladium.grapple_pitch</td>
-<td>
-Number</td>
-<td>
-The pitch from the entity's shoulders to its grappling hook, in degrees. Positive when the hook is above. 0 without a hook.</td>
-</tr>
-<tr>
-<td>
-palladium.grapple_state</td>
-<td>
-Number</td>
-<td>
-The state of the entity's active grappling hook: 0 none, 1 flying out, 2 pulling the entity towards a block, 3 reeling in a hooked entity.</td>
-</tr>
-<tr>
-<td>
-palladium.grapple_yaw</td>
-<td>
-Number</td>
-<td>
-The yaw from the entity's body to its grappling hook, in degrees from -180 to 180. Positive when the hook is to the right. 0 without a hook.</td>
-</tr>
-<tr>
-<td>
-palladium.head_x_rotation</td>
-<td>
-Number</td>
-<td>
-The head pitch in degrees. Negative when looking up.</td>
-</tr>
-<tr>
-<td>
-palladium.head_y_rotation</td>
-<td>
-Number</td>
-<td>
-The head yaw relative to the body, in degrees from -180 to 180. Unlike query.head_y_rotation this is 0 when the player looks straight ahead, which is what a head bone in an animation needs.</td>
-</tr>
-<tr>
-<td>
-palladium.horizontal_speed</td>
-<td>
-Number</td>
-<td>
-The horizontal distance the entity moved since the last tick, in blocks. Vertical movement is ignored.</td>
-</tr>
-<tr>
-<td>
-palladium.is_wall_climbing</td>
-<td>
-Boolean</td>
-<td>
-Whether the player is climbing a wall with Palladium's wall climbing ability.</td>
-</tr>
-<tr>
-<td>
-palladium.model_property(part, property)</td>
-<td>
-Number</td>
-<td>
-A value of a model part. Only works inside the overrides of a render layer, returns 0 everywhere else.</td>
-</tr>
-<tr>
-<td>
-palladium.pos_x</td>
-<td>
-Number</td>
-<td>
-The entity's X position in the world, smoothed between ticks.</td>
-</tr>
-<tr>
-<td>
-palladium.pos_y</td>
-<td>
-Number</td>
-<td>
-The entity's Y position in the world, smoothed between ticks.</td>
-</tr>
-<tr>
-<td>
-palladium.pos_z</td>
-<td>
-Number</td>
-<td>
-The entity's Z position in the world, smoothed between ticks.</td>
-</tr>
-<tr>
-<td>
-palladium.swinging_is_hanging</td>
-<td>
-Boolean</td>
-<td>
-Whether the player hangs still on a web line.</td>
-</tr>
-<tr>
-<td>
-palladium.swinging_left_arm_pitch</td>
-<td>
-Number</td>
-<td>
-A physics based pitch for the left arm while swinging, in degrees. Points up at the anchor when the arm holds the line.</td>
-</tr>
-<tr>
-<td>
-palladium.swinging_limb_vel</td>
-<td>
-Number</td>
-<td>
-How fast the swinging limbs are currently moving. Useful for secondary motion like legs trailing behind.</td>
-</tr>
-<tr>
-<td>
-palladium.swinging_on_left_arm</td>
-<td>
-Boolean</td>
-<td>
-Whether the current web line is attached to the left arm.</td>
-</tr>
-<tr>
-<td>
-palladium.swinging_on_right_arm</td>
-<td>
-Boolean</td>
-<td>
-Whether the current web line is attached to the right arm.</td>
-</tr>
-<tr>
-<td>
-palladium.swinging_right_arm_pitch</td>
-<td>
-Number</td>
-<td>
-A physics based pitch for the right arm while swinging, in degrees. Points up at the anchor when the arm holds the line.</td>
-</tr>
-<tr>
-<td>
-palladium.tick_count</td>
-<td>
-Number</td>
-<td>
-The entity's age in ticks, including the progress to the next tick for smooth motion.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-
-<div>
-<h2>
 query</h2>
 <p>
 Queries modelled after the ones in Bedrock Edition. Also available as "q".</p>
@@ -948,6 +606,348 @@ How far the yaw changed since the last tick, in degrees.</td>
 
 <div>
 <h2>
+palladium</h2>
+<p>
+Queries added by Palladium, for its own features and for values that are useful in player animations.</p>
+<table>
+<thead>
+<tr>
+<th>
+Query</th>
+<th>
+Returns</th>
+<th>
+Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+palladium.any_animation_finished</td>
+<td>
+Boolean</td>
+<td>
+Whether the animation of the current animation controller state has finished. Only works in animation controller transitions.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_body_yaw</td>
+<td>
+Number</td>
+<td>
+The body twist in degrees during the vanilla attack swing.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_on_left_arm</td>
+<td>
+Boolean</td>
+<td>
+Whether an attack swing is playing and the left arm is the main arm.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_on_right_arm</td>
+<td>
+Boolean</td>
+<td>
+Whether an attack swing is playing and the right arm is the main arm.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_swing_x</td>
+<td>
+Number</td>
+<td>
+The X rotation in degrees the attacking arm gets in the vanilla swing animation. Lets animations recreate the swing.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_swing_y</td>
+<td>
+Number</td>
+<td>
+The Y rotation in degrees the attacking arm gets in the vanilla swing animation.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_swing_z</td>
+<td>
+Number</td>
+<td>
+The Z rotation in degrees the attacking arm gets in the vanilla swing animation.</td>
+</tr>
+<tr>
+<td>
+palladium.attack_time</td>
+<td>
+Number</td>
+<td>
+Progress of the current attack swing, from 0 to 1. 0 when not attacking.</td>
+</tr>
+<tr>
+<td>
+palladium.cape_x_rotation</td>
+<td>
+Number</td>
+<td>
+The X rotation in degrees that the vanilla cape physics add on top of a cape bone. Subtract it in an animation to take full control of the cape.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_limb_pitch</td>
+<td>
+Number</td>
+<td>
+The pitch the arms and legs should follow during flight, in degrees.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_limb_roll</td>
+<td>
+Number</td>
+<td>
+The roll the arms and legs should follow during flight, in degrees.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_phase</td>
+<td>
+Number</td>
+<td>
+The phase of the active flight type. Default flight: 0 none, 1 hovering, 2 moving, 3 propelled, 4 descending, 5 landing. Swinging: 0 none, 1 launching, 2 swinging, 3 released, 4 diving, 5 landing.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_pitch</td>
+<td>
+Number</td>
+<td>
+The pitch of the current flight animation, in degrees. 0 when not flying.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_propulsion_scale</td>
+<td>
+Number</td>
+<td>
+How far the propelled (fast) flight pose is blended in, from 0 to 1.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_roll</td>
+<td>
+Number</td>
+<td>
+The roll of the current flight animation, in degrees. 0 when not flying.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_speed_forward</td>
+<td>
+Number</td>
+<td>
+Forward speed during flight relative to the flight speed, from -1 (backwards) to 1.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_speed_sideways</td>
+<td>
+Number</td>
+<td>
+Sideways speed during flight relative to the flight speed, from -1 to 1.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_yaw</td>
+<td>
+Number</td>
+<td>
+The yaw of the current flight animation, in degrees. 0 when not flying.</td>
+</tr>
+<tr>
+<td>
+palladium.flight_yaw_delta</td>
+<td>
+Number</td>
+<td>
+How fast the flying entity is turning, smoothed. Useful to lean into curves.</td>
+</tr>
+<tr>
+<td>
+palladium.get_animation_timer_eased(ability)</td>
+<td>
+Number</td>
+<td>
+The eased animation timer of an ability, from 0 to 1. 0 if the ability is not found.</td>
+</tr>
+<tr>
+<td>
+palladium.gliding_tick_count</td>
+<td>
+Number</td>
+<td>
+Ticks spent gliding with an elytra. 0 when not gliding.</td>
+</tr>
+<tr>
+<td>
+palladium.grapple_distance</td>
+<td>
+Number</td>
+<td>
+The distance from the entity's shoulders to its grappling hook, in blocks. 0 without a hook.</td>
+</tr>
+<tr>
+<td>
+palladium.grapple_pitch</td>
+<td>
+Number</td>
+<td>
+The pitch from the entity's shoulders to its grappling hook, in degrees. Positive when the hook is above. 0 without a hook.</td>
+</tr>
+<tr>
+<td>
+palladium.grapple_state</td>
+<td>
+Number</td>
+<td>
+The state of the entity's active grappling hook: 0 none, 1 flying out, 2 pulling the entity towards a block, 3 reeling in a hooked entity.</td>
+</tr>
+<tr>
+<td>
+palladium.grapple_yaw</td>
+<td>
+Number</td>
+<td>
+The yaw from the entity's body to its grappling hook, in degrees from -180 to 180. Positive when the hook is to the right. 0 without a hook.</td>
+</tr>
+<tr>
+<td>
+palladium.head_x_rotation</td>
+<td>
+Number</td>
+<td>
+The head pitch in degrees. Negative when looking up.</td>
+</tr>
+<tr>
+<td>
+palladium.head_y_rotation</td>
+<td>
+Number</td>
+<td>
+The head yaw relative to the body, in degrees from -180 to 180. Unlike query.head_y_rotation this is 0 when the player looks straight ahead, which is what a head bone in an animation needs.</td>
+</tr>
+<tr>
+<td>
+palladium.horizontal_speed</td>
+<td>
+Number</td>
+<td>
+The horizontal distance the entity moved since the last tick, in blocks. Vertical movement is ignored.</td>
+</tr>
+<tr>
+<td>
+palladium.is_wall_climbing</td>
+<td>
+Boolean</td>
+<td>
+Whether the player is climbing a wall with Palladium's wall climbing ability.</td>
+</tr>
+<tr>
+<td>
+palladium.model_property(part, property)</td>
+<td>
+Number</td>
+<td>
+A value of a model part. Only works inside the overrides of a render layer, returns 0 everywhere else.</td>
+</tr>
+<tr>
+<td>
+palladium.pos_x</td>
+<td>
+Number</td>
+<td>
+The entity's X position in the world, smoothed between ticks.</td>
+</tr>
+<tr>
+<td>
+palladium.pos_y</td>
+<td>
+Number</td>
+<td>
+The entity's Y position in the world, smoothed between ticks.</td>
+</tr>
+<tr>
+<td>
+palladium.pos_z</td>
+<td>
+Number</td>
+<td>
+The entity's Z position in the world, smoothed between ticks.</td>
+</tr>
+<tr>
+<td>
+palladium.swinging_is_hanging</td>
+<td>
+Boolean</td>
+<td>
+Whether the player hangs still on a web line.</td>
+</tr>
+<tr>
+<td>
+palladium.swinging_left_arm_pitch</td>
+<td>
+Number</td>
+<td>
+A physics based pitch for the left arm while swinging, in degrees. Points up at the anchor when the arm holds the line.</td>
+</tr>
+<tr>
+<td>
+palladium.swinging_limb_vel</td>
+<td>
+Number</td>
+<td>
+How fast the swinging limbs are currently moving. Useful for secondary motion like legs trailing behind.</td>
+</tr>
+<tr>
+<td>
+palladium.swinging_on_left_arm</td>
+<td>
+Boolean</td>
+<td>
+Whether the current web line is attached to the left arm.</td>
+</tr>
+<tr>
+<td>
+palladium.swinging_on_right_arm</td>
+<td>
+Boolean</td>
+<td>
+Whether the current web line is attached to the right arm.</td>
+</tr>
+<tr>
+<td>
+palladium.swinging_right_arm_pitch</td>
+<td>
+Number</td>
+<td>
+A physics based pitch for the right arm while swinging, in degrees. Points up at the anchor when the arm holds the line.</td>
+</tr>
+<tr>
+<td>
+palladium.tick_count</td>
+<td>
+Number</td>
+<td>
+The entity's age in ticks, including the progress to the next tick for smooth motion.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+
+<div>
+<h2>
 argon</h2>
 <p>
 Queries added by Argon.</p>
@@ -1035,26 +1035,6 @@ Number</td>
 <td>
 The roll, in degrees, of the body on the surface Wall Crawling is attached to, following where the entity looks. 0 when not on a surface.</td>
 </tr>
-</tbody>
-</table>
-</div>
-<hr>
-
-<div>
-<h2>
-fsang</h2>
-<table>
-<thead>
-<tr>
-<th>
-Query</th>
-<th>
-Returns</th>
-<th>
-Description</th>
-</tr>
-</thead>
-<tbody>
 </tbody>
 </table>
 </div>

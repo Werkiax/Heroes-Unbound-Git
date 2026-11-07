@@ -39,6 +39,10 @@ Add Random Superpower</a>
 Add Superpower</a>
 </li>
 <li>
+<a href="#palladium:as_target">
+As Target</a>
+</li>
+<li>
 <a href="#palladium:change_size">
 Change Size</a>
 </li>
@@ -111,10 +115,6 @@ Set Superpower</a>
 Argon</h3>
 <ul>
 <li>
-<a href="#argon:dash">
-Dash</a>
-</li>
-<li>
 <a href="#argon:directional_leap">
 Directional Leap</a>
 </li>
@@ -170,11 +170,11 @@ true</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:add_random_superpower","power":"example:my_power"}</pre>
+{"type":"palladium:add_random_superpower","powers":"example:my_power"}</pre>
 <pre class="json-snippet">
-{"type":"palladium:add_random_superpower","power":["example:my_power","example:my_second_power"]}</pre>
+{"type":"palladium:add_random_superpower","powers":["example:my_power","example:my_second_power"]}</pre>
 <pre class="json-snippet">
-{"type":"palladium:add_random_superpower","power":"#example:my_power_tag"}</pre>
+{"type":"palladium:add_random_superpower","powers":"#example:my_power_tag"}</pre>
 </div>
 <hr>
 
@@ -223,10 +223,54 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="palladium:as_target">
+As Target</h2>
+<p>
+Runs actions on the target entity instead of the entity itself. The target is the entity an ability affected. It is known in the final attack actions of combo attacks, the entity hit actions of beams and blasts, the actions of area actions, the actions of action on hit and the entity hit actions of custom projectiles. Only combo attacks run their actions on the attacker, the others already run them on the affected entity. Without a target, nothing happens. Everything else in the context, like the ability or power, stays the same.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+actions</td>
+<td>
+Action | Action[]</td>
+<td>
+The action(s) that are run on the target.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:as_target","actions":{"type":"palladium:set_on_fire","duration":5}}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="palladium:change_size">
 Change Size</h2>
 <p>
-Animates the entity's size to the target value using the given size change type's duration and easing.</p>
+Animates the entity's size to the target value using the given size change type's duration and easing. Inside an ability the size belongs to that ability, so running the action again with the same type replaces its earlier value. Outside of abilities all change_size actions share one size per type.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -464,8 +508,8 @@ amount</td>
 (Dynamic) Value</td>
 <td>
 The amount of health to heal.</td>
-<td style="background-color: lightcoral">
-false</td>
+<td style="background-color: lightgreen">
+true</td>
 <td>
 /</td>
 </tr>
@@ -698,11 +742,11 @@ true</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:remove_superpower","power":"example:my_power"}</pre>
+{"type":"palladium:remove_superpower","powers":"example:my_power"}</pre>
 <pre class="json-snippet">
-{"type":"palladium:remove_superpower","power":["example:my_power","example:my_second_power"]}</pre>
+{"type":"palladium:remove_superpower","powers":["example:my_power","example:my_second_power"]}</pre>
 <pre class="json-snippet">
-{"type":"palladium:remove_superpower","power":"#example:my_power_tag"}</pre>
+{"type":"palladium:remove_superpower","powers":"#example:my_power_tag"}</pre>
 </div>
 <hr>
 
@@ -736,8 +780,8 @@ command</td>
 string[]</td>
 <td>
 The command(s) that are being run.</td>
-<td style="background-color: lightgreen">
-true</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -838,8 +882,8 @@ fall_distance</td>
 (Dynamic) Value</td>
 <td>
 The value the fall distance is set to.</td>
-<td style="background-color: lightcoral">
-false</td>
+<td style="background-color: lightgreen">
+true</td>
 <td>
 /</td>
 </tr>
@@ -938,8 +982,8 @@ duration</td>
 (Dynamic) Value</td>
 <td>
 How long the entity will burn.</td>
-<td style="background-color: lightcoral">
-false</td>
+<td style="background-color: lightgreen">
+true</td>
 <td>
 /</td>
 </tr>
@@ -992,11 +1036,11 @@ true</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:set_random_superpower","power":"example:my_power"}</pre>
+{"type":"palladium:set_random_superpower","powers":"example:my_power"}</pre>
 <pre class="json-snippet">
-{"type":"palladium:set_random_superpower","power":["example:my_power","example:my_second_power"]}</pre>
+{"type":"palladium:set_random_superpower","powers":["example:my_power","example:my_second_power"]}</pre>
 <pre class="json-snippet">
-{"type":"palladium:set_random_superpower","power":"#example:my_power_tag"}</pre>
+{"type":"palladium:set_random_superpower","powers":"#example:my_power_tag"}</pre>
 </div>
 <hr>
 
@@ -1101,50 +1145,6 @@ Examples:</h3>
 <hr>
 
 <div>
-<h2 id="argon:dash">
-Dash</h2>
-<p>
-Launches the entity horizontally in the direction it's facing, scaled by a velocity modifier, unaffected by whether it's looking up or down unlike leap.</p>
-<h3>
-Settings:</h3>
-<table>
-<thead>
-<tr>
-<th>
-Setting</th>
-<th>
-Type</th>
-<th>
-Description</th>
-<th>
-Required</th>
-<th>
-Fallback Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-velocity_modifier</td>
-<td>
-Float</td>
-<td>
-The multiplier applied to the entity's horizontal facing direction when this action runs.</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Examples:</h3>
-<pre class="json-snippet">
-{"type":"argon:dash","velocity_modifier":1.5}</pre>
-</div>
-<hr>
-
-<div>
 <h2 id="argon:directional_leap">
 Directional Leap</h2>
 <p>
@@ -1192,7 +1192,7 @@ Examples:</h3>
 <h2 id="argon:jump">
 Jump</h2>
 <p>
-Launches the entity straight up like a jump, keeping its sideways movement. A normal jump is about 0.42 and gets roughly 1.25 blocks; 0.8 gets roughly 4.5.</p>
+Launches the entity straight up like a jump, keeping its sideways movement. A normal jump is about 0.42 and gets roughly 1.25 blocks, 0.8 gets roughly 4.5.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -1215,7 +1215,7 @@ Fallback Value</th>
 <td>
 velocity</td>
 <td>
-Float</td>
+(Dynamic) Value</td>
 <td>
 The upward speed, in blocks per tick.</td>
 <td style="background-color: lightgreen">
@@ -1248,7 +1248,7 @@ Examples:</h3>
 <h2 id="argon:ride">
 Ride</h2>
 <p>
-Mounts the entity you look at once. "ride_target" has you ride it; "target_rides_player" puts it on top of you instead (toggled off if triggered again).</p>
+Mounts the entity you look at, once. "ride_target" makes you ride it, "target_rides_player" puts it on top of you instead (toggled off if triggered again).</p>
 <h3>
 Settings:</h3>
 <table>
@@ -1273,7 +1273,7 @@ mode</td>
 <td>
 "ride_target" | "target_rides_player"</td>
 <td>
-Which of the two mounts the entity into: "ride_target" (user rides target) or "target_rides_player" (target rides user).</td>
+Which way to mount: "ride_target" (user rides target) or "target_rides_player" (target rides user).</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>

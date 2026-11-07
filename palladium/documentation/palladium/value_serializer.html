@@ -79,6 +79,10 @@ Entity Health</a>
 Entity Tick Count</a>
 </li>
 <li>
+<a href="#palladium:event_data">
+Event Data</a>
+</li>
+<li>
 <a href="#palladium:float_data_attachment">
 Float Data Attachment</a>
 </li>
@@ -158,6 +162,10 @@ Wide Player Model</a>
 <h3>
 Argon</h3>
 <ul>
+<li>
+<a href="#argon:beam_charge">
+Beam Charge</a>
+</li>
 <li>
 <a href="#argon:flight_speed">
 Flight Speed</a>
@@ -640,8 +648,8 @@ Examples:</h3>
 
 <div>
 <h2 id="palladium:crouching">
-Crouching<span class="type-badge" title="Returns String">
-String</span>
+Crouching<span class="type-badge" title="Returns Boolean | String">
+Boolean | String</span>
 </h2>
 <p>
 Checks if the entity is crouching.</p>
@@ -669,9 +677,9 @@ on_false</td>
 <td>
 String</td>
 <td>
-The value to return if the result is false.</td>
-<td style="background-color: lightgreen">
-true</td>
+The string to return if the result is false. If omitted, the value returns false.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -681,9 +689,9 @@ on_true</td>
 <td>
 String</td>
 <td>
-The value to return if the result is true.</td>
-<td style="background-color: lightgreen">
-true</td>
+The string to return if the result is true. If omitted, the value returns true.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -691,6 +699,8 @@ true</td>
 </table>
 <h3>
 Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:crouching"}</pre>
 <pre class="json-snippet">
 {"type":"palladium:crouching","on_true":"is_crouching","on_false":"not_crouching"}</pre>
 </div>
@@ -845,6 +855,54 @@ Examples:</h3>
 {"type":"palladium:entity_tick_count"}</pre>
 <pre class="json-snippet">
 {"type":"palladium:entity_tick_count","modify":"this * 2"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:event_data">
+Event Data<span class="type-badge" title="Returns Anything">
+Anything</span>
+</h2>
+<p>
+Reads a number or string from the data of the custom event that started the current automation. Booleans are stored as 1 or 0. Returns 0 if there is no event or nothing exists at the path.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+path</td>
+<td>
+String</td>
+<td>
+Path to the entry in the event data. Use dots to go into nested objects, e.g. "reward.tier".</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:event_data","path":"tier"}</pre>
+<pre class="json-snippet">
+{"type":"palladium:event_data","path":"reward.tier"}</pre>
 </div>
 <hr>
 
@@ -1042,8 +1100,8 @@ Examples:</h3>
 
 <div>
 <h2 id="palladium:item_open">
-Item Open<span class="type-badge" title="Returns String">
-String</span>
+Item Open<span class="type-badge" title="Returns Boolean | String">
+Boolean | String</span>
 </h2>
 <p>
 Checks if an item was opened.</p>
@@ -1071,9 +1129,9 @@ on_false</td>
 <td>
 String</td>
 <td>
-The value to return if the result is false.</td>
-<td style="background-color: lightgreen">
-true</td>
+The string to return if the result is false. If omitted, the value returns false.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -1083,9 +1141,9 @@ on_true</td>
 <td>
 String</td>
 <td>
-The value to return if the result is true.</td>
-<td style="background-color: lightgreen">
-true</td>
+The string to return if the result is true. If omitted, the value returns true.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -1482,7 +1540,7 @@ Score<span class="type-badge" title="Returns Integer">
 Integer</span>
 </h2>
 <p>
-Returns the score of the entity for the given objective.</p>
+Returns the score of the entity for the given objective. Only works on the server.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -1510,6 +1568,18 @@ MoLang</td>
 MoLang function to modify the value.</td>
 <td style="background-color: lightcoral">
 false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+objective</td>
+<td>
+String</td>
+<td>
+The name of the scoreboard objective.</td>
+<td style="background-color: lightgreen">
+true</td>
 <td>
 /</td>
 </tr>
@@ -1584,8 +1654,8 @@ Examples:</h3>
 
 <div>
 <h2 id="palladium:slim_player_model">
-Slim Player Model<span class="type-badge" title="Returns String">
-String</span>
+Slim Player Model<span class="type-badge" title="Returns Boolean | String">
+Boolean | String</span>
 </h2>
 <p>
 Checks if the entity is a player and has the slim-armed (Alex) player model.</p>
@@ -1613,9 +1683,9 @@ on_false</td>
 <td>
 String</td>
 <td>
-The value to return if the result is false.</td>
-<td style="background-color: lightgreen">
-true</td>
+The string to return if the result is false. If omitted, the value returns false.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -1625,9 +1695,9 @@ on_true</td>
 <td>
 String</td>
 <td>
-The value to return if the result is true.</td>
-<td style="background-color: lightgreen">
-true</td>
+The string to return if the result is true. If omitted, the value returns true.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -1878,8 +1948,8 @@ Examples:</h3>
 
 <div>
 <h2 id="palladium:wide_player_model">
-Wide Player Model<span class="type-badge" title="Returns String">
-String</span>
+Wide Player Model<span class="type-badge" title="Returns Boolean | String">
+Boolean | String</span>
 </h2>
 <p>
 Checks if the entity is a player and has the wide-armed (Steve) player model.</p>
@@ -1907,9 +1977,9 @@ on_false</td>
 <td>
 String</td>
 <td>
-The value to return if the result is false.</td>
-<td style="background-color: lightgreen">
-true</td>
+The string to return if the result is false. If omitted, the value returns false.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -1919,9 +1989,9 @@ on_true</td>
 <td>
 String</td>
 <td>
-The value to return if the result is true.</td>
-<td style="background-color: lightgreen">
-true</td>
+The string to return if the result is true. If omitted, the value returns true.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -1935,12 +2005,82 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="argon:beam_charge">
+Beam Charge<span class="type-badge" title="Returns Double">
+Double</span>
+</h2>
+<p>
+Scales a value by how charged the shot of a charged argon:energy_beam was. Use it in that beam's damage, knockback or lift. Multiplies "value" by "min" at no charge and "max" at full charge.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+min</td>
+<td>
+Double</td>
+<td>
+The multiplier at the lowest charge.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+max</td>
+<td>
+Double</td>
+<td>
+The multiplier at full charge.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
+value</td>
+<td>
+(Dynamic) Value</td>
+<td>
+The value to scale.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:beam_charge","value":10,"max":2.0}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="argon:flight_speed">
 Flight Speed<span class="type-badge" title="Returns Double">
 Double</span>
 </h2>
 <p>
-A flight speed following an argon:flight_speed_adjuster dial: "base" plus the dial's value divided by its division_amount. For a flight type's "speed" and "sprint_speed"; just "base" while the ability is off.</p>
+A flight speed that follows an argon:flight_speed_adjuster dial: "base" plus the dial's value divided by its division_amount. Use it for a flight type's "speed" and "sprint_speed". Just "base" while the ability is off.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -1998,7 +2138,7 @@ Item Custom Value<span class="type-badge" title="Returns Double">
 Double</span>
 </h2>
 <p>
-A number a Tech Table module wrote onto the item in the given slot with its "argon:custom_value" effect, by the name given there; the fallback if the item has no such value.</p>
+A number a Tech Table module wrote onto the item in the given slot with its "argon:custom_value" effect, under the name given there. Uses the fallback if the item has no such value.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -2068,7 +2208,7 @@ Smoothed<span class="type-badge" title="Returns Double">
 Double</span>
 </h2>
 <p>
-A number that slides toward another value at a steady speed instead of jumping, so stepped values like a beam's range change smoothly. Each entity has its own figure, restarting if unread for half a second.</p>
+A number that slides toward another value at a steady speed instead of jumping, so stepped values like a beam's range change smoothly. Each entity has its own figure, which restarts if unread for half a second.</p>
 <h3>
 Settings:</h3>
 <table>
