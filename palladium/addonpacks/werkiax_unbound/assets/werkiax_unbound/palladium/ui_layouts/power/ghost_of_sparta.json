@@ -1,5 +1,7 @@
 {
-  "type": "palladium:power/default",
-  "background": "minecraft:textures/block/orange_concrete_powder.png",
-  "display_type": "tree"
+    "type": "palladium:power/default",
+    "width": 300,
+    "height": 256,
+    "background": "minecraft:textures/block/orange_concrete_powder.png",
+    "display_type": "tree"
 }
