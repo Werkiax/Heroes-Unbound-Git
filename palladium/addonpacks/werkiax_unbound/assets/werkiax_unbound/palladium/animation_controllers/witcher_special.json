@@ -18,12 +18,54 @@
             "animation": "werkiax_unbound:aard_cast",
             "blend_transition": 2,
             "transitions": {
-                "idle": "palladium.any_animation_finished()"
+                "aard_ring": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:witcher#aard"
+                    },
+                    {
+                        "type": "palladium:ability_ticks",
+                        "ability": "werkiax_unbound:witcher#aard",
+                        "min": 10
+                    }
+                ],
+                "wait": "palladium.any_animation_finished()"
+            }
+        },
+        "aard_ring": {
+            "animation": "werkiax_unbound:aard_ring",
+            "blend_transition": 2,
+            "transitions": {
+                "wait": "palladium.any_animation_finished()"
+            }
+        },
+        "wait": {
+            "transitions": {
+                "idle": {
+                    "type": "palladium:not",
+                    "conditions": {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:witcher#aard"
+                    }
+                }
             }
         },
         "igni": {
-            "animation": "werkiax_unbound:igni_cone",
+            "animation": "werkiax_unbound:igni_hold",
             "blend_transition": 2,
+            "transitions": {
+                "igni_end": {
+                    "type": "palladium:not",
+                    "conditions": {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:witcher#igni"
+                    }
+                }
+            }
+        },
+        "igni_end": {
+            "animation": "werkiax_unbound:igni_end",
+            "blend_transition": 1,
             "transitions": {
                 "idle": "palladium.any_animation_finished()"
             }

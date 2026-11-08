@@ -234,7 +234,7 @@
             "type": "palladium:dummy",
             "properties": {
                 "title": "Igni",
-                "description": "Release a cone of fire that damages and ignites enemies.",
+                "description": "Tap to release a cone of fire that damages and ignites enemies. Hold to emit a continuous short-range stream of fire instead.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/igni.png"
@@ -245,9 +245,46 @@
             "state": {
                 "enabling": {
                     "type": "palladium:key_bind",
-                    "behaviour": "activation",
-                    "time": 3,
+                    "behaviour": "held",
+                    "time": 60,
                     "cooldown": "5s"
+                }
+            }
+        },
+        "igni_hold_counter": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:igni_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:witcher#igni"
+                }
+            }
+        },
+        "igni_counter_reset": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:set_data_attachment",
+                "attachment": "werkiax_unbound:igni_charge",
+                "value": 0
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:witcher#igni"
                 }
             }
         },
@@ -304,10 +341,76 @@
                 "hidden_in_bar": true
             },
             "state": {
-                "enabling": {
-                    "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:witcher#igni"
+                "enabling": [
+                    {
+                        "type": "palladium:ability_last_tick",
+                        "ability": "werkiax_unbound:witcher#igni"
+                    },
+                    {
+                        "type": "palladium:number_data_attachment",
+                        "attachment": "werkiax_unbound:igni_charge",
+                        "min": 0,
+                        "max": 9
+                    }
+                ]
+            }
+        },
+        "igni_stream": {
+            "type": "argon:energy_beam",
+            "beam_renderer": "werkiax_unbound:igni_stream",
+            "damage": 2.0,
+            "damage_type": "minecraft:on_fire",
+            "max_distance": 6,
+            "max_bounces": 0,
+            "redirect_off_blocks": false,
+            "pierce": true,
+            "set_on_fire_ticks": 60,
+            "cone": {
+                "start_size": 0.3,
+                "end_size": 3.0,
+                "end_distance": 6.0,
+                "rays": 16
+            },
+            "visuals": [
+                {
+                    "shape": "streak",
+                    "particle": {
+                        "type": "minecraft:flame"
+                    },
+                    "step": 0.5,
+                    "spread": 0.25,
+                    "speed": 0.05
+                },
+                {
+                    "shape": "streak",
+                    "particle": {
+                        "type": "minecraft:smoke"
+                    },
+                    "step": 1.2,
+                    "spread": 0.3,
+                    "speed": 0.03
                 }
+            ],
+            "pierce_size": {
+                "width": 1.2,
+                "height": 1.0
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:witcher#igni"
+                    },
+                    {
+                        "type": "palladium:ability_ticks",
+                        "ability": "werkiax_unbound:witcher#igni",
+                        "min": 10
+                    }
+                ]
             }
         },
         "fx_igni": {
@@ -326,7 +429,32 @@
             "state": {
                 "enabling": {
                     "type": "palladium:ability_first_tick",
-                    "ability": "werkiax_unbound:witcher#igni"
+                    "ability": "werkiax_unbound:witcher#igni_cone"
+                }
+            }
+        },
+        "fx_igni_stream": {
+            "type": "palladium:action",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "first_tick_action": {
+                "type": "palladium:run_command",
+                "command": [
+                    "playsound minecraft:entity.blaze.shoot master @a ~ ~ ~ 1.0 0.6"
+                ]
+            },
+            "action": {
+                "type": "palladium:run_command",
+                "command": [
+                    "execute if predicate {condition:'minecraft:random_chance',chance:0.25} run playsound minecraft:item.firecharge.use master @a ~ ~ ~ 0.5 0.9"
+                ]
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:witcher#igni_stream"
                 }
             }
         }
