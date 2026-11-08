@@ -1,17 +1,6 @@
 {
     "name": "Spirit Form",
     "icon": "minecraft:ender_eye",
-    "energy_bars": {
-        "negative_energy": {
-            "max": 10000,
-            "color": "F2F2F2",
-            "synced_value": {
-                "type": "palladium:integer_data_attachment",
-                "attachment": "werkiax_unbound:negative_energy",
-                "fallback": 0
-            }
-        }
-    },
     "abilities": {
         "spirit_return": {
             "type": "palladium:action",
@@ -21,8 +10,8 @@
                     "command": "tag @s remove negative_spirit_wandering"
                 },
                 {
-                    "type": "palladium:set_superpower",
-                    "power": "werkiax_unbound:negative_spirit"
+                    "type": "palladium:remove_superpower",
+                    "powers": "werkiax_unbound:spirit_wander"
                 }
             ],
             "properties": {
@@ -83,8 +72,8 @@
                         "min": 20
                     },
                     {
-                        "type": "palladium:energy_bar",
-                        "energy_bar": "werkiax_unbound:spirit_wander#negative_energy",
+                        "type": "palladium:number_data_attachment",
+                        "attachment": "werkiax_unbound:negative_energy",
                         "max": 0
                     }
                 ]
@@ -98,8 +87,8 @@
                     "command": "tag @s remove negative_spirit_wandering"
                 },
                 {
-                    "type": "palladium:set_superpower",
-                    "power": "werkiax_unbound:negative_spirit"
+                    "type": "palladium:remove_superpower",
+                    "powers": "werkiax_unbound:spirit_wander"
                 }
             ],
             "properties": {
@@ -419,8 +408,8 @@
                     ]
                 },
                 {
-                    "type": "palladium:set_superpower",
-                    "power": "werkiax_unbound:negative_spirit"
+                    "type": "palladium:remove_superpower",
+                    "powers": "werkiax_unbound:spirit_wander"
                 }
             ],
             "properties": {
