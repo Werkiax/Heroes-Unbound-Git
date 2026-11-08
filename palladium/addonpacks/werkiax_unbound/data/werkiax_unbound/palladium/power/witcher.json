@@ -827,7 +827,7 @@
                 "enabling": {
                     "type": "palladium:key_bind",
                     "behaviour": "activation",
-                    "time": 1,
+                    "time": "10s",
                     "cooldown": "2s"
                 }
             }
@@ -882,7 +882,7 @@
             "type": "palladium:action",
             "action": {
                 "type": "palladium:run_command",
-                "command": "execute as @e[type=minecraft:item_display,tag=yrden_sigil,distance=..32] at @s run tp @s ~ ~ ~ ~4 0"
+                "command": "execute as @e[type=minecraft:item_display,tag=yrden_sigil,distance=..64] at @s run tp @s ~ ~ ~ ~4 0"
             },
             "properties": {
                 "hidden_in_gui": true,
@@ -890,9 +890,8 @@
             },
             "state": {
                 "enabling": {
-                    "type": "palladium:ability_ticks",
-                    "ability": "werkiax_unbound:witcher#yrden_zone",
-                    "min": 1
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:witcher#yrden"
                 }
             }
         },
@@ -900,7 +899,7 @@
             "type": "palladium:action",
             "first_tick_action": {
                 "type": "palladium:run_command",
-                "command": "kill @e[type=minecraft:item_display,tag=yrden_sigil,distance=..32,limit=1,sort=nearest]"
+                "command": "kill @e[type=minecraft:item_display,tag=yrden_sigil,distance=..64,limit=1,sort=nearest]"
             },
             "properties": {
                 "hidden_in_gui": true,
@@ -909,7 +908,7 @@
             "state": {
                 "enabling": {
                     "type": "palladium:ability_last_tick",
-                    "ability": "werkiax_unbound:witcher#yrden_zone"
+                    "ability": "werkiax_unbound:witcher#yrden"
                 }
             }
         }
