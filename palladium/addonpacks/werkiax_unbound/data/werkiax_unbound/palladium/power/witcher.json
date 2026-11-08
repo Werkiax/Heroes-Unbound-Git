@@ -13,7 +13,7 @@
                     "texture": "werkiax_unbound:textures/icons/aard.png"
                 },
                 "list_index": 0,
-                "color": "cyan"
+                "color": "blue"
             },
             "state": {
                 "enabling": {
@@ -716,6 +716,32 @@
                 "enabling": {
                     "type": "palladium:ability_enabled",
                     "ability": "werkiax_unbound:witcher#igni_stream"
+                }
+            }
+        },
+        "axii": {
+            "type": "argon:calm",
+            "range": 8.0,
+            "hold_time": "2s",
+            "calm_duration": "5s",
+            "lockout_duration": "10s",
+            "entity_tag": "#werkiax_unbound:axii_calmable",
+            "calm_effect": "argon:calmed",
+            "lockout_effect": "argon:calm_lockout",
+            "properties": {
+                "title": "Axii",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/axii.png"
+                },
+                "list_index": 3,
+                "color": "green"
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "behaviour": "held",
+                    "cooldown": "1s"
                 }
             }
         },
