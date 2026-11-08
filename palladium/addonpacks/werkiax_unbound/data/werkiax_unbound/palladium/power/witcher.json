@@ -838,7 +838,10 @@
             "duration": "10s",
             "interval": "1s",
             "damage": 2,
-            "damage_type": "minecraft:magic",
+            "damage_type": "argon:magic",
+            "particle": {
+                "type": "minecraft:dragon_breath"
+            },
             "effects": [
                 {
                     "effect": "minecraft:slowness",
@@ -854,60 +857,6 @@
             "state": {
                 "enabling": {
                     "type": "palladium:ability_first_tick",
-                    "ability": "werkiax_unbound:witcher#yrden"
-                }
-            }
-        },
-        "fx_yrden": {
-            "type": "palladium:action",
-            "first_tick_action": {
-                "type": "palladium:run_command",
-                "command": [
-                    "summon minecraft:item_display ~ ~0.03 ~ {Tags:[\"yrden_sigil\"],billboard:\"fixed\",teleport_duration:1,brightness:{sky:15,block:15},view_range:2.0f,item:{id:\"minecraft:paper\",count:1,components:{\"minecraft:item_model\":\"werkiax_unbound:yrden_sigil\"}},transformation:{left_rotation:[-0.7071f,0f,0f,0.7071f],right_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[10f,10f,0.01f]}}",
-                    "playsound minecraft:block.beacon.activate master @a ~ ~ ~ 1.0 0.6"
-                ]
-            },
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_first_tick",
-                    "ability": "werkiax_unbound:witcher#yrden"
-                }
-            }
-        },
-        "fx_yrden_spin": {
-            "type": "palladium:action",
-            "action": {
-                "type": "palladium:run_command",
-                "command": "execute as @e[type=minecraft:item_display,tag=yrden_sigil,distance=..64] at @s run tp @s ~ ~ ~ ~4 0"
-            },
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:witcher#yrden"
-                }
-            }
-        },
-        "fx_yrden_end": {
-            "type": "palladium:action",
-            "first_tick_action": {
-                "type": "palladium:run_command",
-                "command": "kill @e[type=minecraft:item_display,tag=yrden_sigil,distance=..64,limit=1,sort=nearest]"
-            },
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_last_tick",
                     "ability": "werkiax_unbound:witcher#yrden"
                 }
             }
