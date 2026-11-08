@@ -1,0 +1,28 @@
+{
+    "spacing": 0.25,
+    "lifetime": 10,
+    "requires_movement": false,
+    "renderer": {
+        "type": "palladium:lightning_aura",
+        "amount": 4,
+        "branches": 3,
+        "segments": 8,
+        "growth": 3,
+        "render_settings": {
+            "glow": {
+                "color": "#B9E7FF",
+                "opacity": 0.85
+            },
+            "core": {
+                "color": "#000000"
+            },
+            "bloom": 3,
+            "size": 2.0
+        },
+        "arc_settings": {
+            "idle_range": 10.0,
+            "running_range": 10.0,
+            "sprinting_range": 10.0
+        }
+    }
+}
