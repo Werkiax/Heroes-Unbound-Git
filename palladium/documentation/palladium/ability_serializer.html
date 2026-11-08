@@ -805,7 +805,7 @@ action</td>
 <td>
 Action | Action[]</td>
 <td>
-Action(s) that are performed when an entity is attacked</td>
+Action(s) that are performed for the attacked entity. Use 'palladium:as_source' to run actions on the entity with the ability instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -917,7 +917,7 @@ first_tick_action</td>
 <td>
 Action | Action[]</td>
 <td>
-Action(s) that are performed during the first tick of the ability</td>
+Action(s) that are performed for every entity in the area during the first tick of the ability. Use 'palladium:as_source' to run actions on the entity with the ability instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -929,7 +929,7 @@ last_tick_action</td>
 <td>
 Action | Action[]</td>
 <td>
-Action(s) that are performed during the last tick of the ability</td>
+Action(s) that are performed for every entity in the area during the last tick of the ability. Use 'palladium:as_source' to run actions on the entity with the ability instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -953,7 +953,7 @@ action</td>
 <td>
 Action | Action[]</td>
 <td>
-Action(s) that are performed during each tick of the ability</td>
+Action(s) that are performed for every entity in the area during each tick of the ability. Use 'palladium:as_source' to run actions on the entity with the ability instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1117,7 +1117,7 @@ entity_hit_actions</td>
 <td>
 Action | Action[]</td>
 <td>
-Action(s) that are performed every tick the beam hits an entity. They run for the entity that was hit.</td>
+Action(s) that are performed every tick the beam hits an entity. They run for the entity that was hit. Use 'palladium:as_source' to run actions on the entity with the ability instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1257,7 +1257,7 @@ entity_hit_actions</td>
 <td>
 Action | Action[]</td>
 <td>
-Action(s) that are performed when the blast hits an entity. They run for the entity that was hit.</td>
+Action(s) that are performed when the blast hits an entity. They run for the entity that was hit. Use 'palladium:as_source' to run actions on the entity with the ability instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1557,7 +1557,7 @@ on_final_attack</td>
 <td>
 Action | Action[]</td>
 <td>
-Action(s) run when the final attack of the combo lands.</td>
+Action(s) run for the entity hit by the final attack of the combo. Use 'palladium:as_source' to run actions on the entity with the ability instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -2467,7 +2467,7 @@ The scale of the texture.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@f500481</td>
+net.minecraft.world.phys.Vec2@279c94ad</td>
 </tr>
 <tr>
 <td>
@@ -2515,7 +2515,7 @@ The translation of the texture.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@75be3cdf</td>
+net.minecraft.world.phys.Vec2@13ea9afc</td>
 </tr>
 </tbody>
 </table>
@@ -7637,7 +7637,7 @@ Who this ability forces to drown, each entry either {"type": "self"} or {"type":
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[Target[mode=SELF, range=net.threetag.palladium.logic.value.StaticValue@6e8627e6]]</td>
+[Target[mode=SELF, range=net.threetag.palladium.logic.value.StaticValue@28ea7f58]]</td>
 </tr>
 </tbody>
 </table>
@@ -9747,7 +9747,7 @@ Pixel offset of the slot strip from its default spot above the hotbar.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@75be3cdf</td>
+net.minecraft.world.phys.Vec2@13ea9afc</td>
 </tr>
 <tr>
 <td>
@@ -10269,7 +10269,7 @@ Pixel offset of the icon and label from their default spot above the hotbar.</td
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@75be3cdf</td>
+net.minecraft.world.phys.Vec2@13ea9afc</td>
 </tr>
 <tr>
 <td>
@@ -11391,7 +11391,7 @@ Whether the radar should rotate with the player, or be static.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-Rotation[mode=LOOK_DIRECTION, staticAngle=net.threetag.palladium.logic.value.StaticValue@6e8627e6]</td>
+Rotation[mode=LOOK_DIRECTION, staticAngle=net.threetag.palladium.logic.value.StaticValue@28ea7f58]</td>
 </tr>
 <tr>
 <td>
@@ -11403,7 +11403,7 @@ The radius, in blocks, within which entities are detected and shown on the radar
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.threetag.palladium.logic.value.StaticValue@36bf903c</td>
+net.threetag.palladium.logic.value.StaticValue@5fdb445b</td>
 </tr>
 <tr>
 <td>
@@ -11415,7 +11415,7 @@ The X/Y onscreen position of the radar relative to the alignment.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-Translate[x=net.threetag.palladium.logic.value.StaticValue@6e8627e6, y=net.threetag.palladium.logic.value.StaticValue@6e8627e6]</td>
+Translate[x=net.threetag.palladium.logic.value.StaticValue@28ea7f58, y=net.threetag.palladium.logic.value.StaticValue@28ea7f58]</td>
 </tr>
 <tr>
 <td>
@@ -13021,7 +13021,7 @@ The [x, y] scale of the text.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@f500481</td>
+net.minecraft.world.phys.Vec2@279c94ad</td>
 </tr>
 <tr>
 <td>
@@ -13057,7 +13057,7 @@ A [x, y] pixel offset applied to the text's position.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@75be3cdf</td>
+net.minecraft.world.phys.Vec2@13ea9afc</td>
 </tr>
 </tbody>
 </table>

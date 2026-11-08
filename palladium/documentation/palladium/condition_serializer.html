@@ -83,6 +83,14 @@ Any Animation Finished</a>
 As Client Player</a>
 </li>
 <li>
+<a href="#palladium:as_source">
+As Source</a>
+</li>
+<li>
+<a href="#palladium:as_target">
+As Target</a>
+</li>
+<li>
 <a href="#palladium:attribute">
 Attribute</a>
 </li>
@@ -1141,6 +1149,94 @@ true</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:as_client_player","conditions":[{"type":"palladium:crouching"}]}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:as_source">
+As Source</h2>
+<p>
+Checks the given conditions for the source entity instead of the entity itself. The source is the entity that caused something to happen to the current entity, like the attacker in action on hit, area actions, beams, blasts and the final attack of combo attacks, or the shooter of a custom projectile. Without a source, this condition is not fulfilled.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+conditions</td>
+<td>
+Condition | Condition[]</td>
+<td>
+The condition(s) that are checked for the source.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:as_source","conditions":[{"type":"palladium:crouching"}]}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:as_target">
+As Target</h2>
+<p>
+Checks the given conditions for the target entity instead of the entity itself. The target is the entity that was affected, like the hit entity in action on hit, area actions, beams, blasts, the final attack of combo attacks and custom projectiles. These already check their conditions for the target, so this is mostly useful inside of an as source condition. Without a target, this condition is not fulfilled.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+conditions</td>
+<td>
+Condition | Condition[]</td>
+<td>
+The condition(s) that are checked for the target.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:as_target","conditions":[{"type":"palladium:crouching"}]}</pre>
 </div>
 <hr>
 
@@ -2980,7 +3076,7 @@ true</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:multi_jumps_remaining","ability":"example:power#multi_jump","max":0}</pre>
+{"type":"palladium:multi_jumps_remaining","ability":"example:power#multi_jump","min":0,"max":0}</pre>
 </div>
 <hr>
 

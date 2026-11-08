@@ -7,11 +7,22 @@
                 "aard": {
                     "type": "palladium:ability_enabled",
                     "ability": "werkiax_unbound:witcher#aard"
+                },
+                "igni": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:witcher#igni"
                 }
             }
         },
         "aard": {
             "animation": "werkiax_unbound:aard_cast",
+            "blend_transition": 2,
+            "transitions": {
+                "idle": "palladium.any_animation_finished()"
+            }
+        },
+        "igni": {
+            "animation": "werkiax_unbound:igni_cone",
             "blend_transition": 2,
             "transitions": {
                 "idle": "palladium.any_animation_finished()"

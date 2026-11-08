@@ -7,7 +7,7 @@
             "type": "palladium:dummy",
             "properties": {
                 "title": "Aard",
-                "description": "Release a forward shockwave of telekinetic force, damaging enemies and pushing them away.",
+                "description": "Tap to release a forward shockwave of telekinetic force. Hold to release a 360 degree shockwave around you instead.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/aard.png"
@@ -18,9 +18,46 @@
             "state": {
                 "enabling": {
                     "type": "palladium:key_bind",
-                    "behaviour": "activation",
-                    "time": 3,
+                    "behaviour": "held",
+                    "time": 40,
                     "cooldown": "4s"
+                }
+            }
+        },
+        "aard_hold_counter": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:aard_charge",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:witcher#aard"
+                }
+            }
+        },
+        "aard_counter_reset": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:set_data_attachment",
+                "attachment": "werkiax_unbound:aard_charge",
+                "value": 0
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:witcher#aard"
                 }
             }
         },
@@ -100,10 +137,18 @@
                 "hidden_in_bar": true
             },
             "state": {
-                "enabling": {
-                    "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:witcher#aard"
-                }
+                "enabling": [
+                    {
+                        "type": "palladium:ability_last_tick",
+                        "ability": "werkiax_unbound:witcher#aard"
+                    },
+                    {
+                        "type": "palladium:number_data_attachment",
+                        "attachment": "werkiax_unbound:aard_charge",
+                        "min": 0,
+                        "max": 9
+                    }
+                ]
             }
         },
         "fx_aard": {
@@ -127,7 +172,161 @@
             "state": {
                 "enabling": {
                     "type": "palladium:ability_first_tick",
-                    "ability": "werkiax_unbound:witcher#aard"
+                    "ability": "werkiax_unbound:witcher#aard_cone"
+                }
+            }
+        },
+        "aard_ring": {
+            "type": "argon:area_burst",
+            "shape": "sphere",
+            "radius": 6,
+            "damage": 8,
+            "damage_type": "minecraft:player_attack",
+            "knockback_distance": 5,
+            "lift": 0.3,
+            "falloff": 0.3,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:witcher#aard"
+                    },
+                    {
+                        "type": "palladium:ability_ticks",
+                        "ability": "werkiax_unbound:witcher#aard",
+                        "min": 10
+                    }
+                ]
+            }
+        },
+        "fx_aard_ring": {
+            "type": "palladium:action",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "first_tick_action": [
+                {
+                    "type": "palladium:run_command",
+                    "command": [
+                        "playsound minecraft:entity.wind_charge.wind_burst master @a ~ ~ ~ 1.0 0.7",
+                        "playsound minecraft:entity.warden.sonic_boom master @a ~ ~ ~ 0.6 1.4",
+                        "particle minecraft:dust_color_transition{from_color:[0.55,0.83,1.0],to_color:[1.0,1.0,1.0],scale:1.6} ~ ~0.3 ~ 3 0.1 3 0.08 160 force",
+                        "particle minecraft:cloud ~ ~0.5 ~ 3 0.3 3 0.1 60 force"
+                    ]
+                },
+                {
+                    "type": "palladium:extinguish"
+                }
+            ],
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:witcher#aard_ring"
+                }
+            }
+        },
+        "igni": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Igni",
+                "description": "Release a cone of fire that damages and ignites enemies.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/igni.png"
+                },
+                "list_index": 1,
+                "color": "red"
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "behaviour": "activation",
+                    "time": 3,
+                    "cooldown": "5s"
+                }
+            }
+        },
+        "igni_cone": {
+            "type": "argon:energy_beam",
+            "beam_renderer": "werkiax_unbound:igni",
+            "damage": 6.0,
+            "damage_type": "minecraft:on_fire",
+            "max_distance": 7,
+            "max_bounces": 0,
+            "redirect_off_blocks": false,
+            "pierce": true,
+            "set_on_fire_ticks": 100,
+            "cone": {
+                "start_size": 0.5,
+                "end_size": 24.0,
+                "end_distance": 7.0,
+                "rays": 64
+            },
+            "visuals": [
+                {
+                    "shape": "ring",
+                    "particle": {
+                        "type": "minecraft:flame"
+                    },
+                    "rings": 4,
+                    "radius": 7.0,
+                    "count": 24,
+                    "arc": 120,
+                    "anchor": "caster",
+                    "height": 0.8,
+                    "speed": 0.08
+                },
+                {
+                    "shape": "ring",
+                    "particle": {
+                        "type": "minecraft:smoke"
+                    },
+                    "rings": 2,
+                    "radius": 4.0,
+                    "count": 14,
+                    "arc": 120,
+                    "anchor": "caster",
+                    "height": 0.3,
+                    "speed": 0.04
+                }
+            ],
+            "pierce_size": {
+                "width": 2.0,
+                "height": 1.5
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:witcher#igni"
+                }
+            }
+        },
+        "fx_igni": {
+            "type": "palladium:action",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "first_tick_action": {
+                "type": "palladium:run_command",
+                "command": [
+                    "playsound minecraft:item.firecharge.use master @a ~ ~ ~ 1.0 0.7",
+                    "playsound minecraft:entity.blaze.shoot master @a ~ ~ ~ 0.8 0.8"
+                ]
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:witcher#igni"
                 }
             }
         }

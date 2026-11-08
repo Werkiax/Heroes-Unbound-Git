@@ -39,6 +39,10 @@ Add Random Superpower</a>
 Add Superpower</a>
 </li>
 <li>
+<a href="#palladium:as_source">
+As Source</a>
+</li>
+<li>
 <a href="#palladium:as_target">
 As Target</a>
 </li>
@@ -223,10 +227,54 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="palladium:as_source">
+As Source</h2>
+<p>
+Runs actions on the source entity instead of the entity itself. The source is the entity that caused something to happen to the current entity, like the attacker in the actions of action on hit, area actions, beams, blasts and the final attack of combo attacks, or the shooter of a custom projectile. Without a source, nothing happens. Everything else in the context, like the ability or power, stays the same.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+actions</td>
+<td>
+Action | Action[]</td>
+<td>
+The action(s) that are run on the source.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:as_source","actions":{"type":"palladium:heal","amount":2}}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="palladium:as_target">
 As Target</h2>
 <p>
-Runs actions on the target entity instead of the entity itself. The target is the entity an ability affected. It is known in the final attack actions of combo attacks, the entity hit actions of beams and blasts, the actions of area actions, the actions of action on hit and the entity hit actions of custom projectiles. Only combo attacks run their actions on the attacker, the others already run them on the affected entity. Without a target, nothing happens. Everything else in the context, like the ability or power, stays the same.</p>
+Runs actions on the target entity instead of the entity itself. The target is the entity an ability affected, like the hit entity in action on hit, area actions, beams, blasts, the final attack of combo attacks and custom projectiles. These already run their actions on the target, so this is mostly useful inside of an as source action. Without a target, nothing happens. Everything else in the context, like the ability or power, stays the same.</p>
 <h3>
 Settings:</h3>
 <table>
