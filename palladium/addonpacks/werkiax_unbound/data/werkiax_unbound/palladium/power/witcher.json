@@ -840,7 +840,7 @@
             "damage": 2,
             "damage_type": "argon:magic",
             "particle": {
-                "type": "minecraft:dragon_breath"
+                "type": "minecraft:enchant"
             },
             "effects": [
                 {
