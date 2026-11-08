@@ -1,8 +1,8 @@
 {
-    "body_part": "body",
+    "body_part": "right_arm",
     "offset": [
-        0,
-        0,
+        -1,
+        11,
         0
     ],
     "renderer": {
@@ -10,18 +10,15 @@
         "start_size": 0.3,
         "end_size": 3.0,
         "end_distance": 6.0,
-        "end_fade": 0.3,
         "blend": "additive",
-        "glow_layers": 3,
-        "segments": 20,
         "glow": {
             "color": "#FF6A00",
-            "opacity": 0.2,
+            "opacity": 0.0,
             "scale": 1.0
         },
         "core": {
             "color": "#FFD27A",
-            "opacity": 0.35,
+            "opacity": 0.0,
             "scale": 0.4
         }
     }

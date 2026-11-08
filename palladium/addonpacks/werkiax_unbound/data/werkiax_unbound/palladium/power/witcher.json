@@ -304,34 +304,6 @@
                 "end_distance": 7.0,
                 "rays": 64
             },
-            "visuals": [
-                {
-                    "shape": "ring",
-                    "particle": {
-                        "type": "minecraft:flame"
-                    },
-                    "rings": 4,
-                    "radius": 7.0,
-                    "count": 24,
-                    "arc": 120,
-                    "anchor": "caster",
-                    "height": 0.8,
-                    "speed": 0.08
-                },
-                {
-                    "shape": "ring",
-                    "particle": {
-                        "type": "minecraft:smoke"
-                    },
-                    "rings": 2,
-                    "radius": 4.0,
-                    "count": 14,
-                    "arc": 120,
-                    "anchor": "caster",
-                    "height": 0.3,
-                    "speed": 0.04
-                }
-            ],
             "pierce_size": {
                 "width": 2.0,
                 "height": 1.5
@@ -413,6 +385,27 @@
                 ]
             }
         },
+        "igni_stream_aim": {
+            "type": "palladium:aim",
+            "arm": "right_arm",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:witcher#igni"
+                    },
+                    {
+                        "type": "palladium:ability_ticks",
+                        "ability": "werkiax_unbound:witcher#igni",
+                        "min": 10
+                    }
+                ]
+            }
+        },
         "fx_igni": {
             "type": "palladium:action",
             "properties": {
@@ -448,7 +441,13 @@
             "action": {
                 "type": "palladium:run_command",
                 "command": [
-                    "execute if predicate {condition:'minecraft:random_chance',chance:0.25} run playsound minecraft:item.firecharge.use master @a ~ ~ ~ 0.5 0.9"
+                    "execute if predicate {condition:'minecraft:random_chance',chance:0.25} run playsound minecraft:item.firecharge.use master @a ~ ~ ~ 0.5 0.9",
+                    "execute anchored eyes positioned ^-0.3 ^-0.25 ^0.8 run particle minecraft:flame ~ ~ ~ 0.08 0.08 0.08 0.02 3 force",
+                    "execute anchored eyes positioned ^-0.3 ^-0.25 ^1.8 run particle minecraft:flame ~ ~ ~ 0.15 0.15 0.15 0.02 3 force",
+                    "execute anchored eyes positioned ^-0.3 ^-0.25 ^2.8 run particle minecraft:flame ~ ~ ~ 0.22 0.22 0.22 0.02 3 force",
+                    "execute anchored eyes positioned ^-0.3 ^-0.25 ^3.8 run particle minecraft:flame ~ ~ ~ 0.3 0.3 0.3 0.02 3 force",
+                    "execute anchored eyes positioned ^-0.3 ^-0.25 ^4.8 run particle minecraft:flame ~ ~ ~ 0.38 0.38 0.38 0.02 3 force",
+                    "execute anchored eyes positioned ^-0.3 ^-0.25 ^5.8 run particle minecraft:flame ~ ~ ~ 0.45 0.45 0.45 0.02 2 force"
                 ]
             },
             "state": {
