@@ -180,11 +180,6 @@
                             "type": "palladium:ability_enabled",
                             "ability": "werkiax_unbound:negative_spirit#possess"
                         }
-                    },
-                    {
-                        "type": "argon:has_power",
-                        "power": "werkiax_unbound:spirit_wander",
-                        "mode": "exclude"
                     }
                 ],
                 "enabling": {
@@ -302,11 +297,6 @@
                             "type": "palladium:ability_enabled",
                             "ability": "werkiax_unbound:negative_spirit#possess"
                         }
-                    },
-                    {
-                        "type": "argon:has_power",
-                        "power": "werkiax_unbound:spirit_wander",
-                        "mode": "exclude"
                     }
                 ],
                 "enabling": {
@@ -470,11 +460,6 @@
                             "type": "palladium:ability_enabled",
                             "ability": "werkiax_unbound:negative_spirit#negative_beam"
                         }
-                    },
-                    {
-                        "type": "argon:has_power",
-                        "power": "werkiax_unbound:spirit_wander",
-                        "mode": "exclude"
                     }
                 ]
             }
@@ -547,11 +532,6 @@
                     {
                         "type": "palladium:ability_unlocked",
                         "ability": "werkiax_unbound:negative_spirit#possess_unlock"
-                    },
-                    {
-                        "type": "argon:has_power",
-                        "power": "werkiax_unbound:spirit_wander",
-                        "mode": "exclude"
                     }
                 ],
                 "enabling": {
@@ -590,11 +570,6 @@
                             "type": "palladium:ability_enabled",
                             "ability": "werkiax_unbound:negative_spirit#possess"
                         }
-                    },
-                    {
-                        "type": "argon:has_power",
-                        "power": "werkiax_unbound:spirit_wander",
-                        "mode": "exclude"
                     }
                 ],
                 "enabling": {
@@ -605,7 +580,7 @@
                 }
             },
             "last_tick_action": {
-                "type": "palladium:add_superpower",
+                "type": "palladium:set_superpower",
                 "power": "werkiax_unbound:spirit_wander"
             }
         },
@@ -1518,11 +1493,6 @@
                             "type": "palladium:ability_enabled",
                             "ability": "werkiax_unbound:negative_spirit#possess"
                         }
-                    },
-                    {
-                        "type": "argon:has_power",
-                        "power": "werkiax_unbound:spirit_wander",
-                        "mode": "exclude"
                     }
                 ],
                 "enabling": {
