@@ -155,7 +155,7 @@
             "type": "palladium:dummy",
             "properties": {
                 "title": "Negative Beam",
-                "description": "Hold to fire a piercing beam of negative energy from your hand. It deals poison damage to everything it passes through and poisons them for 2 seconds. Drains Negative Energy while it fires.",
+                "description": "Hold to fire a piercing beam of negative energy from your hand. It deals poison damage to everything it passes through and poisons them for 2 seconds. Drains 400 Negative Energy per second, lasts up to 5 seconds, then has a 3 second cooldown.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/negative_beam.png"
@@ -173,7 +173,7 @@
                     {
                         "type": "palladium:energy_bar",
                         "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
-                        "min": 100
+                        "min": 400
                     },
                     {
                         "type": "palladium:not",
@@ -185,7 +185,9 @@
                 ],
                 "enabling": {
                     "type": "palladium:key_bind",
-                    "behaviour": "held"
+                    "behaviour": "held",
+                    "time": "5s",
+                    "cooldown": "3s"
                 }
             }
         },
@@ -272,7 +274,7 @@
             ],
             "properties": {
                 "title": "Phase Dash",
-                "description": "Instantly blink up to 8 blocks forward, slipping through glass and other see-through blocks. Costs 1500 Negative Energy.",
+                "description": "Instantly blink up to 8 blocks forward, slipping through glass and other see-through blocks. Costs 100 Negative Energy.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/phase_dash.png"
@@ -290,7 +292,7 @@
                     {
                         "type": "palladium:energy_bar",
                         "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
-                        "min": 1500
+                        "min": 100
                     },
                     {
                         "type": "palladium:not",
@@ -314,7 +316,7 @@
                 "type": "palladium:modify_number_data_attachment",
                 "attachment": "werkiax_unbound:negative_energy",
                 "operation": "-",
-                "value": 1500
+                "value": 100
             },
             "properties": {
                 "hidden_in_gui": true,
@@ -333,7 +335,7 @@
                 "type": "palladium:modify_number_data_attachment",
                 "attachment": "werkiax_unbound:negative_energy",
                 "operation": "-",
-                "value": 50
+                "value": 20
             },
             "properties": {
                 "hidden_in_gui": true,
@@ -437,7 +439,7 @@
                     "type": "palladium:number_comparison",
                     "value": {
                         "type": "palladium:entity_tick_count",
-                        "modify": "math.mod(this, 9)"
+                        "modify": "math.mod(this, 6)"
                     },
                     "operator": "=",
                     "compare_to": 0
@@ -460,6 +462,13 @@
                         "conditions": {
                             "type": "palladium:ability_enabled",
                             "ability": "werkiax_unbound:negative_spirit#negative_beam"
+                        }
+                    },
+                    {
+                        "type": "palladium:not",
+                        "conditions": {
+                            "type": "palladium:ability_enabled",
+                            "ability": "werkiax_unbound:negative_spirit#possess"
                         }
                     }
                 ]
@@ -519,7 +528,7 @@
             "end_on_damage": true,
             "properties": {
                 "title": "Possess",
-                "description": "Take over a living creature within 10 blocks: see through its eyes and control its movement. You can jump to up to 2 more targets. The possession ends if your body takes damage or the target gets more than 50 blocks away from your body. Press again to return.",
+                "description": "Take over a living creature within 10 blocks: see through its eyes and control its movement. You can jump to up to 2 more targets. The possession ends if your body takes damage or the target gets more than 50 blocks away from your body. Drains 10 Negative Energy per second. Press again to return.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/possess.png"
@@ -533,11 +542,47 @@
                     {
                         "type": "palladium:ability_unlocked",
                         "ability": "werkiax_unbound:negative_spirit#possess_unlock"
+                    },
+                    {
+                        "type": "palladium:energy_bar",
+                        "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
+                        "min": 10
                     }
                 ],
                 "enabling": {
                     "type": "palladium:key_bind",
                     "behaviour": "toggle"
+                }
+            }
+        },
+        "possess_cost": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:conditional",
+                "condition": {
+                    "type": "palladium:number_comparison",
+                    "value": {
+                        "type": "palladium:entity_tick_count",
+                        "modify": "math.mod(this, 2)"
+                    },
+                    "operator": "=",
+                    "compare_to": 0
+                },
+                "on_true": {
+                    "type": "palladium:modify_number_data_attachment",
+                    "attachment": "werkiax_unbound:negative_energy",
+                    "operation": "-",
+                    "value": 1
+                }
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#possess"
                 }
             }
         },
@@ -1471,7 +1516,7 @@
             ],
             "properties": {
                 "title": "Negative Burst",
-                "description": "Release a concentrated burst of negative energy around you, instantly dealing radiation damage and knocking back everything nearby. Costs 800 Negative Energy.",
+                "description": "Release a concentrated burst of negative energy around you, instantly dealing radiation damage and knocking back everything nearby. Costs 5000 Negative Energy.",
                 "icon": "minecraft:echo_shard",
                 "list_index": 3,
                 "color": "white",
@@ -1486,7 +1531,7 @@
                     {
                         "type": "palladium:energy_bar",
                         "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
-                        "min": 800
+                        "min": 5000
                     },
                     {
                         "type": "palladium:not",
@@ -1500,7 +1545,7 @@
                     "type": "palladium:key_bind",
                     "behaviour": "activation",
                     "time": 1,
-                    "cooldown": "6s"
+                    "cooldown": "20s"
                 }
             }
         },
@@ -1510,7 +1555,7 @@
                 "type": "palladium:modify_number_data_attachment",
                 "attachment": "werkiax_unbound:negative_energy",
                 "operation": "-",
-                "value": 800
+                "value": 5000
             },
             "properties": {
                 "hidden_in_gui": true,
