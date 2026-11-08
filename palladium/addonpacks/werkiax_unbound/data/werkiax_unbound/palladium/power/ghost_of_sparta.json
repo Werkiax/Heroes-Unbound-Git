@@ -1,5 +1,6 @@
 {
     "name": "Ghost of Sparta",
+    "persistent_data": true,
     "icon": "minecraft:iron_axe",
     "energy_bars": {
         "fury": {

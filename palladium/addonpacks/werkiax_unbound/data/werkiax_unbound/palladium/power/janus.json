@@ -1,5 +1,6 @@
 {
     "name": "Janus",
+    "persistent_data": true,
     "icon": "minecraft:shield",
     "energy_bars": {
         "kinetic_charge": {

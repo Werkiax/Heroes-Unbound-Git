@@ -1,5 +1,6 @@
 {
     "name": "Negative Spirit",
+    "persistent_data": true,
     "icon": "minecraft:ender_eye",
     "energy_bars": {
         "negative_energy": {
