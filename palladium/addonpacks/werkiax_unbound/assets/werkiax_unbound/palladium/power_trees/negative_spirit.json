@@ -59,7 +59,7 @@
         ],
         "upgrades": {
             "pos": [
-                7.5,
+                7.0,
                 1.3
             ],
             "style": "hub",
@@ -150,10 +150,6 @@
             "to": "phase_dash_unlock"
         },
         {
-            "from": "upgrades",
-            "to": "health_upgrade_1"
-        },
-        {
             "from": "health_upgrade_1",
             "to": "health_upgrade_2"
         },
@@ -164,10 +160,6 @@
         {
             "from": "health_upgrade_3",
             "to": "health_upgrade_4"
-        },
-        {
-            "from": "upgrades",
-            "to": "damage_upgrade_1"
         },
         {
             "from": "damage_upgrade_1",
@@ -182,10 +174,6 @@
             "to": "damage_upgrade_4"
         },
         {
-            "from": "upgrades",
-            "to": "armor_upgrade_1"
-        },
-        {
             "from": "armor_upgrade_1",
             "to": "armor_upgrade_2"
         },
@@ -196,10 +184,6 @@
         {
             "from": "armor_upgrade_3",
             "to": "armor_upgrade_4"
-        },
-        {
-            "from": "upgrades",
-            "to": "speed_upgrade_1"
         },
         {
             "from": "speed_upgrade_1",
