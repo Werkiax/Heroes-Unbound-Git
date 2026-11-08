@@ -220,6 +220,53 @@
                 ]
             }
         },
+        "guard": {
+            "type": "palladium:guard",
+            "guard_threshold": 30.0,
+            "break_damage": 6.0,
+            "break_lockout": "4s",
+            "recovery_rate": 6.0,
+            "block_angle": 180.0,
+            "knockback_strength": 1.0,
+            "disable_attacking": true,
+            "bypassed_by": "#minecraft:bypasses_shield",
+            "block_sound": "minecraft:item.shield.block",
+            "break_sound": "minecraft:item.shield.break",
+            "properties": {
+                "title": "Guardian Shield",
+                "description": "Hold to raise your shield and block damage coming from the front. After absorbing 30 damage the shield breaks, hurting you and locking it for 4 seconds. Absorbed damage recovers over time while you are not guarding. You cannot attack while blocking.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/spartan_guard.png"
+                },
+                "list_index": 4
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:ghost_of_sparta#grab"
+                    }
+                },
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "behaviour": "held",
+                    "cooldown": "3s",
+                    "conditions": {
+                        "type": "palladium:not",
+                        "conditions": {
+                            "type": "palladium:guard_broken",
+                            "ability": "werkiax_unbound:ghost_of_sparta#guard"
+                        }
+                    }
+                }
+            }
+        },
         "stomp_blast": {
             "type": "argon:explosion",
             "radius": 3.0,

@@ -1,33 +1,33 @@
 {
-  "trigger": {
-    "trigger": "minecraft:player_hurt_entity"
-  },
-  "condition": {
-    "type": "palladium:has_power",
-    "power": "werkiax_unbound:ghost_of_sparta"
-  },
-  "actions": [
-    {
-      "type": "palladium:modify_number_data_attachment",
-      "attachment": "werkiax_unbound:fury",
-      "operation": "+",
-      "value": 2
+    "trigger": {
+        "trigger": "minecraft:player_hurt_entity"
     },
-    {
-      "type": "palladium:set_data_attachment",
-      "attachment": "werkiax_unbound:fury",
-      "value": {
-        "type": "palladium:min_number",
-        "number_type": "integer",
-        "values": [
-          {
-            "type": "palladium:integer_data_attachment",
+    "condition": {
+        "type": "palladium:has_power",
+        "powers": "werkiax_unbound:ghost_of_sparta"
+    },
+    "actions": [
+        {
+            "type": "palladium:modify_number_data_attachment",
             "attachment": "werkiax_unbound:fury",
-            "fallback": 0
-          },
-          400
-        ]
-      }
-    }
-  ]
+            "operation": "+",
+            "value": 2
+        },
+        {
+            "type": "palladium:set_data_attachment",
+            "attachment": "werkiax_unbound:fury",
+            "value": {
+                "type": "palladium:min_number",
+                "number_type": "integer",
+                "values": [
+                    {
+                        "type": "palladium:integer_data_attachment",
+                        "attachment": "werkiax_unbound:fury",
+                        "fallback": 0
+                    },
+                    400
+                ]
+            }
+        }
+    ]
 }

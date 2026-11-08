@@ -1,15 +1,15 @@
 {
-  "trigger": {
-    "trigger": "minecraft:entity_hurt_player"
-  },
-  "condition": {
-    "type": "palladium:has_power",
-    "power": "werkiax_unbound:ghost_of_sparta"
-  },
-  "actions": {
-    "type": "palladium:modify_number_data_attachment",
-    "attachment": "werkiax_unbound:fury",
-    "operation": "+",
-    "value": 4
-  }
+    "trigger": {
+        "trigger": "minecraft:entity_hurt_player"
+    },
+    "condition": {
+        "type": "palladium:has_power",
+        "powers": "werkiax_unbound:ghost_of_sparta"
+    },
+    "actions": {
+        "type": "palladium:modify_number_data_attachment",
+        "attachment": "werkiax_unbound:fury",
+        "operation": "+",
+        "value": 4
+    }
 }
