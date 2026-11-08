@@ -46,5 +46,11 @@
                 "pitch": 1.2
             }
         ]
+    },
+    "negative_burst": {
+        "sounds": [
+            "werkiax_unbound:negative_burst"
+        ],
+        "subtitle": "Negative Burst"
     }
 }
