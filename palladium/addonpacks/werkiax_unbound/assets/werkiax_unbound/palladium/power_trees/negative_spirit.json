@@ -1,6 +1,4 @@
 {
-    "grid_size": 38,
-    "auto_connect": false,
     "node_styles": {
         "default": {
             "size": 28,
@@ -33,15 +31,17 @@
             }
         }
     },
+    "grid_size": 38,
+    "auto_connect": false,
     "nodes": {
         "beam_unlock": {
-            "pos": [2.5, 0.0],
+            "pos": [7.0, 0.0],
             "style": "root"
         },
-        "phase_dash_unlock": [2.5, 1.3],
-        "possess_unlock": [2.5, 2.6],
-        "spirit_form_unlock": [2.5, 5.2],
-        "negative_burst_unlock": [2.5, 3.9],
+        "phase_dash_unlock": [7.0, -1.2],
+        "possess_unlock": [7.0, -2.4],
+        "spirit_form_unlock": [7.0, -4.8],
+        "negative_burst_unlock": [7.0, -3.6],
         "upgrades": {
             "pos": [7.0, 1.3],
             "style": "hub",
@@ -64,7 +64,28 @@
         "speed_upgrade_1": [8.5, 2.6],
         "speed_upgrade_2": [8.5, 3.6],
         "speed_upgrade_3": [8.5, 4.6],
-        "speed_upgrade_4": [8.5, 5.6]
+        "speed_upgrade_4": [8.5, 5.6],
+        "negative_beam": [0.0, 0.0],
+        "negative_beam_shot": [0.0, 0.0],
+        "phase_dash": [0.0, 0.0],
+        "phase_dash_cost": [0.0, 0.0],
+        "negative_beam_cost": [0.0, 0.0],
+        "negative_beam_lock": [0.0, 0.0],
+        "negative_beam_no_sprint": [0.0, 0.0],
+        "negative_beam_no_flight": [0.0, 0.0],
+        "negative_beam_sound": [0.0, 0.0],
+        "negative_energy_regen": [0.0, 0.0],
+        "energy_clamp": [0.0, 0.0],
+        "possess": [0.0, 0.0],
+        "possess_cost": [0.0, 0.0],
+        "spirit_form": [0.0, 0.0],
+        "wall_immunity": [0.0, 0.0],
+        "effect_immunity": [0.0, 0.0],
+        "fall_immunity": [0.0, 0.0],
+        "negative_burst": [0.0, 0.0],
+        "negative_burst_push": [0.0, 0.0],
+        "negative_burst_cost": [0.0, 0.0],
+        "fx_negative_burst": [0.0, 0.0]
     },
     "connections": [
         {

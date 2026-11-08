@@ -165,7 +165,7 @@
         },
         "grab": {
             "type": "argon:carry",
-            "range": 4,
+            "range": 3,
             "attachment": [
                 0.0,
                 2.3,
