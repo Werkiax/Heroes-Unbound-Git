@@ -1151,27 +1151,20 @@
         "negative_burst": {
             "type": "argon:area_burst",
             "shape": "sphere",
-            "radius": 6,
-            "damage": 14,
+            "radius": 10,
+            "damage": 25,
             "damage_type": "minecraft:poison",
-            "falloff": 0.4,
-            "knockback_distance": 7,
-            "lift": 0.3,
+            "falloff": 0.0,
             "effects": [
                 {
                     "effect": "minecraft:poison",
-                    "duration": "4s",
-                    "amplifier": 2
-                },
-                {
-                    "effect": "minecraft:poison",
-                    "duration": "3s",
-                    "amplifier": 1
+                    "duration": "7s",
+                    "amplifier": 3
                 }
             ],
             "properties": {
                 "title": "Negative Burst",
-                "description": "Release a concentrated burst of negative energy around you, instantly dealing radiation damage and knocking back everything nearby. Costs 5000 Negative Energy.",
+                "description": "Release a massive burst of negative energy in a 10 block sphere around you. Instantly deals 25 poison damage to everything nearby, poisons it (Poison IV) for 7 seconds and shoves it away. Costs 5000 Negative Energy.",
                 "icon": "minecraft:echo_shard",
                 "list_index": 3,
                 "color": "white",
@@ -1201,6 +1194,23 @@
                     "behaviour": "activation",
                     "time": 1,
                     "cooldown": "20s"
+                }
+            }
+        },
+        "negative_burst_push": {
+            "type": "argon:push_field",
+            "mode": "horizontal",
+            "amount": 2.0,
+            "inflation": 10.0,
+            "affect_projectiles": true,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:negative_spirit#negative_burst"
                 }
             }
         },
