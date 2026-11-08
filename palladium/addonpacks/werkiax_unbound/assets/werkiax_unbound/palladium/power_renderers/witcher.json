@@ -1,5 +1,10 @@
 {
     "animation_controller": {
         "special": "werkiax_unbound:witcher_special"
+    },
+    "render_layers": {
+        "werkiax_unbound:witcher_eyes": [
+            true
+        ]
     }
 }

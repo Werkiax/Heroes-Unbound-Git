@@ -1,0 +1,6 @@
+{
+    "type": "palladium:render_layer",
+    "texture": "#werkiax_unbound:witcher_eyes",
+    "render_type": "palladium:glow",
+    "light_emission": 15
+}
