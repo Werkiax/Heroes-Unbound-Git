@@ -289,69 +289,20 @@
             }
         },
         "igni_cone": {
-            "type": "argon:energy_beam",
-            "beam_renderer": "werkiax_unbound:igni",
+            "type": "argon:area_burst",
+            "shape": "cone",
+            "cone_angle": 160,
+            "radius": 7,
             "damage": 6.0,
             "damage_type": "minecraft:on_fire",
-            "max_distance": 7,
-            "max_bounces": 0,
-            "redirect_off_blocks": false,
-            "pierce": true,
-            "set_on_fire_ticks": 100,
-            "cone": {
-                "start_size": 0.5,
-                "end_size": 24.0,
-                "end_distance": 7.0,
-                "rays": 64
-            },
-            "visuals": [
+            "effects": [
                 {
-                    "shape": "streak",
-                    "particle": {
-                        "type": "minecraft:dust",
-                        "color": [
-                            1.0,
-                            0.45,
-                            0.05
-                        ],
-                        "scale": 0.6
-                    },
-                    "step": 0.25,
-                    "spread": 0.9,
-                    "speed": 0.5
-                },
-                {
-                    "shape": "streak",
-                    "particle": {
-                        "type": "minecraft:flame"
-                    },
-                    "step": 0.4,
-                    "spread": 0.8,
-                    "speed": 0.35
-                },
-                {
-                    "shape": "streak",
-                    "particle": {
-                        "type": "minecraft:lava"
-                    },
-                    "step": 0.5,
-                    "spread": 1.0,
-                    "speed": 0.2
-                },
-                {
-                    "shape": "burst",
-                    "particle": {
-                        "type": "minecraft:flame"
-                    },
-                    "radius": 2.5,
-                    "count": 40,
-                    "speed": 0.15
+                    "effect": "argon:burning",
+                    "duration": "5s",
+                    "amplifier": 0,
+                    "particles": false
                 }
             ],
-            "pierce_size": {
-                "width": 2.0,
-                "height": 1.5
-            },
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
