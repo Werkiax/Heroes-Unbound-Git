@@ -8,12 +8,12 @@
     "renderer": {
         "type": "argon:cone",
         "start_size": 0.5,
-        "end_size": 5.0,
+        "end_size": 52.2,
         "end_distance": 7.0,
         "end_fade": 0.15,
         "blend": "translucent",
         "glow_layers": 3,
-        "segments": 24,
+        "segments": 48,
         "glow": {
             "color": "#8FD3FF",
             "opacity": 0.12,

@@ -45,9 +45,9 @@
         "upgrades": {
             "pos": [7.0, 1.3],
             "style": "hub",
-            "title": "Negative Upgrades",
-            "icon": "minecraft:ender_eye",
-            "description": "Permanent stat upgrades and passive regeneration."
+            "title": "Negative Spirit",
+            "icon": "werkiax_unbound:textures/icons/negative_spirit_icon.png",
+            "description": "The Negative Spirit is a living negative-energy entity that resides within its host, granting them the ability to project it beyond their physical body. In its spirit form, it can fly, phase through solid matter, emit radiation, and possess other beings, making it highly effective for reconnaissance, infiltration, and combat."
         },
         "health_upgrade_1": [5.5, 2.6],
         "health_upgrade_2": [5.5, 3.6],

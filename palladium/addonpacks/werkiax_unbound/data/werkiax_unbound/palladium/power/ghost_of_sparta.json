@@ -1,7 +1,10 @@
 {
     "name": "Ghost of Sparta",
     "persistent_data": true,
-    "icon": "minecraft:iron_axe",
+    "icon": {
+        "type": "palladium:texture",
+        "texture": "werkiax_unbound:textures/icons/ghost_of_sparta_icon.png"
+    },
     "energy_bars": {
         "fury": {
             "max": 400,

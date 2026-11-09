@@ -1,7 +1,10 @@
 {
     "name": "Witcher",
     "persistent_data": true,
-    "icon": "minecraft:iron_sword",
+    "icon": {
+        "type": "palladium:texture",
+        "texture": "werkiax_unbound:textures/icons/witcher_icon.png"
+    },
     "abilities": {
         "aard": {
             "type": "palladium:dummy",
@@ -65,16 +68,24 @@
             "type": "argon:energy_beam",
             "beam_renderer": "werkiax_unbound:aard",
             "damage": 8.0,
-            "damage_type": "minecraft:player_attack",
+            "damage_type": "minecraft:freeze",
             "max_distance": 7,
             "max_bounces": 0,
             "redirect_off_blocks": false,
             "pierce": true,
+            "entity_effects": [
+                {
+                    "effect": "argon:freezing",
+                    "duration": "4s",
+                    "amplifier": 0,
+                    "particles": false
+                }
+            ],
             "cone": {
                 "start_size": 0.5,
-                "end_size": 5.0,
+                "end_size": 52.2,
                 "end_distance": 7.0,
-                "rays": 24
+                "rays": 128
             },
             "knockback_distance": 5,
             "lift": 0.3,
@@ -98,34 +109,19 @@
                     "rings": 3,
                     "radius": 5.0,
                     "count": 14,
-                    "arc": 40,
+                    "arc": 150,
                     "anchor": "caster",
                     "height": 0.8,
                     "speed": 0.1
                 },
                 {
-                    "shape": "ring",
+                    "shape": "streak",
                     "particle": {
-                        "type": "minecraft:dust_color_transition",
-                        "from_color": [
-                            0.55,
-                            0.83,
-                            1.0
-                        ],
-                        "to_color": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ],
-                        "scale": 1.4
+                        "type": "minecraft:snowflake"
                     },
-                    "rings": 2,
-                    "radius": 2.5,
-                    "count": 12,
-                    "arc": 40,
-                    "anchor": "caster",
-                    "height": 0.1,
-                    "speed": 0.1
+                    "step": 0.8,
+                    "spread": 0.4,
+                    "speed": 0.05
                 }
             ],
             "pierce_size": {
@@ -182,7 +178,7 @@
             "radius": 6,
             "damage": 8,
             "damage_type": "minecraft:player_attack",
-            "knockback_distance": 5,
+            "knockback_distance": 6,
             "lift": 0.3,
             "falloff": 0.3,
             "properties": {
@@ -609,10 +605,11 @@
             "state": {
                 "enabling": [
                     {
-                        "type": "palladium:ability_ticks",
-                        "ability": "werkiax_unbound:witcher#quen",
-                        "min": 10,
-                        "max": 10
+                        "type": "palladium:ability_first_tick",
+                        "ability": "werkiax_unbound:witcher#quen"
+                    },
+                    {
+                        "type": "palladium:crouching"
                     }
                 ]
             }
@@ -657,7 +654,7 @@
             "type": "argon:ward",
             "pool": 100,
             "duration": "6s",
-            "knockback_reduction": 1.0,
+            "knockback_reduction": 1,
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
@@ -671,9 +668,9 @@
         },
         "quen_bubble_dome": {
             "type": "argon:dome",
-            "radius": 3.0,
+            "radius": 3,
             "duration": "6s",
-            "damage_reduction": 0.0,
+            "damage_reduction": 0,
             "deflect_projectiles": true,
             "repel": 0.25,
             "properties": {
@@ -706,33 +703,6 @@
             }
         },
         "fx_quen_bubble": {
-            "type": "palladium:action",
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "first_tick_action": {
-                "type": "palladium:run_command",
-                "command": [
-                    "playsound minecraft:block.beacon.activate master @a ~ ~ ~ 1.0 1.2",
-                    "particle minecraft:dust_color_transition{from_color:[1.0,0.85,0.2],to_color:[1.0,1.0,0.6],scale:1.6} ~ ~1 ~ 2 1.2 2 0 150 force",
-                    "particle minecraft:end_rod ~ ~1 ~ 2 1.2 2 0.05 40 force"
-                ]
-            },
-            "action": {
-                "type": "palladium:run_command",
-                "command": [
-                    "particle minecraft:dust{color:[1.0,0.85,0.2],scale:1.0} ~ ~1 ~ 1.8 1.1 1.8 0 6 force"
-                ]
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:witcher#quen_bubble"
-                }
-            }
-        },
-        "fx_quen_bubble_pop": {
             "type": "palladium:action",
             "properties": {
                 "hidden_in_gui": true,
@@ -804,6 +774,28 @@
             "state": {
                 "enabling": {
                     "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:witcher#quen_bubble"
+                }
+            }
+        },
+        "fx_quen_bubble_pop": {
+            "type": "palladium:action",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "first_tick_action": {
+                "type": "palladium:run_command",
+                "command": [
+                    "playsound minecraft:block.glass.break master @a ~ ~ ~ 1.0 1.4",
+                    "playsound minecraft:entity.wind_charge.wind_burst master @a ~ ~ ~ 0.8 1.0",
+                    "particle minecraft:dust_color_transition{from_color:[1.0,0.85,0.2],to_color:[1.0,1.0,1.0],scale:1.6} ~ ~1 ~ 2.5 1.2 2.5 0.05 200 force",
+                    "particle minecraft:end_rod ~ ~1 ~ 2.5 1.2 2.5 0.15 60 force"
+                ]
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_last_tick",
                     "ability": "werkiax_unbound:witcher#quen_bubble"
                 }
             }
@@ -922,8 +914,21 @@
                 "hidden_in_bar": true
             }
         },
-        "yrden": {
-            "type": "palladium:dummy",
+        "yrden_zone": {
+            "type": "argon:zone",
+            "radius": 5,
+            "duration": "10s",
+            "interval": "1s",
+            "damage": 2,
+            "damage_type": "argon:magic",
+            "effects": [
+                {
+                    "effect": "minecraft:slowness",
+                    "duration": "2s",
+                    "amplifier": 3,
+                    "particles": false
+                }
+            ],
             "properties": {
                 "title": "Yrden",
                 "description": "Trace a magic circle on the ground. Enemies inside are slowed and take damage over time. Lasts 10 seconds.",
@@ -941,34 +946,92 @@
                     "time": "10s",
                     "cooldown": "2s"
                 }
-            }
-        },
-        "yrden_zone": {
-            "type": "argon:zone",
-            "radius": 8,
-            "duration": "15s",
-            "interval": "1s",
-            "damage": 2,
-            "damage_type": "argon:magic",
+            },
             "particle": {
                 "type": "minecraft:enchant"
+            }
+        },
+        "fx_yrden_start": {
+            "type": "palladium:action",
+            "first_tick_action": {
+                "type": "palladium:run_command",
+                "command": [
+                    "summon minecraft:area_effect_cloud ~ ~ ~ {Duration:205,Radius:0f,RadiusPerTick:0f,Tags:[\"yrden_center\"]}",
+                    "playsound minecraft:block.beacon.activate master @a ~ ~ ~ 1.0 0.6"
+                ]
             },
-            "effects": [
-                {
-                    "effect": "minecraft:slowness",
-                    "duration": "2s",
-                    "amplifier": 3,
-                    "particles": false
-                }
-            ],
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
             },
             "state": {
                 "enabling": {
-                    "type": "palladium:ability_first_tick",
-                    "ability": "werkiax_unbound:witcher#yrden"
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:witcher#yrden_zone"
+                }
+            }
+        },
+        "fx_yrden_sigil": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:conditional",
+                "condition": {
+                    "type": "palladium:number_comparison",
+                    "value": {
+                        "type": "palladium:entity_tick_count",
+                        "modify": "math.mod(this, 5)"
+                    },
+                    "operator": "=",
+                    "compare_to": 0
+                },
+                "on_true": {
+                    "type": "palladium:run_command",
+                    "command": [
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-1.50 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-1.20 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.90 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.60 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.30 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.00 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.30 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.60 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.90 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~1.20 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~1.50 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~1.27 ~0.1 ~1.10 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~1.04 ~0.1 ~0.90 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.81 ~0.1 ~0.70 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.58 ~0.1 ~0.50 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.35 ~0.1 ~0.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.12 ~0.1 ~0.10 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.12 ~0.1 ~-0.10 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.35 ~0.1 ~-0.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.58 ~0.1 ~-0.50 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.81 ~0.1 ~-0.70 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-1.04 ~0.1 ~-0.90 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-1.27 ~0.1 ~-1.10 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-1.50 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-1.20 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.90 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.60 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.30 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.00 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.30 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.60 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.90 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~1.20 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~1.50 ~0.1 ~-1.30 0 0 0 0 1 force"
+                    ]
+                }
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:witcher#yrden_zone"
                 }
             }
         }
