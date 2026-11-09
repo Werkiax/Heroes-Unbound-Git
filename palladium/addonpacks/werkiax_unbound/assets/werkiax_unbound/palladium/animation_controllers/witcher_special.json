@@ -69,6 +69,17 @@
             "transitions": {
                 "idle": "palladium.any_animation_finished()"
             }
+        },
+        "quen": {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:witcher#quen"
+        },
+        "quen": {
+            "animation": "werkiax_unbound:quen_cast",
+            "blend_transition": 2,
+            "transitions": {
+                "wait": "palladium.any_animation_finished()"
+            }
         }
     }
 }
