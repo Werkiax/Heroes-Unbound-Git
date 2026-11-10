@@ -87,7 +87,7 @@ true</td>
 </tr>
 <tr>
 <td>
-requires</td>
+conditions</td>
 <td>
 Condition | Condition[]</td>
 <td>
@@ -104,7 +104,7 @@ Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:buyable","cost":{"type":"palladium:experience_level","xp_level":5}}</pre>
 <pre class="json-snippet">
-{"type":"palladium:buyable","cost":{"type":"palladium:item","ingredient":"minecraft:diamond","amount":3},"requires":{"type":"palladium:ability_unlocked","ability":"example:power#ability_key"}}</pre>
+{"type":"palladium:buyable","cost":{"type":"palladium:item","ingredient":"minecraft:diamond","amount":3},"conditions":{"type":"palladium:ability_unlocked","ability":"example:power#ability_key"}}</pre>
 </div>
 <hr>
 
@@ -193,7 +193,7 @@ true</td>
 <td>
 requires</td>
 <td>
-Requirement[]</td>
+{ ability*, draw_line }[]</td>
 <td>
 Abilities that have to be unlocked first. Each entry has an "ability" reference and an optional "draw_line" flag.</td>
 <td style="background-color: lightcoral">

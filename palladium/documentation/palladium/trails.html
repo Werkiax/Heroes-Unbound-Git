@@ -47,6 +47,14 @@ Lightning Trail</a>
 Lightning Aura Trail</a>
 </li>
 </ul>
+<h3>
+Argon</h3>
+<ul>
+<li>
+<a href="#argon:motion_blur">
+Motion Blur Trail</a>
+</li>
+</ul>
 </p>
 <hr>
 
@@ -407,6 +415,230 @@ Examples:</h3>
 {"type":"palladium:lightning_aura","branches":1,"render_settings":{"glow":{"color":"#ff7a1a","opacity":0.75}}}</pre>
 <pre class="json-snippet">
 {"type":"palladium:lightning_aura","amount":2,"branches":3,"segments":8,"growth":4,"render_settings":{"glow":{"color":"#00aaff","opacity":0.8,"rainbow":0.5,"pulse":{"scale":0.25,"frequency":2.0}},"core":{"pulse":{"scale":0.1}},"bloom":3,"size":2.0,"rotation_speed":4.0},"arc_settings":{"search_directions":48}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:motion_blur">
+Motion Blur Trail</h2>
+<p>
+A short, translucent, tapering ribbon built from the entity's recent positions that reads as a motion blur, with optional thin secondary streaks and surface dust. It follows the entity's actual speed: nothing is drawn below minimum_trail_speed, and length, opacity and width grow smoothly towards maximum_trail_speed. Use with tick_delay 1 and a lifetime of at least max_age.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+lod</td>
+<td>
+Distance Settings</td>
+<td>
+Distance quality: beyond far_distance only a simplified ribbon is drawn, beyond cull_distance nothing.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+streaks</td>
+<td>
+Streak Settings</td>
+<td>
+Thin secondary streaks beside the ribbon: enabled, count, width, lifetime (ticks), opacity, color.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+trail_taper_curve</td>
+<td>
+Float</td>
+<td>
+Exponent of the taper. 1 is linear, higher keeps the ribbon wide for longer before narrowing.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.4</td>
+</tr>
+<tr>
+<td>
+trail_height</td>
+<td>
+Float</td>
+<td>
+Height in blocks of the vertical sheet crossing the ribbon. 0 draws only the flat sheet.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.4</td>
+</tr>
+<tr>
+<td>
+color</td>
+<td>
+Color</td>
+<td>
+Main colour of the blur.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#648aa3</td>
+</tr>
+<tr>
+<td>
+texture</td>
+<td>
+Texture Reference</td>
+<td>
+Texture drawn along the ribbon. The first axis runs from the entity to the tail, the second across the ribbon, with the soft centre in the middle.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+argon:textures/trail/motion_blur.png</td>
+</tr>
+<tr>
+<td>
+edge_color</td>
+<td>
+Color</td>
+<td>
+Colour of the faint outer boundary.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#3b6687</td>
+</tr>
+<tr>
+<td>
+highlight_color</td>
+<td>
+Color</td>
+<td>
+Colour the centre moves towards at high speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#d6e4ea</td>
+</tr>
+<tr>
+<td>
+speed</td>
+<td>
+Speed Settings</td>
+<td>
+How the effect reacts to actual movement speed (blocks per second): minimum_trail_speed, maximum_trail_speed, intensity_curve, length_multiplier, opacity_multiplier, width_multiplier, acceleration_response (0-1 share per tick), deceleration_fade (ticks).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+trail_start_width</td>
+<td>
+Float</td>
+<td>
+Ribbon width in blocks next to the entity.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.6</td>
+</tr>
+<tr>
+<td>
+trail_end_width</td>
+<td>
+Float</td>
+<td>
+Ribbon width in blocks at the oldest end.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.08</td>
+</tr>
+<tr>
+<td>
+max_age</td>
+<td>
+Float</td>
+<td>
+Ticks a ribbon segment stays visible at full intensity.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+6.0</td>
+</tr>
+<tr>
+<td>
+smoothing</td>
+<td>
+Float</td>
+<td>
+How strongly the ribbon curves between recorded positions. 0 gives straight lines with sharp corners.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.4</td>
+</tr>
+<tr>
+<td>
+opacity</td>
+<td>
+Float</td>
+<td>
+Opacity at full intensity, before the speed opacity multiplier.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.55</td>
+</tr>
+<tr>
+<td>
+glow</td>
+<td>
+Boolean</td>
+<td>
+If true, the ribbon is drawn additively and unaffected by world light.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+dust</td>
+<td>
+Dust Settings</td>
+<td>
+Block particles kicked up from the ground while running: enabled, max_per_tick, lifetime (ticks), range (blocks from the camera), turn_burst, splash.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:motion_blur"}</pre>
 </div>
 <script>
 function syntaxHighlight(json) {

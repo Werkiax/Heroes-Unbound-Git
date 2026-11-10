@@ -310,7 +310,7 @@ true</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:as_target","actions":{"type":"palladium:set_on_fire","duration":5}}</pre>
+{"type":"palladium:as_target","actions":{"type":"palladium:set_on_fire","duration":100}}</pre>
 </div>
 <hr>
 
@@ -395,18 +395,6 @@ Fallback Value</th>
 <tbody>
 <tr>
 <td>
-condition</td>
-<td>
-Condition | Condition[]</td>
-<td>
-The condition(s) that define the action that will run.</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
-</tr>
-<tr>
-<td>
 on_false</td>
 <td>
 Action | Action[]</td>
@@ -429,12 +417,24 @@ false</td>
 <td>
 /</td>
 </tr>
+<tr>
+<td>
+conditions</td>
+<td>
+Condition | Condition[]</td>
+<td>
+The condition(s) that define the action that will run.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
 </tbody>
 </table>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:conditional","condition":{"type":"palladium:crouching"},"on_true":{"type":"palladium:run_command","command":"say Is crouching!"},"on_false":{"type":"palladium:run_command","command":"say Is not crouching!"}}</pre>
+{"type":"palladium:conditional","conditions":{"type":"palladium:crouching"},"on_true":{"type":"palladium:run_command","command":"say Is crouching!"},"on_false":{"type":"palladium:run_command","command":"say Is not crouching!"}}</pre>
 </div>
 <hr>
 
@@ -1027,7 +1027,7 @@ Fallback Value</th>
 <td>
 duration</td>
 <td>
-(Dynamic) Value</td>
+Integer | Time String ("40s", "2m", etc.) | (Dynamic) Value</td>
 <td>
 How long the entity will burn.</td>
 <td style="background-color: lightgreen">
@@ -1040,7 +1040,7 @@ true</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:set_on_fire","duration":5}</pre>
+{"type":"palladium:set_on_fire","duration":100}</pre>
 </div>
 <hr>
 

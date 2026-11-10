@@ -487,18 +487,6 @@ Fallback Value</th>
 <tbody>
 <tr>
 <td>
-condition</td>
-<td>
-Condition | Condition[]</td>
-<td>
-The condition to test.</td>
-<td style="background-color: lightgreen">
-true</td>
-<td>
-/</td>
-</tr>
-<tr>
-<td>
 on_false</td>
 <td>
 (Dynamic) Value</td>
@@ -521,12 +509,24 @@ true</td>
 <td>
 /</td>
 </tr>
+<tr>
+<td>
+conditions</td>
+<td>
+Condition | Condition[]</td>
+<td>
+The condition(s) to test.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
 </tbody>
 </table>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:conditional","condition":{"type":"palladium:crouching"},"on_true":"crouching","on_false":"not_crouching"}</pre>
+{"type":"palladium:conditional","conditions":{"type":"palladium:crouching"},"on_true":"crouching","on_false":"not_crouching"}</pre>
 </div>
 <hr>
 

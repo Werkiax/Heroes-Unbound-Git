@@ -235,6 +235,18 @@ true</td>
 </tr>
 <tr>
 <td>
+interval</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+Time until the lightning changes its shape.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+2</td>
+</tr>
+<tr>
+<td>
 segments</td>
 <td>
 Integer</td>
@@ -244,18 +256,6 @@ The amount of segments the lightning should have.</td>
 false</td>
 <td>
 5</td>
-</tr>
-<tr>
-<td>
-frequency</td>
-<td>
-Integer</td>
-<td>
-The frequency of the lightning fluctuation.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-2</td>
 </tr>
 <tr>
 <td>
@@ -274,7 +274,7 @@ false</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:lightning","render_settings":{"glow":"#0000ff","bloom":2,"size":2.0},"segments":10,"frequency":4,"spread":112.0}</pre>
+{"type":"palladium:lightning","render_settings":{"glow":"#0000ff","bloom":2,"size":2.0},"segments":10,"interval":4,"spread":112.0}</pre>
 </div>
 <hr>
 
@@ -421,7 +421,7 @@ false</td>
 <td>
 size</td>
 <td>
-Number or [width, height]</td>
+Float (>= 0.0) | Vector 2D</td>
 <td>
 The cross-section size of each box segment, in blocks.</td>
 <td style="background-color: lightcoral">
@@ -827,6 +827,18 @@ false</td>
 </tr>
 <tr>
 <td>
+face_beam</td>
+<td>
+Boolean</td>
+<td>
+If true, the ring faces along the beam instead of lying flat, so it works as a circle in front of a hand.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
 scroll_speed</td>
 <td>
 Float</td>
@@ -957,7 +969,7 @@ false</td>
 <td>
 textures</td>
 <td>
-Texture Layer (texture, size, spacing, rotation, rotation_speed, motion_speed, facing, pulse)[]</td>
+{ texture*, size, spacing, rotation, rotation_speed, motion_speed, facing, pulse }[]</td>
 <td>
 The texture layers to render simultaneously around the beam axis, each either a sweeping ribbon ("facing": "radial", default) or a stack of flat cards facing down the beam ("along_beam").</td>
 <td style="background-color: lightgreen">
@@ -981,7 +993,7 @@ false</td>
 <td>
 tint</td>
 <td>
-Item Tint (slot, source)</td>
+{ slot*, source* }</td>
 <td>
 Tints every texture layer by the color a registered source reads off an item in "slot" (first match wins). "source" is an id an addon registered; with no match it stays white. Omit for no tint.</td>
 <td style="background-color: lightcoral">
