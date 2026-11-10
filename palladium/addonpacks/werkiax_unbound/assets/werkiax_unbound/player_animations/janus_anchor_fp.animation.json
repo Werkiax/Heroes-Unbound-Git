@@ -1,0 +1,69 @@
+{
+    "format_version": "1.8.0",
+    "animations": {
+        "janus_anchor_fp": {
+            "loop": "hold_on_last_frame",
+            "animation_length": 0.3,
+            "bones": {
+                "right_arm": {
+                    "rotation": {
+                        "0.0": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "0.3": {
+                            "vector": [
+                                -35,
+                                15,
+                                -10
+                            ],
+                            "easing": "easeOutBack"
+                        }
+                    },
+                    "position": {
+                        "0.0": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "0.3": [
+                            0,
+                            -1,
+                            0
+                        ]
+                    }
+                },
+                "left_arm": {
+                    "rotation": {
+                        "0.0": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "0.3": {
+                            "vector": [
+                                -35,
+                                -15,
+                                10
+                            ],
+                            "easing": "easeOutBack"
+                        }
+                    },
+                    "position": {
+                        "0.0": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "0.3": [
+                            0,
+                            -1,
+                            0
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

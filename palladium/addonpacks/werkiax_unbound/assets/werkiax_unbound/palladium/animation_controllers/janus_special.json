@@ -1,102 +1,127 @@
 {
-  "initial_state": "idle",
-  "blend_transition": 3,
-  "states": {
-    "idle": {
-      "transitions": {
-        "power_strike_charge": {
-          "type": "palladium:ability_enabled",
-          "ability": "werkiax_unbound:janus#power_strike"
-        },
-        "crater": [
-          {
-            "type": "palladium:ability_enabled",
-            "ability": "werkiax_unbound:janus#crater"
-          },
-          {
-            "type": "palladium:not",
-            "conditions": {
-              "type": "palladium:on_ground"
-            }
-          }
-        ],
-        "repulsion_cone": [
-          {
-            "type": "palladium:ability_enabled",
-            "ability": "werkiax_unbound:janus#kinetic_repulsion"
-          },
-          {
-            "type": "palladium:not",
-            "conditions": {
-              "type": "palladium:crouching"
-            }
-          }
-        ],
-        "repulsion_ring": [
-          {
-            "type": "palladium:ability_enabled",
-            "ability": "werkiax_unbound:janus#kinetic_repulsion"
-          },
-          {
-            "type": "palladium:crouching"
-          }
-        ]
-      }
-    },
-    "power_strike_charge": {
-      "animation": "werkiax_unbound:janus_strike_charge",
-      "first_person_animation": "werkiax_unbound:janus_strike_charge_fp",
-      "transitions": {
-        "power_strike": {
-          "type": "palladium:not",
-          "conditions": {
-            "type": "palladium:ability_enabled",
-            "ability": "werkiax_unbound:janus#power_strike"
-          }
-        }
-      }
-    },
-    "power_strike": {
-      "animation": "werkiax_unbound:janus_power_strike",
-      "transitions": {
-        "idle": "palladium.any_animation_finished()"
-      },
-      "first_person_animation": "werkiax_unbound:janus_power_strike_fp"
-    },
-    "crater": {
-      "animation": "werkiax_unbound:janus_crater",
-      "transitions": {
+    "initial_state": "idle",
+    "blend_transition": 3,
+    "states": {
         "idle": {
-          "type": "palladium:or",
-          "conditions": [
-            {
-              "type": "palladium:not",
-              "conditions": {
-                "type": "palladium:ability_enabled",
-                "ability": "werkiax_unbound:janus#crater"
-              }
-            },
-            {
-              "type": "palladium:on_ground"
+            "transitions": {
+                "power_strike_charge": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:janus#power_strike"
+                },
+                "crater": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:janus#crater"
+                    },
+                    {
+                        "type": "palladium:not",
+                        "conditions": {
+                            "type": "palladium:on_ground"
+                        }
+                    }
+                ],
+                "anchor": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:janus#anchor"
+                },
+                "repulsion_cone": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:janus#kinetic_repulsion"
+                    },
+                    {
+                        "type": "palladium:not",
+                        "conditions": {
+                            "type": "palladium:crouching"
+                        }
+                    }
+                ],
+                "repulsion_ring": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:janus#kinetic_repulsion"
+                    },
+                    {
+                        "type": "palladium:crouching"
+                    }
+                ]
             }
-          ]
+        },
+        "power_strike_charge": {
+            "animation": "werkiax_unbound:janus_strike_charge",
+            "first_person_animation": "werkiax_unbound:janus_strike_charge_fp",
+            "transitions": {
+                "power_strike": {
+                    "type": "palladium:not",
+                    "conditions": {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:janus#power_strike"
+                    }
+                }
+            }
+        },
+        "power_strike": {
+            "animation": "werkiax_unbound:janus_power_strike",
+            "transitions": {
+                "idle": "palladium.any_animation_finished()"
+            },
+            "first_person_animation": "werkiax_unbound:janus_power_strike_fp"
+        },
+        "crater": {
+            "animation": "werkiax_unbound:janus_crater",
+            "transitions": {
+                "idle": {
+                    "type": "palladium:or",
+                    "conditions": [
+                        {
+                            "type": "palladium:not",
+                            "conditions": {
+                                "type": "palladium:ability_enabled",
+                                "ability": "werkiax_unbound:janus#crater"
+                            }
+                        },
+                        {
+                            "type": "palladium:on_ground"
+                        }
+                    ]
+                }
+            },
+            "first_person_animation": "werkiax_unbound:janus_crater_fp"
+        },
+        "anchor": {
+            "animation": "werkiax_unbound:janus_anchor",
+            "first_person_animation": "werkiax_unbound:janus_anchor_fp",
+            "blend_transition": 2,
+            "transitions": {
+                "anchor_release": {
+                    "type": "palladium:not",
+                    "conditions": {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:janus#anchor"
+                    }
+                }
+            }
+        },
+        "anchor_release": {
+            "animation": "werkiax_unbound:janus_anchor_release",
+            "blend_transition": 1,
+            "transitions": {
+                "idle": "palladium.any_animation_finished()"
+            }
+        },
+        "repulsion_cone": {
+            "animation": "werkiax_unbound:kinetic_repulsion_cone",
+            "blend_transition": 2,
+            "transitions": {
+                "idle": "palladium.any_animation_finished()"
+            }
+        },
+        "repulsion_ring": {
+            "animation": "werkiax_unbound:kinetic_repulsion_ring",
+            "blend_transition": 2,
+            "transitions": {
+                "idle": "palladium.any_animation_finished()"
+            }
         }
-      },
-      "first_person_animation": "werkiax_unbound:janus_crater_fp"
-    },
-    "repulsion_cone": {
-      "animation": "werkiax_unbound:kinetic_repulsion_cone",
-      "blend_transition": 2,
-      "transitions": {
-        "idle": "palladium.any_animation_finished()"
-      }
-    },
-    "repulsion_ring": {
-      "animation": "werkiax_unbound:kinetic_repulsion_ring",
-      "blend_transition": 2,
-      "transitions": {
-        "idle": "palladium.any_animation_finished()"
-      }
     }
-  }
 }

@@ -721,7 +721,7 @@
             "deflect_projectiles": true,
             "repel": 0.25,
             "follow_user": true,
-            "color": true, FFBF00
+            "color": "#FFD933",
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
@@ -1116,6 +1116,54 @@
                     "operation": "add_value",
                     "id": "werkiax_unbound:witcher_base_toughness"
                 }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "quen_bubble_slow": {
+            "type": "argon:movement_reduction",
+            "mode": "movement",
+            "percentage": 80.0,
+            "reduce_attack_damage": false,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:witcher#quen_bubble"
+                }
+            }
+        },
+        "quen_bubble_slow_flight": {
+            "type": "argon:movement_reduction",
+            "mode": "flight",
+            "percentage": 80.0,
+            "reduce_attack_damage": false,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:witcher#quen_bubble"
+                }
+            }
+        },
+        "witcher_resistance": {
+            "type": "argon:damage_reduction",
+            "percentage": 80,
+            "damage_types": [
+                "minecraft:mob_attack",
+                "minecraft:mob_attack_no_aggro",
+                "minecraft:magic",
+                "minecraft:wither",
+                "argon:magic",
+                "neoforge:poison"
             ],
             "properties": {
                 "hidden_in_gui": true,
