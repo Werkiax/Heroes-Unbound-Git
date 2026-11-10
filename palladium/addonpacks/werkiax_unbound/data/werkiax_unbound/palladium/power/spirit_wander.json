@@ -56,7 +56,7 @@
             },
             "action": {
                 "type": "palladium:conditional",
-                "condition": {
+                "conditions": {
                     "type": "palladium:number_comparison",
                     "value": {
                         "type": "palladium:entity_tick_count",
@@ -209,7 +209,7 @@
             "type": "palladium:action",
             "action": {
                 "type": "palladium:conditional",
-                "condition": {
+                "conditions": {
                     "type": "palladium:number_comparison",
                     "value": {
                         "type": "palladium:entity_tick_count",
@@ -235,7 +235,7 @@
             "action": [
                 {
                     "type": "palladium:conditional",
-                    "condition": {
+                    "conditions": {
                         "type": "palladium:number_comparison",
                         "value": {
                             "type": "palladium:integer_data_attachment",
@@ -253,7 +253,7 @@
                 },
                 {
                     "type": "palladium:conditional",
-                    "condition": {
+                    "conditions": {
                         "type": "palladium:number_comparison",
                         "value": {
                             "type": "palladium:integer_data_attachment",
@@ -392,7 +392,7 @@
         },
         "wall_immunity": {
             "type": "palladium:damage_immunity",
-            "damage_type": "minecraft:in_wall",
+            "damage_types": "minecraft:in_wall",
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
@@ -415,7 +415,7 @@
         },
         "fall_immunity": {
             "type": "palladium:damage_immunity",
-            "damage_type": "minecraft:fall",
+            "damage_types": "minecraft:fall",
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true

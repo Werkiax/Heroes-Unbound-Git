@@ -106,7 +106,7 @@
             "type": "palladium:action",
             "last_tick_action": {
                 "type": "palladium:conditional",
-                "condition": [
+                "conditions": [
                     {
                         "type": "palladium:ability_ticks",
                         "ability": "werkiax_unbound:ghost_of_sparta#charge_leap",
@@ -371,7 +371,7 @@
             "action": {
                 "type": "palladium:run_command",
                 "command": [
-                    "execute if predicate {condition:'minecraft:random_chance',chance:0.2} run particle minecraft:flame ~ ~1 ~ 0.3 0.6 0.3 0.01 1 force"
+                    "execute if predicate {conditions:'minecraft:random_chance',chance:0.2} run particle minecraft:flame ~ ~1 ~ 0.3 0.6 0.3 0.01 1 force"
                 ]
             },
             "properties": {
@@ -551,7 +551,8 @@
                         }
                     }
                 ]
-            }
+            },
+            "interval": 20
         },
         "regen_rage": {
             "type": "palladium:healing",
@@ -569,11 +570,12 @@
                         "ability": "werkiax_unbound:ghost_of_sparta#rage"
                     }
                 ]
-            }
+            },
+            "interval": 20
         },
         "immunities": {
             "type": "palladium:damage_immunity",
-            "damage_type": "minecraft:fall",
+            "damage_types": "minecraft:fall",
             "properties": {
                 "hidden_in_gui": true
             }

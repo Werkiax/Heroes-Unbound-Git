@@ -178,7 +178,7 @@
         "anchor_big": [0.0, 0.0],
         "anchor_hit_small": [0.0, 0.0],
         "anchor_hit_medium": [0.0, 0.0],
-        "anchor_hit_big": [0.0, 0.0],
+        "anchor_hit_big": [0.75, 1.25],
         "anchor_reset": [0.0, 0.0],
         "bulwark_stats": [0.0, 0.0],
         "bulwark_reduction": [0.0, 0.0],
@@ -244,7 +244,12 @@
         "fx_strike_charge_sound": [0.0, 0.0],
         "fx_bowling_ball_barrier": [0.0, 0.0],
         "fx_berserk_activate_sound": [0.0, 0.0],
-        "fx_berserk_glow_sound": [0.0, 0.0]
+        "fx_berserk_glow_sound": [0.0, 0.0],
+        "crater_quake": [0.0, 0.0],
+        "crater_shake": [0.0, 0.0],
+        "anchor_hit_far": [0.0, 0.0],
+        "anchor_hit_close": [0.0, 0.0],
+        "anchor_end_push": [0.0, 0.0]
     },
     "connections": [
         {

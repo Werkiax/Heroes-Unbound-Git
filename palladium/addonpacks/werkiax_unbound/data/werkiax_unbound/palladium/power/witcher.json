@@ -720,6 +720,8 @@
             "damage_reduction": 0,
             "deflect_projectiles": true,
             "repel": 0.25,
+            "follow_user": true,
+            "color": true, FFBF00
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
@@ -826,7 +828,6 @@
             "hold_time": "2s",
             "calm_duration": "5s",
             "lockout_duration": "10s",
-            "entity_tag": "#werkiax_unbound:axii_calmable",
             "calm_effect": "argon:calmed",
             "lockout_effect": "argon:calm_lockout",
             "properties": {
@@ -946,7 +947,7 @@
             "type": "palladium:action",
             "action": {
                 "type": "palladium:conditional",
-                "condition": {
+                "conditions": {
                     "type": "palladium:number_comparison",
                     "value": {
                         "type": "palladium:entity_tick_count",
@@ -1129,7 +1130,8 @@
                 "hidden_in_gui": true,
                 "hidden_in_bar": true,
                 "color": "red"
-            }
+            },
+            "interval": 20
         },
         "health_upgrade_1": {
             "type": "palladium:attribute_modifier",

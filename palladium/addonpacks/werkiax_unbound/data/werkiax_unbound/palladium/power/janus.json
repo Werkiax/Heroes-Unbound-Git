@@ -1,7 +1,7 @@
 {
     "name": "Janus",
     "persistent_data": true,
-    "icon": "minecraft:shield",
+    "icon": "werkiax_unbound:textures/icons/janus_might.png",
     "energy_bars": {
         "kinetic_charge": {
             "max": 1000,
@@ -21,7 +21,7 @@
                 "description": "Dash forward, launch entities in your path to air while dealing damage. Costs a little Kinetic Energy.",
                 "icon": {
                     "type": "palladium:texture",
-                    "texture": "werkiax_unbound:textures/icons/bowling_ball.png"
+                    "texture": "werkiax_unbound:textures/icons/janus_bowling_ball.png"
                 },
                 "list_index": 1,
                 "color": "purple",
@@ -62,7 +62,10 @@
             "properties": {
                 "title": "Power Strike",
                 "description": "Hold up to 6 seconds to charge your fist with Kinetic Energy, then release to punch. Damage grows with each charge stage (10, 20, 30) and consumes 100 / 200 / 300 Kinetic Energy. Higher stages launch enemies further into the air, and a full charge pierces armor and cracks the ground. You move slower while charging, and the cooldown is twice as long as the time you charged.",
-                "icon": "minecraft:mace",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/janus_uppercut.png"
+                },
                 "list_index": 0,
                 "color": "purple",
                 "hidden_in_gui": true
@@ -112,7 +115,7 @@
             "type": "palladium:action",
             "first_tick_action": {
                 "type": "palladium:conditional",
-                "condition": {
+                "conditions": {
                     "type": "palladium:energy_bar",
                     "energy_bar": "werkiax_unbound:janus#kinetic_charge",
                     "min": 100,
@@ -218,10 +221,7 @@
             "properties": {
                 "title": "Berserk",
                 "description": "Toggle to harden your scales around both hands and fight with dual-wielded fists. Grants +10 attack damage and +2 attack knockback, but you take 20% more damage in total (15% base + 5%) and can't hold items.",
-                "icon": {
-                    "type": "palladium:texture",
-                    "texture": "werkiax_unbound:textures/icons/berserk.png"
-                },
+                "icon": "werkiax_unbound:textures/icons/janus_berserk.png",
                 "list_index": 2,
                 "color": "purple"
             },
@@ -266,7 +266,7 @@
             "reset_time": "5s",
             "on_final_attack": {
                 "type": "palladium:conditional",
-                "condition": {
+                "conditions": {
                     "type": "palladium:energy_bar",
                     "energy_bar": "werkiax_unbound:janus#kinetic_charge",
                     "max": 974
@@ -356,7 +356,8 @@
                         "ability": "werkiax_unbound:janus#regeneration_upgrade"
                     }
                 ]
-            }
+            },
+            "interval": 20
         },
         "berserk_no_mainhand": {
             "type": "palladium:restrict_slots",
@@ -473,10 +474,7 @@
             "properties": {
                 "title": "Kinetic Repulsion",
                 "description": "Unleash a powerful gust of force in the direction you are looking, damaging and shoving back everything in front of you. Crouch while using it to release a weaker pulse in every direction around you instead.",
-                "icon": {
-                    "type": "palladium:texture",
-                    "texture": "werkiax_unbound:textures/icons/kinetic_repulsion.png"
-                },
+                "icon": "werkiax_unbound:textures/icons/janus_kinetic_repulsion.png",
                 "list_index": 0,
                 "color": "purple"
             },
@@ -776,7 +774,7 @@
         },
         "crater_no_fall_damage": {
             "type": "palladium:damage_immunity",
-            "damage_type": "minecraft:fall",
+            "damage_types": "minecraft:fall",
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
@@ -906,7 +904,10 @@
             "properties": {
                 "title": "Anchor",
                 "description": "Plant yourself for 5 seconds, unable to move or attack. Nearby enemies are slowly pulled toward you like a black hole while you absorb Kinetic Energy at a greatly increased rate. When it ends, all your Kinetic Energy is released in an explosion that grows with the amount stored, and everyone nearby is blasted away. Damage reduction rises from 30% to 80% while anchored.",
-                "icon": "minecraft:turtle_scute",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/janus_anchor.png"
+                },
                 "list_index": 2,
                 "color": "purple"
             },
@@ -1057,7 +1058,7 @@
             },
             "action": {
                 "type": "palladium:conditional",
-                "condition": {
+                "conditions": {
                     "type": "palladium:energy_bar",
                     "energy_bar": "werkiax_unbound:janus#kinetic_charge",
                     "min": 0,
@@ -1617,7 +1618,7 @@
             "properties": {
                 "title": "Janus",
                 "description": "Cycle between Base, Might and Bulwark Form. Base Form requires crouching; the other forms require standing and must be unlocked first.",
-                "icon": "minecraft:nether_star",
+                "icon": "werkiax_unbound:textures/icons/janus_icon.png",
                 "list_index": 4,
                 "color": "purple"
             },
@@ -1634,7 +1635,7 @@
             "properties": {
                 "title": "Might Form",
                 "description": "Fast and offensive. Higher attack and speed, passive regeneration, Kinetic Energy gained by attacking. Must be unlocked before you can transform into it.",
-                "icon": "minecraft:netherite_sword",
+                "icon": "werkiax_unbound:textures/icons/janus_might.png",
                 "list_index": 20,
                 "color": "purple"
             },
@@ -1653,7 +1654,10 @@
             "properties": {
                 "title": "Bulwark Form",
                 "description": "Slow and highly defensive. Heavy armor and damage reduction, no regeneration, Kinetic Energy gained by taking damage. Must be unlocked before you can transform into it.",
-                "icon": "minecraft:netherite_chestplate",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/janus_bulwark.png"
+                },
                 "list_index": 19,
                 "color": "purple"
             },
@@ -1832,10 +1836,7 @@
             "properties": {
                 "title": "Regeneration",
                 "description": "Unlocks passive regeneration in Might Form.",
-                "icon": {
-                    "type": "palladium:texture",
-                    "texture": "werkiax_unbound:textures/icons/regeneration_upgrade.png"
-                },
+                "icon": "werkiax_unbound:textures/icons/janus_regeneration.png",
                 "list_index": 17,
                 "color": "purple"
             },
@@ -1860,7 +1861,7 @@
                 "description": "Unlocks Bowling Ball: dash forward, launching entities in your path to air while dealing damage. Costs a little Kinetic Energy.",
                 "icon": {
                     "type": "palladium:texture",
-                    "texture": "werkiax_unbound:textures/icons/bowling_ball.png"
+                    "texture": "werkiax_unbound:textures/icons/janus_bowling_ball.png"
                 },
                 "hidden_in_bar": true,
                 "list_index": 21,
@@ -1885,7 +1886,7 @@
             "properties": {
                 "title": "Power Strike",
                 "description": "Unlocks Power Strike: hold to charge your fist with Kinetic Energy, then release to punch.",
-                "icon": "minecraft:mace",
+                "icon": "werkiax_unbound:textures/icons/janus_uppercut.png",
                 "hidden_in_bar": true,
                 "list_index": 22,
                 "color": "purple"
@@ -1909,10 +1910,7 @@
             "properties": {
                 "title": "Damage Reduction",
                 "description": "Unlocks the base damage reduction of Bulwark Form.",
-                "icon": {
-                    "type": "palladium:texture",
-                    "texture": "werkiax_unbound:textures/icons/damage_reduction_upgrade.png"
-                },
+                "icon": "werkiax_unbound:textures/icons/janus_reduction.png",
                 "list_index": 18,
                 "color": "purple"
             },
@@ -2235,10 +2233,7 @@
             "properties": {
                 "title": "Health I",
                 "description": "Health +6 in Might Form, +6 in Bulwark Form.",
-                "icon": {
-                    "type": "palladium:texture",
-                    "texture": "werkiax_unbound:textures/icons/health_upgrade_1.png"
-                },
+                "icon": "werkiax_unbound:textures/icons/health_icon.png",
                 "list_index": 30,
                 "color": "purple"
             },
@@ -2319,10 +2314,7 @@
             "properties": {
                 "title": "Health II",
                 "description": "Health +6 in Might Form, +6 in Bulwark Form. Requires Health I.",
-                "icon": {
-                    "type": "palladium:texture",
-                    "texture": "werkiax_unbound:textures/icons/health_upgrade_2.png"
-                },
+                "icon": "werkiax_unbound:textures/icons/health_icon.png",
                 "list_index": 31,
                 "color": "purple"
             },
@@ -2407,7 +2399,7 @@
             "properties": {
                 "title": "Health III",
                 "description": "Health +7 in Might Form, +7 in Bulwark Form. Requires Health II.",
-                "icon": "minecraft:totem_of_undying",
+                "icon": "werkiax_unbound:textures/icons/health_icon.png",
                 "list_index": 32,
                 "color": "purple"
             },
@@ -2492,7 +2484,7 @@
             "properties": {
                 "title": "Health IV",
                 "description": "Health +7 in Might Form, +7 in Bulwark Form. Requires Health III.",
-                "icon": "minecraft:enchanted_golden_apple",
+                "icon": "werkiax_unbound:textures/icons/health_icon.png",
                 "list_index": 33,
                 "color": "purple"
             },
@@ -2658,7 +2650,7 @@
             "properties": {
                 "title": "Damage II",
                 "description": "Damage +6 in Might Form, +2 in Bulwark Form. Requires Damage I.",
-                "icon": "minecraft:diamond_sword",
+                "icon": "minecraft:golden_sword",
                 "list_index": 35,
                 "color": "purple"
             },
@@ -2743,7 +2735,7 @@
             "properties": {
                 "title": "Damage III",
                 "description": "Damage +6 in Might Form, +2 in Bulwark Form. Requires Damage II.",
-                "icon": "minecraft:netherite_sword",
+                "icon": "minecraft:diamond_sword",
                 "list_index": 36,
                 "color": "purple"
             },
@@ -2828,7 +2820,7 @@
             "properties": {
                 "title": "Damage IV",
                 "description": "Damage +6 in Might Form, +2 in Bulwark Form. Requires Damage III.",
-                "icon": "minecraft:mace",
+                "icon": "minecraft:netherite_sword",
                 "list_index": 37,
                 "color": "purple"
             },
@@ -3000,7 +2992,7 @@
             "properties": {
                 "title": "Armor II",
                 "description": "Armor +2 in Might Form, +5 in Bulwark Form. Requires Armor I.",
-                "icon": "minecraft:diamond_chestplate",
+                "icon": "minecraft:golden_chestplate",
                 "list_index": 39,
                 "color": "purple"
             },
@@ -3091,7 +3083,7 @@
             "properties": {
                 "title": "Armor III",
                 "description": "Armor +3 in Might Form, +6 in Bulwark Form. Requires Armor II.",
-                "icon": "minecraft:netherite_chestplate",
+                "icon": "minecraft:diamond_chestplate",
                 "list_index": 40,
                 "color": "purple"
             },
@@ -3182,7 +3174,7 @@
             "properties": {
                 "title": "Armor IV",
                 "description": "Armor +3 in Might Form, +6 in Bulwark Form. Requires Armor III.",
-                "icon": "minecraft:shield",
+                "icon": "minecraft:netherite_chestplate",
                 "list_index": 41,
                 "color": "purple"
             },
@@ -3273,7 +3265,7 @@
             "properties": {
                 "title": "Speed I",
                 "description": "Speed +15% in Might Form, +5% in Bulwark Form.",
-                "icon": "minecraft:sugar",
+                "icon": "werkiax_unbound:textures/icons/speed_upgrade.png",
                 "list_index": 42,
                 "color": "purple"
             },
@@ -3354,7 +3346,7 @@
             "properties": {
                 "title": "Speed II",
                 "description": "Speed +15% in Might Form, +5% in Bulwark Form. Requires Speed I.",
-                "icon": "minecraft:feather",
+                "icon": "werkiax_unbound:textures/icons/speed_upgrade.png",
                 "list_index": 43,
                 "color": "purple"
             },
@@ -3439,7 +3431,7 @@
             "properties": {
                 "title": "Speed III",
                 "description": "Speed +15% in Might Form, +5% in Bulwark Form. Requires Speed II.",
-                "icon": "minecraft:rabbit_foot",
+                "icon": "werkiax_unbound:textures/icons/speed_upgrade.png",
                 "list_index": 44,
                 "color": "purple"
             },
@@ -3524,7 +3516,7 @@
             "properties": {
                 "title": "Speed IV",
                 "description": "Speed +15% in Might Form, +5% in Bulwark Form. Requires Speed III.",
-                "icon": "minecraft:netherite_boots",
+                "icon": "werkiax_unbound:textures/icons/speed_upgrade.png",
                 "list_index": 45,
                 "color": "purple"
             },

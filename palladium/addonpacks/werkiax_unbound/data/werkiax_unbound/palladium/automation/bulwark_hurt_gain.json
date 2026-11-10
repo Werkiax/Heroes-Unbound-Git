@@ -1,31 +1,31 @@
 {
-  "trigger": {
-    "trigger": "minecraft:entity_hurt_player",
-    "conditions": {}
-  },
-  "condition": {
-    "type": "palladium:mode_active",
-    "ability": "werkiax_unbound:janus#form_switch",
-    "mode": "bulwark",
-    "ignore_unlocked": false
-  },
-  "actions": {
-    "type": "palladium:conditional",
+    "trigger": {
+        "trigger": "minecraft:entity_hurt_player",
+        "conditions": {}
+    },
     "condition": {
-      "type": "palladium:energy_bar",
-      "energy_bar": "werkiax_unbound:janus#kinetic_charge",
-      "max": 949
+        "type": "palladium:mode_active",
+        "ability": "werkiax_unbound:janus#form_switch",
+        "mode": "bulwark",
+        "ignore_unlocked": false
     },
-    "on_true": {
-      "type": "palladium:modify_number_data_attachment",
-      "attachment": "werkiax_unbound:kinetic_charge",
-      "operation": "+",
-      "value": 50
-    },
-    "on_false": {
-      "type": "palladium:set_data_attachment",
-      "attachment": "werkiax_unbound:kinetic_charge",
-      "value": 1000
+    "actions": {
+        "type": "palladium:conditional",
+        "conditions": {
+            "type": "palladium:energy_bar",
+            "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+            "max": 949
+        },
+        "on_true": {
+            "type": "palladium:modify_number_data_attachment",
+            "attachment": "werkiax_unbound:kinetic_charge",
+            "operation": "+",
+            "value": 50
+        },
+        "on_false": {
+            "type": "palladium:set_data_attachment",
+            "attachment": "werkiax_unbound:kinetic_charge",
+            "value": 1000
+        }
     }
-  }
 }

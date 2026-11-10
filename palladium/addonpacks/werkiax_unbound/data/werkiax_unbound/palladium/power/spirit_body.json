@@ -108,7 +108,7 @@
         },
         "poison_immunity": {
             "type": "palladium:damage_immunity",
-            "damage_type": "neoforge:poison",
+            "damage_types": "neoforge:poison",
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
