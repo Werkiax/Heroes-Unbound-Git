@@ -43,6 +43,47 @@
                 }
             }
         },
+        "spirit_poison_aura": {
+            "type": "palladium:area_action",
+            "radius": 5.0,
+            "affect_self": false,
+            "entity_condition": {
+                "type": "palladium:not",
+                "conditions": {
+                    "type": "palladium:has_power",
+                    "powers": "werkiax_unbound:spirit_body"
+                }
+            },
+            "action": {
+                "type": "palladium:conditional",
+                "condition": {
+                    "type": "palladium:number_comparison",
+                    "value": {
+                        "type": "palladium:entity_tick_count",
+                        "modify": "math.mod(this, 40)"
+                    },
+                    "operator": "=",
+                    "compare_to": 0
+                },
+                "on_true": {
+                    "type": "palladium:run_command",
+                    "command": [
+                        "damage @s 1 neoforge:poison"
+                    ]
+                }
+            },
+            "properties": {
+                "title": "Spirit Poison",
+                "description": "Your spirit leaks negative energy. Everything within 5 blocks is poisoned and takes damage over time.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/spirit_poison_aura.png"
+                },
+                "list_index": 2,
+                "color": "white",
+                "hidden_in_bar": true
+            }
+        },
         "spirit_sense": {
             "type": "argon:highlight",
             "mode": "others",

@@ -45,8 +45,8 @@
         "upgrades": {
             "pos": [7.0, 1.3],
             "style": "hub",
-            "title": "Spartan Upgrades",
-            "icon": "minecraft:iron_axe",
+            "title": "Ghost of Sparta",
+            "icon": "werkiax_unbound:textures/icons/ghost_of_sparta_icon.png",
             "description": "Permanent stat upgrades. Four tiers each for health, damage, armor and speed."
         },
         "health_upgrade_1": [5.5, 2.6],

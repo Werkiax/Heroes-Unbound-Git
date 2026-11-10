@@ -655,6 +655,14 @@
                 "hidden_in_bar": true
             }
         },
+        "poison_immunity": {
+            "type": "palladium:damage_immunity",
+            "damage_type": "neoforge:poison",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
         "health_upgrade_1": {
             "type": "palladium:attribute_modifier",
             "modifiers": [

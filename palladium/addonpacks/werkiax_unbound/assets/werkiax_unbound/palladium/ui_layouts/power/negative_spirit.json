@@ -10,7 +10,9 @@
         {
             "type": "palladium:power_name",
             "properties": {
-                "alignment": "top_left"
+                "alignment": "top_left",
+                "width": 200,
+                "height": 18
             }
         },
         {

@@ -6,6 +6,20 @@
         "texture": "werkiax_unbound:textures/icons/witcher_icon.png"
     },
     "abilities": {
+        "witcher_core": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Witcher",
+                "description": "Trained since childhood, a Witcher is a monster hunter with sharpened senses and mastery of the Signs. Unlock Witcher Sense to begin your path.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/witcher_icon.png"
+                },
+                "list_index": 0,
+                "color": "yellow",
+                "hidden_in_bar": true
+            }
+        },
         "aard": {
             "type": "palladium:dummy",
             "properties": {
@@ -24,6 +38,17 @@
                     "behaviour": "held",
                     "time": 40,
                     "cooldown": "4s"
+                },
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#witcher_sense"
+                    }
                 }
             }
         },
@@ -244,6 +269,17 @@
                     "behaviour": "held",
                     "time": 60,
                     "cooldown": "5s"
+                },
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#aard"
+                    }
                 }
             }
         },
@@ -415,6 +451,17 @@
                     "behaviour": "activation",
                     "time": 5,
                     "cooldown": "10s"
+                },
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#igni"
+                    }
                 }
             }
         },
@@ -796,6 +843,17 @@
                     "type": "palladium:key_bind",
                     "behaviour": "held",
                     "cooldown": "1s"
+                },
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#witcher_sense"
+                    }
                 }
             }
         },
@@ -819,7 +877,7 @@
         "yrden_zone": {
             "type": "argon:zone",
             "radius": 5,
-            "duration": "10s",
+            "duration": "20s",
             "interval": "1s",
             "damage": 2,
             "damage_type": "argon:magic",
@@ -833,7 +891,7 @@
             ],
             "properties": {
                 "title": "Yrden",
-                "description": "Trace a magic circle on the ground. Enemies inside are slowed and take damage over time. Lasts 10 seconds.",
+                "description": "Trace a magic circle on the ground. Enemies inside are slowed and take damage over time. Lasts 20 seconds.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/yrden.png"
@@ -845,8 +903,19 @@
                 "enabling": {
                     "type": "palladium:key_bind",
                     "behaviour": "activation",
-                    "time": "10s",
+                    "time": "20s",
                     "cooldown": "2s"
+                },
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#witcher_sense"
+                    }
                 }
             },
             "particle": {
@@ -858,7 +927,7 @@
             "first_tick_action": {
                 "type": "palladium:run_command",
                 "command": [
-                    "summon minecraft:area_effect_cloud ~ ~ ~ {Duration:205,Radius:0f,RadiusPerTick:0f,Tags:[\"yrden_center\"]}",
+                    "summon minecraft:area_effect_cloud ~ ~ ~ {Duration:405,Radius:0f,RadiusPerTick:0f,Tags:[\"yrden_center\"]}",
                     "playsound minecraft:block.beacon.activate master @a ~ ~ ~ 1.0 0.6"
                 ]
             },
@@ -889,40 +958,52 @@
                 "on_true": {
                     "type": "palladium:run_command",
                     "command": [
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-1.50 ~0.1 ~1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-1.20 ~0.1 ~1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.90 ~0.1 ~1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.60 ~0.1 ~1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.30 ~0.1 ~1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.00 ~0.1 ~1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.30 ~0.1 ~1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.60 ~0.1 ~1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.90 ~0.1 ~1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~1.20 ~0.1 ~1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~1.50 ~0.1 ~1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~1.27 ~0.1 ~1.10 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~1.04 ~0.1 ~0.90 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.81 ~0.1 ~0.70 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.58 ~0.1 ~0.50 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.35 ~0.1 ~0.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.12 ~0.1 ~0.10 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.12 ~0.1 ~-0.10 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.35 ~0.1 ~-0.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.58 ~0.1 ~-0.50 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.81 ~0.1 ~-0.70 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-1.04 ~0.1 ~-0.90 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-1.27 ~0.1 ~-1.10 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-1.50 ~0.1 ~-1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-1.20 ~0.1 ~-1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.90 ~0.1 ~-1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.60 ~0.1 ~-1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~-0.30 ~0.1 ~-1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.00 ~0.1 ~-1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.30 ~0.1 ~-1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.60 ~0.1 ~-1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~0.90 ~0.1 ~-1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~1.20 ~0.1 ~-1.30 0 0 0 0 1 force",
-                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:reverse_portal ~1.50 ~0.1 ~-1.30 0 0 0 0 1 force"
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-1.50 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-1.20 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.90 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.60 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.30 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.00 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.30 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.60 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.90 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~1.20 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~1.50 ~0.1 ~1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~1.27 ~0.1 ~1.10 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~1.04 ~0.1 ~0.90 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.81 ~0.1 ~0.70 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.58 ~0.1 ~0.50 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.35 ~0.1 ~0.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.12 ~0.1 ~0.10 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.12 ~0.1 ~-0.10 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.35 ~0.1 ~-0.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.58 ~0.1 ~-0.50 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.81 ~0.1 ~-0.70 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-1.04 ~0.1 ~-0.90 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-1.27 ~0.1 ~-1.10 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-1.50 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-1.20 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.90 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.60 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.30 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.00 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.30 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.60 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.90 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~1.20 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~1.50 ~0.1 ~-1.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-1.27 ~0.1 ~1.10 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-1.04 ~0.1 ~0.90 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.81 ~0.1 ~0.70 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.58 ~0.1 ~0.50 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.35 ~0.1 ~0.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~-0.12 ~0.1 ~0.10 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.12 ~0.1 ~-0.10 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.35 ~0.1 ~-0.30 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.58 ~0.1 ~-0.50 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~0.81 ~0.1 ~-0.70 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~1.04 ~0.1 ~-0.90 0 0 0 0 1 force",
+                        "execute at @e[type=minecraft:area_effect_cloud,tag=yrden_center,limit=1,sort=nearest] run particle minecraft:witch ~1.27 ~0.1 ~-1.10 0 0 0 0 1 force"
                     ]
                 }
             },
@@ -1000,7 +1081,7 @@
             "attacker_memory_time": "5m",
             "show_visual": true,
             "glow_color": "#FFD93D",
-            "glow_opacity": 0.50,
+            "glow_opacity": 0.5,
             "glow_thickness": 14.0,
             "glow_spread": 100.0,
             "properties": {
@@ -1010,6 +1091,540 @@
                 "list_index": 10,
                 "color": "yellow",
                 "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 1
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#witcher_core"
+                    }
+                }
+            }
+        },
+        "base_toughness": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:armor_toughness",
+                    "amount": 6.0,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_base_toughness"
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "base_regen": {
+            "type": "palladium:healing",
+            "frequency": 60,
+            "amount": 2.0,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true,
+                "color": "red"
+            }
+        },
+        "health_upgrade_1": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:max_health",
+                    "amount": 5,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_health_1"
+                }
+            ],
+            "properties": {
+                "title": "Health I",
+                "description": "Health +5.",
+                "icon": "minecraft:golden_apple",
+                "list_index": 20,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 1
+                    }
+                }
+            }
+        },
+        "health_upgrade_2": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:max_health",
+                    "amount": 5,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_health_2"
+                }
+            ],
+            "properties": {
+                "title": "Health II",
+                "description": "Health +5. Requires Health I.",
+                "icon": "minecraft:golden_apple",
+                "list_index": 21,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#health_upgrade_1"
+                    }
+                }
+            }
+        },
+        "health_upgrade_3": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:max_health",
+                    "amount": 5,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_health_3"
+                }
+            ],
+            "properties": {
+                "title": "Health III",
+                "description": "Health +5. Requires Health II.",
+                "icon": "minecraft:golden_apple",
+                "list_index": 22,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#health_upgrade_2"
+                    }
+                }
+            }
+        },
+        "health_upgrade_4": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:max_health",
+                    "amount": 5,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_health_4"
+                }
+            ],
+            "properties": {
+                "title": "Health IV",
+                "description": "Health +5. Requires Health III.",
+                "icon": "minecraft:golden_apple",
+                "list_index": 23,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 4
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#health_upgrade_3"
+                    }
+                }
+            }
+        },
+        "damage_upgrade_1": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:attack_damage",
+                    "amount": 3,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_damage_1"
+                }
+            ],
+            "properties": {
+                "title": "Damage I",
+                "description": "Damage +3.",
+                "icon": "minecraft:iron_sword",
+                "list_index": 24,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 1
+                    }
+                }
+            }
+        },
+        "damage_upgrade_2": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:attack_damage",
+                    "amount": 3,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_damage_2"
+                }
+            ],
+            "properties": {
+                "title": "Damage II",
+                "description": "Damage +3. Requires Damage I.",
+                "icon": "minecraft:iron_sword",
+                "list_index": 25,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#damage_upgrade_1"
+                    }
+                }
+            }
+        },
+        "damage_upgrade_3": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:attack_damage",
+                    "amount": 3,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_damage_3"
+                }
+            ],
+            "properties": {
+                "title": "Damage III",
+                "description": "Damage +3. Requires Damage II.",
+                "icon": "minecraft:iron_sword",
+                "list_index": 26,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#damage_upgrade_2"
+                    }
+                }
+            }
+        },
+        "damage_upgrade_4": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:attack_damage",
+                    "amount": 3,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_damage_4"
+                }
+            ],
+            "properties": {
+                "title": "Damage IV",
+                "description": "Damage +3. Requires Damage III.",
+                "icon": "minecraft:iron_sword",
+                "list_index": 27,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 4
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#damage_upgrade_3"
+                    }
+                }
+            }
+        },
+        "armor_upgrade_1": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:armor",
+                    "amount": 4,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_armor_1"
+                }
+            ],
+            "properties": {
+                "title": "Armor I",
+                "description": "Armor +4.",
+                "icon": "minecraft:iron_chestplate",
+                "list_index": 28,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 1
+                    }
+                }
+            }
+        },
+        "armor_upgrade_2": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:armor",
+                    "amount": 4,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_armor_2"
+                }
+            ],
+            "properties": {
+                "title": "Armor II",
+                "description": "Armor +4. Requires Armor I.",
+                "icon": "minecraft:iron_chestplate",
+                "list_index": 29,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#armor_upgrade_1"
+                    }
+                }
+            }
+        },
+        "armor_upgrade_3": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:armor",
+                    "amount": 4,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_armor_3"
+                }
+            ],
+            "properties": {
+                "title": "Armor III",
+                "description": "Armor +4. Requires Armor II.",
+                "icon": "minecraft:iron_chestplate",
+                "list_index": 30,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#armor_upgrade_2"
+                    }
+                }
+            }
+        },
+        "armor_upgrade_4": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:armor",
+                    "amount": 4,
+                    "operation": "add_value",
+                    "id": "werkiax_unbound:witcher_armor_4"
+                }
+            ],
+            "properties": {
+                "title": "Armor IV",
+                "description": "Armor +4. Requires Armor III.",
+                "icon": "minecraft:iron_chestplate",
+                "list_index": 31,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 4
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#armor_upgrade_3"
+                    }
+                }
+            }
+        },
+        "speed_upgrade_1": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:movement_speed",
+                    "amount": 0.15,
+                    "operation": "add_multiplied_base",
+                    "id": "werkiax_unbound:witcher_speed_1"
+                }
+            ],
+            "properties": {
+                "title": "Speed I",
+                "description": "Speed +15%.",
+                "icon": "minecraft:sugar",
+                "list_index": 32,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 1
+                    }
+                }
+            }
+        },
+        "speed_upgrade_2": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:movement_speed",
+                    "amount": 0.15,
+                    "operation": "add_multiplied_base",
+                    "id": "werkiax_unbound:witcher_speed_2"
+                }
+            ],
+            "properties": {
+                "title": "Speed II",
+                "description": "Speed +15%. Requires Speed I.",
+                "icon": "minecraft:sugar",
+                "list_index": 33,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 2
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#speed_upgrade_1"
+                    }
+                }
+            }
+        },
+        "speed_upgrade_3": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:movement_speed",
+                    "amount": 0.15,
+                    "operation": "add_multiplied_base",
+                    "id": "werkiax_unbound:witcher_speed_3"
+                }
+            ],
+            "properties": {
+                "title": "Speed III",
+                "description": "Speed +15%. Requires Speed II.",
+                "icon": "minecraft:sugar",
+                "list_index": 34,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#speed_upgrade_2"
+                    }
+                }
+            }
+        },
+        "speed_upgrade_4": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": [
+                {
+                    "attribute": "minecraft:movement_speed",
+                    "amount": 0.15,
+                    "operation": "add_multiplied_base",
+                    "id": "werkiax_unbound:witcher_speed_4"
+                }
+            ],
+            "properties": {
+                "title": "Speed IV",
+                "description": "Speed +15%. Requires Speed III.",
+                "icon": "minecraft:sugar",
+                "list_index": 35,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 4
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#speed_upgrade_3"
+                    }
+                }
             }
         }
     }

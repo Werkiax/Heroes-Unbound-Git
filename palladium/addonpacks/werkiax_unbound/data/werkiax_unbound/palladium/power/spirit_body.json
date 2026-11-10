@@ -91,6 +91,29 @@
                 }
             }
         },
+        "effect_immunity": {
+            "type": "argon:immunity",
+            "effects": [
+                {
+                    "effect": "minecraft:poison"
+                },
+                {
+                    "effect": "minecraft:wither"
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
+        "poison_immunity": {
+            "type": "palladium:damage_immunity",
+            "damage_type": "neoforge:poison",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            }
+        },
         "body_burst": {
             "type": "argon:area_burst",
             "radius": 4,
