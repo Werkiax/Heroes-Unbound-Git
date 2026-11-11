@@ -80,7 +80,7 @@
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/spartan_stomp.png"
                 },
-                "list_index": 2
+                "list_index": 3
             },
             "state": {
                 "unlocking": {
@@ -145,7 +145,7 @@
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/spartan_leap.png"
                 },
-                "list_index": 1
+                "list_index": 2
             },
             "state": {
                 "unlocking": {
@@ -243,7 +243,7 @@
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/spartan_guard.png"
                 },
-                "list_index": 4
+                "list_index": 1
             },
             "state": {
                 "unlocking": {
@@ -332,7 +332,7 @@
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/spartan_rage.png"
                 },
-                "list_index": 3
+                "list_index": 4
             },
             "state": {
                 "unlocking": {
@@ -642,7 +642,7 @@
             "properties": {
                 "title": "Health I",
                 "description": "Health +7.",
-                "icon": "minecraft:golden_apple",
+                "icon": "werkiax_unbound:textures/icons/health_icon.png",
                 "list_index": 5,
                 "color": "red",
                 "hidden_in_bar": true
@@ -670,7 +670,7 @@
             "properties": {
                 "title": "Health II",
                 "description": "Health +7. Requires Health I.",
-                "icon": "minecraft:golden_apple",
+                "icon": "werkiax_unbound:textures/icons/health_icon.png",
                 "list_index": 6,
                 "color": "red",
                 "hidden_in_bar": true
@@ -702,7 +702,7 @@
             "properties": {
                 "title": "Health III",
                 "description": "Health +8. Requires Health II.",
-                "icon": "minecraft:enchanted_golden_apple",
+                "icon": "werkiax_unbound:textures/icons/health_icon.png",
                 "list_index": 7,
                 "color": "red",
                 "hidden_in_bar": true
@@ -734,7 +734,7 @@
             "properties": {
                 "title": "Health IV",
                 "description": "Health +8. Requires Health III.",
-                "icon": "minecraft:totem_of_undying",
+                "icon": "werkiax_unbound:textures/icons/health_icon.png",
                 "list_index": 8,
                 "color": "red",
                 "hidden_in_bar": true
@@ -794,7 +794,7 @@
             "properties": {
                 "title": "Damage II",
                 "description": "Damage +4. Requires Damage I.",
-                "icon": "minecraft:iron_sword",
+                "icon": "minecraft:golden_sword",
                 "list_index": 10,
                 "color": "red",
                 "hidden_in_bar": true
@@ -890,7 +890,7 @@
             "properties": {
                 "title": "Armor I",
                 "description": "Armor +5.",
-                "icon": "minecraft:leather_chestplate",
+                "icon": "minecraft:iron_chestplate",
                 "list_index": 13,
                 "color": "red",
                 "hidden_in_bar": true
@@ -918,7 +918,7 @@
             "properties": {
                 "title": "Armor II",
                 "description": "Armor +5. Requires Armor I.",
-                "icon": "minecraft:iron_chestplate",
+                "icon": "minecraft:golden_chestplate",
                 "list_index": 14,
                 "color": "red",
                 "hidden_in_bar": true
@@ -1014,7 +1014,7 @@
             "properties": {
                 "title": "Speed I",
                 "description": "Speed +10%.",
-                "icon": "minecraft:sugar",
+                "icon": "werkiax_unbound:textures/icons/speed_upgrade.png",
                 "list_index": 17,
                 "color": "red",
                 "hidden_in_bar": true
@@ -1042,7 +1042,7 @@
             "properties": {
                 "title": "Speed II",
                 "description": "Speed +10%. Requires Speed I.",
-                "icon": "minecraft:feather",
+                "icon": "werkiax_unbound:textures/icons/speed_upgrade.png",
                 "list_index": 18,
                 "color": "red",
                 "hidden_in_bar": true
@@ -1074,7 +1074,7 @@
             "properties": {
                 "title": "Speed III",
                 "description": "Speed +10%. Requires Speed II.",
-                "icon": "minecraft:rabbit_foot",
+                "icon": "werkiax_unbound:textures/icons/speed_upgrade.png",
                 "list_index": 19,
                 "color": "red",
                 "hidden_in_bar": true
@@ -1106,7 +1106,7 @@
             "properties": {
                 "title": "Speed IV",
                 "description": "Speed +10%. Requires Speed III.",
-                "icon": "minecraft:netherite_boots",
+                "icon": "werkiax_unbound:textures/icons/speed_upgrade.png",
                 "list_index": 20,
                 "color": "red",
                 "hidden_in_bar": true
