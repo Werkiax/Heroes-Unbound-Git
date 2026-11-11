@@ -1,0 +1,33 @@
+{
+    "base": "werkiax_unbound:textures/icons/janus_icon.png",
+    "variables": {
+        "form": {
+            "type": "palladium:conditional",
+            "conditions": {
+                "type": "palladium:crouching"
+            },
+            "on_true": "icon",
+            "on_false": {
+                "type": "palladium:conditional",
+                "conditions": {
+                    "type": "palladium:mode_active",
+                    "ability": "werkiax_unbound:janus#form_switch",
+                    "mode": "might",
+                    "ignore_unlocked": false
+                },
+                "on_true": "bulwark",
+                "on_false": {
+                    "type": "palladium:conditional",
+                    "conditions": {
+                        "type": "palladium:mode_active",
+                        "ability": "werkiax_unbound:janus#form_switch",
+                        "mode": "bulwark",
+                        "ignore_unlocked": false
+                    },
+                    "on_true": "might",
+                    "on_false": "icon"
+                }
+            }
+        }
+    }
+}

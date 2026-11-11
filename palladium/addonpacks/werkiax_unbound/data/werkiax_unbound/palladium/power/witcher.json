@@ -24,7 +24,7 @@
             "type": "palladium:dummy",
             "properties": {
                 "title": "Aard",
-                "description": "Tap to release a forward shockwave of telekinetic force. Hold to release a 360 degree shockwave around you instead.",
+                "description": "Release a forward shockwave of telekinetic force. Unlock Aard: Wave to hold the key for a 360 degree shockwave instead.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/aard.png"
@@ -219,6 +219,10 @@
                         "type": "palladium:ability_ticks",
                         "ability": "werkiax_unbound:witcher#aard",
                         "min": 10
+                    },
+                    {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#aard_wave"
                     }
                 ]
             }
@@ -254,30 +258,11 @@
                 }
             }
         },
-        "fx_axii": {
-            "type": "palladium:action",
-            "first_tick_action": {
-                "type": "palladium:play_sound",
-                "sound": "werkiax_unbound:axii",
-                "volume": 1.0,
-                "pitch": 1.0
-            },
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_first_tick",
-                    "ability": "werkiax_unbound:witcher#axii"
-                }
-            }
-        },
         "igni": {
             "type": "palladium:dummy",
             "properties": {
                 "title": "Igni",
-                "description": "Tap to release a cone of fire that damages and ignites enemies. Hold to emit a continuous short-range stream of fire instead.",
+                "description": "Release a cone of fire that damages and ignites enemies. Unlock Igni: Torrent to hold the key for a continuous short-range stream of fire instead.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/igni.png"
@@ -300,7 +285,7 @@
                     },
                     "requires": {
                         "type": "palladium:ability_unlocked",
-                        "ability": "werkiax_unbound:witcher#aard"
+                        "ability": "witcher_sense"
                     }
                 }
             }
@@ -430,6 +415,10 @@
                         "type": "palladium:ability_ticks",
                         "ability": "werkiax_unbound:witcher#igni",
                         "min": 10
+                    },
+                    {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#igni_torrent"
                     }
                 ]
             }
@@ -451,6 +440,10 @@
                         "type": "palladium:ability_ticks",
                         "ability": "werkiax_unbound:witcher#igni",
                         "min": 10
+                    },
+                    {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#igni_torrent"
                     }
                 ]
             }
@@ -459,7 +452,7 @@
             "type": "palladium:dummy",
             "properties": {
                 "title": "Quen",
-                "description": "Surround yourself with a protective sign that blocks the next hit you take, then shatters. Lasts up to 15 seconds.",
+                "description": "Surround yourself with a protective sign that blocks the next hit you take, then shatters. Lasts up to 15 seconds. Unlock Quen: Dome to crouch-cast a protective dome instead.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/quen.png"
@@ -482,7 +475,7 @@
                     },
                     "requires": {
                         "type": "palladium:ability_unlocked",
-                        "ability": "werkiax_unbound:witcher#igni"
+                        "ability": "witcher_sense"
                     }
                 }
             }
@@ -655,6 +648,25 @@
                 }
             }
         },
+        "fx_quen_bubble_break": {
+            "type": "palladium:action",
+            "first_tick_action": {
+                "type": "palladium:play_sound",
+                "sound": "werkiax_unbound:quen_break",
+                "volume": 1.0,
+                "pitch": 1.0
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_last_tick",
+                    "ability": "werkiax_unbound:witcher#quen_bubble"
+                }
+            }
+        },
         "quen_hold_counter": {
             "type": "palladium:action",
             "action": {
@@ -697,7 +709,7 @@
             "action": {
                 "type": "palladium:set_data_attachment",
                 "attachment": "werkiax_unbound:quen_bubble_timer",
-                "value": 160
+                "value": 120
             },
             "properties": {
                 "hidden_in_gui": true,
@@ -711,6 +723,10 @@
                     },
                     {
                         "type": "palladium:crouching"
+                    },
+                    {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:witcher#quen_dome"
                     }
                 ]
             }
@@ -751,15 +767,11 @@
                 }
             }
         },
-        "quen_bubble_dome": {
-            "type": "argon:dome",
-            "radius": 2,
-            "duration": "8s",
-            "damage_reduction": 1,
-            "deflect_projectiles": true,
-            "repel": 0.25,
-            "follow_user": true,
-            "color": "#FFD933",
+        "quen_bubble_ward": {
+            "type": "argon:ward",
+            "pool": 100,
+            "duration": "6s",
+            "knockback_reduction": 1,
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
@@ -771,21 +783,22 @@
                 }
             }
         },
-        "fx_quen_bubble_break": {
-            "type": "palladium:action",
-            "first_tick_action": {
-                "type": "palladium:play_sound",
-                "sound": "werkiax_unbound:quen_break",
-                "volume": 1.0,
-                "pitch": 1.0
-            },
+        "quen_bubble_dome": {
+            "type": "argon:dome",
+            "radius": 2,
+            "duration": "8s",
+            "damage_reduction": 0,
+            "deflect_projectiles": true,
+            "repel": 0.25,
+            "follow_user": true,
+            "color": "#FFD933",
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
             },
             "state": {
                 "enabling": {
-                    "type": "palladium:ability_last_tick",
+                    "type": "palladium:ability_enabled",
                     "ability": "werkiax_unbound:witcher#quen_bubble"
                 }
             }
@@ -814,41 +827,32 @@
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
             },
-            "first_tick_action": [
-                {
-                    "type": "palladium:play_sound",
-                    "sound": "werkiax_unbound:igni",
-                    "volume": 1.0,
-                    "pitch": 1.0
-                },
-                {
-                    "type": "palladium:run_command",
-                    "command": [
-                        "playsound minecraft:item.firecharge.use master @a ~ ~ ~ 1.0 0.7",
-                        "playsound minecraft:entity.blaze.shoot master @a ~ ~ ~ 0.8 0.8",
-                        "execute anchored eyes rotated ~-64 ~ positioned ^ ^-0.25 ^2.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 0.9 0.5 0.9 0 25 force",
-                        "execute anchored eyes rotated ~-64 ~ positioned ^ ^-0.25 ^5.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 1.2 0.7 1.2 0 40 force",
-                        "execute anchored eyes rotated ~-64 ~ positioned ^ ^-0.25 ^4 run particle minecraft:flame ~ ~ ~ 1.0 0.6 1.0 0.12 15 force",
-                        "execute anchored eyes rotated ~-64 ~ positioned ^ ^-0.25 ^4 run particle minecraft:lava ~ ~ ~ 1.2 0.6 1.2 0 5 force",
-                        "execute anchored eyes rotated ~-32 ~ positioned ^ ^-0.25 ^2.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 0.9 0.5 0.9 0 25 force",
-                        "execute anchored eyes rotated ~-32 ~ positioned ^ ^-0.25 ^5.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 1.2 0.7 1.2 0 40 force",
-                        "execute anchored eyes rotated ~-32 ~ positioned ^ ^-0.25 ^4 run particle minecraft:flame ~ ~ ~ 1.0 0.6 1.0 0.12 15 force",
-                        "execute anchored eyes rotated ~-32 ~ positioned ^ ^-0.25 ^4 run particle minecraft:lava ~ ~ ~ 1.2 0.6 1.2 0 5 force",
-                        "execute anchored eyes rotated ~ ~ positioned ^ ^-0.25 ^2.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 0.9 0.5 0.9 0 25 force",
-                        "execute anchored eyes rotated ~ ~ positioned ^ ^-0.25 ^5.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 1.2 0.7 1.2 0 40 force",
-                        "execute anchored eyes rotated ~ ~ positioned ^ ^-0.25 ^4 run particle minecraft:flame ~ ~ ~ 1.0 0.6 1.0 0.12 15 force",
-                        "execute anchored eyes rotated ~ ~ positioned ^ ^-0.25 ^4 run particle minecraft:lava ~ ~ ~ 1.2 0.6 1.2 0 5 force",
-                        "execute anchored eyes rotated ~32 ~ positioned ^ ^-0.25 ^2.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 0.9 0.5 0.9 0 25 force",
-                        "execute anchored eyes rotated ~32 ~ positioned ^ ^-0.25 ^5.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 1.2 0.7 1.2 0 40 force",
-                        "execute anchored eyes rotated ~32 ~ positioned ^ ^-0.25 ^4 run particle minecraft:flame ~ ~ ~ 1.0 0.6 1.0 0.12 15 force",
-                        "execute anchored eyes rotated ~32 ~ positioned ^ ^-0.25 ^4 run particle minecraft:lava ~ ~ ~ 1.2 0.6 1.2 0 5 force",
-                        "execute anchored eyes rotated ~64 ~ positioned ^ ^-0.25 ^2.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 0.9 0.5 0.9 0 25 force",
-                        "execute anchored eyes rotated ~64 ~ positioned ^ ^-0.25 ^5.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 1.2 0.7 1.2 0 40 force",
-                        "execute anchored eyes rotated ~64 ~ positioned ^ ^-0.25 ^4 run particle minecraft:flame ~ ~ ~ 1.0 0.6 1.0 0.12 15 force",
-                        "execute anchored eyes rotated ~64 ~ positioned ^ ^-0.25 ^4 run particle minecraft:lava ~ ~ ~ 1.2 0.6 1.2 0 5 force"
-                    ]
-                }
-            ],
+            "first_tick_action": {
+                "type": "palladium:run_command",
+                "command": [
+                    "playsound werkiax_unbound:igni master @a ~ ~ ~ 1.0 1.0",
+                    "execute anchored eyes rotated ~-64 ~ positioned ^ ^-0.25 ^2.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 0.9 0.5 0.9 0 25 force",
+                    "execute anchored eyes rotated ~-64 ~ positioned ^ ^-0.25 ^5.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 1.2 0.7 1.2 0 40 force",
+                    "execute anchored eyes rotated ~-64 ~ positioned ^ ^-0.25 ^4 run particle minecraft:flame ~ ~ ~ 1.0 0.6 1.0 0.12 15 force",
+                    "execute anchored eyes rotated ~-64 ~ positioned ^ ^-0.25 ^4 run particle minecraft:lava ~ ~ ~ 1.2 0.6 1.2 0 5 force",
+                    "execute anchored eyes rotated ~-32 ~ positioned ^ ^-0.25 ^2.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 0.9 0.5 0.9 0 25 force",
+                    "execute anchored eyes rotated ~-32 ~ positioned ^ ^-0.25 ^5.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 1.2 0.7 1.2 0 40 force",
+                    "execute anchored eyes rotated ~-32 ~ positioned ^ ^-0.25 ^4 run particle minecraft:flame ~ ~ ~ 1.0 0.6 1.0 0.12 15 force",
+                    "execute anchored eyes rotated ~-32 ~ positioned ^ ^-0.25 ^4 run particle minecraft:lava ~ ~ ~ 1.2 0.6 1.2 0 5 force",
+                    "execute anchored eyes rotated ~ ~ positioned ^ ^-0.25 ^2.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 0.9 0.5 0.9 0 25 force",
+                    "execute anchored eyes rotated ~ ~ positioned ^ ^-0.25 ^5.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 1.2 0.7 1.2 0 40 force",
+                    "execute anchored eyes rotated ~ ~ positioned ^ ^-0.25 ^4 run particle minecraft:flame ~ ~ ~ 1.0 0.6 1.0 0.12 15 force",
+                    "execute anchored eyes rotated ~ ~ positioned ^ ^-0.25 ^4 run particle minecraft:lava ~ ~ ~ 1.2 0.6 1.2 0 5 force",
+                    "execute anchored eyes rotated ~32 ~ positioned ^ ^-0.25 ^2.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 0.9 0.5 0.9 0 25 force",
+                    "execute anchored eyes rotated ~32 ~ positioned ^ ^-0.25 ^5.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 1.2 0.7 1.2 0 40 force",
+                    "execute anchored eyes rotated ~32 ~ positioned ^ ^-0.25 ^4 run particle minecraft:flame ~ ~ ~ 1.0 0.6 1.0 0.12 15 force",
+                    "execute anchored eyes rotated ~32 ~ positioned ^ ^-0.25 ^4 run particle minecraft:lava ~ ~ ~ 1.2 0.6 1.2 0 5 force",
+                    "execute anchored eyes rotated ~64 ~ positioned ^ ^-0.25 ^2.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 0.9 0.5 0.9 0 25 force",
+                    "execute anchored eyes rotated ~64 ~ positioned ^ ^-0.25 ^5.5 run particle minecraft:dust{color:[1.0,0.45,0.05],scale:0.7} ~ ~ ~ 1.2 0.7 1.2 0 40 force",
+                    "execute anchored eyes rotated ~64 ~ positioned ^ ^-0.25 ^4 run particle minecraft:flame ~ ~ ~ 1.0 0.6 1.0 0.12 15 force",
+                    "execute anchored eyes rotated ~64 ~ positioned ^ ^-0.25 ^4 run particle minecraft:lava ~ ~ ~ 1.2 0.6 1.2 0 5 force"
+                ]
+            },
             "state": {
                 "enabling": {
                     "type": "palladium:ability_first_tick",
@@ -858,10 +862,6 @@
         },
         "fx_igni_stream": {
             "type": "palladium:action",
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
             "first_tick_action": {
                 "type": "palladium:play_sound",
                 "sound": "werkiax_unbound:igni_stream",
@@ -884,6 +884,10 @@
                     "type": "palladium:ability_enabled",
                     "ability": "werkiax_unbound:witcher#igni_stream"
                 }
+            },
+            "properties": {
+                "hidden_in_bar": false,
+                "hidden_in_gui": true
             }
         },
         "axii": {
@@ -917,8 +921,27 @@
                     },
                     "requires": {
                         "type": "palladium:ability_unlocked",
-                        "ability": "werkiax_unbound:witcher#witcher_sense"
+                        "ability": "witcher_sense"
                     }
+                }
+            }
+        },
+        "fx_axii": {
+            "type": "palladium:action",
+            "first_tick_action": {
+                "type": "palladium:play_sound",
+                "sound": "werkiax_unbound:axii",
+                "volume": 1.0,
+                "pitch": 1.0
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:witcher#axii"
                 }
             }
         },
@@ -1187,30 +1210,18 @@
             }
         },
         "quen_bubble_slow": {
-            "type": "palladium:attribute_modifier",
-            "modifiers": [
-                {
-                    "attribute": "minecraft:movement_speed",
-                    "amount": -1.0,
-                    "operation": "add_multiplied_total",
-                    "id": "werkiax_unbound:quen_bubble_slow"
-                },
-                {
-                    "attribute": "minecraft:jump_strength",
-                    "amount": -1.0,
-                    "operation": "add_multiplied_total",
-                    "id": "werkiax_unbound:quen_bubble_jump"
-                }
-            ],
+            "type": "argon:movement_reduction",
+            "mode": "movement",
+            "percentage": 80.0,
+            "reduce_attack_damage": false,
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
             },
             "state": {
                 "enabling": {
-                    "type": "argon:ability_enabled_activation",
-                    "ability": "werkiax_unbound:witcher#quen_bubble_dome",
-                    "duration": 2
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:witcher#quen_bubble"
                 }
             }
         },
@@ -1270,7 +1281,7 @@
             "properties": {
                 "title": "Health I",
                 "description": "Health +5.",
-                "icon": "minecraft:golden_apple",
+                "icon": "werkiax_unbound:textures/icons/health_icon.png",
                 "list_index": 20,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1298,7 +1309,7 @@
             "properties": {
                 "title": "Health II",
                 "description": "Health +5. Requires Health I.",
-                "icon": "minecraft:golden_apple",
+                "icon": "werkiax_unbound:textures/icons/health_icon.png",
                 "list_index": 21,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1330,7 +1341,7 @@
             "properties": {
                 "title": "Health III",
                 "description": "Health +5. Requires Health II.",
-                "icon": "minecraft:golden_apple",
+                "icon": "werkiax_unbound:textures/icons/health_icon.png",
                 "list_index": 22,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1362,7 +1373,7 @@
             "properties": {
                 "title": "Health IV",
                 "description": "Health +5. Requires Health III.",
-                "icon": "minecraft:golden_apple",
+                "icon": "werkiax_unbound:textures/icons/health_icon.png",
                 "list_index": 23,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1422,7 +1433,7 @@
             "properties": {
                 "title": "Damage II",
                 "description": "Damage +3. Requires Damage I.",
-                "icon": "minecraft:iron_sword",
+                "icon": "minecraft:golden_sword",
                 "list_index": 25,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1454,7 +1465,7 @@
             "properties": {
                 "title": "Damage III",
                 "description": "Damage +3. Requires Damage II.",
-                "icon": "minecraft:iron_sword",
+                "icon": "minecraft:diamond_sword",
                 "list_index": 26,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1486,7 +1497,7 @@
             "properties": {
                 "title": "Damage IV",
                 "description": "Damage +3. Requires Damage III.",
-                "icon": "minecraft:iron_sword",
+                "icon": "minecraft:netherite_sword",
                 "list_index": 27,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1546,7 +1557,7 @@
             "properties": {
                 "title": "Armor II",
                 "description": "Armor +4. Requires Armor I.",
-                "icon": "minecraft:iron_chestplate",
+                "icon": "minecraft:golden_chestplate",
                 "list_index": 29,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1578,7 +1589,7 @@
             "properties": {
                 "title": "Armor III",
                 "description": "Armor +4. Requires Armor II.",
-                "icon": "minecraft:iron_chestplate",
+                "icon": "minecraft:diamond_chestplate",
                 "list_index": 30,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1610,7 +1621,7 @@
             "properties": {
                 "title": "Armor IV",
                 "description": "Armor +4. Requires Armor III.",
-                "icon": "minecraft:iron_chestplate",
+                "icon": "minecraft:netherite_chestplate",
                 "list_index": 31,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1642,7 +1653,7 @@
             "properties": {
                 "title": "Speed I",
                 "description": "Speed +15%.",
-                "icon": "minecraft:sugar",
+                "icon": "werkiax_unbound:textures/icons/speed_upgrade.png",
                 "list_index": 32,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1670,7 +1681,7 @@
             "properties": {
                 "title": "Speed II",
                 "description": "Speed +15%. Requires Speed I.",
-                "icon": "minecraft:sugar",
+                "icon": "werkiax_unbound:textures/icons/speed_upgrade.png",
                 "list_index": 33,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1702,7 +1713,7 @@
             "properties": {
                 "title": "Speed III",
                 "description": "Speed +15%. Requires Speed II.",
-                "icon": "minecraft:sugar",
+                "icon": "werkiax_unbound:textures/icons/speed_upgrade.png",
                 "list_index": 34,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1734,7 +1745,7 @@
             "properties": {
                 "title": "Speed IV",
                 "description": "Speed +15%. Requires Speed III.",
-                "icon": "minecraft:sugar",
+                "icon": "werkiax_unbound:textures/icons/speed_upgrade.png",
                 "list_index": 35,
                 "color": "yellow",
                 "hidden_in_bar": true
@@ -1749,6 +1760,87 @@
                     "requires": {
                         "type": "palladium:ability_unlocked",
                         "ability": "werkiax_unbound:witcher#speed_upgrade_3"
+                    }
+                }
+            }
+        },
+        "aard_wave": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Aard: Wave",
+                "description": "Unlocks the hold form of Aard: hold the key to release a 360 degree shockwave around you.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/aard.png"
+                },
+                "list_index": 3,
+                "color": "blue",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "witcher_sense"
+                    }
+                }
+            }
+        },
+        "igni_torrent": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Igni: Torrent",
+                "description": "Unlocks the hold form of Igni: hold the key to emit a continuous short-range stream of fire.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/igni.png"
+                },
+                "list_index": 4,
+                "color": "red",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 3
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "witcher_sense"
+                    }
+                }
+            }
+        },
+        "quen_dome": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Quen: Dome",
+                "description": "Unlocks the crouch form of Quen: crouch while casting to raise a protective dome around you that blocks projectiles and pushes enemies away, but slows you down.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/quen.png"
+                },
+                "list_index": 5,
+                "color": "yellow",
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 4
+                    },
+                    "requires": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "witcher_sense"
                     }
                 }
             }

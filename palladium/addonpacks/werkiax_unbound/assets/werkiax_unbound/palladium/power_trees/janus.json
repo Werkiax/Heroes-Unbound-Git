@@ -249,7 +249,9 @@
         "crater_shake": [0.0, 0.0],
         "anchor_hit_far": [0.0, 0.0],
         "anchor_hit_close": [0.0, 0.0],
-        "anchor_end_push": [0.0, 0.0]
+        "anchor_end_push": [0.0, 0.0],
+        "anchor_body_glow": [0.0, 0.0],
+        "fx_uppercut_hit_sound": [0.0, 0.0]
     },
     "connections": [
         {

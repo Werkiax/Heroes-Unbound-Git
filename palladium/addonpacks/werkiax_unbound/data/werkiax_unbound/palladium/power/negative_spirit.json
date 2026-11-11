@@ -1175,7 +1175,7 @@
             "type": "argon:area_burst",
             "shape": "sphere",
             "radius": 10,
-            "damage": 25,
+            "damage": 20,
             "damage_type": "minecraft:poison",
             "falloff": 0.0,
             "effects": [
@@ -1187,7 +1187,7 @@
             ],
             "properties": {
                 "title": "Negative Burst",
-                "description": "Release a massive burst of negative energy in a 10 block sphere around you. Instantly deals 25 poison damage to everything nearby, poisons it (Poison IV) for 7 seconds and shoves it away. Costs 5000 Negative Energy.",
+                "description": "Release a massive burst of negative energy in a 10 block sphere around you. Instantly deals 20 poison damage to everything nearby, poisons it (Poison IV) for 7 seconds and shoves it away. Costs 5000 Negative Energy.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/negative_burst.png"
@@ -1197,29 +1197,20 @@
                 "hidden_in_gui": true
             },
             "state": {
-                "unlocking": [
-                    {
-                        "type": "palladium:ability_unlocked",
-                        "ability": "werkiax_unbound:negative_spirit#negative_burst_unlock"
-                    },
-                    {
-                        "type": "palladium:energy_bar",
-                        "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
-                        "min": 5000
-                    },
-                    {
-                        "type": "palladium:not",
-                        "conditions": {
-                            "type": "palladium:ability_enabled",
-                            "ability": "werkiax_unbound:negative_spirit#possess"
-                        }
-                    }
-                ],
+                "unlocking": {
+                    "type": "palladium:ability_unlocked",
+                    "ability": "werkiax_unbound:negative_spirit#negative_burst_unlock"
+                },
                 "enabling": {
                     "type": "palladium:key_bind",
                     "behaviour": "activation",
                     "time": 1,
-                    "cooldown": "20s"
+                    "cooldown": "20s",
+                    "conditions": {
+                        "type": "palladium:energy_bar",
+                        "energy_bar": "werkiax_unbound:negative_spirit#negative_energy",
+                        "min": 5000
+                    }
                 }
             }
         },

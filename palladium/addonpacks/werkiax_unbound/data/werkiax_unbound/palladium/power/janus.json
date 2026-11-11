@@ -1,7 +1,7 @@
 {
     "name": "Janus",
     "persistent_data": true,
-    "icon": "werkiax_unbound:textures/icons/janus_might.png",
+    "icon": "werkiax_unbound:textures/icons/janus_icon.png",
     "energy_bars": {
         "kinetic_charge": {
             "max": 1000,
@@ -1603,7 +1603,10 @@
             "properties": {
                 "title": "Janus",
                 "description": "Cycle between Base, Might and Bulwark Form. Base Form requires crouching; the other forms require standing and must be unlocked first.",
-                "icon": "werkiax_unbound:textures/icons/janus_icon.png",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "#werkiax_unbound:janus_form_icon"
+                },
                 "list_index": 4,
                 "color": "purple"
             },

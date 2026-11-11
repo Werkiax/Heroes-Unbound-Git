@@ -26,11 +26,82 @@
             "outline_width": 0,
             "color": {
                 "locked": "#5C6B75",
-                "available": "#E8D9A0",
-                "unlocked": "#FFFFFF"
+                "available": "#FFE9A8",
+                "unlocked": "#FFD24A"
             }
         }
     },
+    "ppd_node_order": [
+        "witcher_core",
+        "aard",
+        "aard_hold_counter",
+        "aard_counter_reset",
+        "aard_cone",
+        "fx_aard",
+        "aard_ring",
+        "fx_aard_ring",
+        "igni_hold_counter",
+        "igni_counter_reset",
+        "igni_cone",
+        "igni_stream",
+        "igni_stream_aim",
+        "quen_shield_start",
+        "quen_glow",
+        "quen_shield_tick",
+        "quen_shield_reaction",
+        "quen_shield_pop",
+        "fx_quen",
+        "fx_quen_dome",
+        "fx_quen_pop",
+        "fx_quen_bubble_break",
+        "quen_hold_counter",
+        "quen_counter_reset",
+        "quen_bubble_start",
+        "quen_bubble_tick",
+        "quen_bubble",
+        "quen_bubble_ward",
+        "quen_bubble_dome",
+        "quen_bubble_pop",
+        "fx_igni",
+        "fx_igni_stream",
+        "fx_axii",
+        "night_vision",
+        "fx_yrden_start",
+        "fx_yrden_sigil",
+        "aard_aim",
+        "quen_aim",
+        "igni_aim",
+        "witcher_sense",
+        "base_toughness",
+        "quen_bubble_slow",
+        "quen_bubble_slow_flight",
+        "witcher_resistance",
+        "base_regen",
+        "health_upgrade_1",
+        "health_upgrade_2",
+        "health_upgrade_3",
+        "health_upgrade_4",
+        "damage_upgrade_1",
+        "damage_upgrade_2",
+        "damage_upgrade_3",
+        "damage_upgrade_4",
+        "armor_upgrade_1",
+        "armor_upgrade_2",
+        "armor_upgrade_3",
+        "armor_upgrade_4",
+        "speed_upgrade_1",
+        "speed_upgrade_2",
+        "speed_upgrade_3",
+        "speed_upgrade_4",
+        "yrden_zone",
+        "axii",
+        "quen",
+        "igni",
+        "igni_torrent",
+        "aard_wave",
+        "quen_dome",
+        "upgrades"
+    ],
     "grid_size": 38,
     "auto_connect": false,
     "nodes": {
@@ -39,15 +110,18 @@
             "style": "root"
         },
         "witcher_sense": [7.0, -1.2],
+        "axii": [5.25, -1.2],
+        "yrden_zone": [8.75, -1.2],
         "aard": [7.0, -2.4],
         "igni": [7.0, -3.6],
         "quen": [7.0, -4.8],
-        "axii": [5.75, -1.8],
-        "yrden_zone": [8.5, -1.8],
+        "aard_wave": [8.75, -2.4],
+        "igni_torrent": [8.75, -3.6],
+        "quen_dome": [8.75, -4.8],
         "upgrades": {
             "pos": [7.0, 1.3],
             "style": "hub",
-            "title": "Witcher Training",
+            "title": "Witcher Upgrades",
             "icon": "minecraft:iron_sword",
             "description": "Permanent stat upgrades. Four tiers each for health, damage, armor and speed."
         },
@@ -72,14 +146,12 @@
         "aard_cone": [0.0, 0.0],
         "fx_aard": [0.0, 0.0],
         "aard_ring": [0.0, 0.0],
-        "aard_aim": [0.0, 0.0],
+        "fx_aard_ring": [0.0, 0.0],
         "igni_hold_counter": [0.0, 0.0],
         "igni_counter_reset": [0.0, 0.0],
         "igni_cone": [0.0, 0.0],
         "igni_stream": [0.0, 0.0],
         "igni_stream_aim": [0.0, 0.0],
-        "fx_igni": [0.0, 0.0],
-        "fx_igni_stream": [0.0, 0.0],
         "quen_shield_start": [0.0, 0.0],
         "quen_glow": [0.0, 0.0],
         "quen_shield_tick": [0.0, 0.0],
@@ -95,22 +167,36 @@
         "quen_bubble_ward": [0.0, 0.0],
         "quen_bubble_dome": [0.0, 0.0],
         "quen_bubble_pop": [0.0, 0.0],
-        "quen_aim": [0.0, 0.0],
+        "fx_igni": [0.0, 0.0],
+        "fx_igni_stream": [0.0, 0.0],
         "night_vision": [0.0, 0.0],
         "fx_yrden_start": [0.0, 0.0],
         "fx_yrden_sigil": [0.0, 0.0],
-        "base_toughness": [0.0, 0.0],
-        "base_regen": [0.0, 0.0],
-        "fx_aard_ring": [0.0, 0.0],
+        "aard_aim": [0.0, 0.0],
+        "quen_aim": [0.0, 0.0],
         "igni_aim": [0.0, 0.0],
+        "base_toughness": [0.0, 0.0],
         "quen_bubble_slow": [0.0, 0.0],
         "quen_bubble_slow_flight": [0.0, 0.0],
-        "fx_axii": [0.0, 0.0],
+        "witcher_resistance": [0.0, 0.0],
+        "base_regen": [0.0, 0.0],
         "fx_quen_dome": [0.0, 0.0],
         "fx_quen_bubble_break": [0.0, 0.0],
-        "witcher_resistance": [0.0, 0.0]
+        "fx_axii": [0.0, 0.0]
     },
     "connections": [
+        {
+            "from": "witcher_core",
+            "to": "witcher_sense"
+        },
+        {
+            "from": "witcher_sense",
+            "to": "axii"
+        },
+        {
+            "from": "witcher_sense",
+            "to": "yrden_zone"
+        },
         {
             "from": "witcher_sense",
             "to": "aard"
@@ -124,16 +210,36 @@
             "to": "quen"
         },
         {
-            "from": "witcher_sense",
-            "to": "axii"
+            "from": "aard",
+            "to": "aard_wave"
         },
         {
-            "from": "witcher_sense",
-            "to": "yrden_zone"
+            "from": "igni",
+            "to": "igni_torrent"
+        },
+        {
+            "from": "quen",
+            "to": "quen_dome"
+        },
+        {
+            "from": "witcher_core",
+            "to": "upgrades"
         },
         {
             "from": "upgrades",
             "to": "health_upgrade_1"
+        },
+        {
+            "from": "upgrades",
+            "to": "damage_upgrade_1"
+        },
+        {
+            "from": "upgrades",
+            "to": "armor_upgrade_1"
+        },
+        {
+            "from": "upgrades",
+            "to": "speed_upgrade_1"
         },
         {
             "from": "health_upgrade_1",
@@ -148,10 +254,6 @@
             "to": "health_upgrade_4"
         },
         {
-            "from": "upgrades",
-            "to": "damage_upgrade_1"
-        },
-        {
             "from": "damage_upgrade_1",
             "to": "damage_upgrade_2"
         },
@@ -164,10 +266,6 @@
             "to": "damage_upgrade_4"
         },
         {
-            "from": "upgrades",
-            "to": "armor_upgrade_1"
-        },
-        {
             "from": "armor_upgrade_1",
             "to": "armor_upgrade_2"
         },
@@ -178,10 +276,6 @@
         {
             "from": "armor_upgrade_3",
             "to": "armor_upgrade_4"
-        },
-        {
-            "from": "upgrades",
-            "to": "speed_upgrade_1"
         },
         {
             "from": "speed_upgrade_1",
