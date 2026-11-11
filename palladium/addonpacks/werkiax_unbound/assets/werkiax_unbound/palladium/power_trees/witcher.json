@@ -105,6 +105,9 @@
         "igni_aim": [0.0, 0.0],
         "quen_bubble_slow": [0.0, 0.0],
         "quen_bubble_slow_flight": [0.0, 0.0],
+        "fx_axii": [0.0, 0.0],
+        "fx_quen_dome": [0.0, 0.0],
+        "fx_quen_bubble_break": [0.0, 0.0],
         "witcher_resistance": [0.0, 0.0]
     },
     "connections": [

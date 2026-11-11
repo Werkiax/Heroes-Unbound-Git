@@ -40,11 +40,6 @@
                         "ignore_unlocked": false
                     },
                     {
-                        "type": "palladium:energy_bar",
-                        "energy_bar": "werkiax_unbound:janus#kinetic_charge",
-                        "min": 10
-                    },
-                    {
                         "type": "palladium:ability_unlocked",
                         "ability": "werkiax_unbound:janus#dash_upgrade"
                     }
@@ -53,14 +48,19 @@
                     "type": "palladium:key_bind",
                     "behaviour": "activation",
                     "time": 5,
-                    "cooldown": "2s"
+                    "cooldown": "2s",
+                    "conditions": {
+                        "type": "palladium:energy_bar",
+                        "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+                        "min": 10
+                    }
                 }
             }
         },
         "power_strike": {
             "type": "palladium:dummy",
             "properties": {
-                "title": "Power Strike",
+                "title": "Uppercut",
                 "description": "Hold up to 6 seconds to charge your fist with Kinetic Energy, then release to punch. Damage grows with each charge stage (10, 20, 30) and consumes 100 / 200 / 300 Kinetic Energy. Higher stages launch enemies further into the air, and a full charge pierces armor and cracks the ground. You move slower while charging, and the cooldown is twice as long as the time you charged.",
                 "icon": {
                     "type": "palladium:texture",
@@ -94,11 +94,6 @@
                         ]
                     },
                     {
-                        "type": "palladium:energy_bar",
-                        "energy_bar": "werkiax_unbound:janus#kinetic_charge",
-                        "min": 100
-                    },
-                    {
                         "type": "palladium:ability_unlocked",
                         "ability": "werkiax_unbound:janus#strike_upgrade"
                     }
@@ -107,7 +102,12 @@
                     "type": "palladium:key_bind",
                     "behaviour": "held",
                     "time": 120,
-                    "cooldown": 0
+                    "cooldown": 0,
+                    "conditions": {
+                        "type": "palladium:energy_bar",
+                        "energy_bar": "werkiax_unbound:janus#kinetic_charge",
+                        "min": 100
+                    }
                 }
             }
         },
@@ -1023,6 +1023,23 @@
                 ]
             }
         },
+        "anchor_body_glow": {
+            "type": "argon:body_glow",
+            "color": "#9B32FF",
+            "opacity": 0.1,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:janus#anchor"
+                    }
+                ]
+            }
+        },
         "anchor_nocollide": {
             "type": "palladium:action",
             "properties": {
@@ -1400,65 +1417,6 @@
                 ]
             }
         },
-        "fx_strike_t2": {
-            "type": "palladium:action",
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "first_tick_action": {
-                "type": "palladium:run_command",
-                "command": [
-                    "particle minecraft:dust_color_transition{from_color:[0.45,0.02,0.79],to_color:[0.85,0.45,1.0],scale:1.6} ~ ~0.3 ~ 1.5 0.2 1.5 0 60 force",
-                    "particle minecraft:dragon_breath ~ ~0.2 ~ 1.5 0.1 1.5 0.05 40 force"
-                ]
-            },
-            "state": {
-                "enabling": [
-                    {
-                        "type": "palladium:ability_last_tick",
-                        "ability": "werkiax_unbound:janus#power_strike"
-                    },
-                    {
-                        "type": "palladium:number_data_attachment",
-                        "attachment": "werkiax_unbound:strike_charge",
-                        "min": 90,
-                        "max": 169
-                    }
-                ]
-            }
-        },
-        "fx_strike_t3": {
-            "type": "palladium:action",
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "first_tick_action": {
-                "type": "palladium:run_command",
-                "command": [
-                    "particle minecraft:block{block_state:\"minecraft:stone\"} ~ ~0.1 ~ 3 0.1 3 0.2 200 force",
-                    "particle minecraft:block{block_state:\"minecraft:dirt\"} ~ ~0.1 ~ 2 0.1 2 0.2 100 force",
-                    "particle minecraft:dust_color_transition{from_color:[0.45,0.02,0.79],to_color:[0.85,0.45,1.0],scale:1.6} ~ ~0.3 ~ 3 0.3 3 0 160 force",
-                    "particle minecraft:dragon_breath ~ ~0.3 ~ 3 0.2 3 0.08 80 force",
-                    "particle minecraft:witch ~ ~0.5 ~ 3 0.5 3 0.1 60 force"
-                ]
-            },
-            "state": {
-                "enabling": [
-                    {
-                        "type": "palladium:ability_last_tick",
-                        "ability": "werkiax_unbound:janus#power_strike"
-                    },
-                    {
-                        "type": "palladium:number_data_attachment",
-                        "attachment": "werkiax_unbound:strike_charge",
-                        "min": 170,
-                        "max": 1000
-                    }
-                ]
-            }
-        },
         "fx_berserk_aura": {
             "type": "palladium:action",
             "properties": {
@@ -1496,6 +1454,33 @@
                     {
                         "type": "palladium:ability_enabled",
                         "ability": "werkiax_unbound:janus#power_strike"
+                    }
+                ]
+            }
+        },
+        "fx_uppercut_hit_sound": {
+            "type": "palladium:action",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "first_tick_action": {
+                "type": "palladium:play_sound",
+                "sound": "werkiax_unbound:uppercut_hit",
+                "volume": 1.0,
+                "pitch": 1.0
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_last_tick",
+                        "ability": "werkiax_unbound:janus#power_strike"
+                    },
+                    {
+                        "type": "palladium:number_data_attachment",
+                        "attachment": "werkiax_unbound:strike_charge",
+                        "min": 10,
+                        "max": 1000
                     }
                 ]
             }
@@ -1884,8 +1869,8 @@
         "strike_upgrade": {
             "type": "palladium:dummy",
             "properties": {
-                "title": "Power Strike",
-                "description": "Unlocks Power Strike: hold to charge your fist with Kinetic Energy, then release to punch.",
+                "title": "Uppercut",
+                "description": "Unlocks Uppercut: hold to charge your fist with Kinetic Energy, then release to punch.",
                 "icon": "werkiax_unbound:textures/icons/janus_uppercut.png",
                 "hidden_in_bar": true,
                 "list_index": 22,

@@ -52,5 +52,79 @@
             "werkiax_unbound:negative_burst"
         ],
         "subtitle": "Negative Burst"
+    },
+    "uppercut_hit": {
+        "sounds": [
+            {
+                "name": "minecraft:entity.player.attack.knockback",
+                "type": "event",
+                "volume": 1.0,
+                "pitch": 0.7
+            }
+        ]
+    },
+    "aard": {
+        "sounds": [
+            {
+                "name": "werkiax_unbound:aard",
+                "stream": false
+            }
+        ]
+    },
+    "axii": {
+        "sounds": [
+            {
+                "name": "werkiax_unbound:axii",
+                "stream": false
+            }
+        ]
+    },
+    "igni": {
+        "sounds": [
+            {
+                "name": "werkiax_unbound:igni",
+                "stream": false
+            }
+        ]
+    },
+    "igni_stream": {
+        "sounds": [
+            {
+                "name": "werkiax_unbound:igni_stream",
+                "stream": false
+            }
+        ]
+    },
+    "yrden": {
+        "sounds": [
+            {
+                "name": "werkiax_unbound:yrden",
+                "stream": false
+            }
+        ]
+    },
+    "quen_ward": {
+        "sounds": [
+            {
+                "name": "werkiax_unbound:quen_ward",
+                "stream": false
+            }
+        ]
+    },
+    "quen_dome": {
+        "sounds": [
+            {
+                "name": "werkiax_unbound:quen_dome",
+                "stream": false
+            }
+        ]
+    },
+    "quen_break": {
+        "sounds": [
+            {
+                "name": "werkiax_unbound:quen_break",
+                "stream": false
+            }
+        ]
     }
 }

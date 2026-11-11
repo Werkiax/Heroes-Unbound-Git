@@ -7,6 +7,10 @@
             "type": "palladium:ability_enabled",
             "ability": "werkiax_unbound:janus#berserk"
         },
+        "werkiax_unbound:uppercut_glow": {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:janus#power_strike"
+        },
         "werkiax_unbound:berserk_sparks": {
             "type": "palladium:ability_enabled",
             "ability": "werkiax_unbound:janus#berserk"

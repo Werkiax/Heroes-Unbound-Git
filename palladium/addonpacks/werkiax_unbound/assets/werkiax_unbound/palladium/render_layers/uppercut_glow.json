@@ -1,0 +1,9 @@
+{
+    "type": "palladium:render_layer",
+    "texture": {
+        "wide": "werkiax_unbound:textures/entity/uppercut_glow_wide.png",
+        "slim": "werkiax_unbound:textures/entity/uppercut_glow_slim.png"
+    },
+    "render_type": "argon:additive",
+    "light_emission": 15
+}
