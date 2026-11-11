@@ -18,7 +18,11 @@
             "ability": "werkiax_unbound:ghost_of_sparta#stomp",
             "max": 3
           }
-        ]
+        ],
+        "guarding": {
+          "type": "palladium:ability_enabled",
+          "ability": "werkiax_unbound:ghost_of_sparta#guard"
+        }
       }
     },
     "charging": {
@@ -45,6 +49,20 @@
       "blend_transition": 2,
       "transitions": {
         "idle": "palladium.any_animation_finished()"
+      }
+    },
+    "guarding": {
+      "animation": "werkiax_unbound:ghost_guard",
+      "first_person_animation": "werkiax_unbound:ghost_guard_fp",
+      "blend_transition": 3,
+      "transitions": {
+        "idle": {
+          "type": "palladium:not",
+          "conditions": {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:ghost_of_sparta#guard"
+          }
+        }
       }
     }
   }
