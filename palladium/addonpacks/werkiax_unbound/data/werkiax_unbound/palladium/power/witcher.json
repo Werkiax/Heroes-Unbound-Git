@@ -621,7 +621,7 @@
                 "enabling": [
                     {
                         "type": "palladium:ability_first_tick",
-                        "ability": "werkiax_unbound:witcher#quen"
+                        "ability": "werkiax_unbound:witcher#quen_bubble"
                     },
                     {
                         "type": "palladium:crouching"
@@ -663,7 +663,7 @@
             "state": {
                 "enabling": {
                     "type": "palladium:ability_last_tick",
-                    "ability": "werkiax_unbound:witcher#quen_bubble"
+                    "ability": "werkiax_unbound:witcher#quen_dome"
                 }
             }
         },
@@ -764,22 +764,6 @@
                     "attachment": "werkiax_unbound:quen_bubble_timer",
                     "min": 1,
                     "max": 1000
-                }
-            }
-        },
-        "quen_bubble_ward": {
-            "type": "argon:ward",
-            "pool": 100,
-            "duration": "6s",
-            "knockback_reduction": 1,
-            "properties": {
-                "hidden_in_gui": true,
-                "hidden_in_bar": true
-            },
-            "state": {
-                "enabling": {
-                    "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:witcher#quen_bubble"
                 }
             }
         },
@@ -1221,7 +1205,7 @@
             "state": {
                 "enabling": {
                     "type": "palladium:ability_enabled",
-                    "ability": "werkiax_unbound:witcher#quen_bubble"
+                    "ability": "werkiax_unbound:witcher#quen_bubble_dome"
                 }
             }
         },
