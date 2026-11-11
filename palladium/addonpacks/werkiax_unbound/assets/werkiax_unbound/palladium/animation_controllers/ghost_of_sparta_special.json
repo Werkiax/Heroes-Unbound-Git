@@ -1,51 +1,69 @@
 {
-  "initial_state": "idle",
-  "blend_transition": 4,
-  "states": {
-    "idle": {
-      "transitions": {
-        "charging": {
-          "type": "palladium:ability_enabled",
-          "ability": "werkiax_unbound:ghost_of_sparta#charge_leap"
+    "initial_state": "idle",
+    "blend_transition": 4,
+    "states": {
+        "idle": {
+            "transitions": {
+                "charging": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:ghost_of_sparta#charge_leap"
+                },
+                "stomping": [
+                    {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:ghost_of_sparta#stomp"
+                    },
+                    {
+                        "type": "palladium:ability_ticks",
+                        "ability": "werkiax_unbound:ghost_of_sparta#stomp",
+                        "max": 3
+                    }
+                ],
+                "guarding": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:ghost_of_sparta#guard"
+                }
+            }
         },
-        "stomping": [
-          {
-            "type": "palladium:ability_enabled",
-            "ability": "werkiax_unbound:ghost_of_sparta#stomp"
-          },
-          {
-            "type": "palladium:ability_ticks",
-            "ability": "werkiax_unbound:ghost_of_sparta#stomp",
-            "max": 3
-          }
-        ]
-      }
-    },
-    "charging": {
-      "animation": "werkiax_unbound:ghost_charge_leap",
-      "transitions": {
+        "charging": {
+            "animation": "werkiax_unbound:ghost_charge_leap",
+            "transitions": {
+                "launch": {
+                    "type": "palladium:not",
+                    "conditions": {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:ghost_of_sparta#charge_leap"
+                    }
+                }
+            }
+        },
         "launch": {
-          "type": "palladium:not",
-          "conditions": {
-            "type": "palladium:ability_enabled",
-            "ability": "werkiax_unbound:ghost_of_sparta#charge_leap"
-          }
+            "animation": "werkiax_unbound:ghost_launch",
+            "blend_transition": 1,
+            "transitions": {
+                "idle": "palladium.any_animation_finished()"
+            }
+        },
+        "stomping": {
+            "animation": "werkiax_unbound:ghost_stomp",
+            "blend_transition": 2,
+            "transitions": {
+                "idle": "palladium.any_animation_finished()"
+            }
+        },
+        "guarding": {
+            "animation": "werkiax_unbound:ghost_guard",
+            "first_person_animation": "werkiax_unbound:ghost_guard_fp",
+            "blend_transition": 3,
+            "transitions": {
+                "idle": {
+                    "type": "palladium:not",
+                    "conditions": {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:ghost_of_sparta#guard"
+                    }
+                }
+            }
         }
-      }
-    },
-    "launch": {
-      "animation": "werkiax_unbound:ghost_launch",
-      "blend_transition": 1,
-      "transitions": {
-        "idle": "palladium.any_animation_finished()"
-      }
-    },
-    "stomping": {
-      "animation": "werkiax_unbound:ghost_stomp",
-      "blend_transition": 2,
-      "transitions": {
-        "idle": "palladium.any_animation_finished()"
-      }
     }
-  }
 }

@@ -185,31 +185,109 @@
         "fx_axii": [0.0, 0.0]
     },
     "connections": [
-        { "from": "witcher_core", "to": "witcher_sense" },
-        { "from": "witcher_sense", "to": "axii" },
-        { "from": "witcher_sense", "to": "yrden_zone" },
-        { "from": "witcher_sense", "to": "aard" },
-        { "from": "aard", "to": "igni" },
-        { "from": "igni", "to": "quen" },
-        { "from": "aard", "to": "aard_wave" },
-        { "from": "igni", "to": "igni_torrent" },
-        { "from": "quen", "to": "quen_dome" },
-        { "from": "witcher_core", "to": "upgrades" },
-        { "from": "upgrades", "to": "health_upgrade_1" },
-        { "from": "upgrades", "to": "damage_upgrade_1" },
-        { "from": "upgrades", "to": "armor_upgrade_1" },
-        { "from": "upgrades", "to": "speed_upgrade_1" },
-        { "from": "health_upgrade_1", "to": "health_upgrade_2" },
-        { "from": "health_upgrade_2", "to": "health_upgrade_3" },
-        { "from": "health_upgrade_3", "to": "health_upgrade_4" },
-        { "from": "damage_upgrade_1", "to": "damage_upgrade_2" },
-        { "from": "damage_upgrade_2", "to": "damage_upgrade_3" },
-        { "from": "damage_upgrade_3", "to": "damage_upgrade_4" },
-        { "from": "armor_upgrade_1", "to": "armor_upgrade_2" },
-        { "from": "armor_upgrade_2", "to": "armor_upgrade_3" },
-        { "from": "armor_upgrade_3", "to": "armor_upgrade_4" },
-        { "from": "speed_upgrade_1", "to": "speed_upgrade_2" },
-        { "from": "speed_upgrade_2", "to": "speed_upgrade_3" },
-        { "from": "speed_upgrade_3", "to": "speed_upgrade_4" }
+        {
+            "from": "witcher_core",
+            "to": "witcher_sense"
+        },
+        {
+            "from": "witcher_sense",
+            "to": "axii"
+        },
+        {
+            "from": "witcher_sense",
+            "to": "yrden_zone"
+        },
+        {
+            "from": "witcher_sense",
+            "to": "aard"
+        },
+        {
+            "from": "aard",
+            "to": "igni"
+        },
+        {
+            "from": "igni",
+            "to": "quen"
+        },
+        {
+            "from": "aard",
+            "to": "aard_wave"
+        },
+        {
+            "from": "igni",
+            "to": "igni_torrent"
+        },
+        {
+            "from": "quen",
+            "to": "quen_dome"
+        },
+        {
+            "from": "witcher_core",
+            "to": "upgrades"
+        },
+        {
+            "from": "upgrades",
+            "to": "health_upgrade_1"
+        },
+        {
+            "from": "upgrades",
+            "to": "damage_upgrade_1"
+        },
+        {
+            "from": "upgrades",
+            "to": "armor_upgrade_1"
+        },
+        {
+            "from": "upgrades",
+            "to": "speed_upgrade_1"
+        },
+        {
+            "from": "health_upgrade_1",
+            "to": "health_upgrade_2"
+        },
+        {
+            "from": "health_upgrade_2",
+            "to": "health_upgrade_3"
+        },
+        {
+            "from": "health_upgrade_3",
+            "to": "health_upgrade_4"
+        },
+        {
+            "from": "damage_upgrade_1",
+            "to": "damage_upgrade_2"
+        },
+        {
+            "from": "damage_upgrade_2",
+            "to": "damage_upgrade_3"
+        },
+        {
+            "from": "damage_upgrade_3",
+            "to": "damage_upgrade_4"
+        },
+        {
+            "from": "armor_upgrade_1",
+            "to": "armor_upgrade_2"
+        },
+        {
+            "from": "armor_upgrade_2",
+            "to": "armor_upgrade_3"
+        },
+        {
+            "from": "armor_upgrade_3",
+            "to": "armor_upgrade_4"
+        },
+        {
+            "from": "speed_upgrade_1",
+            "to": "speed_upgrade_2"
+        },
+        {
+            "from": "speed_upgrade_2",
+            "to": "speed_upgrade_3"
+        },
+        {
+            "from": "speed_upgrade_3",
+            "to": "speed_upgrade_4"
+        }
     ]
 }
