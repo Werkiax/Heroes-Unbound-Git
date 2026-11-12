@@ -16,25 +16,19 @@
             "size": 32,
             "icon_size": 22,
             "overlay": false,
-            "show_icon": {
-                "locked": true,
-                "available": true,
-                "unlocked": true
-            }
-        },
-        "junction": {
-            "size": 6,
-            "icon_size": 0,
-            "overlay": false,
-            "show_icon": false
+            "show_icon": true
         }
     },
     "connection_styles": {
         "default": {
             "path": "elbow_vertical",
-            "width": 3,
-            "outline_width": 2,
-            "dash": false
+            "width": 2,
+            "outline_width": 0,
+            "color": {
+                "locked": "#5C6B75",
+                "available": "#00d4f0",
+                "unlocked": "#FFD24A"
+            }
         }
     },
     "ppd_node_order": [
@@ -105,44 +99,40 @@
         "igni",
         "igni_torrent",
         "aard_wave",
-        "quen_dome",
-        "j_aard",
-        "j_igni",
-        "j_quen",
-        "j_axii"
+        "quen_dome"
     ],
     "grid_size": 38,
     "auto_connect": false,
     "nodes": {
         "witcher_core": {
-            "pos": [7.0, 0.0],
+            "pos": [7.0, 0.75],
             "style": "root"
         },
         "witcher_sense": [7.0, -1.2],
-        "aard": [6.0, -2.4],
-        "igni": [6.0, -3.5],
-        "quen": [6.0, -4.6],
-        "axii": [6.0, -5.7],
-        "yrden_zone": [8.0, -5.7],
-        "aard_wave": [8.0, -2.4],
-        "igni_torrent": [8.0, -3.5],
-        "quen_dome": [8.0, -4.6],
-        "health_upgrade_1": [5.5, 1.3],
-        "health_upgrade_2": [5.5, 2.3],
-        "health_upgrade_3": [5.5, 3.3],
-        "health_upgrade_4": [5.5, 4.3],
-        "damage_upgrade_1": [6.5, 1.3],
-        "damage_upgrade_2": [6.5, 2.3],
-        "damage_upgrade_3": [6.5, 3.3],
-        "damage_upgrade_4": [6.5, 4.3],
-        "armor_upgrade_1": [7.5, 1.3],
-        "armor_upgrade_2": [7.5, 2.3],
-        "armor_upgrade_3": [7.5, 3.3],
-        "armor_upgrade_4": [7.5, 4.3],
-        "speed_upgrade_1": [8.5, 1.3],
-        "speed_upgrade_2": [8.5, 2.3],
-        "speed_upgrade_3": [8.5, 3.3],
-        "speed_upgrade_4": [8.5, 4.3],
+        "axii": [5.5, -1.2],
+        "yrden_zone": [8.75, -1.2],
+        "aard": [7.0, -2.4],
+        "igni": [7.0, -3.6],
+        "quen": [7.0, -4.8],
+        "aard_wave": [8.75, -2.4],
+        "igni_torrent": [8.75, -3.6],
+        "quen_dome": [8.75, -4.8],
+        "health_upgrade_1": [5.5, 2.6],
+        "health_upgrade_2": [5.5, 3.6],
+        "health_upgrade_3": [5.5, 4.6],
+        "health_upgrade_4": [5.5, 5.6],
+        "damage_upgrade_1": [6.5, 2.6],
+        "damage_upgrade_2": [6.5, 3.6],
+        "damage_upgrade_3": [6.5, 4.6],
+        "damage_upgrade_4": [6.5, 5.6],
+        "armor_upgrade_1": [7.5, 2.6],
+        "armor_upgrade_2": [7.5, 3.6],
+        "armor_upgrade_3": [7.5, 4.6],
+        "armor_upgrade_4": [7.5, 5.6],
+        "speed_upgrade_1": [8.5, 2.6],
+        "speed_upgrade_2": [8.5, 3.6],
+        "speed_upgrade_3": [8.5, 4.6],
+        "speed_upgrade_4": [8.5, 5.6],
         "aard_hold_counter": [0.0, 0.0],
         "aard_counter_reset": [0.0, 0.0],
         "aard_cone": [0.0, 0.0],
@@ -184,96 +174,40 @@
         "base_regen": [0.0, 0.0],
         "fx_quen_dome": [0.0, 0.0],
         "fx_quen_bubble_break": [0.0, 0.0],
-        "fx_axii": [0.0, 0.0],
-        "j_aard": {
-            "pos": [7.0, -2.4],
-            "style": "junction"
-        },
-        "j_igni": {
-            "pos": [7.0, -3.5],
-            "style": "junction"
-        },
-        "j_quen": {
-            "pos": [7.0, -4.6],
-            "style": "junction"
-        },
-        "j_axii": {
-            "pos": [7.0, -5.7],
-            "style": "junction"
-        }
+        "fx_axii": [0.0, 0.0]
     },
     "connections": [
         {
             "from": "witcher_sense",
-            "to": "j_aard"
-        },
-        {
-            "from": "j_aard",
-            "to": "j_igni"
-        },
-        {
-            "from": "j_igni",
-            "to": "j_quen"
-        },
-        {
-            "from": "j_quen",
-            "to": "j_axii"
-        },
-        {
-            "from": "j_aard",
-            "to": "aard"
-        },
-        {
-            "from": "j_aard",
-            "to": "aard_wave"
-        },
-        {
-            "from": "j_igni",
-            "to": "igni"
-        },
-        {
-            "from": "j_igni",
-            "to": "igni_torrent"
-        },
-        {
-            "from": "j_quen",
-            "to": "quen"
-        },
-        {
-            "from": "j_quen",
-            "to": "quen_dome"
-        },
-        {
-            "from": "j_axii",
             "to": "axii"
         },
         {
-            "from": "j_axii",
+            "from": "witcher_sense",
             "to": "yrden_zone"
+        },
+        {
+            "from": "witcher_sense",
+            "to": "aard"
         },
         {
             "from": "aard",
             "to": "igni"
         },
         {
-            "from": "aard_wave",
-            "to": "igni_torrent"
-        },
-        {
             "from": "igni",
             "to": "quen"
         },
         {
-            "from": "igni_torrent",
-            "to": "quen_dome"
+            "from": "aard",
+            "to": "aard_wave"
+        },
+        {
+            "from": "igni",
+            "to": "igni_torrent"
         },
         {
             "from": "quen",
-            "to": "axii"
-        },
-        {
-            "from": "quen_dome",
-            "to": "yrden_zone"
+            "to": "quen_dome"
         },
         {
             "from": "health_upgrade_1",

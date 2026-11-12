@@ -929,12 +929,20 @@
                 }
             }
         },
+        "witcher_sense_highlight": {
+            "type": "argon:highlight",
+            "mode": "others",
+            "color": "#B9E7FF",
+            "opacity": 0.06,
+            "distance": 12,
+            "highlight_entities": true
+        },
         "night_vision": {
             "type": "argon:random_effect",
             "effects": [
                 {
                     "effect": "minecraft:night_vision",
-                    "duration": 0,
+                    "duration": 400,
                     "amplifier": 0,
                     "particles": false,
                     "show_icon": false
@@ -1160,8 +1168,6 @@
                 "title": "Witcher Sense",
                 "description": "Your senses warn you of danger. Hostile mobs within 6 blocks, and players who hurt you in the last 5 minutes, light up the edge of your screen in the direction they are in.",
                 "icon": "minecraft:spyglass",
-                "list_index": 10,
-                "color": "yellow",
                 "hidden_in_bar": true
             },
             "state": {

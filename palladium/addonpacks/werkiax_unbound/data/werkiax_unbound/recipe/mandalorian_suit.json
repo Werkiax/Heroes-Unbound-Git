@@ -1,0 +1,20 @@
+{
+    "type": "argon:tech_table_crafting",
+    "pattern": [
+        "bbbbb",
+        "bgggb",
+        "bgsgb",
+        "bgggb",
+        "bbbbb"
+    ],
+    "key": {
+        "b": "minecraft:iron_ingot",
+        "g": "minecraft:gold_ingot",
+        "s": "minecraft:netherite_ingot"
+    },
+    "result": {
+        "suit_set": "werkiax_unbound:mandalorian"
+    },
+    "name": "Mandalorian Armor",
+    "time": 600
+}

@@ -156,7 +156,7 @@
                     },
                     "requires": {
                         "type": "palladium:ability_unlocked",
-                        "ability": "werkiax_unbound:ghost_of_sparta#grab"
+                        "ability": "guard"
                     }
                 },
                 "enabling": {
@@ -164,6 +164,24 @@
                     "behaviour": "held",
                     "cooldown": "5s"
                 }
+            }
+        },
+        "charge_leap_blast": {
+            "type": "argon:explosion",
+            "radius": 1.0,
+            "destroy_environment": false,
+            "damage_self": false,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:ability_last_tick",
+                        "ability": "werkiax_unbound:ghost_of_sparta#charge_leap"
+                    }
+                ]
             }
         },
         "grab": {
@@ -197,7 +215,10 @@
                     "behaviour": "held",
                     "cooldown": "3s"
                 }
-            }
+            },
+            "allow_mobs": true,
+            "target_collision": false,
+            "arm_pose": true
         },
         "grab_throw": {
             "type": "argon:held_target",
@@ -237,7 +258,7 @@
             "block_sound": "minecraft:item.shield.block",
             "break_sound": "minecraft:item.shield.break",
             "properties": {
-                "title": "Guardian Shield",
+                "title": "Guard",
                 "description": "Hold to raise your shield and block damage coming from the front. After absorbing 30 damage the shield breaks, hurting you and locking it for 4 seconds. Absorbed damage recovers over time while you are not guarding. You cannot attack while blocking.",
                 "icon": {
                     "type": "palladium:texture",
@@ -324,42 +345,6 @@
                 "hidden_in_bar": true
             }
         },
-        "rage": {
-            "type": "palladium:dual_wielding",
-            "properties": {
-                "title": "Rage",
-                "icon": {
-                    "type": "palladium:texture",
-                    "texture": "werkiax_unbound:textures/icons/spartan_rage.png"
-                },
-                "list_index": 4
-            },
-            "state": {
-                "unlocking": {
-                    "type": "palladium:buyable",
-                    "cost": {
-                        "type": "palladium:experience_level",
-                        "xp_level": 5
-                    },
-                    "requires": [
-                        {
-                            "type": "palladium:ability_unlocked",
-                            "ability": "werkiax_unbound:ghost_of_sparta#stomp"
-                        },
-                        {
-                            "type": "palladium:energy_bar",
-                            "energy_bar": "werkiax_unbound:ghost_of_sparta#fury",
-                            "min": 5
-                        }
-                    ]
-                },
-                "enabling": {
-                    "type": "palladium:key_bind",
-                    "behaviour": "toggle",
-                    "cooldown": "10s"
-                }
-            }
-        },
         "fx_rage_flames": {
             "type": "palladium:action",
             "first_tick_action": {
@@ -382,7 +367,7 @@
                 "enabling": [
                     {
                         "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:ghost_of_sparta#rage"
+                        "ability": "werkiax_unbound:ghost_of_sparta#spartan_rage"
                     }
                 ]
             }
@@ -414,7 +399,7 @@
                 "enabling": [
                     {
                         "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:ghost_of_sparta#rage"
+                        "ability": "werkiax_unbound:ghost_of_sparta#spartan_rage"
                     }
                 ]
             }
@@ -432,7 +417,7 @@
                 "enabling": [
                     {
                         "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:ghost_of_sparta#rage"
+                        "ability": "werkiax_unbound:ghost_of_sparta#spartan_rage"
                     }
                 ]
             }
@@ -456,7 +441,7 @@
                 "enabling": [
                     {
                         "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:ghost_of_sparta#rage"
+                        "ability": "werkiax_unbound:ghost_of_sparta#spartan_rage"
                     }
                 ]
             }
@@ -477,7 +462,7 @@
                 "enabling": [
                     {
                         "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:ghost_of_sparta#rage"
+                        "ability": "werkiax_unbound:ghost_of_sparta#spartan_rage"
                     }
                 ]
             }
@@ -496,7 +481,7 @@
                 "enabling": [
                     {
                         "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:ghost_of_sparta#rage"
+                        "ability": "werkiax_unbound:ghost_of_sparta#spartan_rage"
                     }
                 ]
             }
@@ -528,7 +513,7 @@
                 "enabling": [
                     {
                         "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:ghost_of_sparta#rage"
+                        "ability": "werkiax_unbound:ghost_of_sparta#spartan_rage"
                     }
                 ]
             }
@@ -547,7 +532,7 @@
                         "type": "palladium:not",
                         "conditions": {
                             "type": "palladium:ability_enabled",
-                            "ability": "werkiax_unbound:ghost_of_sparta#rage"
+                            "ability": "werkiax_unbound:ghost_of_sparta#spartan_rage"
                         }
                     }
                 ]
@@ -567,7 +552,7 @@
                 "enabling": [
                     {
                         "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:ghost_of_sparta#rage"
+                        "ability": "werkiax_unbound:ghost_of_sparta#spartan_rage"
                     }
                 ]
             },
@@ -600,7 +585,7 @@
                         "type": "palladium:not",
                         "conditions": {
                             "type": "palladium:ability_enabled",
-                            "ability": "werkiax_unbound:ghost_of_sparta#rage"
+                            "ability": "werkiax_unbound:ghost_of_sparta#spartan_rage"
                         }
                     }
                 ]
@@ -624,7 +609,7 @@
                 "enabling": [
                     {
                         "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:ghost_of_sparta#rage"
+                        "ability": "werkiax_unbound:ghost_of_sparta#spartan_rage"
                     }
                 ]
             }
@@ -1122,6 +1107,42 @@
                         "type": "palladium:ability_unlocked",
                         "ability": "werkiax_unbound:ghost_of_sparta#speed_upgrade_3"
                     }
+                }
+            }
+        },
+        "spartan_rage": {
+            "type": "palladium:dual_wielding",
+            "properties": {
+                "title": "Spartan Rage",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/spartan_rage.png"
+                },
+                "list_index": 4
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 5
+                    },
+                    "requires": [
+                        {
+                            "type": "palladium:ability_unlocked",
+                            "ability": "werkiax_unbound:ghost_of_sparta#stomp"
+                        },
+                        {
+                            "type": "palladium:energy_bar",
+                            "energy_bar": "werkiax_unbound:ghost_of_sparta#fury",
+                            "min": 5
+                        }
+                    ]
+                },
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "behaviour": "toggle",
+                    "cooldown": "10s"
                 }
             }
         }

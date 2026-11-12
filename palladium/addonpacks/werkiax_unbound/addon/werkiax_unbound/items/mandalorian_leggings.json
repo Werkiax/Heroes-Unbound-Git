@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:armor",
+    "armor_type": "leggings",
+    "armor_material": "minecraft:netherite",
+    "properties": {
+        "components": {
+            "minecraft:max_stack_size": 1
+        }
+    }
+}

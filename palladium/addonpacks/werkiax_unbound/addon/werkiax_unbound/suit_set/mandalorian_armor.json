@@ -1,0 +1,22 @@
+{
+    "armor_material": "werkiax_unbound:mandalorian",
+    "tab": {
+        "type": "add_after",
+        "tab": "minecraft:combat",
+        "target": "minecraft:netherite_boots"
+    },
+    "slots": {
+        "helmet": {
+            "item_name": "mandalorian_helmet"
+        },
+        "chestplate": {
+            "item_name": "mandalorian_chestplate"
+        },
+        "leggings": {
+            "item_name": "mandalorian_leggings"
+        },
+        "boots": {
+            "item_name": "mandalorian_boots"
+        }
+    }
+}

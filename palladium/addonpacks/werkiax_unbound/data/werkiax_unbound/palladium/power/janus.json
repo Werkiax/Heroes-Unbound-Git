@@ -1564,7 +1564,7 @@
                     }
                 },
                 "might": {
-                    "title": "Might Form",
+                    "title": "Bulwark Form",
                     "conditions": {
                         "type": "palladium:and",
                         "conditions": [
@@ -1582,7 +1582,7 @@
                     }
                 },
                 "bulwark": {
-                    "title": "Bulwark Form",
+                    "title": "Might Form",
                     "conditions": {
                         "type": "palladium:and",
                         "conditions": [
@@ -1791,6 +1791,66 @@
                     {
                         "type": "palladium:ability_last_tick",
                         "ability": "werkiax_unbound:janus#anchor"
+                    }
+                ]
+            }
+        },
+        "bulwark_armor_lock": {
+            "type": "argon:lock_slots",
+            "slots": "chest",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:mode_active",
+                        "ability": "werkiax_unbound:janus#form_switch",
+                        "mode": "bulwark",
+                        "ignore_unlocked": false
+                    }
+                ]
+            }
+        },
+        "bulwark_armor_store": {
+            "type": "argon:store_equipment",
+            "id": "bulwark_stored",
+            "slots": [
+                "head",
+                "chest",
+                "legs",
+                "feet"
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:mode_active",
+                        "ability": "werkiax_unbound:janus#form_switch",
+                        "mode": "bulwark",
+                        "ignore_unlocked": false
+                    }
+                ]
+            }
+        },
+        "bulwark_armor_restore": {
+            "type": "argon:restore_equipment",
+            "id": "bulwark_stored",
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": [
+                    {
+                        "type": "palladium:mode_active",
+                        "ability": "werkiax_unbound:janus#form_switch",
+                        "mode": "might",
+                        "ignore_unlocked": false
                     }
                 ]
             }

@@ -1,0 +1,7 @@
+{
+    "texture": {
+        "wide": "werkiax_unbound:textures/entity/suits/mandalorian_suit_wide.png",
+        "slim": "werkiax_unbound:textures/entity/suits/mandalorian_suit_slim.png"
+    },
+    "render_type": "minecraft:entity_translucent"
+}

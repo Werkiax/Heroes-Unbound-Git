@@ -31,20 +31,63 @@
             }
         }
     },
+    "ppd_node_order": [
+        "combo",
+        "combo_shake",
+        "leap",
+        "stomp",
+        "charge_leap_blast",
+        "grab",
+        "grab_throw",
+        "stomp_blast",
+        "stomp_quake",
+        "base_toughness",
+        "spartan_rage",
+        "fx_rage_flames",
+        "rage_light",
+        "rage_bar_color",
+        "rage_overload",
+        "rage_drain",
+        "rage_roar",
+        "rage_bonus",
+        "regen",
+        "regen_rage",
+        "immunities",
+        "damage_reduction",
+        "damage_reduction_rage",
+        "health_upgrade_1",
+        "health_upgrade_2",
+        "health_upgrade_3",
+        "health_upgrade_4",
+        "damage_upgrade_1",
+        "damage_upgrade_2",
+        "damage_upgrade_3",
+        "damage_upgrade_4",
+        "armor_upgrade_1",
+        "armor_upgrade_2",
+        "armor_upgrade_3",
+        "armor_upgrade_4",
+        "speed_upgrade_1",
+        "speed_upgrade_2",
+        "speed_upgrade_3",
+        "speed_upgrade_4",
+        "upgrades",
+        "guard",
+        "charge_leap"
+    ],
     "grid_size": 38,
     "auto_connect": false,
     "nodes": {
         "grab": {
             "pos": [7.0, -0.25],
-            "style": "root"
+            "style": "default"
         },
         "guard": [7.0, -1.45],
         "charge_leap": [7.0, -2.4],
         "stomp": [7.0, -3.35],
-        "rage": [7.0, -4.3],
         "upgrades": {
             "pos": [7.0, 1.3],
-            "style": "hub",
+            "style": "root",
             "title": "Ghost of Sparta",
             "icon": "werkiax_unbound:textures/icons/ghost_of_sparta_icon.png",
             "description": "Permanent stat upgrades. Four tiers each for health, damage, armor and speed."
@@ -83,7 +126,8 @@
         "regen_rage": [0.0, 0.0],
         "immunities": [0.0, 0.0],
         "damage_reduction": [0.0, 0.0],
-        "damage_reduction_rage": [0.0, 0.0]
+        "damage_reduction_rage": [0.0, 0.0],
+        "spartan_rage": [7.0, -4.3]
     },
     "connections": [
         {
@@ -100,7 +144,7 @@
         },
         {
             "from": "stomp",
-            "to": "rage"
+            "to": "spartan_rage"
         },
         {
             "from": "upgrades",
