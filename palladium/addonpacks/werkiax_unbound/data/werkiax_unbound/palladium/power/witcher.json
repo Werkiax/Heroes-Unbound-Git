@@ -274,7 +274,7 @@
                 "enabling": {
                     "type": "palladium:key_bind",
                     "behaviour": "held",
-                    "time": 60,
+                    "time": 210,
                     "cooldown": "5s"
                 },
                 "unlocking": {
@@ -663,7 +663,7 @@
             "state": {
                 "enabling": {
                     "type": "palladium:ability_last_tick",
-                    "ability": "werkiax_unbound:witcher#quen_dome"
+                    "ability": "werkiax_unbound:witcher#quen_bubble"
                 }
             }
         },
@@ -770,7 +770,7 @@
         "quen_bubble_dome": {
             "type": "argon:dome",
             "radius": 2,
-            "duration": "8s",
+            "duration": "7s",
             "damage_reduction": 0,
             "deflect_projectiles": true,
             "repel": 0.25,

@@ -1,5 +1,5 @@
 {
-    "base": "werkiax_unbound:textures/icons/janus_icon.png",
+    "base": "werkiax_unbound:textures/icons/janus_form.png",
     "variables": {
         "form": {
             "type": "palladium:conditional",

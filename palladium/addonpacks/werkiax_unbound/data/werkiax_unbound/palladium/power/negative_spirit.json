@@ -172,7 +172,7 @@
                     {
                         "type": "palladium:not",
                         "conditions": {
-                            "type": "palladium:ability_enabled",
+                            "type": "argon:possessing",
                             "ability": "werkiax_unbound:negative_spirit#possess"
                         }
                     }
@@ -291,7 +291,7 @@
                     {
                         "type": "palladium:not",
                         "conditions": {
-                            "type": "palladium:ability_enabled",
+                            "type": "argon:possessing",
                             "ability": "werkiax_unbound:negative_spirit#possess"
                         }
                     }
@@ -461,7 +461,7 @@
                     {
                         "type": "palladium:not",
                         "conditions": {
-                            "type": "palladium:ability_enabled",
+                            "type": "argon:possessing",
                             "ability": "werkiax_unbound:negative_spirit#possess"
                         }
                     }
@@ -522,7 +522,7 @@
             "end_on_damage": true,
             "properties": {
                 "title": "Possess",
-                "description": "Take over a living creature within 10 blocks: see through its eyes and control its movement. You can jump to up to 2 more targets. The possession ends if your body takes damage or the target gets more than 50 blocks away from your body. Drains 10 Negative Energy per second. Press again to return.",
+                "description": "Take over a living creature within 10 blocks: see through its eyes and control its movement. You can jump to up to 2 more targets. The possession ends if your body takes damage or the target gets more than 50 blocks away from your body. Drains 10 Negative Energy per second.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/possess.png"
@@ -545,7 +545,8 @@
                 ],
                 "enabling": {
                     "type": "palladium:key_bind",
-                    "behaviour": "toggle"
+                    "behaviour": "activation",
+                    "time": 1
                 }
             }
         },
@@ -575,7 +576,7 @@
             },
             "state": {
                 "enabling": {
-                    "type": "palladium:ability_enabled",
+                    "type": "argon:possessing",
                     "ability": "werkiax_unbound:negative_spirit#possess"
                 }
             }
@@ -607,7 +608,7 @@
                     {
                         "type": "palladium:not",
                         "conditions": {
-                            "type": "palladium:ability_enabled",
+                            "type": "argon:possessing",
                             "ability": "werkiax_unbound:negative_spirit#possess"
                         }
                     }
@@ -1197,10 +1198,19 @@
                 "hidden_in_gui": true
             },
             "state": {
-                "unlocking": {
-                    "type": "palladium:ability_unlocked",
-                    "ability": "werkiax_unbound:negative_spirit#negative_burst_unlock"
-                },
+                "unlocking": [
+                    {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:negative_spirit#negative_burst_unlock"
+                    },
+                    {
+                        "type": "palladium:not",
+                        "conditions": {
+                            "type": "argon:possessing",
+                            "ability": "werkiax_unbound:negative_spirit#possess"
+                        }
+                    }
+                ],
                 "enabling": {
                     "type": "palladium:key_bind",
                     "behaviour": "activation",
