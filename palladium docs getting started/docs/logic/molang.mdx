@@ -1,0 +1,126 @@
+---
+sidebar_position: 6
+---
+
+# MoLang
+
+import MoLangQueryList from "@site/src/components/MoLangQueryList";
+
+MoLang is a small expression language that Minecraft uses on Bedrock Edition for animations. Palladium uses it wherever a value has to be calculated while the game runs: a condition that checks if the player is on the ground, a number that rises with the player's speed, or an arm rotation that follows the head. You write a short formula as a string, and Palladium evaluates it every time it is needed.
+
+```
+query.is_on_ground && query.is_sprinting
+```
+
+## Where MoLang Works
+
+| Place | What the expression does |
+|-------|--------------------------|
+| [Conditions](conditions) | A plain string in any condition field is read as MoLang. The condition passes when the result is not 0. |
+| [Animation controller](/docs/rendering/animations) transitions | Same as conditions. Decides when the controller switches states. |
+| Keyframes in player animations | Any number in an animation file can be an expression, like `"-22.5 * !q.is_on_ground"`. |
+| `modify` on [values](values) | Changes a number value. The original value is available as `this`. |
+| `overrides` on the default [render layer](/docs/rendering/render-layers) | Changes the position, rotation or scale of a model part. The current value is available as `this`. |
+
+## The Basics
+
+**Queries** read information from the game. They start with a namespace, then a dot, then the query name: `query.health`. The [list below](#query-reference) shows everything that is available.
+
+**Booleans are numbers.** `true` is 1, `false` is 0. That is why `-22.5 * !query.is_on_ground` works: in the air `!query.is_on_ground` is 1 and the result is -22.5, on the ground it is 0 and the result is 0.
+
+**Operators** work like in most languages: `+ - * /`, comparisons with `== != < > <= >=`, logic with `&& || !`, and parentheses. `condition ? a : b` picks one of two values.
+
+**Parentheses on queries are optional** when the query takes no arguments. `query.is_on_ground` and `query.is_on_ground()` mean the same. Queries with arguments need them, with text in single quotes: `palladium.get_animation_timer_eased('mypack:hero#transform')`.
+
+**Math functions** live in the `math` namespace, for example `math.abs`, `math.clamp`, `math.lerp`, `math.mod`, `math.sin` and `math.cos`.
+
+### Namespaces
+
+- `query` (short: `q`) holds the general queries that are known from Bedrock Edition: health, movement, rotations, time and so on.
+- `palladium` holds Palladium's own queries for flight, web swinging, abilities and attack animations.
+- `math` holds the math functions.
+
+Inside the keyframes of player animations, the `query` namespace is provided by Player Animation Library instead of Palladium. It contains the same queries listed below plus two more: `query.anim_time` (seconds since the animation started) and `query.controller_speed`. The `palladium` namespace works there too.
+
+## Query Reference
+
+### `query`
+
+<MoLangQueryList data={require('@site/src/palladium_docs/palladium/molang/query.json')}/>
+
+### `palladium`
+
+<MoLangQueryList data={require('@site/src/palladium_docs/palladium/molang/palladium.json')}/>
+
+## Examples
+
+### Condition as a string
+
+A power renderer that shows a render layer only while the player is sprinting on the ground:
+
+```json title="assets/mypack/palladium/power_renderers/hero.json (excerpt)"
+"render_layers": {
+  "mypack:speed_lines": "query.is_sprinting && query.is_on_ground"
+}
+```
+
+### Turning a value into frame numbers
+
+`modify` on an integer value, cycling through 1, 2 and 3 once per second. Used as a [dynamic texture variable](/docs/rendering/dynamic-textures#variables), this switches between three texture files:
+
+```json
+"FRAME": {
+  "type": "palladium:entity_tick_count",
+  "modify": "math.mod(this / 20, 3) + 1"
+}
+```
+
+### Animation controller transitions
+
+Switching between idle, running and jumping based on movement:
+
+```json title="assets/mypack/palladium/animation_controllers/hero_movement.json"
+{
+  "initial_state": "idle",
+  "states": {
+    "idle": {
+      "transitions": {
+        "jumping": "!query.is_on_ground && query.vertical_speed > 0",
+        "running": "query.is_sprinting && query.is_on_ground"
+      }
+    },
+    "running": {
+      "animation": "mypack:hero_run",
+      "transitions": {
+        "idle": "!query.is_sprinting || !query.is_on_ground"
+      }
+    },
+    "jumping": {
+      "animation": "mypack:hero_jump",
+      "transitions": {
+        "idle": "query.is_on_ground"
+      }
+    }
+  }
+}
+```
+
+### Head that follows the camera in an animation
+
+In a player animation, the head bone can keep following where the player looks while the rest of the body is animated. `palladium.head_y_rotation` is relative to the body, which is exactly what a bone rotation needs:
+
+```json title="assets/mypack/player_animations/hero_run.json (excerpt)"
+"head": {
+  "rotation": ["palladium.head_x_rotation - 17.5", "palladium.head_y_rotation", 0]
+}
+```
+
+### Leaning into turns while flying
+
+A keyframe expression on the body that tilts the player sideways when they turn during flight. The value is clamped so it never goes past 30 degrees:
+
+```json title="assets/mypack/player_animations/hero_flight.json (excerpt)"
+"body": {
+  "rotation": [0, 0, "math.clamp(palladium.flight_yaw_delta * 2, -30, 30)"]
+}
+```

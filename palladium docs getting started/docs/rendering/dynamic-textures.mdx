@@ -1,0 +1,282 @@
+---
+sidebar_position: 7
+---
+
+# Dynamic Textures
+
+import PalladiumObjectViewer from "@site/src/components/PalladiumObjectViewer";
+
+A dynamic texture is a texture that is decided while the game runs instead of being a fixed file. It can switch between files based on what the player is doing, use the player's own skin, or be built from several images that Palladium combines for you. Typical uses are a suit that changes its look with an ability, a helmet that dissolves frame by frame during a transformation, or glowing eyes drawn exactly where the player placed them.
+
+Dynamic textures work anywhere Palladium accepts a texture reference: render layers, power renderer models, icons, GUI widgets and backgrounds, textured beams and the ability bar.
+
+## Two Ways to Use Them
+
+### As a standalone file
+
+Dynamic texture files are client-side assets:
+
+```
+assets/<namespace>/palladium/dynamic_textures/<filename>.json
+```
+
+They are referenced with a `#` in front of the ID. The file `assets/mypack/palladium/dynamic_textures/hero_suit.json` becomes `#mypack:hero_suit`:
+
+```json title="assets/mypack/palladium/render_layers/hero_suit.json"
+{
+  "texture": "#mypack:hero_suit"
+}
+```
+
+Without the `#` the same string would be read as a normal texture path. Standalone files are the way to go when several render layers, icons or widgets share the same dynamic texture.
+
+### Inline in a render layer
+
+Render layers also accept the dynamic texture object directly in their `texture` field, so you do not need an extra file for a texture that is only used once:
+
+```json title="assets/mypack/palladium/render_layers/hero_suit.json"
+{
+  "texture": {
+    "base": "mypack:textures/entity/hero_suit_#MODE.png",
+    "variables": {
+      "MODE": {
+        "type": "palladium:crouching",
+        "on_true": "stealth",
+        "on_false": "normal"
+      }
+    }
+  }
+}
+```
+
+Inline objects only work in render layers. Every other texture field takes a texture reference, which means a plain path or a `#` reference to a standalone file.
+
+## Texture Types
+
+The `type` field selects how the texture is produced. If it is left out, the [Configured Texture](#palladiumconfigured) is used, which is why the examples above have no `type`.
+
+<!-- PALLADIUM_LIST_START type="palladium/dynamic_textures" heading="h3" -->
+### Configured Texture {#palladiumconfigured}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/dynamic_textures.json').find(x => x.namespace === 'palladium' && x.path === 'configured')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Entity Texture {#palladiumentity}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/dynamic_textures.json').find(x => x.namespace === 'palladium' && x.path === 'entity')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Eye Selection Texture {#palladiumeye_selection}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/dynamic_textures.json').find(x => x.namespace === 'palladium' && x.path === 'eye_selection')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Static Texture {#palladiumstatic}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/dynamic_textures.json').find(x => x.namespace === 'palladium' && x.path === 'static')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+<!-- PALLADIUM_LIST_END -->
+
+## Variables
+
+Variables replace parts of a path with something that is calculated every frame. Each entry in `variables` has a name and a [value](/docs/logic/values). Everywhere the name appears with a `#` in front of it, it is replaced with the value:
+
+```json
+"base": "mypack:textures/entity/hero_#STAGE.png",
+"variables": {
+  "STAGE": {
+    "type": "palladium:ability_animation_timer_value",
+    "ability": "mypack:hero#transform"
+  }
+}
+```
+
+While the ability's animation timer counts from 0 to 10, this texture goes through `hero_0.png`, `hero_1.png` up to `hero_10.png`.
+
+Variables are replaced in `base`, in `output` and in the texture paths of transformers (`overlay`, `mask`).
+
+A few things to keep in mind:
+
+- The value is inserted as text. Decimal numbers come out as `1.0`, `2.5` and so on, so use integer values or wrap a decimal value in `palladium:convert_to_integer` when the result is part of a file name.
+- Boolean values like `palladium:crouching` need `on_true` and `on_false` strings, which are inserted as they are.
+- Most number values have a `modify` field that takes a [MoLang](/docs/rendering/animations) expression with `this` as the value. `"modify": "math.mod(this / 20, 3) + 1"` on `palladium:entity_tick_count` cycles through 1, 2 and 3, switching every second.
+- Replacement is plain text search. If one variable name is part of another one, like `#A` and `#AB`, they get in each other's way. Use names that do not overlap. Upper case names are a good habit because they stand out from the rest of the path.
+
+## Texture Transformers
+
+Transformers are steps that edit the base image, applied in the order they are listed. They work on the [Configured](#palladiumconfigured) and [Entity](#palladiumentity) types. The `transformers` field takes a single transformer or a list.
+
+<!-- PALLADIUM_LIST_START type="palladium/texture_transformers" heading="h3" -->
+### Alpha Mask {#palladiumalpha_mask}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/texture_transformers.json').find(x => x.namespace === 'palladium' && x.path === 'alpha_mask')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Overlay {#palladiumoverlay}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/texture_transformers.json').find(x => x.namespace === 'palladium' && x.path === 'overlay')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+<!-- PALLADIUM_LIST_END -->
+
+### Generated textures
+
+A dynamic texture with transformers creates a real texture in memory. It is registered under the `output` path, or under a path derived from the base and the variable names when `output` is not set. Every distinct result of the variables produces its own texture, which is then reused until resources are reloaded (F3+T clears them all).
+
+This keeps rendering cheap, but it means a variable with many possible results also creates many textures. A transformation with 17 frames is fine. A raw tick count that never repeats is not, so limit such values with `modify` or a `conditional` value first. Textures without transformers only switch between existing files and create nothing new.
+
+## Examples
+
+### Different suit while crouching
+
+A render layer that swaps between two existing files, without a separate dynamic texture file:
+
+```json title="assets/mypack/palladium/render_layers/stealth_suit.json"
+{
+  "texture": {
+    "base": "mypack:textures/entity/suit_#STATE.png",
+    "variables": {
+      "STATE": {
+        "type": "palladium:crouching",
+        "on_true": "stealth",
+        "on_false": "default"
+      }
+    }
+  }
+}
+```
+
+The pack needs `suit_stealth.png` and `suit_default.png` next to each other.
+
+### Blinking lights shared by several layers
+
+A standalone file so the helmet and the chestplate layers can use the same animation. It shows `lights_1.png`, `lights_2.png` and `lights_3.png`, one per second:
+
+```json title="assets/mypack/palladium/dynamic_textures/suit_lights.json"
+{
+  "base": "mypack:textures/entity/lights_#FRAME.png",
+  "variables": {
+    "FRAME": {
+      "type": "palladium:entity_tick_count",
+      "modify": "math.mod(this / 20, 3) + 1"
+    }
+  }
+}
+```
+
+```json title="assets/mypack/palladium/render_layers/suit_lights.json"
+{
+  "texture": "#mypack:suit_lights",
+  "render_type": "palladium:glow"
+}
+```
+
+### Glowing eyes
+
+Red eyes at the spots the player selected:
+
+```json title="assets/mypack/palladium/render_layers/glowing_eyes.json"
+{
+  "texture": {
+    "type": "palladium:eye_selection",
+    "color": "#ff0000"
+  },
+  "light_emission": 15
+}
+```
+
+### Suit dissolving with an ability
+
+The suit fades in frame by frame while the ability's animation timer runs. The pack provides 17 masks, `transformation_0.png` (all white) to `transformation_16.png` (all black), which uncover the suit step by step. The reactor lights are a second layer that is always visible:
+
+```json title="data/mypack/palladium/power/armor.json (excerpt)"
+"abilities": {
+  "suit_up": {
+    "type": "palladium:dummy",
+    "properties": {
+      "animation_timer": 16
+    },
+    "state": {
+      "enabling": {
+        "type": "palladium:key_bind",
+        "behaviour": "toggle"
+      }
+    }
+  }
+}
+```
+
+```json title="assets/mypack/palladium/render_layers/armor.json"
+{
+  "type": "palladium:compound",
+  "layers": [
+    {
+      "texture": {
+        "base": "mypack:textures/entity/armor.png",
+        "transformers": {
+          "type": "palladium:alpha_mask",
+          "mask": "mypack:textures/entity/armor_masks/transformation_#TIMER.png"
+        },
+        "variables": {
+          "TIMER": {
+            "type": "palladium:ability_animation_timer_value",
+            "ability": "mypack:armor#suit_up"
+          }
+        }
+      }
+    },
+    {
+      "texture": "mypack:textures/entity/armor_lights.png",
+      "light_emission": 15
+    }
+  ]
+}
+```
+
+### Suit painted onto the player's skin
+
+Takes the player's skin and draws a suit pattern over it. With `ignore_blank` the pattern only lands where the skin has pixels, so slim and wide skins both stay clean. Since every skin is different, Palladium generates one texture per skin automatically:
+
+```json title="assets/mypack/palladium/dynamic_textures/skin_suit.json"
+{
+  "type": "palladium:entity",
+  "transformers": [
+    {
+      "type": "palladium:overlay",
+      "overlay": "mypack:textures/entity/suit_pattern.png",
+      "ignore_blank": true
+    }
+  ]
+}
+```
+
+```json title="assets/mypack/palladium/render_layers/skin_suit.json"
+{
+  "texture": "#mypack:skin_suit"
+}
+```
+
+### Overlay that follows a choice
+
+Combines a variable and a transformer: the emblem drawn onto the suit depends on an integer data attachment, so commands or abilities can switch it. `output` is set to a short, readable path for the generated textures:
+
+```json title="assets/mypack/palladium/dynamic_textures/emblem_suit.json"
+{
+  "base": "mypack:textures/entity/suit.png",
+  "output": "mypack:generated/emblem_suit_#EMBLEM",
+  "transformers": [
+    {
+      "type": "palladium:overlay",
+      "overlay": "mypack:textures/entity/emblems/emblem_#EMBLEM.png"
+    }
+  ],
+  "variables": {
+    "EMBLEM": {
+      "type": "palladium:integer_data_attachment",
+      "attachment": "mypack:emblem",
+      "fallback": 0
+    }
+  }
+}
+```

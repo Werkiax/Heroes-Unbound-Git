@@ -1,0 +1,212 @@
+---
+sidebar_position: 2
+---
+
+import PalladiumObjectViewer from "@site/src/components/PalladiumObjectViewer";
+
+# Widgets
+
+Widgets are the elements inside a [layout](layouts): text, buttons, images, item icons, the player model, and so on. Each entry in a layout's `widgets` list is an object with a `type` field and the type's own settings:
+
+```json
+{
+  "type": "palladium:text",
+  "text": "Hello!",
+  "properties": {
+    "alignment": "center",
+    "y": -20
+  }
+}
+```
+
+---
+
+## Common Properties
+
+Every widget accepts an optional `properties` object with the same set of fields:
+
+| Field        | Type                                     | Required | Fallback     | Description                                                                                          |
+|--------------|------------------------------------------|----------|--------------|------------------------------------------------------------------------------------------------------|
+| `alignment`  | Alignment                                | No       | `top_left`   | Which point of the layout the widget is anchored to. See [Positioning](#positioning).             |
+| `x`          | Integer                                  | No       | `0`          | Horizontal offset from the anchor point. Can be negative.                                            |
+| `y`          | Integer                                  | No       | `0`          | Vertical offset from the anchor point. Can be negative.                                              |
+| `width`      | Integer                                  | No       | per type     | Width of the widget. Most types default to `50`, square types (icon, item) to `16`.               |
+| `height`     | Integer                                  | No       | per type     | Height of the widget. Most types default to `18`, square types (icon, item) to `16`.              |
+| `action`     | Action                                   | No       | /            | Action to run on click. Only used by button widgets. See [Click Actions](#click-actions).         |
+| `tooltip`    | Text Component                           | No       | /            | Tooltip shown while hovering the widget.                                                          |
+| `visibility` | [Condition(s)](../../logic/conditions)   | No       | always       | The widget is only shown while the condition is true. Re-checked every tick.                      |
+
+### Positioning
+
+Widgets are not laid out automatically; each one is positioned on its own. The `alignment` anchors the widget to one of nine points of the layout's padded area, and `x`/`y` shift it from there:
+
+```
+top_left      top_center      top_right
+middle_left   center          middle_right
+bottom_left   bottom_center   bottom_right
+```
+
+For centered alignments the widget's own size is taken into account, so `"alignment": "center"` with no offsets puts the widget exactly in the middle. Offsets always move the widget right (`x`) and down (`y`); use negative values for the other direction. A back button in the bottom right corner, 4 pixels off the edge, would be:
+
+```json
+"properties": {
+  "alignment": "bottom_right",
+  "x": -4,
+  "y": -4,
+  "width": 60,
+  "height": 20
+}
+```
+
+### Click Actions
+
+The `action` property makes buttons do something when pressed. It uses the vanilla [dialog action format](https://minecraft.wiki/w/Dialog#Action_format), so everything vanilla supports works here: `minecraft:run_command`, `minecraft:open_url`, `minecraft:suggest_command`, `minecraft:show_dialog`, `minecraft:copy_to_clipboard`, and the dynamic variants.
+
+Palladium adds three more action types:
+
+- `palladium:open_screen` opens another Palladium screen (field `screen`, the screen ID). This is how you link screens together into multi-page menus.
+- `palladium:open_customization_screen` opens the player customization screen (optional field `category` to jump to a category).
+- `palladium:custom_event` sends an event to the server. This is the way to make a button do something server-side beyond running a command; see [Custom Events](#custom-events) below.
+
+```json
+{
+  "type": "palladium:button",
+  "text": "Choose your side",
+  "close_on_press": true,
+  "properties": {
+    "action": {
+      "type": "minecraft:run_command",
+      "command": "function mypack:choose_side"
+    }
+  }
+}
+```
+
+Only the two button widgets (`palladium:button` and `palladium:flat_button`) execute actions; on all other widgets the `action` property is ignored. Commands run through actions are executed by the player, with their permission level, exactly like the vanilla dialog system.
+
+### Custom Events
+
+The `palladium:custom_event` action sends an event with a freely chosen ID and optional NBT data to the server:
+
+| Field  | Type   | Required | Description                                        |
+|--------|--------|----------|--------------------------------------------------------|
+| `id`   | ID     | Yes      | The event ID. Use your own namespace.                  |
+| `data` | Object | No       | Arbitrary NBT data sent along with the event.          |
+
+On the server, the event fires the `palladium:custom_event` advancement criterion trigger, so anything that listens to criterion triggers can react to it. The main consumer is the [automation system](../../logic/automations#custom-events), where you can match on the event ID and data and run server-side actions; inside the automation, the event ID and data are also available on the context. It also works as a regular criterion in advancements.
+
+```json
+{
+  "type": "palladium:button",
+  "text": "Claim reward",
+  "properties": {
+    "action": {
+      "type": "palladium:custom_event",
+      "id": "mypack:claim_reward",
+      "data": { "tier": 2 }
+    }
+  }
+}
+```
+
+Keep in mind that the client decides what it sends: treat an incoming event like a button press, not as trusted data, and put any real checks into the automation's `condition`.
+
+### Visibility
+
+The `visibility` property takes the same [conditions](../../logic/conditions) used everywhere else in Palladium, tested against the viewing player. Since it is re-evaluated every tick while the screen is open, you can build screens that react to the player's state, for example showing a button only once a power is unlocked:
+
+```json
+"properties": {
+  "visibility": {
+    "type": "palladium:has_power",
+    "power": "mypack:super_strength"
+  }
+}
+```
+
+---
+
+## Widget Types
+
+<!-- PALLADIUM_LIST_START type="palladium/ui/widgets" heading="h3" -->
+### Blit {#palladiumblit}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'blit')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Button {#palladiumbutton}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'button')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Colored Rectangle {#palladiumcolored_rectangle}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'colored_rectangle')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Custom Button {#palladiumcustom_button}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'custom_button')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Flat Button {#palladiumflat_button}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'flat_button')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Gradient Rectangle {#palladiumgradient_rectangle}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'gradient_rectangle')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Icon {#palladiumicon}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'icon')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Icon Button {#palladiumicon_button}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'icon_button')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Item {#palladiumitem}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'item')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Player Display {#palladiumplayer_display}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'player_display')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Power List {#palladiumpower_list}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'power_list')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Power Name {#palladiumpower_name}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'power_name')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Power Tree {#palladiumpower_tree}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'power_tree')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Progress Bar {#palladiumprogress_bar}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'progress_bar')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Text {#palladiumtext}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'text')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Text Box {#palladiumtext_box}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/widgets.json').find(x => x.namespace === 'palladium' && x.path === 'text_box')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+<!-- PALLADIUM_LIST_END -->

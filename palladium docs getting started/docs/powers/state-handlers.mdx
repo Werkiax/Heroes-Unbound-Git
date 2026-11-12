@@ -1,0 +1,380 @@
+---
+sidebar_position: 1
+---
+
+# Ability State Handlers
+
+State handlers control the lifecycle of an ability. They are set on the `state` field of an ability definition inside a power JSON.
+
+```json
+"state": {
+  "unlocking": { ... },
+  "enabling":  { ... }
+}
+```
+
+Both fields are optional. Omitting `unlocking` means the ability is always unlocked; omitting `enabling` means the ability is always enabled.
+
+Each field accepts **one of two forms**:
+
+- A **typed handler object** (using the `type` field): handlers like `palladium:key_bind` or the buyable variants.
+- A **list of Conditions**: automatically wrapped into a `palladium:conditional` handler. A list is treated as AND (all must pass).
+
+You cannot combine multiple handlers together; if you need complex logic, use the condition system instead.
+
+---
+
+## Unlocking Handlers
+
+Unlocking determines whether the player has access to the ability at all. A locked ability is displayed with a "lock" icon and cannot be enabled.
+
+### Condition shorthand
+
+Passing a list of [conditions](/docs/logic/conditions) directly is a shorthand for `palladium:conditional`. This covers the majority of unlocking use cases.
+
+```json
+"unlocking": [
+  { "type": "palladium:has_effect", "effect": "minecraft:strength" },
+  { "type": "palladium:crouching" }
+]
+```
+
+---
+
+### `palladium:conditional`
+
+Unlocks the ability automatically when a condition is fulfilled.
+
+| Field        | Type                                   | Default | Description                                                                      |
+|--------------|----------------------------------------|---------|----------------------------------------------------------------------------------|
+| `conditions` | [Condition(s)](/docs/logic/conditions) | —       | **Required.** The condition(s) that must be true for the ability to be unlocked. |
+
+```json
+"unlocking": {
+  "type": "palladium:conditional",
+  "conditions": { "type": "palladium:has_effect", "effect": "minecraft:strength" }
+}
+```
+```json
+"unlocking": {
+  "type": "palladium:conditional",
+  "conditions": [
+    { "type": "palladium:has_effect", "effect": "minecraft:strength" },
+    { "type": "palladium:crouching" }
+  ]
+}
+```
+
+---
+
+### `palladium:buyable`
+
+The ability starts locked. The player must click it in the power screen and pay the specified cost, which is consumed on purchase.
+
+| Field      | Type                                   | Default | Description                                                                                                                    |
+|------------|----------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------|
+| `cost`     | [Cost](/docs/logic/costs)              | —       | **Required.** The cost that must be paid to unlock the ability.                                                                |
+| `requires` | [Condition(s)](/docs/logic/conditions) | —       | Optional additional conditions. Once purchased, these must still be fulfilled for the ability to be considered unlocked.       |
+
+**Buy with XP levels:**
+```json
+"unlocking": {
+  "type": "palladium:buyable",
+  "cost": {
+    "type": "palladium:experience_level",
+    "xp_level": 5
+  }
+}
+```
+
+**Buy with items:**
+```json
+"unlocking": {
+  "type": "palladium:buyable",
+  "cost": {
+    "type": "palladium:item",
+    "ingredient": "minecraft:diamond",
+    "amount": 3
+  }
+}
+```
+
+**Buy with a scoreboard score:**
+```json
+"unlocking": {
+  "type": "palladium:buyable",
+  "cost": {
+    "type": "palladium:score",
+    "objective": "skill_points",
+    "amount": 10,
+    "icon": { "type": "palladium:item", "item": "minecraft:experience_bottle" },
+    "description": "Skill Points"
+  }
+}
+```
+
+**With an additional unlock condition:**
+```json
+"unlocking": {
+  "type": "palladium:buyable",
+  "cost": {
+    "type": "palladium:experience_level",
+    "xp_level": 10
+  },
+  "requires": [
+    { "type": "palladium:has_effect", "effect": "minecraft:strength" },
+    { "type": "palladium:crouching" }
+  ]
+}
+```
+
+---
+
+## Enabling Handlers
+
+Enabling determines whether the ability is **currently active**. An unlocked but disabled ability has no effect.
+
+### Condition shorthand
+
+Passing a list of [conditions](/docs/logic/conditions) directly is a shorthand for `palladium:conditional`. This covers the majority of unlocking use cases.
+
+```json
+"unlocking": [
+  { "type": "palladium:has_effect", "effect": "minecraft:strength" },
+  { "type": "palladium:crouching" }
+]
+```
+
+---
+
+### `palladium:conditional`
+
+Enables the ability automatically whenever a condition holds. Evaluated every tick.
+
+| Field        | Type                                   | Default | Description                                                                    |
+|--------------|----------------------------------------|---------|--------------------------------------------------------------------------------|
+| `conditions` | [Condition(s)](/docs/logic/conditions) | —       | **Required.** The condition(s) that must be true for the ability to be active. |
+
+```json
+"enabling": {
+  "type": "palladium:conditional",
+  "conditions": { "type": "palladium:has_effect", "effect": "minecraft:strength" }
+}
+```
+```json
+"enabling": {
+  "type": "palladium:conditional",
+  "conditions": [
+    { "type": "palladium:has_effect", "effect": "minecraft:strength" },
+    { "type": "palladium:crouching" }
+  ]
+}
+```
+
+---
+
+### `palladium:key_bind`
+
+Enables the ability in response to a player key press. The exact behavior depends on the `behaviour` field.
+
+| Field       | Type                             | Default                 | Description                                                                                                       |
+|-------------|----------------------------------|-------------------------|-------------------------------------------------------------------------------------------------------------------|
+| `key_bind`  | [Key Bind Type](#key-bind-types) | `palladium:ability_key` | Which key triggers this handler.                                                                                  |
+| `behaviour` | [Behaviour](#behaviour)          | `activation`            | How the key press maps to the enabled state.                                                                      |
+| `cooldown`  | Time (ticks or `"Xs"`)           | `0`                     | Cooldown after each activation (or forced deactivation for `held`/`toggle`). `0` = no cooldown.                  |
+| `time`      | Time (ticks or `"Xs"`)           | `0`                     | Behaviour-dependent duration. See [Behaviour](#behaviour) table for details. Defaults to 1 tick for `activation`. |
+
+```json
+"enabling": {
+  "type": "palladium:key_bind",
+  "key_bind": { "type": "palladium:ability_key" },
+  "behaviour": "toggle",
+  "cooldown": 20
+}
+```
+
+#### Behaviour
+
+| Value        | Description                                                                                                                                                                                         | `time` meaning                                                                               | `cooldown` meaning                                                                |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| `activation` | Press once to activate for `time` ticks, then wait `cooldown` before pressing again. With the default `time` of 1 this behaves as a single-tick trigger (equivalent to the old `action` behaviour). | How long the ability stays active after the key is pressed. Defaults to **1 tick** if unset. | Wait before the player can trigger again.                                         |
+| `toggle`     | Press to switch the ability on or off. When `time > 0`, pressing again while active cancels early — `cooldown` always applies on deactivation.                                                      | *(optional)* Max active duration. If `0`, toggle is unlimited.                               | Applied after the timer expires or the player cancels early by pressing again.    |
+| `held`       | The ability is active while the key is held. When `time > 0`, the ability is force-deactivated after `time` ticks; releasing early also triggers `cooldown`.                                        | *(optional)* Max hold duration in ticks. If `0`, the ability can be held indefinitely.       | Applied whenever the ability deactivates (both early release and hitting `time`). |
+
+#### Key Bind Types
+
+##### `palladium:ability_key` *(default)*
+
+The dedicated Palladium ability keybind (configurable by the player in the controls menu). No extra fields.
+
+```json
+"key_bind": { "type": "palladium:ability_key" }
+```
+
+Since this is the default, it can be omitted entirely from the handler.
+
+##### `palladium:jump`
+
+Triggers on the player's jump key.
+
+| Field         | Type    | Default | Description                                                                     |
+|---------------|---------|---------|---------------------------------------------------------------------------------|
+| `cancel_jump` | Boolean | `false` | When `true`, the jump action itself is suppressed while this handler is active. |
+
+```json
+"key_bind": {
+  "type": "palladium:jump",
+  "cancel_jump": true
+}
+```
+
+##### `palladium:mouse_click`
+
+Triggers on a mouse button press.
+
+| Field                | Type                                            | Default | Description                                                             |
+|----------------------|-------------------------------------------------|---------|-------------------------------------------------------------------------|
+| `click_type`         | `left_click` \| `right_click` \| `middle_click` | —       | **Required.** Which mouse button to listen to.                          |
+| `cancel_interaction` | Boolean                                         | `false` | When `true`, the normal click interaction (attack / use) is suppressed. |
+
+```json
+"key_bind": {
+  "type": "palladium:mouse_click",
+  "click_type": "right_click",
+  "cancel_interaction": true
+}
+```
+
+##### `palladium:mouse_scroll`
+
+Triggers when the mouse wheel is scrolled up or down. Useful for abilities that adjust a value step by step, like a speed that goes up and down with the wheel.
+
+| Field           | Type           | Default | Description                                                                          |
+|-----------------|----------------|---------|--------------------------------------------------------------------------------------|
+| `direction`     | `up` \| `down` | —       | **Required.** Which scroll direction to listen to.                                   |
+| `cancel_scroll` | Boolean        | `false` | When `true`, scrolling in that direction no longer switches the selected hotbar slot. |
+
+Scrolling has no "release" like a key, so the behaviours work a little differently:
+
+- `activation` and `toggle` trigger once for every step of the wheel.
+- `held` stays active while the player keeps scrolling, and ends a quarter of a second after the last step.
+
+```json
+"key_bind": {
+  "type": "palladium:mouse_scroll",
+  "direction": "up",
+  "cancel_scroll": true
+}
+```
+
+##### `palladium:gui_button`
+
+The ability is used by clicking it in the power screen, either in the ability tree or in the ability list. It doesn't show up in the ability bar. Useful for abilities that are only switched every now and then, like changing a suit's mode.
+
+| Field                | Type    | Default | Description                                                                                          |
+|----------------------|---------|---------|------------------------------------------------------------------------------------------------------|
+| `needs_confirmation` | Boolean | `true`  | When `true`, clicking the ability opens a window with its description and a button to confirm. When `false`, clicking uses the ability right away. |
+
+Holding Shift while clicking opens the normal description window instead. The `held` behaviour can't be used with this key bind, since there is no key to let go of. `activation` and `toggle` work as usual.
+
+```json
+"key_bind": {
+  "type": "palladium:gui_button",
+  "needs_confirmation": false
+}
+```
+
+---
+
+## Examples
+
+### Always unlocked, enabled by toggle key
+
+```json
+"state": {
+  "enabling": {
+    "type": "palladium:key_bind",
+    "behaviour": "toggle"
+  }
+}
+```
+
+### Buy with XP, then hold jump to activate
+
+```json
+"state": {
+  "unlocking": {
+    "type": "palladium:buyable",
+    "cost": {
+      "type": "palladium:experience_level",
+      "xp_level": 10
+    }
+  },
+  "enabling": {
+    "type": "palladium:key_bind",
+    "key_bind": { "type": "palladium:jump", "cancel_jump": true },
+    "behaviour": "held"
+  }
+}
+```
+
+### Condition-based unlock, condition-based enable
+
+```json
+"state": {
+  "unlocking": [ { "type": "palladium:has_power", "power": "test:parent_power" } ],
+  "enabling": [ { "type": "palladium:sneaking" } ]
+}
+```
+
+### Single-use activation with cooldown (right-click shoots, 2 second cooldown)
+
+```json
+"state": {
+  "enabling": {
+    "type": "palladium:key_bind",
+    "key_bind": { "type": "palladium:mouse_click", "click_type": "right_click", "cancel_interaction": true },
+    "behaviour": "activation",
+    "cooldown": 40
+  }
+}
+```
+
+### Timed activation (active for 3 seconds, then 10 second cooldown)
+
+```json
+"state": {
+  "enabling": {
+    "type": "palladium:key_bind",
+    "behaviour": "activation",
+    "time": "3s",
+    "cooldown": "10s"
+  }
+}
+```
+
+### Limited hold (hold for up to 5 seconds, 8 second cooldown on release)
+
+```json
+"state": {
+  "enabling": {
+    "type": "palladium:key_bind",
+    "behaviour": "held",
+    "time": "5s",
+    "cooldown": "8s"
+  }
+}
+```
+
+### Timed toggle (press to activate for 4 seconds, press again to cancel early)
+
+```json
+"state": {
+  "enabling": {
+    "type": "palladium:key_bind",
+    "behaviour": "toggle",
+    "time": "4s",
+    "cooldown": "10s"
+  }
+}
+```

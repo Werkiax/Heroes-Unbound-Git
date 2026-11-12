@@ -1,0 +1,126 @@
+---
+sidebar_position: 5
+---
+
+# Automations
+
+Automations are JSON-driven event handlers that run a list of [Actions](actions) whenever a vanilla advancement criterion trigger fires, optionally gated behind a [Condition](conditions).
+
+Files are loaded from `data/<namespace>/palladium/automation/`.
+
+## Structure
+
+| Field       | Type                      | Required | Description                                                                   |
+|-------------|---------------------------|----------|-------------------------------------------------------------------------------|
+| `trigger`   | Criterion object          | Yes      | The advancement criterion trigger that fires this automation                  |
+| `condition` | Condition                 | No       | Optional condition that must pass for the actions to run (defaults to `true`) |
+| `actions`   | Action or list of Actions | Yes      | The actions to execute when the trigger fires and the condition passes        |
+
+The `trigger` field follows the same format as a criterion entry in a vanilla advancement: an object with a `trigger` key (the trigger's ID) and an optional `conditions` key for filtering.
+
+## Example
+
+Run a command whenever the player gains the `mymod:super_strength` power:
+
+```json
+{
+  "trigger": {
+    "trigger": "palladium:power_gained",
+    "conditions": {
+      "power": "mymod:super_strength"
+    }
+  },
+  "actions": {
+    "type": "palladium:run_command",
+    "command": "say I just gained super strength!"
+  }
+}
+```
+
+With an additional condition and multiple actions:
+
+```json
+{
+  "trigger": {
+    "trigger": "palladium:ability_enabled",
+    "conditions": {
+      "ability": "mymod:flight_power#flight_ability"
+    }
+  },
+  "condition": {
+    "type": "palladium:crouching"
+  },
+  "actions": [
+    {
+      "type": "palladium:run_command",
+      "command": "playsound minecraft:entity.firework_rocket.launch master @s"
+    },
+    {
+      "type": "palladium:run_command",
+      "command": "particle minecraft:cloud ~ ~1 ~ 0 0 0 0.1 20"
+    }
+  ]
+}
+```
+
+## Available Triggers
+
+Palladium provides the following built-in criterion triggers for use in automations (and advancements):
+
+| Trigger                     | Description                                                                                      |
+|-----------------------------|--------------------------------------------------------------------------------------------------|
+| `palladium:power_gained`    | Fires when the player gains a power. Accepts an optional `power` filter (power ID).              |
+| `palladium:power_lost`      | Fires when the player loses a power. Accepts an optional `power` filter (power ID).              |
+| `palladium:ability_enabled` | Fires when an ability gets enabled. Accepts an optional `ability` filter (power and ability ID). |
+| `palladium:custom_event`    | Fires when the player sends a custom event, e.g. by clicking a [GUI button](../rendering/guis/widgets#click-actions). See below.  |
+
+Any other vanilla or modded advancement criterion trigger can also be used.
+A list of vanilla triggers can be found [here](https://minecraft.wiki/w/Advancement_definition#List_of_triggers).
+
+### Custom Events
+
+The `palladium:custom_event` trigger is the counterpart to the [`palladium:custom_event` click action](../rendering/guis/widgets#click-actions) in custom GUIs: the button sends an event ID plus optional NBT data to the server, and this trigger fires with both. Its `conditions` accept:
+
+| Field | Type          | Required | Description                                                                                  |
+|-------|---------------|----------|------------------------------------------------------------------------------------------------|
+| `id`  | ID Predicate  | No       | The event ID to match. A plain ID matches exactly; an object with `namespace` and/or `path` matches partially. |
+| `data`| NBT Predicate | No       | NBT that the event's custom data must contain (vanilla NBT predicate semantics: given values must be present and equal, extra data is ignored). |
+
+A button that reports which side the player picked, and an automation reacting to one of the sides:
+
+```json title="assets/mypack/palladium/screens/choice.json (component excerpt)"
+{
+  "type": "palladium:button",
+  "text": "Join the heroes",
+  "close_on_press": true,
+  "properties": {
+    "action": {
+      "type": "palladium:custom_event",
+      "id": "mypack:side_chosen",
+      "data": { "side": "heroes" }
+    }
+  }
+}
+```
+
+```json title="data/mypack/palladium/automation/choose_heroes.json"
+{
+  "trigger": {
+    "trigger": "palladium:custom_event",
+    "conditions": {
+      "id": "mypack:side_chosen",
+      "data": { "side": "heroes" }
+    }
+  },
+  "actions": {
+    "type": "palladium:run_command",
+    "command": "tag @s add heroes"
+  }
+}
+```
+
+:::warning
+
+The event ID and data are sent by the client, so a modified client can send any event with any data at any time. Treat them like a button press, not like verified information: never grant something based on data values alone that the player should not be able to claim freely, and use the automation's `condition` for server-side checks (e.g. required power, score, or advancement).
+
+:::

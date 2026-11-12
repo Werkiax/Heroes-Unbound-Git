@@ -1,0 +1,358 @@
+---
+sidebar_position: 2.5
+---
+
+# Geo Render Layers
+
+Geo render layers let you put a [GeckoLib](https://geckolib.com) model on top of the player. The big difference to the default render layer is that you can play your own animations on the model, made in Blockbench, for example a cape that flutters while walking or a helmet that folds open when an ability is used.
+
+GeckoLib needs to be installed for this layer type to exist. Without it, files using `geckolib:render_layer` fail to load.
+
+This page explains how the files fit together and how to set up the model so it moves with the player. The general render layer options (conditions, hidden model parts and so on) are explained on the [Render Layers](render-layers) page and work the same here.
+
+---
+
+## The Files
+
+A geo render layer is made out of up to four files. Only the model, the texture and the layer file itself are required:
+
+| File                        | Location                                                          | Referenced as         |
+|-----------------------------|-------------------------------------------------------------------|-----------------------|
+| Render layer                | `assets/<namespace>/palladium/render_layers/<id>.json`            | `<namespace>:<id>`    |
+| Model                       | `assets/<namespace>/geckolib/models/<path>.geo.json`              | `<namespace>:<path>`  |
+| Animations (optional)       | `assets/<namespace>/geckolib/animations/<path>.animation.json`    | `<namespace>:<path>`  |
+| Texture                     | `assets/<namespace>/textures/<path>.png`                          | `<namespace>:textures/<path>.png` |
+
+Note that the model and animation IDs leave out both the `geckolib/models/` (or `geckolib/animations/`) folder and the `.geo.json` (or `.animation.json`) ending. The texture is a normal texture path and keeps everything, including `.png`.
+
+With a model at `assets/mypack/geckolib/models/cape.geo.json` and a texture at `assets/mypack/textures/entity/cape.png`, the render layer looks like this:
+
+```json title="assets/mypack/palladium/render_layers/cape.json"
+{
+  "type": "geckolib:render_layer",
+  "model": "mypack:cape",
+  "texture": "mypack:textures/entity/cape.png"
+}
+```
+
+Like every render layer, it only shows up once something uses it, usually a [power renderer](power-renderers) or an item's [`palladium:render_layers`](/docs/items/data-components#palladiumrender_layers) component.
+
+---
+
+## Building the Model
+
+This is where most problems come from, so it's worth reading carefully.
+
+Palladium doesn't render the whole model as it is. It looks for six bones, one for each body part of the player, and only renders those six bones and everything inside them. Each of these bones then copies the movement of the matching body part, so the head bone turns with the head, the right arm bone swings with the right arm and so on.
+
+| Body part | Default bone name | Pivot point  |
+|-----------|-------------------|--------------|
+| Head      | `head`            | `0, 24, 0`   |
+| Body      | `body`            | `0, 24, 0`   |
+| Right arm | `right_arm`       | `-5, 22, 0`  |
+| Left arm  | `left_arm`        | `5, 22, 0`   |
+| Right leg | `right_leg`       | `-1.9, 12, 0`|
+| Left leg  | `left_leg`        | `1.9, 12, 0` |
+
+The pivot points are the same as on the vanilla player model. The easiest way to get everything right is to start from the player model in Blockbench (or a copy of the vanilla player as a "Bedrock Entity" or GeckoLib model) and build your parts inside these bones.
+
+Three things to keep in mind:
+
+- **Everything has to be inside one of the six bones.** A cube or bone that sits next to them at the top level of the model is never rendered. If a part of your model is invisible, this is the first thing to check.
+- **Keep the six bones at the top level.** Don't put `right_arm` inside `body`, for example. The arm would then be drawn twice, once as part of the body and once on its own, and it would pick up the body's movement on top of its own.
+- **The pivot points need to match the table.** If they don't, the bones are still placed and rotated, just around the wrong point, so arms and legs swing from odd places.
+
+You don't have to use all six bones. A helmet only needs a `head` bone, and the other five can be left out.
+
+### Different Bone Names
+
+If your model uses other names, tell the layer which bone belongs to which body part with `bones`:
+
+```json
+"bones": {
+  "head": "helmet",
+  "body": "chestplate",
+  "right_arm": "arm_r",
+  "left_arm": "arm_l",
+  "right_leg": "leg_r",
+  "left_leg": "leg_l"
+}
+```
+
+Only the body parts you list here are renamed. Body parts you leave out keep their default bone name.
+
+---
+
+## Fields
+
+| Field                  | Type                                                  | Required | Description                                                                                  |
+|------------------------|-------------------------------------------------------|----------|----------------------------------------------------------------------------------------------|
+| `model`                | Model ID                                              | **Yes**  | The geo model to render. See [The Files](#the-files) and [Switching Models](#switching-models). |
+| `texture`              | [Texture](render-layers#textures)                     | **Yes**  | The texture of the model. Can also be a [dynamic texture](dynamic-textures).                 |
+| `animations`           | Animation ID                                          | No       | The animation file. Needed as soon as you use animation controllers. Can switch like `model`. |
+| `animation_controller` | Controller or list of controllers                    | No       | Decides which animations play when. See [Animations](#animations).                          |
+| `light_emission`       | Integer (0 to 15)                                     | No       | Makes the model glow, 15 being fully lit. Defaults to `0`, which means normal lighting.      |
+| `bones`                | Map of body part to bone name                         | No       | Renames the bones, see [Different Bone Names](#different-bone-names).                       |
+
+`model`, `texture` and `animations` can be split into a version for the wide and the slim player model:
+
+```json
+"model": {
+  "wide": "mypack:suit",
+  "slim": "mypack:suit_slim"
+}
+```
+
+### Switching Models
+
+The model can also change while the game is running. Instead of a plain ID, write an object with a `base` and `variables`. Variables work exactly like the ones in [dynamic textures](dynamic-textures#variables): every `#NAME` in `base` is replaced with the result of the [value](/docs/logic/values) with that name, and the result is used as the model ID.
+
+This layer uses `mypack:suit_closed` normally and `mypack:suit_open` while crouching:
+
+```json
+"model": {
+  "base": "mypack:suit_#STATE",
+  "variables": {
+    "STATE": {
+      "type": "palladium:crouching",
+      "on_true": "open",
+      "on_false": "closed"
+    }
+  }
+}
+```
+
+`animations` works the same way. Keep in mind that every model that can come out of the variables needs the same bone setup described in [Building the Model](#building-the-model), and the texture has to fit all of them, unless you switch the texture with the same variable as well.
+
+The model is rendered with a cutout render type. Pixels are either fully visible or fully invisible, half transparent pixels in your texture are not supported here.
+
+The arms of the model also show up in first person, as long as the layer is visible in first person (see [Conditions](render-layers#conditions)).
+
+---
+
+## Animations
+
+Animations are made in Blockbench and exported into an `.animation.json` file, which you reference with `animations`. On its own that file does nothing, though. Animation controllers decide which animation plays at what moment.
+
+A controller can either be one of the built-in presets, or one you set up yourself.
+
+### Presets
+
+Presets are ready-made controllers that react to what the player is doing. They expect your animations to have specific names:
+
+| Preset                  | Plays                                                                            |
+|-------------------------|----------------------------------------------------------------------------------|
+| `idle`                  | `misc.idle`, all the time                                                        |
+| `living`                | `misc.living`, all the time                                                      |
+| `walk`                  | `move.walk` while moving, nothing otherwise                                      |
+| `walk_or_else_idle`     | `move.walk` while moving, `misc.idle` otherwise                                  |
+| `walk_run_or_else_idle` | `move.run` while sprinting, `move.walk` while moving, `misc.idle` otherwise      |
+| `sneak`                 | `move.sneak`, all the time                                                       |
+| `crawl`                 | `move.crawl`, all the time                                                       |
+| `swim`                  | `move.swim` while moving, nothing otherwise                                      |
+| `swim_or_else_idle`     | `move.swim` while moving, `misc.idle` otherwise                                  |
+| `fly`                   | `move.fly` while moving, nothing otherwise                                       |
+| `fly_or_else_idle`      | `move.fly` while moving, `misc.idle` otherwise                                   |
+| `attack`                | `attack.punch` while the player swings their arm                                 |
+
+```json
+"animation_controller": { "preset": "walk_or_else_idle" }
+```
+
+Animations are added on top of the player's own movement. If your walking animation rotates the right arm a little, the arm still swings like it normally does, plus your rotation.
+
+### Custom Controllers
+
+If the presets don't fit, set up your own controller:
+
+```json
+"animation_controller": {
+  "name": "main",
+  "transition_tick_time": 5,
+  "animation": "misc.flutter"
+}
+```
+
+| Field                  | Type                           | Required | Description                                                                                          |
+|------------------------|--------------------------------|----------|------------------------------------------------------------------------------------------------------|
+| `name`                 | String                         | **Yes**  | Name of the controller. Needed to trigger animations on it, see below.                              |
+| `transition_tick_time` | Integer                        | **Yes**  | How many ticks it takes to blend from one animation into the next. `0` switches instantly.          |
+| `animation`            | Animation                      | No       | The animation this controller keeps playing.                                                        |
+| `triggers`             | Map of trigger name to animation | No     | Animations that can be started on demand by an ability.                                              |
+
+An animation can be written in two ways. The short way is just the name of the animation from your animation file. It then loops (or doesn't) depending on the loop setting you chose in Blockbench:
+
+```json
+"animation": "misc.flutter"
+```
+
+The long way is a list of steps that play one after another. Each step can override the loop setting and wait a few ticks before it starts:
+
+```json
+"animation": [
+  { "animation": "helmet.open", "loop_type": "hold_on_last_frame" }
+]
+```
+
+| Field        | Type    | Default             | Description                                                                                     |
+|--------------|---------|---------------------|-------------------------------------------------------------------------------------------------|
+| `animation`  | String  | none, only waits    | Name of the animation in your animation file.                                                   |
+| `loop_type`  | String  | setting from the file | `loop` repeats forever, `play_once` plays once and stops, `hold_on_last_frame` plays once and stays in the last pose. |
+| `wait_ticks` | Integer | `0`                 | Ticks to wait before this step starts.                                                          |
+
+You can use several controllers at once by putting them in a list. They all run at the same time, so make sure they don't animate the same bones, or the results get mixed:
+
+```json
+"animation_controller": [
+  { "preset": "walk_or_else_idle" },
+  { "name": "actions", "transition_tick_time": 0, "triggers": { "wave": "gesture.wave" } }
+]
+```
+
+### Triggering Animations With Abilities
+
+Triggers are animations that only play when something starts them. That something is the `geckolib:trigger_layer_animation` ability. It needs the render layer, the name of the controller and the name of the trigger:
+
+```json title="data/mypack/palladium/power/hero.json (excerpt)"
+"wave": {
+  "type": "geckolib:trigger_layer_animation",
+  "render_layer": "mypack:hero_suit",
+  "controller": "actions",
+  "trigger": "wave",
+  "state": {
+    "enabling": {
+      "type": "palladium:key_bind",
+      "behaviour": "activation"
+    }
+  }
+}
+```
+
+The ability starts the animation every tick it is enabled. That's why the `activation` behaviour fits best here: it enables the ability for a single tick, so the animation starts exactly once per key press.
+
+The render layer also has to be visible at that moment. A layer that isn't shown has nothing to play the animation on.
+
+---
+
+## Examples
+
+### Simple: A Static Helmet
+
+A helmet that only uses the `head` bone. No animations, it just follows the head:
+
+```json title="assets/mypack/palladium/render_layers/knight_helmet.json"
+{
+  "type": "geckolib:render_layer",
+  "model": "mypack:knight_helmet",
+  "texture": "mypack:textures/entity/knight_helmet.png",
+  "hidden_model_parts": "head.hat"
+}
+```
+
+`hidden_model_parts` hides the player's hat layer, so hair from the skin doesn't poke through the helmet.
+
+### Medium: An Animated Suit With a Glowing Visor
+
+A full suit with an idle and a walking animation, using a model that names its bones differently. A second layer renders the visor glowing on top:
+
+```json title="assets/mypack/palladium/render_layers/robot_suit.json"
+{
+  "type": "geckolib:render_layer",
+  "model": "mypack:robot_suit",
+  "texture": "mypack:textures/entity/robot_suit.png",
+  "animations": "mypack:robot_suit",
+  "animation_controller": { "preset": "walk_or_else_idle" },
+  "bones": {
+    "head": "robot_head",
+    "body": "robot_torso"
+  }
+}
+```
+
+```json title="assets/mypack/palladium/render_layers/robot_suit_visor.json"
+{
+  "type": "geckolib:render_layer",
+  "model": "mypack:robot_suit",
+  "texture": "mypack:textures/entity/robot_suit_visor.png",
+  "animations": "mypack:robot_suit",
+  "animation_controller": { "preset": "walk_or_else_idle" },
+  "bones": {
+    "head": "robot_head",
+    "body": "robot_torso"
+  },
+  "light_emission": 15
+}
+```
+
+The visor texture is fully transparent except for the visor itself. Both layers use the same model and animations, so the visor moves exactly with the suit.
+
+### Advanced: Wings That Open on Command
+
+Wings that idle on the player's back and spread out when an ability is used. The wings are modeled inside the `body` bone, so they turn with the player's upper body. Two controllers run side by side: one keeps the idle motion going, the other one waits for the trigger.
+
+```json title="assets/mypack/palladium/render_layers/angel_wings.json"
+{
+  "type": "geckolib:render_layer",
+  "model": {
+    "wide": "mypack:angel_wings",
+    "slim": "mypack:angel_wings_slim"
+  },
+  "texture": "mypack:textures/entity/angel_wings.png",
+  "animations": "mypack:angel_wings",
+  "animation_controller": [
+    {
+      "name": "idle",
+      "transition_tick_time": 10,
+      "animation": "wings.idle"
+    },
+    {
+      "name": "spread",
+      "transition_tick_time": 4,
+      "triggers": {
+        "open": [
+          { "animation": "wings.spread", "loop_type": "play_once" },
+          { "animation": "wings.hold_open", "loop_type": "loop", "wait_ticks": 2 }
+        ],
+        "close": "wings.fold"
+      }
+    }
+  ],
+  "conditions": {
+    "main": true,
+    "first_person": false
+  }
+}
+```
+
+The `conditions` keep the wings out of first person, where they would only get in the way. The power shows the wings with a power renderer and uses two abilities to trigger the animations:
+
+```json title="assets/mypack/palladium/power_renderers/angel.json"
+{
+  "render_layers": {
+    "mypack:angel_wings": true
+  }
+}
+```
+
+```json title="data/mypack/palladium/power/angel.json (excerpt)"
+"open_wings": {
+  "type": "geckolib:trigger_layer_animation",
+  "render_layer": "mypack:angel_wings",
+  "controller": "spread",
+  "trigger": "open",
+  "state": {
+    "enabling": { "type": "palladium:key_bind", "behaviour": "activation" }
+  }
+},
+"close_wings": {
+  "type": "geckolib:trigger_layer_animation",
+  "render_layer": "mypack:angel_wings",
+  "controller": "spread",
+  "trigger": "close",
+  "state": {
+    "enabling": { "type": "palladium:key_bind", "behaviour": "activation" }
+  }
+}
+```
+
+The `open` trigger plays the spreading animation once, waits two ticks and then loops the open pose until `close` is triggered.

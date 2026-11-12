@@ -1,0 +1,94 @@
+---
+sidebar_position: 1
+---
+
+import PalladiumObjectViewer from "@site/src/components/PalladiumObjectViewer";
+
+# Layouts
+
+A layout is the top-level object of a screen file. It defines the size of the screen, what is drawn behind it, and which [widgets](widgets) it contains.
+
+Like most Palladium systems, layouts are typed: the `type` field decides which layout implementation is used. As a shortcut, you can leave out the `type` field entirely, in which case the file is read as a `palladium:simple` layout. These two files are identical:
+
+```json title="assets/mypack/palladium/screens/my_screen.json"
+{
+  "width": 200,
+  "height": 120
+}
+```
+
+```json title="assets/mypack/palladium/screens/my_screen.json"
+{
+  "type": "palladium:simple",
+  "width": 200,
+  "height": 120
+}
+```
+
+## Auto Size
+
+`width` and `height` of the simple layout are optional, and each can be omitted independently. An omitted dimension spans the full available space: the whole screen when opened as a screen or rendered as a [HUD overlay](../power-renderers#hud-layouts). A file with neither is a fullscreen canvas, which is the usual choice for HUDs; a layout with only `"height": 100` becomes a full-width strip centered vertically.
+
+Layouts without a fixed size should not be used as columns inside a `palladium:multi_column` layout, since the column arrangement needs concrete widths.
+
+## Alignment
+
+The `alignment` field controls where on the screen the layout is placed, both when opened as a screen and when rendered as a [HUD overlay](../power-renderers#hud-layouts). It accepts the same nine anchor values as [widget alignment](widgets#positioning) and defaults to `center`:
+
+```json title="assets/mypack/palladium/screens/status_box.json"
+{
+  "width": 120,
+  "height": 40,
+  "alignment": "bottom_right",
+  "widgets": [ ... ]
+}
+```
+
+Alignment only matters for layouts with a fixed size on at least one axis; a fully [auto-sized](#auto-size) layout covers the whole screen anyway. Both the simple and the multi column layout support the field.
+
+## Padding
+
+The `padding` field of the simple layout insets the area that widgets are placed in. Widget positions and [alignments](widgets#positioning) are relative to this padded area, not the full layout, so the padding keeps widgets off the background's border.
+
+Padding is either a single number for all four sides or an object with per-side values:
+
+```json
+"padding": 7
+```
+
+```json
+"padding": {
+  "top": 10,
+  "bottom": 4,
+  "left": 7,
+  "right": 7
+}
+```
+
+Sides left out of the object default to `0`. The simple layout's default padding is `7` on all sides, which matches the border width of the default background sprite.
+
+## Nesting
+
+The `palladium:multi_column` layout places several layouts side by side, which is the main tool for building wider, structured screens. Each column is itself a full layout with its own background, padding and widgets. Columns can nest further, though a single level is usually enough.
+
+The total size is calculated automatically: the width is the sum of all column widths (plus gaps), the height is the height of the tallest column.
+
+## Layout Types
+
+<!-- PALLADIUM_LIST_START type="palladium/ui/layouts" heading="h3" -->
+### Default Power Layout {#palladiumpower/default}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/layouts.json').find(x => x.namespace === 'palladium' && x.path === 'power/default')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Multi Column Layout {#palladiummulti_column}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/layouts.json').find(x => x.namespace === 'palladium' && x.path === 'multi_column')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Simple {#palladiumsimple}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/layouts.json').find(x => x.namespace === 'palladium' && x.path === 'simple')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+<!-- PALLADIUM_LIST_END -->

@@ -1,0 +1,173 @@
+# Trails
+
+import PalladiumObjectViewer from "@site/src/components/PalladiumObjectViewer";
+
+Trails are visual effects that follow an entity as it moves. They are defined as client-side asset files and can be referenced by the `palladium:trail` ability or by a [size change type](../powers/size-changing).
+
+## Creating a Trail
+
+Trail files go in your resource pack at:
+
+```json title="assets/<namespace>/palladium/trails/<filename>.json"
+{
+  "spacing": 1,
+  "lifetime": 20,
+  "requires_movement": true,
+  "renderer": {
+    "type": "palladium:gradient",
+    "color": "#ff0000"
+  }
+}
+```
+
+A single file can also define multiple independent trails using a list:
+
+```json title="assets/<namespace>/palladium/trails/<filename>.json"
+[
+  {
+    "spacing": 1,
+    "lifetime": 20,
+    "renderer": { "type": "palladium:gradient", "color": "#ff0000" }
+  },
+  {
+    "spacing": 0.5,
+    "lifetime": 10,
+    "renderer": { "type": "palladium:after_image", "opacity": 0.3 }
+  }
+]
+```
+
+### Settings
+
+`spacing` *(optional, default: `1`)* is the distance in blocks between spawned trail segments.
+
+`lifetime` *(optional, default: `20`)* is how many ticks each segment stays visible before fading out.
+
+`requires_movement` *(optional, default: `true`)* when `true`, new segments are only spawned while the entity is actually moving.
+
+`tick_delay` *(optional)* delays segment spawning by this many ticks after the trail becomes active. Accepts a plain integer (ticks) or a time string: `"1s"` (seconds), `"20t"` (ticks), `"1m"` (minutes).
+
+`anchor` *(optional)* attaches the trail to a named model part instead of the entity's hitbox, so segments spawn at that part and follow it (arm animation included). Common part names are `"right_arm"`, `"left_arm"`, `"head"`, and `"body"`; nested parts can be reached with a dotted path. When omitted, the full entity hitbox is used. Only works for entities rendered with a player-style model.
+
+`offset` *(optional, default: `[0, 0, 0]`)* shifts the spawn point, in voxels (1 voxel = 1/16 of a block). When `anchor` is set the offset is applied in the part's **local** space, so it rotates with the part; otherwise it is applied in world space. For example, `[0, -11, 0]` moves from an arm's pivot down to the hand.
+
+### Anchoring to a body part
+
+This file defines two trails, one streaming lightning from each hand:
+
+```json title="assets/<namespace>/palladium/trails/hand_lightning.json"
+[
+  {
+    "spacing": 2,
+    "anchor": "right_arm",
+    "offset": [0, -11, 0],
+    "requires_movement": false,
+    "renderer": {
+      "type": "palladium:lightning",
+      "amount": 1,
+      "area": [0.1, 0.1, 0.1],
+      "render_settings": { "glow": "#00aaff", "size": 0.5 }
+    }
+  },
+  {
+    "spacing": 2,
+    "anchor": "left_arm",
+    "offset": [0, -11, 0],
+    "requires_movement": false,
+    "renderer": {
+      "type": "palladium:lightning",
+      "amount": 1,
+      "area": [0.1, 0.1, 0.1],
+      "render_settings": { "glow": "#00aaff", "size": 0.5 }
+    }
+  }
+]
+```
+
+## Using Trails
+
+Reference a trail by its identifier (`namespace:filename`) in either of these places:
+
+- The `palladium:trail` ability's `trail` field -- see the [Abilities](../powers/abilities) page.
+- The `trails` list in a [size change type](../powers/size-changing).
+
+## Trail Renderers
+
+The `renderer` object inside each trail entry defines how it looks. The `type` field selects the renderer.
+
+<!-- PALLADIUM_LIST_START type="palladium/trails" heading="h3" -->
+### After Image Trail {#palladiumafter_image}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/trails.json').find(x => x.namespace === 'palladium' && x.path === 'after_image')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Gradient Trail {#palladiumgradient}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/trails.json').find(x => x.namespace === 'palladium' && x.path === 'gradient')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Lightning Aura Trail {#palladiumlightning_aura}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/trails.json').find(x => x.namespace === 'palladium' && x.path === 'lightning_aura')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Lightning Trail {#palladiumlightning}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/trails.json').find(x => x.namespace === 'palladium' && x.path === 'lightning')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+<!-- PALLADIUM_LIST_END -->
+
+## Laser Renderer Settings
+
+The `render_settings` field of the **Lightning Trail** and **Lightning Aura Trail** renderers uses a laser renderer. For trails it is drawn as a single connected, camera-facing ribbon that runs the whole length of each bolt, so segments join seamlessly and the glow does not double up where they meet. It supports two visual layers: a solid inner `core` and a softer outer `glow`.
+
+```json
+"render_settings": {
+  "core": "#ffffff",
+  "glow": { "color": "#4444ff", "opacity": 0.6 },
+  "bloom": 3,
+  "size": 2,
+  "rotation": 0,
+  "rotation_speed": 0
+}
+```
+
+`core` *(optional)* is the inner beam. Can be a plain hex color string as shorthand, or a full [laser part](#laser-part) object. Defaults to white at full opacity.
+
+`glow` *(optional)* is the outer glow layer rendered around the core. Same format as `core`. Defaults to white at full opacity.
+
+`bloom` *(optional, default: `1`)* controls the number of additional glow passes rendered around the beam. Range 0 to 10. Higher values produce a wider, softer glow.
+
+`size` *(optional, default: `1`)* is the beam width and height in voxels (1 voxel = 1/16 of a block). Can be a single number for a square beam, or `[width, height]` for a rectangular one. Because a trail ribbon is flat and always faces the camera, only the width is used there.
+
+`rotation` *(optional, default: `0`)* is a static rotation of the beam in degrees (0 to 360). Has no effect on trail ribbons.
+
+`rotation_speed` *(optional, default: `0`)* makes the beam spin continuously. Value is degrees per tick. Has no effect on trail ribbons.
+
+### Laser Part
+
+Both `core` and `glow` accept either a plain hex color string (shorthand for full opacity, no effects) or a full object:
+
+```json
+{
+  "color": "#ff0000",
+  "opacity": 0.8,
+  "rainbow": 0.5,
+  "pulse": {
+    "scale": 0.3,
+    "frequency": 2.0
+  }
+}
+```
+
+`color` *(optional, default: `"#ffffff"`)* is the color of the layer.
+
+`opacity` *(optional, default: `1`)* is the opacity of the layer, from `0` to `1`.
+
+`rainbow` *(optional, default: `0`)* cycles the color through the full Minecraft dye palette. Value is a speed from `0` (off) to `1` (fast). Also accepts `true` as shorthand for `1`.
+
+`pulse` *(optional)* makes the layer rhythmically scale in and out.
+
+- `scale` *(optional, default: `1`)* is the amplitude of the pulse.
+- `frequency` *(optional, default: `1`)* is the speed of the pulse, from `0` to `10`.

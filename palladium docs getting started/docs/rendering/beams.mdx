@@ -1,0 +1,301 @@
+---
+sidebar_position: 6
+---
+
+# Beams
+
+import PalladiumObjectViewer from "@site/src/components/PalladiumObjectViewer";
+
+A beam is a visual line drawn from a point on the player's body to a target somewhere in the world. Energy beams shot from the hands, a laser from the forehead, the rope of a grappling hook or the web line of a web swinger all use the same system. A beam file only describes how the line looks and where on the body it starts. What it points at and how long it stays is decided by whatever uses it, for example the energy beam ability.
+
+Beam files are client-side assets:
+
+```
+assets/<namespace>/palladium/beams/<filename>.json
+```
+
+The file `assets/mypack/palladium/beams/hand_laser.json` is referenced as `mypack:hand_laser`.
+
+## Creating a Beam
+
+The smallest useful beam needs a body part to start from and a renderer:
+
+```json title="assets/mypack/palladium/beams/hand_laser.json"
+{
+  "body_part": "right_arm",
+  "offset": [0, -11, 0],
+  "renderer": {
+    "type": "palladium:laser",
+    "render_settings": {
+      "glow": "#ff0000"
+    }
+  }
+}
+```
+
+A file can also hold a list of beams. All of them are drawn together towards the same target, which is how you get a beam from each hand out of a single file:
+
+```json title="assets/mypack/palladium/beams/hand_lasers.json"
+[
+  {
+    "body_part": "right_arm",
+    "offset": [0, -11, 0],
+    "renderer": { "type": "palladium:laser", "render_settings": { "glow": "#ff0000" } }
+  },
+  {
+    "body_part": "left_arm",
+    "offset": [0, -11, 0],
+    "renderer": { "type": "palladium:laser", "render_settings": { "glow": "#ff0000" } }
+  }
+]
+```
+
+### Settings
+
+`body_part` *(required)* is the model part the beam starts from. The beam follows the part, so a beam from an arm moves with the arm animation. The names for the player model are `"head"`, `"body"`, `"right_arm"`, `"left_arm"`, `"right_leg"` and `"left_leg"`; parts of render layers or power renderer models can be reached with a dotted path like `"body.cannon"`.
+
+`offset` *(optional, default: `[0, 0, 0]`)* moves the start point away from the part's pivot, in voxels (1 voxel = 1/16 of a block). The offset is applied in the part's local space, so it rotates with the part. Arms pivot at the shoulder, so `[0, -11, 0]` moves the start down to the hand. Accepts a [perspective value](#perspective-values).
+
+`visibility` *(optional, default: always visible)* is a [condition](/docs/logic/conditions) that has to pass for the beam to be drawn. The condition is tested against the entity the beam belongs to. Accepts a [perspective value](#perspective-values), which is handy to hide a beam only in first person.
+
+`renderer` *(required)* decides what the beam looks like. See [Beam Renderers](#beam-renderers).
+
+`particles` *(optional)* spawns particles at the point where the beam hits something. Can be a single entry or a list. See [Impact Particles](#impact-particles).
+
+### Perspective Values
+
+`offset` and `visibility` can be given once for every view, or separately for first and third person. The first person value is used for your own beams while you are in first person, everything else uses the third person value.
+
+```json
+"offset": [0, -11, 0]
+```
+
+```json
+"offset": {
+  "first_person": [0, -8, -2],
+  "third_person": [0, -11, 0]
+}
+```
+
+This matters because the first person arms sit in a different place than the third person model. If a beam looks right on other players but starts next to your own hand, give the first person offset its own value.
+
+### Impact Particles
+
+Each entry in `particles` spawns particles at the end of the beam, for example sparks where a laser hits a wall. Which uses spawn them is up to the feature; the energy beam ability does it while the beam is active.
+
+```json
+"particles": [
+  {
+    "particle_type": "minecraft:flame",
+    "emitter": {
+      "amount": 3,
+      "motion_random": [2, 2, 2]
+    }
+  }
+]
+```
+
+`particle_type` *(required)* is the registry ID of the particle, vanilla or one of your [own particles](particles).
+
+`options` *(optional)* holds extra data for particle types that need it, written as NBT. `minecraft:dust` for example needs `{"color": [1.0, 0.0, 0.0], "scale": 1.0}`.
+
+`emitter` *(optional)* controls how many particles appear and how they move. `amount` is the number per spawn (values below 1 are treated as a chance, `0.25` spawns one particle in a quarter of all cases). `offset` and `offset_random` shift and scatter the spawn position, `motion` and `motion_random` set the base velocity and a random spread on top, all in voxels. `conditions` can limit spawning further.
+
+## Using Beams
+
+Beams are referenced by their identifier (`namespace:filename`):
+
+- `beam_renderer` of the `palladium:beam` ability, the continuous energy beam. See [Abilities](../powers/abilities).
+- `beam_renderer` of the `palladium:blast` ability, a short burst that travels along the line.
+- `beam_renderer` of the `palladium:grapple` ability, where the beam is the rope.
+- `beam_renderer` of a swinging flight type (`data/<namespace>/palladium/flight_type/`), where the beam is the web line. This one takes either one ID or `{"right_arm": "...", "left_arm": "..."}` so each arm can have its own file. The flight type is then used by the `palladium:flight` [ability](../powers/abilities#palladiumflight).
+
+Palladium ships two beams for the web swinger: `palladium:swinging/web_right` and `palladium:swinging/web_left`. Both use the flat textured renderer with `palladium:textures/beam/web.png` and are a good starting point for your own rope or web.
+
+## Beam Renderers
+
+The `renderer` object selects how the line is drawn with its `type` field.
+
+<!-- PALLADIUM_LIST_START type="palladium/beams" heading="h3" -->
+### Flat Textured {#palladiumflat_textured}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/beams.json').find(x => x.namespace === 'palladium' && x.path === 'flat_textured')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Laser {#palladiumlaser}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/beams.json').find(x => x.namespace === 'palladium' && x.path === 'laser')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Lightning Beam {#palladiumlightning}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/beams.json').find(x => x.namespace === 'palladium' && x.path === 'lightning')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Textured {#palladiumtextured}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/beams.json').find(x => x.namespace === 'palladium' && x.path === 'textured')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+<!-- PALLADIUM_LIST_END -->
+
+### Laser Render Settings
+
+The `render_settings` object of the laser and lightning renderers is the same laser renderer used by lightning trails. It has an inner `core` and an outer `glow`, each with color, opacity, rainbow cycling and pulsing, plus `bloom`, `size`, `rotation` and `rotation_speed`. For beams the laser is a real 3D tube, so `size` can be `[width, height]` and the rotation settings spin it around its own axis. All fields are described on the [trails page](trails#laser-renderer-settings).
+
+## Examples
+
+### Red hand laser
+
+One laser from the right hand with a slightly stronger glow, used by an energy beam ability:
+
+```json title="assets/mypack/palladium/beams/red_laser.json"
+{
+  "body_part": "right_arm",
+  "offset": [0, -11, 0],
+  "renderer": {
+    "type": "palladium:laser",
+    "render_settings": {
+      "core": "#ffffff",
+      "glow": "#ff2200",
+      "bloom": 2,
+      "size": 2
+    }
+  }
+}
+```
+
+```json title="data/mypack/palladium/power/laser_hands.json (excerpt)"
+"abilities": {
+  "laser": {
+    "type": "palladium:beam",
+    "beam_renderer": "mypack:red_laser",
+    "damage": 4,
+    "state": {
+      "enabling": {
+        "type": "palladium:key_bind",
+        "behaviour": "held"
+      }
+    }
+  }
+}
+```
+
+### Forehead laser with impact particles
+
+Starts above the eyes, cycles through colors, spins and throws flames where it hits:
+
+```json title="assets/mypack/palladium/beams/forehead_laser.json"
+{
+  "body_part": "head",
+  "offset": [0, 6, 0],
+  "renderer": {
+    "type": "palladium:laser",
+    "render_settings": {
+      "glow": {
+        "rainbow": 0.1,
+        "pulse": { "scale": 0.25, "frequency": 3.0 }
+      },
+      "rotation_speed": 10
+    }
+  },
+  "particles": {
+    "particle_type": "minecraft:flame",
+    "emitter": {
+      "amount": 2,
+      "motion": [0, 1, 0],
+      "motion_random": [1, 0, 1]
+    }
+  }
+}
+```
+
+### Lightning from both hands, tuned per perspective
+
+Two different lightning looks, one per hand. The first person offsets are adjusted so the bolts come out of the visible arms, and the left bolt is hidden in first person because the left arm is not drawn there while holding an item:
+
+```json title="assets/mypack/palladium/beams/hand_lightning.json"
+[
+  {
+    "body_part": "right_arm",
+    "offset": {
+      "first_person": [0, -8, -2],
+      "third_person": [0, -11, 0]
+    },
+    "renderer": {
+      "type": "palladium:lightning",
+      "segments": 25,
+      "spread": 2,
+      "frequency": 200,
+      "render_settings": {
+        "glow": "#652191"
+      }
+    }
+  },
+  {
+    "body_part": "left_arm",
+    "offset": [0, -11, 0],
+    "visibility": {
+      "first_person": false,
+      "third_person": true
+    },
+    "renderer": {
+      "type": "palladium:lightning",
+      "segments": 10,
+      "spread": 5,
+      "frequency": 2,
+      "render_settings": {
+        "core": {
+          "opacity": 0.25,
+          "pulse": { "scale": 0.1, "frequency": 1.0 }
+        },
+        "glow": {
+          "color": "#652191",
+          "pulse": { "scale": 0.25, "frequency": 2.0 }
+        }
+      }
+    }
+  }
+]
+```
+
+### Custom web line for swinging
+
+A repeating texture that keeps its proportions on long lines, with separate files for both arms so each starts at the right hand:
+
+```json title="assets/mypack/palladium/beams/web_right.json"
+{
+  "body_part": "right_arm",
+  "offset": [0, 10, 0],
+  "renderer": {
+    "type": "palladium:flat_textured",
+    "texture": "mypack:textures/beam/web.png",
+    "texture_size": 4,
+    "render_type": "minecraft:entity_cutout"
+  }
+}
+```
+
+Flight types are datapack files of their own. This one uses the two beams and is then referenced by the flight ability:
+
+```json title="data/mypack/palladium/flight_type/web.json"
+{
+  "type": "palladium:swinging",
+  "max_anchor_height": 120,
+  "max_anchor_height_type": "absolute",
+  "radius": [10, 30],
+  "beam_renderer": {
+    "right_arm": "mypack:web_right",
+    "left_arm": "mypack:web_left"
+  }
+}
+```
+
+```json title="data/mypack/palladium/power/web_swinging.json (excerpt)"
+"abilities": {
+  "swing": {
+    "type": "palladium:flight",
+    "flight_type": "mypack:web"
+  }
+}
+```

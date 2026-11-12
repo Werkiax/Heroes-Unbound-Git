@@ -1,0 +1,555 @@
+---
+sidebar_position: 4
+---
+
+# Power Trees
+
+When a power is opened in the power screen, its abilities are shown as a tree. By default, Palladium builds that tree on its own: abilities without parents start on the left, and every ability that needs another one to be unlocked first is placed to the right of it, connected with a line.
+
+If you want full control over where each ability sits and how the tree looks, you can create a **power tree** file. It is a client-side asset, placed at:
+
+```
+assets/<namespace>/palladium/power_trees/<power_path>.json
+```
+
+The file uses the same ID as the power it belongs to. The tree for the power `mypack:speedster` goes into `assets/mypack/palladium/power_trees/speedster.json`. Powers without a tree file keep using the automatic layout.
+
+Power trees can be reloaded with `F3 + T`, just like textures and other resource pack files.
+
+A power tree file can contain these fields. All of them are optional, and each one is explained further down:
+
+```json title="assets/mypack/palladium/power_trees/speedster.json"
+{
+  "grid_size": 50,
+  "auto_connect": true,
+  "node_styles": {},
+  "connection_styles": {},
+  "nodes": {},
+  "connections": [],
+  "regions": []
+}
+```
+
+| Field               | Type                                                  | Default | Description                                                                         |
+|---------------------|-------------------------------------------------------|---------|-------------------------------------------------------------------------------------|
+| `grid_size`         | Integer                                               | `50`    | Size of one grid cell in pixels.                                                    |
+| `auto_connect`      | Boolean                                               | `true`  | Draws a connection from every ability to each of its parents automatically.        |
+| `node_styles`       | Map of name to [Node Style](#node-styles)             | `{}`    | Named styles for nodes. The style called `default` applies to every node.          |
+| `connection_styles` | Map of name to [Connection Style](#connection-styles) | `{}`    | Named styles for connections. The style called `default` applies to every connection. |
+| `nodes`             | Map of key to [Node](#nodes)                          | `{}`    | Position and look of each ability, plus [custom nodes](#custom-nodes).              |
+| `connections`       | List of [Connections](#connections)                   | `[]`    | Extra connections, or replacements for automatic ones.                              |
+| `regions`           | List of [Regions](#regions)                           | `[]`    | Colored or textured areas drawn behind the tree, for example to group a branch.    |
+
+## The Grid
+
+All positions in a power tree are given in grid cells, not pixels. A node at `[0, 0]` sits in the top left cell, `[1, 0]` is the cell to the right of it, and `[0, 1]` the cell below. Positions can have decimals, so `[0.5, 2]` puts a node halfway between two columns.
+
+The size of one cell is set with `grid_size`, in pixels. This tree places three abilities next to each other, 40 pixels apart, with the last one a bit lower:
+
+```json
+{
+  "grid_size": 40,
+  "nodes": {
+    "super_speed": [0, 0],
+    "wall_running": [1, 0],
+    "phasing": [2, 0.5]
+  }
+}
+```
+
+You do not need to start at `[0, 0]`. Palladium looks at all nodes, regions and waypoints, and moves the whole tree so it fits into the screen. If the tree is smaller than the screen, it is centered. If it is bigger, players can drag it around.
+
+## Node States
+
+Every node (and every connection) is in one of three states. Most style settings can have a different value for each state.
+
+| State       | Meaning                                                                                  |
+|-------------|------------------------------------------------------------------------------------------|
+| `locked`    | The ability is locked, and at least one of its parent abilities is still locked as well. |
+| `available` | The ability is locked, but all of its parents are unlocked, so it can be unlocked next.   |
+| `unlocked`  | The ability is unlocked.                                                                  |
+
+"Parents" are the abilities listed in the ability's unlocking requirements, for example through the `palladium:ability_unlocked` condition:
+
+```json title="data/mypack/palladium/powers/speedster.json (excerpt)"
+"wall_running": {
+  "type": "palladium:dummy",
+  "state": {
+    "unlocking": {
+      "type": "palladium:buyable",
+      "cost": {
+        "type": "palladium:experience_level",
+        "xp_level": 5
+      },
+      "requires": {
+        "type": "palladium:ability_unlocked",
+        "ability": "super_speed"
+      }
+    }
+  }
+}
+```
+
+Here, `super_speed` is the parent of `wall_running`. As long as `super_speed` is locked, `wall_running` is `locked`. Once `super_speed` is unlocked, `wall_running` becomes `available`.
+
+The state of a connection depends on both ends:
+
+| Connection state | When                                                             |
+|------------------|------------------------------------------------------------------|
+| `locked`         | The node the connection starts from is still locked.             |
+| `available`      | The starting node is unlocked, but the target node is not.       |
+| `unlocked`       | Both nodes are unlocked.                                         |
+
+So once you unlock an ability, all connections leading out of it switch to `available`, which shows the player where they can go next. When the next ability is unlocked too, the connection becomes `unlocked`.
+
+### Per State Values
+
+Any setting that supports states accepts either a single value, which is used for all states:
+
+```json
+"color": "#00FFFF"
+```
+
+or an object with a value per state:
+
+```json
+"color": {
+  "locked": "#808080",
+  "available": "#FFFFFF",
+  "unlocked": "#00FFFF"
+}
+```
+
+You can leave out states in the object. A missing `available` value uses the `locked` value of the same object. Anything else that is missing comes from the `default` style, and then from Palladium's built-in style. In this example, `available` is the same gray as `locked`:
+
+```json
+"color": {
+  "locked": "#808080",
+  "unlocked": "#00FFFF"
+}
+```
+
+## Nodes
+
+Nodes are listed by the key the ability has in the power file. The short form is just the position:
+
+```json
+"nodes": {
+  "laser_eyes": [0, 0],
+  "heat_vision": [1, 0]
+}
+```
+
+The long form lets you pick a style, and change the title, icon or description that is shown in the tree:
+
+```json
+"nodes": {
+  "laser_eyes": {
+    "pos": [0, 0],
+    "style": "root",
+    "title": "Eye Beams",
+    "icon": "minecraft:redstone"
+  }
+}
+```
+
+| Field         | Type                                         | Required | Description                                                                            |
+|---------------|----------------------------------------------|----------|----------------------------------------------------------------------------------------|
+| `pos`         | `[x, y]`                                     | **Yes**  | Position in grid cells.                                                                |
+| `style`       | String or [Node Style](#node-styles)         | No       | Name of a style from `node_styles`, or a style object written directly into the node. |
+| `title`       | Text Component                               | No       | Title shown when hovering the node. Replaces the ability's title in the tree.         |
+| `icon`        | [Icon](/docs/rendering/icons)                | No       | Icon of the node. Replaces the ability's icon in the tree.                            |
+| `description` | Text Component                               | No       | Text shown when the node is clicked. Replaces the ability's description in the tree.  |
+
+`title`, `icon` and `description` only change what the tree shows. The ability bar and other places keep using the values from the power file.
+
+Abilities that are not listed under `nodes` (and are not hidden with `hidden_in_gui`) are still shown. They are placed automatically, next to their parents.
+
+### Custom Nodes
+
+A node does not have to be an ability. If you use a key that is not an ability of the power and give the node a `title` or an `icon`, it becomes a custom node. Custom nodes can be used as headlines, milestones, or to bundle several branches into one point.
+
+```json
+"nodes": {
+  "super_speed": [0, 1],
+  "wall_running": [1, 0],
+  "phasing": [1, 2],
+  "speed_force": {
+    "pos": [2, 1],
+    "title": "Speed Force",
+    "icon": "minecraft:glowstone_dust",
+    "description": "Unlock Wall Running and Phasing to tap into the Speed Force."
+  }
+},
+"connections": [
+  { "from": "wall_running", "to": "speed_force" },
+  { "from": "phasing", "to": "speed_force" }
+]
+```
+
+Custom nodes cannot be unlocked by players. Their state comes from the [connections](#connections) that lead into them:
+
+| Custom node state | When                                                                    |
+|-------------------|-------------------------------------------------------------------------|
+| `unlocked`        | Every node connected into it is unlocked, or nothing leads into it.     |
+| `available`       | Some, but not all, of the nodes connected into it are unlocked.         |
+| `locked`          | None of the nodes connected into it are unlocked.                       |
+
+In the example above, "Speed Force" is `locked` at first, `available` once one of the two abilities is unlocked, and `unlocked` when both are. Connections that leave a custom node follow the same rules as any other connection, so the node can lead into the next part of the tree.
+
+Clicking a custom node shows its `description`, if it has one. A node with a key that is neither an ability nor has a `title` or `icon` is skipped, and a warning is written to the addon pack log, since that is usually a typo.
+
+## Node Styles
+
+Styles change how nodes look. Define them once under `node_styles` and use them by name. The style named `default` is used for every node, so it is the place to change the look of the whole tree:
+
+```json
+"node_styles": {
+  "default": {
+    "frame": {
+      "locked": "mypack:tree/frame_locked",
+      "available": "mypack:tree/frame_available",
+      "unlocked": "mypack:tree/frame_unlocked"
+    }
+  },
+  "big": {
+    "size": 34,
+    "icon_size": 24
+  }
+},
+"nodes": {
+  "flight": {
+    "pos": [0, 0],
+    "style": "big"
+  }
+}
+```
+
+The `flight` node uses `big` for its size, and everything that `big` does not set (like `frame`) comes from `default`. Styles can also be written directly into a node:
+
+```json
+"flight": {
+  "pos": [0, 0],
+  "style": {
+    "size": 34
+  }
+}
+```
+
+| Field       | Type                                                         | Default                                                                   | Description                                                                |
+|-------------|--------------------------------------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| `size`      | Integer                                                      | `26`                                                                      | Width and height of the node in pixels. Also used for the clickable area. |
+| `frame`     | Per state [Texture Reference](/docs/rendering/dynamic-textures) | `palladium:powers/ability_frame_locked`, or `..._unlocked` when unlocked | The frame behind the icon.                                                 |
+| `overlay`   | Per state Texture Reference or `false`                       | `palladium:powers/lock` while locked or available, nothing when unlocked | Drawn on top of the icon. Use `false` to draw nothing.                     |
+| `show_icon` | Per state Boolean                                            | `false` while locked or available, `true` when unlocked                   | Whether the node's icon is drawn.                                          |
+| `icon_size` | Integer                                                      | `16`                                                                      | Size of the icon in pixels.                                                |
+
+By default, locked abilities show a lock instead of their icon. This style shows the icon in every state and removes the lock:
+
+```json
+"node_styles": {
+  "default": {
+    "overlay": false,
+    "show_icon": true
+  }
+}
+```
+
+Textures are GUI sprite IDs, the same as for the [ability bar](/docs/rendering/power-renderers). A sprite ID like `mypack:tree/frame_locked` points to `assets/mypack/textures/gui/sprites/tree/frame_locked.png`. Sprites can use nine-slice scaling through a `.mcmeta` file, which keeps borders sharp when you change `size`:
+
+```json title="assets/mypack/textures/gui/sprites/tree/frame_locked.png.mcmeta"
+{
+  "gui": {
+    "scaling": {
+      "type": "nine_slice",
+      "width": 26,
+      "height": 26,
+      "border": 3
+    }
+  }
+}
+```
+
+You can also use a [dynamic texture](/docs/rendering/dynamic-textures) by putting a `#` in front of its ID, for example `"frame": "#mypack:animated_frame"`.
+
+## Connections
+
+With `auto_connect` enabled, Palladium already connects every ability to its parents. The `connections` list is for everything else.
+
+**Changing an automatic connection.** If you add a connection with the same `from` and `to` as an automatic one, yours replaces it. This one draws the line between `heat_vision` and its child `solar_flare` with a different style:
+
+```json
+"connections": [
+  {
+    "from": "heat_vision",
+    "to": "solar_flare",
+    "style": "highlight"
+  }
+]
+```
+
+**Adding decorative connections.** Connections between nodes that are not parent and child are only drawn. They do not change how unlocking works:
+
+```json
+"connections": [
+  {
+    "from": "super_strength",
+    "to": "freeze_breath",
+    "path": "straight"
+  }
+]
+```
+
+**Routing a line.** With `via`, the line goes through one or more waypoints before it reaches its target. Waypoints use grid cells, just like node positions. This line goes down to row 3, along the bottom, and back up:
+
+```json
+"connections": [
+  {
+    "from": "heat_vision",
+    "to": "solar_flare",
+    "via": [[2, 3], [5, 3]]
+  }
+]
+```
+
+If you only want your own connections, turn the automatic ones off with `"auto_connect": false`.
+
+| Field   | Type                                             | Required | Description                                                                                |
+|---------|--------------------------------------------------|----------|--------------------------------------------------------------------------------------------|
+| `from`  | String                                           | **Yes**  | Key of the node where the connection starts.                                               |
+| `to`    | String                                           | **Yes**  | Key of the node where the connection ends.                                                 |
+| `style` | String or [Connection Style](#connection-styles) | No       | Name of a style from `connection_styles`, or a style object written directly.             |
+| `path`  | String                                           | No       | Overrides the `path` of the style for this connection only.                                |
+| `via`   | List of `[x, y]`                                 | No       | Waypoints in grid cells. The line goes through each of them in order before reaching `to`. |
+
+## Connection Styles
+
+Connection styles work like node styles: `default` applies to all connections, and other styles can be used by name or written directly into a connection.
+
+```json
+"connection_styles": {
+  "default": {
+    "width": 2,
+    "color": {
+      "locked": "#555555",
+      "available": "#FFFFFF",
+      "unlocked": "#4FC3F7"
+    }
+  },
+  "hint": {
+    "path": "straight",
+    "dash": [4, 3],
+    "outline_width": 0,
+    "color": "#80FFD54F"
+  }
+}
+```
+
+| Field           | Type                   | Default                               | Description                                                           |
+|-----------------|------------------------|---------------------------------------|-----------------------------------------------------------------------|
+| `color`         | Per state Color        | `#FFFFFF` locked, `#00FFFF` otherwise | Color of the line.                                                    |
+| `outline_color` | Per state Color        | `#000000`                             | Color of the outline around the line.                                 |
+| `width`         | Integer                | `1`                                   | Width of the line in pixels.                                          |
+| `outline_width` | Integer                | `1`                                   | Width of the outline on each side. `0` disables the outline.          |
+| `path`          | String                 | `elbow_horizontal`                    | How the line is routed. See below.                                    |
+| `dash`          | `[on, off]` or `false` | `false`                               | Draws a dashed line: `on` pixels of line, then `off` pixels of gap.  |
+
+Colors are written as `#RRGGBB` or, with transparency, as `#AARRGGBB`. `#80FFD54F` is a yellow at half transparency.
+
+There are three path types:
+
+| Path               | Shape                                                                                                                                           |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `elbow_horizontal` | Leaves the start node horizontally, turns vertically halfway, and enters the target horizontally. Good for trees that grow from left to right. |
+| `elbow_vertical`   | The same, rotated: leaves vertically, turns horizontally halfway, enters vertically. Good for trees that grow from top to bottom.              |
+| `straight`         | A direct line, which can also be diagonal.                                                                                                      |
+
+A tree that grows from top to bottom would set this in its default style:
+
+```json
+"connection_styles": {
+  "default": {
+    "path": "elbow_vertical"
+  }
+}
+```
+
+When `via` is used, the path type is applied to every part between two points. If a node has several elbow connections coming in from different parents, they are spread out next to each other so they do not overlap.
+
+## Regions
+
+Regions are rectangles drawn behind the connections and nodes. Use them to mark branches or to add a label to a part of the tree.
+
+```json
+"regions": [
+  {
+    "pos": [1, 0],
+    "size": [2, 1],
+    "label": "Movement",
+    "color": "#30000000"
+  }
+]
+```
+
+`pos` is the top left corner and `size` the width and height, both in grid cells. The region above covers exactly the cells of nodes at `[1, 0]` and `[2, 0]`.
+
+| Field         | Type                                                    | Required | Description                                                                |
+|---------------|---------------------------------------------------------|----------|----------------------------------------------------------------------------|
+| `pos`         | `[x, y]`                                                | **Yes**  | Top left corner in grid cells.                                             |
+| `size`        | `[width, height]`                                       | **Yes**  | Size in grid cells.                                                        |
+| `label`       | Text Component                                          | No       | Text drawn in the top left corner. Can be translatable.                   |
+| `label_color` | Color                                                   | No       | Color of the label. Defaults to white.                                     |
+| `label_shadow` | Boolean                                                | No       | Whether the label is drawn with a shadow. Defaults to `true`.             |
+| `label_offset` | `[x, y]`                                               | No       | Position of the label inside the region, in pixels from its top left corner. Defaults to `[4, 4]`. |
+| `color`       | Color                                                   | No       | Fills the region with this color. Use `#AARRGGBB` to make it see-through. |
+| `background`  | [Texture Reference](/docs/rendering/dynamic-textures)   | No       | Sprite stretched over the region. Nine-slice sprites work well here.      |
+
+A region with a translated label and a sprite as background:
+
+```json
+"regions": [
+  {
+    "pos": [3, 0],
+    "size": [2, 3],
+    "label": {
+      "translate": "tree.mypack.speedster.advanced"
+    },
+    "label_color": "#FFD54F",
+    "background": "mypack:tree/region"
+  }
+]
+```
+
+## Using a Different Tree
+
+By default, the [power tree widget](/docs/rendering/guis/widgets#palladiumpower_tree) uses the tree with the same ID as the power. If you build your own power screen, you can point the widget to another tree file with its `tree` field. That way, one power can be shown with different layouts in different screens:
+
+```json title="assets/mypack/palladium/ui_layouts/power/speedster.json (excerpt)"
+{
+  "type": "palladium:power_tree",
+  "tree": "mypack:speedster_compact",
+  "properties": {
+    "alignment": "bottom_center",
+    "width": 240,
+    "height": 160
+  }
+}
+```
+
+This uses the file `assets/mypack/palladium/power_trees/speedster_compact.json`.
+
+## Examples
+
+### Simple
+
+Places four abilities with a branch, using the default look:
+
+```json title="assets/mypack/palladium/power_trees/speedster.json"
+{
+  "nodes": {
+    "super_speed": [0, 1],
+    "wall_running": [1, 0],
+    "phasing": [1, 2],
+    "time_travel": [2, 1]
+  }
+}
+```
+
+### Advanced
+
+A tree with custom node frames, colored connections per state, a dashed decorative connection, a connection routed around other nodes, a custom milestone node and a labeled region:
+
+```json title="assets/mypack/palladium/power_trees/kryptonian.json"
+{
+  "grid_size": 40,
+  "node_styles": {
+    "default": {
+      "frame": {
+        "locked": "mypack:tree/frame_locked",
+        "available": "mypack:tree/frame_available",
+        "unlocked": "mypack:tree/frame_unlocked"
+      }
+    },
+    "root": {
+      "size": 34,
+      "icon_size": 24,
+      "overlay": false,
+      "show_icon": true
+    },
+    "milestone": {
+      "size": 30,
+      "overlay": false,
+      "show_icon": true
+    }
+  },
+  "connection_styles": {
+    "default": {
+      "width": 2,
+      "color": {
+        "locked": "#555555",
+        "available": "#FFFFFF",
+        "unlocked": "#4FC3F7"
+      }
+    },
+    "hint": {
+      "path": "straight",
+      "dash": [4, 3],
+      "outline_width": 0,
+      "color": "#80FFD54F"
+    }
+  },
+  "nodes": {
+    "flight": {
+      "pos": [0, 1],
+      "style": "root"
+    },
+    "super_strength": [2, 0],
+    "heat_vision": [2, 2],
+    "freeze_breath": [4, 2],
+    "solar_flare": [5, 1],
+    "last_son": {
+      "pos": [6.5, 1],
+      "style": "milestone",
+      "title": {
+        "translate": "tree.mypack.kryptonian.last_son"
+      },
+      "icon": "minecraft:nether_star",
+      "description": {
+        "translate": "tree.mypack.kryptonian.last_son.description"
+      }
+    }
+  },
+  "connections": [
+    {
+      "from": "heat_vision",
+      "to": "solar_flare",
+      "via": [[3, 3], [5, 3]]
+    },
+    {
+      "from": "super_strength",
+      "to": "freeze_breath",
+      "style": "hint"
+    },
+    {
+      "from": "solar_flare",
+      "to": "last_son"
+    },
+    {
+      "from": "freeze_breath",
+      "to": "last_son"
+    }
+  ],
+  "regions": [
+    {
+      "pos": [2, 2],
+      "size": [3, 1],
+      "label": {
+        "translate": "tree.mypack.kryptonian.breath_and_eyes"
+      },
+      "color": "#30000000"
+    }
+  ]
+}
+```
+
+Here, `solar_flare` needs `heat_vision` to be unlocked first. The entry in `connections` replaces the automatic line between them and routes it along the bottom of the tree instead. The dashed line from `super_strength` to `freeze_breath` is only a visual hint, since the two abilities do not depend on each other. `last_son` is a custom node: it is not an ability, and it turns `unlocked` once both `solar_flare` and `freeze_breath` are unlocked.

@@ -1,0 +1,143 @@
+---
+sidebar_position: 8
+---
+
+import PalladiumObjectViewer from "@site/src/components/PalladiumObjectViewer";
+
+# Creative Tabs
+
+Addon packs can register their own creative mode tabs, fill them with items, and, thanks to the
+bundled [FancyTabSections](https://modrinth.com/mod/fancytabsections) integration, split them into
+labelled **sections**. Tabs can also pull in [multiversal variants](multiversal-variants) automatically
+through **variant groups**.
+
+---
+
+## Defining a Tab
+
+A tab is an addon object. You need to create a JSON file at:
+
+```
+addon/<namespace>/creative_mode_tab/<id>.json
+```
+
+| Field                | Type           | Required | Fallback | Description                                                                                           |
+|----------------------|----------------|----------|----------|-------------------------------------------------------------------------------------------------------|
+| `name`               | Text Component | Yes      | -        | The tab's display name. A raw string or a full text component (e.g. `{ "translate": "..." }`).        |
+| `icon`               | Item ID        | Yes      | -        | Item shown as the tab's icon.                                                                         |
+| `background_texture` | Identifier     | No       | vanilla  | Background texture of the tab window.                                                                 |
+| `search_bar`         | Boolean        | No       | false    | Enables a search bar at the top of the tab.                                                           |
+| `items`              | Array          | No       | `[]`     | The tab's contents. See [Filling a Tab](#filling-a-tab).                                              |
+| `sections`           | Array          | No       | `[]`     | Sections to split the tab into. See [Sections](#sections). Requires the FancyTabSections integration. |
+
+A minimal tab:
+
+```json title="addon/mypack/creative_mode_tab/my_tab.json"
+{
+  "name": "My Pack",
+  "icon": "mypack:emerald_sword",
+  "items": [
+    "mypack:emerald_sword",
+    "mypack:basic_item"
+  ]
+}
+```
+
+---
+
+## Filling a Tab
+
+Every entry in an `items` list (both a tab's own `items` and a [section's](#sections) `items`) is one of:
+
+- **an item ID**: added as a single stack, or
+- **a variant group**: an object that expands into all matching [multiversal variants](multiversal-variants).
+
+### Variant Groups
+
+A variant group lists a set of base items (like four armor pieces for example) and expands into every variant
+that covers those items' categories. Variants are grouped and ordered automatically: variants sharing a
+category's default stay together, the default first, and each variant's armor pieces are sorted helmet to boots.
+
+| Field           | Type        | Required | Description                                                                                          |
+|-----------------|-------------|----------|------------------------------------------------------------------------------------------------------|
+| `variant_group` | List of IDs | Yes      | The base items to expand. They must carry the `palladium:multiversal_category` component.             |
+| `universe`      | ID          | No       | Only include variants of this universe. Omit to include variants from every universe.                |
+
+```json title="addon/mypack/creative_mode_tab/my_tab.json (excerpt)"
+"items": [
+  "mypack:basic_item",
+  {
+    "variant_group": [
+      "mypack:wooden_helmet",
+      "mypack:wooden_chestplate",
+      "mypack:wooden_leggings",
+      "mypack:wooden_boots"
+    ]
+  }
+]
+```
+
+---
+
+## Sections
+
+Sections split a tab into labelled bands, each with its own banner. They are provided by the bundled
+[FancyTabSections](https://modrinth.com/mod/fancytabsections) mod. When a tab declares
+`sections`, its content is built from those sections instead of the top-level `items` list.
+
+Each entry in `sections` is an object with a `type` (the section type) plus that type's fields.
+Every section has its own `items` list, which accepts the exact same entries as a tab (plain item IDs
+and [variant groups](#variant-groups)).
+
+```json title="addon/mypack/creative_mode_tab/my_tab.json"
+{
+  "name": "My Pack",
+  "icon": "mypack:emerald_sword",
+  "sections": [
+    {
+      "type": "fancytabsections:colored",
+      "id": "mypack:items",
+      "banner_color": "#ee9b50",
+      "items": [
+        "mypack:emerald_sword",
+        "mypack:basic_item"
+      ]
+    },
+    {
+      "type": "fancytabsections:colored",
+      "id": "mypack:armors",
+      "banner_color": "#7ba05b",
+      "items": [
+        {
+          "variant_group": [
+            "mypack:wooden_helmet",
+            "mypack:wooden_chestplate",
+            "mypack:wooden_leggings",
+            "mypack:wooden_boots"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Section Types
+
+<!-- PALLADIUM_LIST_START type="palladium/creative_tab_sections" heading="h3" -->
+### Animated Textured {#fancytabsectionsanimated_textured}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/creative_tab_sections.json').find(x => x.namespace === 'fancytabsections' && x.path === 'animated_textured')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Colored {#fancytabsectionscolored}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/creative_tab_sections.json').find(x => x.namespace === 'fancytabsections' && x.path === 'colored')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Textured {#fancytabsectionstextured}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/creative_tab_sections.json').find(x => x.namespace === 'fancytabsections' && x.path === 'textured')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+<!-- PALLADIUM_LIST_END -->

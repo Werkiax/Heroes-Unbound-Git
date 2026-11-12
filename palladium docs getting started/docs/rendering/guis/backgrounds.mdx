@@ -1,0 +1,57 @@
+---
+sidebar_position: 3
+---
+
+import PalladiumObjectViewer from "@site/src/components/PalladiumObjectViewer";
+
+# Backgrounds
+
+Backgrounds fill the area behind a [layout](layouts). They are also used by the `palladium:power_tree` widget to draw the area behind the ability tree.
+
+A background is a typed object, like layouts and widgets:
+
+```json
+"background": {
+  "type": "palladium:sprite",
+  "sprite": "palladium:background/default"
+}
+```
+
+As a shortcut, you can write a plain texture path instead of an object. It is read as a `palladium:repeating_texture` background with a 16x16 tile size, which is exactly right for block textures:
+
+```json
+"background": "minecraft:textures/block/stone.png"
+```
+
+If you leave the `background` field out entirely, the simple layout uses the default sprite background (`palladium:background/default`), the same panel texture the built-in power screen uses. To have no background at all, set it to the `palladium:empty` type.
+
+:::info
+
+The `texture` fields of the texture-based backgrounds accept both plain texture paths and [dynamic textures](../dynamic-textures) with a `#` in front of the ID, the same texture reference format used by render layers.
+
+:::
+
+## Background Types
+
+<!-- PALLADIUM_LIST_START type="palladium/ui/backgrounds" heading="h3" -->
+### Empty {#palladiumempty}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/backgrounds.json').find(x => x.namespace === 'palladium' && x.path === 'empty')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Repeating Texture {#palladiumrepeating_texture}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/backgrounds.json').find(x => x.namespace === 'palladium' && x.path === 'repeating_texture')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Sprite {#palladiumsprite}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/backgrounds.json').find(x => x.namespace === 'palladium' && x.path === 'sprite')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Texture {#palladiumtexture}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/ui/backgrounds.json').find(x => x.namespace === 'palladium' && x.path === 'texture')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+<!-- PALLADIUM_LIST_END -->

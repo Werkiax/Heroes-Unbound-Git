@@ -1,0 +1,157 @@
+---
+sidebar_position: 2
+---
+
+import PalladiumObjectViewer from "@site/src/components/PalladiumObjectViewer";
+
+# Render Layers
+
+Render layers are client-side definitions that render additional visuals on top of a player, things like suit textures, glowing eyes, capes, or fully custom 3D models. They are referenced by ID from items (via the [`palladium:render_layers`](/docs/items/data-components#palladiumrender_layers) data component) or from power renderers.
+
+Render layer files are asset-side content, placed at:
+
+```
+assets/<namespace>/palladium/render_layers/<id>.json
+```
+
+---
+
+## Shared Properties
+
+Every render layer type supports the following optional top-level fields, regardless of type.
+
+| Field                | Type                     | Description                                                                           |
+|----------------------|--------------------------|---------------------------------------------------------------------------------------|
+| `hidden_model_parts` | String or List\<String\> | Player model parts to hide while this layer is active (e.g. `"body.cape"`, `"head"`). |
+| `conditions`         | Conditions               | Controls when the layer is visible. See below.                                        |
+
+### Conditions
+
+The `conditions` field controls under which circumstances the render layer is shown. In its simplest form it accepts a single [Condition](/docs/logic/conditions) that applies in all perspectives:
+
+```json
+"conditions": {
+  "type": "palladium:ability_enabled",
+  "ability": "mypack:flight"
+}
+```
+
+To apply different conditions depending on whether the player is in first or third person, use the full object form:
+
+| Field          | Type      | Default     | Description                                        |
+|----------------|-----------|-------------|----------------------------------------------------|
+| `main`         | Condition | —           | Required. Applies in all perspectives.             |
+| `third_person` | Condition | always true | Additional condition applied only in third person. |
+| `first_person` | Condition | always true | Additional condition applied only in first person. |
+
+```json
+"conditions": {
+  "main": {
+    "type": "palladium:ability_enabled",
+    "ability": "mypack:flight"
+  },
+  "first_person": {
+    "type": "palladium:false"
+  }
+}
+```
+
+---
+
+## Textures
+
+Fields that take a texture, like `texture` on the default render layer, accept three forms:
+
+- A plain texture path including `.png`, for example `"mypack:textures/entity/suit.png"`.
+- A reference to a [dynamic texture](dynamic-textures) file with a `#` in front, for example `"#mypack:suit_lights"`.
+- A dynamic texture object written directly into the field, without a separate file. This lets the texture switch with [variables](dynamic-textures#variables) or be edited with [transformers](dynamic-textures#texture-transformers):
+
+```json
+"texture": {
+  "base": "mypack:textures/entity/suit_#STATE.png",
+  "variables": {
+    "STATE": {
+      "type": "palladium:crouching",
+      "on_true": "stealth",
+      "on_false": "default"
+    }
+  }
+}
+```
+
+See [Dynamic Textures](dynamic-textures) for all options.
+
+---
+
+## Model Layers
+
+The `model_layer` field of the default render layer takes the ID of a model layer, optionally followed by `#` and the layer name. Without a layer name, `main` is used:
+
+```json
+"model_layer": "mypack:suit"
+```
+
+The model can also change while the game is running. Instead of a plain ID, write an object with a `base` and `variables`. Variables work exactly like the ones in [dynamic textures](dynamic-textures#variables): every `#NAME` in `base` is replaced with the result of the [value](/docs/logic/values) with that name, and the result is used as the model layer.
+
+This layer uses `mypack:suit_closed` normally and `mypack:suit_open` while crouching:
+
+```json
+"model_layer": {
+  "base": "mypack:suit_#STATE",
+  "variables": {
+    "STATE": {
+      "type": "palladium:crouching",
+      "on_true": "open",
+      "on_false": "closed"
+    }
+  }
+}
+```
+
+Every model layer that can come out of the variables has to exist. If one doesn't, nothing is rendered while the variables point to it, and an error is written to the addon pack log. Variable names in uppercase are a good idea here, so they can't be confused with the layer name after the `#`.
+
+Like the other fields of a render layer, `model_layer` can also be split into a `wide` and a `slim` version, and each of them can be dynamic on its own.
+
+---
+
+## Types
+
+Below is a list of all render layer types provided by Palladium. In your local `palladium/documentation/palladium` folder you can find an auto-generated file that may include additional types added by other mods.
+
+<!-- PALLADIUM_LIST_START type="palladium/render_layers" heading="h3" -->
+### Block on Head {#palladiumblock_on_head}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/render_layers.json').find(x => x.namespace === 'palladium' && x.path === 'block_on_head')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Compound Render Layer {#palladiumcompound}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/render_layers.json').find(x => x.namespace === 'palladium' && x.path === 'compound')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Default Render Layer {#palladiumrender_layer}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/render_layers.json').find(x => x.namespace === 'palladium' && x.path === 'render_layer')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Geo Render Layer {#geckolibrender_layer}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/render_layers.json').find(x => x.namespace === 'geckolib' && x.path === 'render_layer')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Lightning Sparks {#palladiumlightning_sparks}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/render_layers.json').find(x => x.namespace === 'palladium' && x.path === 'lightning_sparks')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Thrusters {#palladiumthrusters}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/render_layers.json').find(x => x.namespace === 'palladium' && x.path === 'thrusters')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+### Vibration {#palladiumvibration}
+<PalladiumObjectViewer data={require('@site/src/palladium_docs/palladium/render_layers.json').find(x => x.namespace === 'palladium' && x.path === 'vibration')} heading={'h3'} showFullPowerExamples={false}/>
+
+<hr/>
+
+<!-- PALLADIUM_LIST_END -->
