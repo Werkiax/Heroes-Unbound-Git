@@ -1,12 +1,23 @@
 {
     "type": "palladium:triggered",
     "animations": {
-        "slam": "werkiax_unbound:gravebreaker_slam"
+        "slam": "werkiax_unbound:gravebreaker_slam",
+        "slam_fp": "werkiax_unbound:gravebreaker_slam_fp"
     },
     "triggers": {
-        "#slam": {
-            "type": "palladium:ability_enabled",
-            "ability": "werkiax_unbound:solomon_grundy#gravebreaker"
-        }
+        "#slam_fp": [
+            {
+                "type": "palladium:ability_enabled",
+                "ability": "werkiax_unbound:solomon_grundy#gravebreaker"
+            },
+            "query.is_first_person"
+        ],
+        "#slam": [
+            {
+                "type": "palladium:ability_enabled",
+                "ability": "werkiax_unbound:solomon_grundy#gravebreaker"
+            },
+            "!query.is_first_person"
+        ]
     }
 }
