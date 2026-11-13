@@ -1,0 +1,15 @@
+{
+    "name": "Mandalorian Armor",
+    "icon": "minecraft:netherite_chestplate",
+    "abilities": {
+        "set_bonus_placeholder": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Mandalorian Set Bonus",
+                "description": "Placeholder for the full-set power. Does nothing yet.",
+                "icon": "minecraft:netherite_chestplate",
+                "list_index": 0
+            }
+        }
+    }
+}

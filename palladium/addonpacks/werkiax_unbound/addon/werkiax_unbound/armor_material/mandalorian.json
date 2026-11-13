@@ -1,0 +1,15 @@
+{
+    "durability": 37,
+    "defense": {
+        "helmet": 3,
+        "chestplate": 8,
+        "leggings": 6,
+        "boots": 3,
+        "body": 19
+    },
+    "enchantment_value": 15,
+    "equip_sound": "minecraft:item.armor.equip_netherite",
+    "toughness": 3.0,
+    "knockback_resistance": 0.1,
+    "repair_items": "#minecraft:repairs_netherite_armor"
+}
