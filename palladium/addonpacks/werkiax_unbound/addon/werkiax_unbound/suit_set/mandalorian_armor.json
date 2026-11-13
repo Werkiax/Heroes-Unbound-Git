@@ -7,16 +7,36 @@
     },
     "slots": {
         "helmet": {
-            "item_name": "mandalorian_helmet"
+            "item_name": "mandalorian_helmet",
+            "components": {
+                "palladium:render_layers": {
+                    "head": "werkiax_unbound:mandalorian_suit"
+                }
+            }
         },
         "chestplate": {
-            "item_name": "mandalorian_chestplate"
+            "item_name": "mandalorian_chestplate",
+            "components": {
+                "palladium:render_layers": {
+                    "chest": "werkiax_unbound:mandalorian_suit"
+                }
+            }
         },
         "leggings": {
-            "item_name": "mandalorian_leggings"
+            "item_name": "mandalorian_leggings",
+            "components": {
+                "palladium:render_layers": {
+                    "legs": "werkiax_unbound:mandalorian_suit"
+                }
+            }
         },
         "boots": {
-            "item_name": "mandalorian_boots"
+            "item_name": "mandalorian_boots",
+            "components": {
+                "palladium:render_layers": {
+                    "feet": "werkiax_unbound:mandalorian_suit"
+                }
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
-   "item.werkiax_unbound.mandalorian_helmet": "Mandalorian Helmet",
-   "item.werkiax_unbound.mandalorian_chestplate": "Mandalorian Chestplate",
-   "item.werkiax_unbound.mandalorian_leggings": "Mandalorian Leggings",
-   "item.werkiax_unbound.mandalorian_boots": "Mandalorian Boots",
-   "palladium.suit_set.werkiax_unbound.mandalorian_armor": "Mandalorian Armor"
+{
+    "item.werkiax_unbound.mandalorian_helmet": "Mandalorian Helmet",
+    "item.werkiax_unbound.mandalorian_chestplate": "Mandalorian Chestplate",
+    "item.werkiax_unbound.mandalorian_leggings": "Mandalorian Leggings",
+    "item.werkiax_unbound.mandalorian_boots": "Mandalorian Boots",
+    "palladium.suit_set.werkiax_unbound.mandalorian_armor": "Mandalorian Armor"
+}
