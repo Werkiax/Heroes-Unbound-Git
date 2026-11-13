@@ -183,8 +183,8 @@
                 },
                 "enabling": {
                     "type": "palladium:key_bind",
-                    "behaviour": "held",
-                    "time": 60,
+                    "behaviour": "activation",
+                    "time": 20,
                     "conditions": [
                         {
                             "type": "palladium:not",
@@ -199,7 +199,7 @@
         },
         "undead_chomp_bite": {
             "type": "argon:held_target",
-            "release_window": 4,
+            "release_window": 1,
             "applications": [
                 {
                     "timing": "last_tick",
@@ -237,8 +237,8 @@
         },
         "chomp_feast": {
             "type": "argon:saturation",
-            "amount": 2.0,
-            "food": 3,
+            "amount": 3.0,
+            "food": 5,
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
@@ -246,33 +246,45 @@
             "state": {
                 "enabling": [
                     {
-                        "type": "palladium:ability_enabled",
+                        "type": "palladium:ability_last_tick",
                         "ability": "werkiax_unbound:solomon_grundy#undead_chomp"
-                    },
-                    {
-                        "type": "palladium:or",
-                        "conditions": [
-                            {
-                                "type": "palladium:number_comparison",
-                                "value": {
-                                    "type": "palladium:ability_tick_count",
-                                    "ability": "werkiax_unbound:solomon_grundy#undead_chomp"
-                                },
-                                "operator": "=",
-                                "compare_to": 25
-                            },
-                            {
-                                "type": "palladium:number_comparison",
-                                "value": {
-                                    "type": "palladium:ability_tick_count",
-                                    "ability": "werkiax_unbound:solomon_grundy#undead_chomp"
-                                },
-                                "operator": "=",
-                                "compare_to": 35
-                            }
-                        ]
                     }
                 ]
+            }
+        },
+        "chomp_sfx": {
+            "type": "palladium:action",
+            "first_tick_action": [
+                {
+                    "type": "palladium:play_sound",
+                    "sound": "minecraft:entity.zombie.ambient",
+                    "volume": 1.5,
+                    "pitch": 0.5
+                }
+            ],
+            "last_tick_action": [
+                {
+                    "type": "palladium:play_sound",
+                    "sound": "minecraft:entity.evoker_fangs.attack",
+                    "volume": 2.0,
+                    "pitch": 0.7
+                },
+                {
+                    "type": "palladium:play_sound",
+                    "sound": "minecraft:entity.generic.eat",
+                    "volume": 1.5,
+                    "pitch": 0.6
+                }
+            ],
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:ability_first_tick",
+                    "ability": "werkiax_unbound:solomon_grundy#undead_chomp"
+                }
             }
         },
         "rotting_breath": {
@@ -369,6 +381,17 @@
                             "ability": "werkiax_unbound:solomon_grundy#stasis"
                         }
                     }
+                },
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 20
+                    },
+                    "conditions": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:solomon_grundy#gravebreaker"
+                    }
                 }
             }
         },
@@ -423,6 +446,17 @@
                             }
                         }
                     ]
+                },
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 15
+                    },
+                    "conditions": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:solomon_grundy#relentless_pursuit"
+                    }
                 }
             }
         },
@@ -595,6 +629,17 @@
                     "type": "palladium:ability_ticks",
                     "ability": "werkiax_unbound:solomon_grundy#relentless_pursuit_timer",
                     "min": "3s"
+                },
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 10
+                    },
+                    "conditions": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:solomon_grundy#swamp_affinity"
+                    }
                 }
             }
         },
@@ -716,6 +761,19 @@
                 },
                 "color": "green",
                 "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 30
+                    },
+                    "conditions": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:solomon_grundy#undead_kinship"
+                    }
+                }
             }
         },
         "stasis": {
@@ -1510,6 +1568,17 @@
                         "within": "10s",
                         "or_hurt_by_hostile": true
                     }
+                },
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 25
+                    },
+                    "conditions": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:solomon_grundy#rotting_breath"
+                    }
                 }
             }
         },
@@ -1534,6 +1603,10 @@
                     "cost": {
                         "type": "palladium:experience_level",
                         "xp_level": 5
+                    },
+                    "conditions": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:solomon_grundy#undead_grasp"
                     }
                 },
                 "enabling": {

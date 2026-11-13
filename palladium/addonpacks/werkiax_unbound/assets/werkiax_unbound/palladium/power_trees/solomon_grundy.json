@@ -29,19 +29,18 @@
     "auto_connect": false,
     "nodes": {
         "undead_being": {
-            "pos": [7.0, -0.25],
+            "pos": [7.0, 0.0],
             "style": "root"
         },
-        "undead_grasp": [6.0, -1.45],
-        "grasp_mode": [6.0, -2.4],
-        "relentless_pursuit": [8.0, -1.45],
-        "upgrades": {
-            "pos": [7.0, 1.3],
-            "style": "root",
-            "title": "Undead Might",
-            "icon": "werkiax_unbound:textures/icons/solomon_grundy_icon.png",
-            "description": "Permanent stat upgrades. Four tiers each for health, damage, armor and speed."
-        },
+        "undead_grasp": [7.0, -1.2],
+        "undead_grasp_squeeze": [5.5, -2.4],
+        "undead_chomp": [7.0, -2.4],
+        "swamp_affinity": [8.5, -2.4],
+        "relentless_pursuit": [8.5, -3.6],
+        "gravebreaker": [8.5, -4.8],
+        "rotting_breath": [8.5, -6.0],
+        "undead_kinship": [8.5, -7.2],
+        "undead_revival": [8.5, -8.4],
         "health_upgrade_1": [5.5, 2.6],
         "health_upgrade_2": [5.5, 3.6],
         "health_upgrade_3": [5.5, 4.6],
@@ -57,17 +56,7 @@
         "speed_upgrade_1": [8.5, 2.6],
         "speed_upgrade_2": [8.5, 3.6],
         "speed_upgrade_3": [8.5, 4.6],
-        "speed_upgrade_4": [8.5, 5.6],
-        "undead_grasp_squeeze": [0.0, 0.0],
-        "undead_grasp_chomp": [0.0, 0.0],
-        "chomp_feast": [0.0, 0.0],
-        "rotting_breath": [8.0, -2.5],
-        "rotting_breath_sfx": [0.0, 0.0],
-        "relentless_pursuit_timer": [0.0, 0.0],
-        "undead_physique": [0.0, 0.0],
-        "undead_regeneration": [0.0, 0.0],
-        "swamp_affinity": [7.0, -2.5],
-        "swamp_affinity_speed": [0.0, 0.0]
+        "speed_upgrade_4": [8.5, 5.6]
     },
     "connections": [
         {
@@ -76,27 +65,35 @@
         },
         {
             "from": "undead_grasp",
-            "to": "grasp_mode"
+            "to": "undead_grasp_squeeze"
         },
         {
-            "from": "undead_being",
+            "from": "undead_grasp",
+            "to": "undead_chomp"
+        },
+        {
+            "from": "undead_grasp",
+            "to": "swamp_affinity"
+        },
+        {
+            "from": "swamp_affinity",
             "to": "relentless_pursuit"
         },
         {
-            "from": "upgrades",
-            "to": "health_upgrade_1"
+            "from": "relentless_pursuit",
+            "to": "gravebreaker"
         },
         {
-            "from": "upgrades",
-            "to": "damage_upgrade_1"
+            "from": "gravebreaker",
+            "to": "rotting_breath"
         },
         {
-            "from": "upgrades",
-            "to": "armor_upgrade_1"
+            "from": "rotting_breath",
+            "to": "undead_kinship"
         },
         {
-            "from": "upgrades",
-            "to": "speed_upgrade_1"
+            "from": "undead_kinship",
+            "to": "undead_revival"
         },
         {
             "from": "health_upgrade_1",
