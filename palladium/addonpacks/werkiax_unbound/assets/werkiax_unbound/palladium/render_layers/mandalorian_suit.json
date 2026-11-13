@@ -5,11 +5,11 @@
     },
     "render_type": "minecraft:entity_translucent",
     "hidden_model_parts": [
-        "hat",
-        "jacket",
-        "left_sleeve",
-        "right_sleeve",
-        "left_pants",
-        "right_pants"
+        "head.hat",
+        "body.jacket",
+        "left_arm.left_sleeve",
+        "right_arm.right_sleeve",
+        "left_leg.left_pants",
+        "right_leg.right_pants"
     ]
 }
