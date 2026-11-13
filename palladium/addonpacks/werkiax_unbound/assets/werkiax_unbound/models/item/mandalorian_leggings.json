@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "werkiax_unbound:item/mandalorian_leggings"
+    }
+}
