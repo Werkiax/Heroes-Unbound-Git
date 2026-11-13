@@ -1,0 +1,12 @@
+{
+    "type": "palladium:triggered",
+    "animations": {
+        "slam": "werkiax_unbound:gravebreaker"
+    },
+    "triggers": {
+        "#slam": {
+            "type": "palladium:ability_enabled",
+            "ability": "werkiax_unbound:solomon_grundy#gravebreaker"
+        }
+    }
+}

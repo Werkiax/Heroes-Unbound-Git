@@ -1,0 +1,26 @@
+{
+    "initial_state": "up",
+    "blend_transition": 5,
+    "states": {
+        "up": {
+            "transitions": {
+                "down": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:solomon_grundy#stasis"
+                }
+            }
+        },
+        "down": {
+            "animation": "werkiax_unbound:grundy_lying",
+            "transitions": {
+                "up": {
+                    "type": "palladium:not",
+                    "conditions": {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:solomon_grundy#stasis"
+                    }
+                }
+            }
+        }
+    }
+}
