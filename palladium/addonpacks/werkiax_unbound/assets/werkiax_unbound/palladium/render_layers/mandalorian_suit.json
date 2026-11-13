@@ -3,5 +3,13 @@
         "wide": "werkiax_unbound:textures/entity/suits/mandalorian_suit_wide.png",
         "slim": "werkiax_unbound:textures/entity/suits/mandalorian_suit_slim.png"
     },
-    "render_type": "minecraft:entity_translucent"
+    "render_type": "minecraft:entity_translucent",
+    "hidden_model_parts": [
+        "hat",
+        "jacket",
+        "left_sleeve",
+        "right_sleeve",
+        "left_pants",
+        "right_pants"
+    ]
 }
