@@ -14,10 +14,7 @@
             "animation": "werkiax_unbound:grundy_lying",
             "transitions": {
                 "up": {
-                    "type": "palladium:not",
-                    "conditions": {
-                        "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:solomon_grundy#stasis"
+                   "animation": "werkiax_unbound:grundy_test"
                     }
                 }
             }

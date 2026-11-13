@@ -1,7 +1,7 @@
 {
     "type": "palladium:triggered",
     "animations": {
-        "slam": "werkiax_unbound:gravebreaker"
+        "slam": "werkiax_unbound:gravebreaker_slam"
     },
     "triggers": {
         "#slam": {
