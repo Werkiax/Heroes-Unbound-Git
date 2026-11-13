@@ -175,6 +175,10 @@ Flight Speed</a>
 Item Custom Value</a>
 </li>
 <li>
+<a href="#argon:power_age">
+Power Age</a>
+</li>
+<li>
 <a href="#argon:smoothed">
 Smoothed</a>
 </li>
@@ -961,7 +965,7 @@ fallback</td>
 <td>
 Float</td>
 <td>
-If the data attachment doesn't exist or is not existent in the entity, this fallback value will be used.</td>
+Used if the data attachment type doesn't exist, for example because it comes from a mod that isn't installed. Entities without a value for the attachment use its default value instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1081,7 +1085,7 @@ fallback</td>
 <td>
 Integer</td>
 <td>
-If the data attachment doesn't exist or is not existent in the entity, this fallback value will be used.</td>
+Used if the data attachment type doesn't exist, for example because it comes from a mod that isn't installed. Entities without a value for the attachment use its default value instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1857,7 +1861,7 @@ fallback</td>
 <td>
 String</td>
 <td>
-If the data attachment doesn't exist or is not existent in the entity, this fallback value will be used.</td>
+Used if the data attachment type doesn't exist, for example because it comes from a mod that isn't installed. Entities without a value for the attachment use its default value instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1929,7 +1933,7 @@ fallback</td>
 <td>
 Text Component</td>
 <td>
-If the data attachment doesn't exist or is not existent in the entity, this fallback value will be used.</td>
+Used if the data attachment type doesn't exist, for example because it comes from a mod that isn't installed. Entities without a value for the attachment use its default value instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -2199,6 +2203,52 @@ true</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"argon:item_custom_value","slot":"chest","key":"example:core_power"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:power_age">
+Power Age<span class="type-badge" title="Returns Double">
+Double</span>
+</h2>
+<p>
+The age, in days, counted by an argon:time_growth ability: the time the ability has been enabled for the player, as a decimal. 0 if the ability is missing.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ability</td>
+<td>
+Ability Reference</td>
+<td>
+The argon:time_growth ability whose age to read.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:power_age","ability":"example:power#growth"}</pre>
 </div>
 <hr>
 

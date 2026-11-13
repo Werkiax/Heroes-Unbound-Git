@@ -30,57 +30,14 @@
         },
         "grundy_size": {
             "type": "palladium:size",
-            "size": 1.3,
+            "size": 1.1,
             "size_change_type": "palladium:default",
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
             }
         },
-        "grasp_mode": {
-            "type": "palladium:mode_switch",
-            "modes": {
-                "carry": {
-                    "title": "Carry"
-                },
-                "squeeze": {
-                    "title": "Squeeze"
-                },
-                "chomp": {
-                    "title": "Chomp"
-                }
-            },
-            "selection": "menu",
-            "confirm": "left_click",
-            "show_popup": true,
-            "properties": {
-                "title": "Undead Grasp",
-                "description": "Hold to pick Carry, Squeeze or Chomp, then release to grab. Press again to drop.",
-                "icon": {
-                    "type": "palladium:texture",
-                    "texture": "werkiax_unbound:textures/icons/undead_grasp.png"
-                },
-                "list_index": 0
-            },
-            "state": {
-                "unlocking": {
-                    "type": "palladium:ability_unlocked",
-                    "ability": "werkiax_unbound:solomon_grundy#undead_grasp"
-                },
-                "enabling": {
-                    "type": "palladium:key_bind",
-                    "behaviour": "held",
-                    "conditions": {
-                        "type": "palladium:not",
-                        "conditions": {
-                            "type": "palladium:ability_enabled",
-                            "ability": "werkiax_unbound:solomon_grundy#stasis"
-                        }
-                    }
-                }
-            }
-        },
-        "undead_grasp": {
+        "undead_carry": {
             "type": "argon:carry",
             "range": 3,
             "attachment": [
@@ -91,17 +48,42 @@
             "maximum_distance": 2.0,
             "allow_players": true,
             "allow_mobs": true,
-            "max_duration": 180,
+            "max_duration": 140,
             "target_collision": false,
             "arm_pose": true,
+            "acquire_ticks": 6,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:or",
+                    "conditions": [
+                        {
+                            "type": "palladium:ability_enabled",
+                            "ability": "werkiax_unbound:solomon_grundy#undead_grasp"
+                        },
+                        {
+                            "type": "palladium:ability_enabled",
+                            "ability": "werkiax_unbound:solomon_grundy#undead_chomp"
+                        }
+                    ]
+                }
+            }
+        },
+        "undead_grasp": {
+            "type": "palladium:dummy",
             "properties": {
                 "title": "Undead Grasp",
-                "description": "Pick up an entity with one hand and lift them above the ground.",
+                "description": "Pick up an entity with one hand and lift them above the ground. Hold to keep it grabbed, release to drop.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/undead_grasp.png"
                 },
-                "hidden_in_bar": true
+                "list_index": 0,
+                "hidden_in_bar": false,
+                "color": "green"
             },
             "state": {
                 "unlocking": {
@@ -111,20 +93,20 @@
                         "xp_level": 1
                     }
                 },
-                "enabling": [
-                    {
-                        "type": "argon:ability_enabled_activation",
-                        "ability": "werkiax_unbound:solomon_grundy#grasp_mode",
-                        "duration": 180
-                    },
-                    {
-                        "type": "palladium:not",
-                        "conditions": {
-                            "type": "palladium:ability_enabled",
-                            "ability": "werkiax_unbound:solomon_grundy#grasp_mode"
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "behaviour": "held",
+                    "time": 140,
+                    "conditions": [
+                        {
+                            "type": "palladium:not",
+                            "conditions": {
+                                "type": "palladium:ability_enabled",
+                                "ability": "werkiax_unbound:solomon_grundy#stasis"
+                            }
                         }
-                    }
-                ]
+                    ]
+                }
             }
         },
         "undead_grasp_squeeze": {
@@ -136,36 +118,92 @@
                     "interval": 20,
                     "damage": 3,
                     "damage_type": "minecraft:player_attack",
-                    "reset_invulnerability": false,
                     "lift": 0.3
                 }
             ],
             "properties": {
-                "hidden_in_gui": true,
+                "title": "Squeeze",
+                "description": "Your Undead Grasp crushes whatever it holds for up to 7 seconds, dealing 3 damage every second.",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/undead_squeeze.png"
+                },
                 "hidden_in_bar": true
             },
             "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 5
+                    },
+                    "conditions": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:solomon_grundy#undead_grasp"
+                    }
+                },
                 "enabling": [
                     {
                         "type": "palladium:ability_enabled",
                         "ability": "werkiax_unbound:solomon_grundy#undead_grasp"
                     },
                     {
-                        "type": "palladium:mode_active",
-                        "ability": "werkiax_unbound:solomon_grundy#grasp_mode",
-                        "mode": "squeeze"
+                        "type": "palladium:not",
+                        "conditions": {
+                            "type": "palladium:ability_enabled",
+                            "ability": "werkiax_unbound:solomon_grundy#undead_chomp"
+                        }
                     }
                 ]
             }
         },
-        "undead_grasp_chomp": {
+        "undead_chomp": {
+            "type": "palladium:dummy",
+            "properties": {
+                "title": "Chomp",
+                "description": "Grab an entity to bite a piece of them, causing damage, bleeding, disorientation and pacifying it while feeding you",
+                "icon": {
+                    "type": "palladium:texture",
+                    "texture": "werkiax_unbound:textures/icons/undead_chomp.png"
+                },
+                "list_index": 1,
+                "hidden_in_bar": false
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:buyable",
+                    "cost": {
+                        "type": "palladium:experience_level",
+                        "xp_level": 10
+                    },
+                    "conditions": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:solomon_grundy#undead_grasp"
+                    }
+                },
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "behaviour": "held",
+                    "time": 60,
+                    "conditions": [
+                        {
+                            "type": "palladium:not",
+                            "conditions": {
+                                "type": "palladium:ability_enabled",
+                                "ability": "werkiax_unbound:solomon_grundy#stasis"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "undead_chomp_bite": {
             "type": "argon:held_target",
-            "release_window": 3,
+            "release_window": 4,
             "applications": [
                 {
-                    "timing": "tick",
-                    "interval": 40,
-                    "damage": 6,
+                    "timing": "last_tick",
+                    "damage": 5,
                     "damage_type": "minecraft:player_attack",
                     "armor_penetration": 0.1,
                     "effects": [
@@ -182,7 +220,8 @@
                             "duration": "5s"
                         }
                     ],
-                    "lift": 0.3
+                    "reset_invulnerability": true,
+                    "lift": 0.0
                 }
             ],
             "properties": {
@@ -190,23 +229,16 @@
                 "hidden_in_bar": true
             },
             "state": {
-                "enabling": [
-                    {
-                        "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:solomon_grundy#undead_grasp"
-                    },
-                    {
-                        "type": "palladium:mode_active",
-                        "ability": "werkiax_unbound:solomon_grundy#grasp_mode",
-                        "mode": "chomp"
-                    }
-                ]
+                "enabling": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:solomon_grundy#undead_chomp"
+                }
             }
         },
         "chomp_feast": {
             "type": "argon:saturation",
-            "amount": 4.0,
-            "food": 6,
+            "amount": 2.0,
+            "food": 3,
             "properties": {
                 "hidden_in_gui": true,
                 "hidden_in_bar": true
@@ -215,17 +247,30 @@
                 "enabling": [
                     {
                         "type": "palladium:ability_enabled",
-                        "ability": "werkiax_unbound:solomon_grundy#undead_grasp_chomp"
+                        "ability": "werkiax_unbound:solomon_grundy#undead_chomp"
                     },
                     {
-                        "type": "palladium:number_comparison",
-                        "value": {
-                            "type": "palladium:ability_tick_count",
-                            "ability": "werkiax_unbound:solomon_grundy#undead_grasp_chomp",
-                            "modify": "math.mod(this, 60)"
-                        },
-                        "operator": "=",
-                        "compare_to": 1
+                        "type": "palladium:or",
+                        "conditions": [
+                            {
+                                "type": "palladium:number_comparison",
+                                "value": {
+                                    "type": "palladium:ability_tick_count",
+                                    "ability": "werkiax_unbound:solomon_grundy#undead_chomp"
+                                },
+                                "operator": "=",
+                                "compare_to": 25
+                            },
+                            {
+                                "type": "palladium:number_comparison",
+                                "value": {
+                                    "type": "palladium:ability_tick_count",
+                                    "ability": "werkiax_unbound:solomon_grundy#undead_chomp"
+                                },
+                                "operator": "=",
+                                "compare_to": 35
+                            }
+                        ]
                     }
                 ]
             }
@@ -357,7 +402,7 @@
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/gravebreaker.png"
                 },
-                "list_index": 1,
+                "list_index": 2,
                 "color": "green"
             },
             "state": {

@@ -467,6 +467,10 @@ Grapple</a>
 Ground Beam</a>
 </li>
 <li>
+<a href="#argon:heal">
+palladium.ability.argon.heal</a>
+</li>
+<li>
 <a href="#argon:hearing">
 Hearing</a>
 </li>
@@ -677,6 +681,10 @@ Throw Blocks</a>
 <li>
 <a href="#argon:time_control">
 Time Control</a>
+</li>
+<li>
+<a href="#argon:time_growth">
+Time Growth</a>
 </li>
 <li>
 <a href="#argon:tool_hands">
@@ -1637,6 +1645,18 @@ false</td>
 </tr>
 <tr>
 <td>
+log</td>
+<td>
+Boolean</td>
+<td>
+If true, the output of the commands is written to the addon pack log.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
 commands</td>
 <td>
 string[]</td>
@@ -2483,7 +2503,7 @@ The scale of the texture.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@50931911</td>
+net.minecraft.world.phys.Vec2@2e02cc02</td>
 </tr>
 <tr>
 <td>
@@ -2531,7 +2551,7 @@ The translation of the texture.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@47fb038d</td>
+net.minecraft.world.phys.Vec2@48531d5</td>
 </tr>
 </tbody>
 </table>
@@ -5719,6 +5739,18 @@ true</td>
 </tr>
 <tr>
 <td>
+safe</td>
+<td>
+Boolean</td>
+<td>
+If true, the blink fails (nothing happens) when the destination is inside blocks, in or over lava, fire or magma, cactus, or over the void.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
 particles</td>
 <td>
 { particle*, count, spread, speed, offset }[]</td>
@@ -5728,6 +5760,18 @@ Optional particle effects played at the user's start and end positions in list o
 false</td>
 <td>
 []</td>
+</tr>
+<tr>
+<td>
+respect_protection</td>
+<td>
+Boolean</td>
+<td>
+If true, the blink fails when a player user could not interact with the destination blocks (spawn protection, claim mods).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
 </tr>
 </tbody>
 </table>
@@ -6865,15 +6909,15 @@ false</td>
 </tr>
 <tr>
 <td>
-knockback_per_speed</td>
+hit_sound</td>
 <td>
-Double</td>
+Identifier</td>
 <td>
-Extra knockback strength for every block per second above min_speed.</td>
+A sound event played at every target that is hit, instead of the default hit sound.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-0.03</td>
+/</td>
 </tr>
 <tr>
 <td>
@@ -6889,15 +6933,27 @@ true</td>
 </tr>
 <tr>
 <td>
-upward_knockback</td>
+visuals_require_blood</td>
 <td>
-Double</td>
+Boolean</td>
 <td>
-Upward velocity added to the target when it is hit.</td>
+If true, hit_visuals are skipped for entities in the argon:bloodless tag, so blood particles do not appear on things that cannot bleed.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-0.3</td>
+false</td>
+</tr>
+<tr>
+<td>
+hit_sound_volume</td>
+<td>
+Float</td>
+<td>
+Volume of hit_sound.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
 </tr>
 <tr>
 <td>
@@ -6925,6 +6981,18 @@ false</td>
 </tr>
 <tr>
 <td>
+excluded_entities</td>
+<td>
+Identifier[]</td>
+<td>
+Entity types that are never hit, so the run passes straight through them. Defaults to minecraft:armor_stand and palladium:suit_stand.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
 inflation</td>
 <td>
 Double</td>
@@ -6937,6 +7005,18 @@ false</td>
 </tr>
 <tr>
 <td>
+hit_sound_pitch</td>
+<td>
+Float</td>
+<td>
+Pitch of hit_sound.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.9</td>
+</tr>
+<tr>
+<td>
 damage_per_speed</td>
 <td>
 Double</td>
@@ -6946,6 +7026,66 @@ Extra damage for every block per second above min_speed.</td>
 false</td>
 <td>
 0.25</td>
+</tr>
+<tr>
+<td>
+knockback_per_speed</td>
+<td>
+Double</td>
+<td>
+Extra knockback strength for every block per second above min_speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.03</td>
+</tr>
+<tr>
+<td>
+effects_min_speed</td>
+<td>
+Double</td>
+<td>
+Horizontal speed in blocks per second the user has to reach before hit_effects, hit_visuals and hit_sound are used. Slower hits only do damage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+hit_visuals</td>
+<td>
+{ shape*, anchor, orientation, particle*, count, radius, step, pitch, strands, arc, height, rings, speed, spread }[]</td>
+<td>
+Particle visuals spawned at every target that is hit, in the same format as the visuals of argon:energy_beam.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+upward_knockback</td>
+<td>
+Double</td>
+<td>
+Upward velocity added to the target when it is hit.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.3</td>
+</tr>
+<tr>
+<td>
+hit_effects</td>
+<td>
+{ effect*, duration*, amplifier, max_amplifier, particles } | { effect*, duration*, amplifier, max_amplifier, particles }[]</td>
+<td>
+Effects applied to every target that is hit, for example bleeding.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
 </tr>
 </tbody>
 </table>
@@ -6960,7 +7100,7 @@ Examples:</h3>
 <h2 id="argon:color_cycle_glow">
 Color Cycle Glow</h2>
 <p>
-While enabled, gives the entity an outline visible through walls that cycles through "colors" in order. It follows world time so everyone sees the same color. Independent of entity_glow and the Glowing effect.</p>
+While enabled, gives the entity an outline that cycles through "colors" in order. It follows world time so everyone sees the same color. Independent of entity_glow and the Glowing effect. By default it is visible through walls, and the outline is a solid colour, so "intensity" dims it towards black.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -6981,6 +7121,18 @@ Fallback Value</th>
 <tbody>
 <tr>
 <td>
+intensity</td>
+<td>
+Float / Value</td>
+<td>
+(Dynamic) 0 to 1, how strong the outline is. The outline is always opaque, so this mixes the colour from faded_color (at 0) to the cycling colour (at 1), for example from an argon:power_age value.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.0</td>
+</tr>
+<tr>
+<td>
 rate</td>
 <td>
 Integer (> 0)</td>
@@ -6990,6 +7142,30 @@ How many ticks (20 per second) each fade from one color to the next takes.</td>
 false</td>
 <td>
 20</td>
+</tr>
+<tr>
+<td>
+through_walls</td>
+<td>
+Boolean</td>
+<td>
+If false, the outline is only shown to viewers who have a clear line of sight to the entity, so it disappears behind blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+faded_color</td>
+<td>
+Color</td>
+<td>
+The colour the outline mixes towards as intensity drops to 0, black by default.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#000000</td>
 </tr>
 <tr>
 <td>
@@ -7008,7 +7184,7 @@ true</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"argon:color_cycle_glow","colors":["#ff0000","#00ff00","#0000ff"],"rate":10}</pre>
+{"type":"argon:color_cycle_glow","colors":["#ff0000","#00ff00","#0000ff"],"rate":10,"intensity":1}</pre>
 </div>
 <hr>
 
@@ -7311,9 +7487,9 @@ Fallback Value</th>
 <td>
 percentage</td>
 <td>
-Double</td>
+(Dynamic) Value</td>
 <td>
-The percentage of the original damage the entity takes, e.g. 0 for none or 150 for 50% more.</td>
+The percentage of the original damage the entity takes, e.g. 0 for none or 150 for 50% more. A Value, so it can scale with power age or other data.</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>
@@ -7829,15 +8005,39 @@ false</td>
 </tr>
 <tr>
 <td>
-radius</td>
+end_with_ability</td>
 <td>
-Float</td>
+Boolean</td>
 <td>
-The radius of the dome in blocks.</td>
+If true, the dome ends as soon as this ability is no longer enabled.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-6.0</td>
+false</td>
+</tr>
+<tr>
+<td>
+quiet</td>
+<td>
+Boolean</td>
+<td>
+If true, the dome makes no sound and spawns no gust or poof particles, so it is only the shell. Combine with damage_reduction 0, deflect_projectiles false and repel 0 for a purely visual dome.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+radius</td>
+<td>
+(Dynamic) Value</td>
+<td>
+The radius of the dome in blocks, read once when it is created, so it can scale with power age.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+6</td>
 </tr>
 <tr>
 <td>
@@ -7856,7 +8056,7 @@ false</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"argon:dome"}</pre>
+{"type":"argon:dome","radius":6.0}</pre>
 </div>
 <hr>
 
@@ -7961,7 +8161,7 @@ Who this ability forces to drown, each entry either {"type": "self"} or {"type":
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[Target[mode=SELF, range=net.threetag.palladium.logic.value.StaticValue@3d44f15d]]</td>
+[Target[mode=SELF, range=net.threetag.palladium.logic.value.StaticValue@16be2c40]]</td>
 </tr>
 </tbody>
 </table>
@@ -8586,6 +8786,18 @@ What the beam does to blocks it hits: "type" is "melt" or "freeze", with "time" 
 false</td>
 <td>
 /</td>
+</tr>
+<tr>
+<td>
+pierce_full_charge_only</td>
+<td>
+Boolean</td>
+<td>
+With pierce and a charge, only a fully charged shot passes through entities; weaker shots stop at the first one.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
 </tr>
 </tbody>
 </table>
@@ -9439,6 +9651,134 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="argon:heal">
+palladium.ability.argon.heal</h2>
+<p>
+On its first enabled tick, heals the user, the ally they are looking at, or every ally nearby. Allies are the user, their team members and their pets. Gives an exact instant amount and can also apply effects such as regeneration.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+mode</td>
+<td>
+"self" | "look_target" | "area_allies"</td>
+<td>
+Who is healed: the user, the ally looked at (look_target), or every ally within range (area_allies).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+SELF</td>
+</tr>
+<tr>
+<td>
+effects</td>
+<td>
+{ effect*, duration, amplifier, particles, size_tiers }[]</td>
+<td>
+Effects applied to everyone healed, such as regeneration for healing over time (regeneration level 2 heals about 1 health per 25 ticks).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+fallback_self</td>
+<td>
+Boolean</td>
+<td>
+In look_target mode, heal the user when no ally is being looked at. Otherwise nothing happens.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+range</td>
+<td>
+(Dynamic) Value</td>
+<td>
+How far away the looked-at ally can be, or the radius for area_allies, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+12.0</td>
+</tr>
+<tr>
+<td>
+include_self</td>
+<td>
+Boolean</td>
+<td>
+In area_allies mode, whether the user is healed too.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+particles</td>
+<td>
+{ particle*, count, spread, speed, offset }[]</td>
+<td>
+Particles played at the middle of everyone healed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+self_pitch</td>
+<td>
+Double</td>
+<td>
+In look_target mode, looking down at least this many degrees heals the user instead of looking for an ally.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+60.0</td>
+</tr>
+<tr>
+<td>
+instant</td>
+<td>
+(Dynamic) Value</td>
+<td>
+Health restored at once, in half hearts (2 is one heart).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:heal","mode":"look_target","range":12.0,"instant":6.0,"effects":[{"effect":"minecraft:regeneration","amplifier":1}]}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="argon:hearing">
 Hearing</h2>
 <p>
@@ -9776,6 +10116,18 @@ If true, also highlights every block matching "blocks" within "distance", throug
 false</td>
 <td>
 false</td>
+</tr>
+<tr>
+<td>
+style</td>
+<td>
+"tint" | "outline"</td>
+<td>
+How highlighted entities are drawn: tint fills the model with the color, outline draws the vanilla glow outline in the color (works on invisible entities too, and the opacity does not apply).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+TINT</td>
 </tr>
 <tr>
 <td>
@@ -10127,7 +10479,7 @@ Pixel offset of the slot strip from its default spot above the hotbar.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@47fb038d</td>
+net.minecraft.world.phys.Vec2@48531d5</td>
 </tr>
 <tr>
 <td>
@@ -10741,7 +11093,7 @@ Pixel offset of the icon and label from their default spot above the hotbar.</td
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@47fb038d</td>
+net.minecraft.world.phys.Vec2@48531d5</td>
 </tr>
 <tr>
 <td>
@@ -11863,7 +12215,7 @@ Whether the radar should rotate with the player, or be static.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-Rotation[mode=LOOK_DIRECTION, staticAngle=net.threetag.palladium.logic.value.StaticValue@3d44f15d]</td>
+Rotation[mode=LOOK_DIRECTION, staticAngle=net.threetag.palladium.logic.value.StaticValue@16be2c40]</td>
 </tr>
 <tr>
 <td>
@@ -11875,7 +12227,7 @@ The radius, in blocks, within which entities are detected and shown on the radar
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.threetag.palladium.logic.value.StaticValue@72cbe3b6</td>
+net.threetag.palladium.logic.value.StaticValue@72e259ca</td>
 </tr>
 <tr>
 <td>
@@ -11887,7 +12239,7 @@ The X/Y onscreen position of the radar relative to the alignment.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-Translate[x=net.threetag.palladium.logic.value.StaticValue@3d44f15d, y=net.threetag.palladium.logic.value.StaticValue@3d44f15d]</td>
+Translate[x=net.threetag.palladium.logic.value.StaticValue@16be2c40, y=net.threetag.palladium.logic.value.StaticValue@16be2c40]</td>
 </tr>
 <tr>
 <td>
@@ -12032,7 +12384,7 @@ Examples:</h3>
 <h2 id="argon:recite">
 Recite</h2>
 <p>
-Says the last spell the user cast, at their current mastery tier, as if typed in chat. If it is a toggle that is already on, it says the stop phrase instead. Cooldown, the spell being unlocked and the voiceless effect still apply.</p>
+Says the last spell the user cast, at their current mastery tier, as if typed in chat. Other spell systems can register a recite hook, and whichever system cast most recently is the one recited. If it is a toggle that is already on, it says the stop phrase instead. Cooldown, the spell being unlocked and the voiceless effect still apply.</p>
 </div>
 <hr>
 
@@ -13729,7 +14081,7 @@ The [x, y] scale of the text.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@50931911</td>
+net.minecraft.world.phys.Vec2@2e02cc02</td>
 </tr>
 <tr>
 <td>
@@ -13765,7 +14117,7 @@ A [x, y] pixel offset applied to the text's position.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@47fb038d</td>
+net.minecraft.world.phys.Vec2@48531d5</td>
 </tr>
 </tbody>
 </table>
@@ -13993,6 +14345,110 @@ true</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"argon:time_control","speed":0.0,"range":16.0,"properties":{"title":"Time Control"}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:time_growth">
+Time Growth</h2>
+<p>
+Makes attributes grow stronger the longer the ability has been enabled for the player. Every enabled tick counts towards the ability's age (time spent offline or with the ability disabled does not count), and each entry adds "per_day" to its attribute for every day of age between "start_day" and "max_day". The age is available to other abilities through the argon:power_age value and condition.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ticks_per_day</td>
+<td>
+Integer</td>
+<td>
+How many enabled ticks count as one day of age. 24000 is one Minecraft day, lower it to test growth quickly.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+24000</td>
+</tr>
+<tr>
+<td>
+reset_on_death</td>
+<td>
+Boolean</td>
+<td>
+If true the age goes back to 0 when the player dies.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+reset_on_power_loss</td>
+<td>
+Boolean</td>
+<td>
+If true the age goes back to 0 when the player loses the power this ability belongs to.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+whole_days</td>
+<td>
+Boolean</td>
+<td>
+If true the bonus only increases once per full day. If false it grows smoothly.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+attributes</td>
+<td>
+Growth Entry[]</td>
+<td>
+The attributes that grow. Each entry has an attribute, an optional operation (default add_value), per_day (the bonus gained per day of age), an optional start_day (default 0, growth begins here) and max_day (growth stops here).</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+milestones</td>
+<td>
+Milestone[]</td>
+<td>
+Ages that announce themselves when the player reaches them by natural growth (not when the age is set with a command). Each entry has a day, a title and an optional subtitle (text components) shown on screen, and an optional sound event ID played for the player.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:time_growth","attributes":[{"attribute":"minecraft:armor","per_day":0.4,"max_day":20.0}],"properties":{"title":"Time Growth"}}</pre>
 </div>
 <hr>
 
@@ -15109,18 +15565,6 @@ Fallback Value</th>
 <tbody>
 <tr>
 <td>
-duration</td>
-<td>
-Integer | Time String ("40s", "2m", etc.)</td>
-<td>
-How long the zone lasts.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-100</td>
-</tr>
-<tr>
-<td>
 damage</td>
 <td>
 (Dynamic) Value</td>
@@ -15145,6 +15589,30 @@ false</td>
 </tr>
 <tr>
 <td>
+ally_effects</td>
+<td>
+{ effect*, duration, amplifier, particles, size_tiers }[]</td>
+<td>
+Effects applied to the user, their team and their pets on every interval.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+duration</td>
+<td>
+Integer | Time String ("40s", "2m", etc.)</td>
+<td>
+How long the zone lasts.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+100</td>
+</tr>
+<tr>
+<td>
 effects</td>
 <td>
 { effect*, duration, amplifier, particles, size_tiers }[]</td>
@@ -15154,6 +15622,30 @@ Effects applied to enemies on every interval.</td>
 false</td>
 <td>
 /</td>
+</tr>
+<tr>
+<td>
+follow_user</td>
+<td>
+Boolean</td>
+<td>
+If true, the zone moves with the user instead of staying where it was created.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+reduction_affects_user</td>
+<td>
+Boolean</td>
+<td>
+If false, the damage reduction applies only to allies, not the user (useful when the user has their own reduction).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
 </tr>
 <tr>
 <td>
@@ -15169,15 +15661,15 @@ false</td>
 </tr>
 <tr>
 <td>
-ally_effects</td>
+end_with_ability</td>
 <td>
-{ effect*, duration, amplifier, particles, size_tiers }[]</td>
+Boolean</td>
 <td>
-Effects applied to the user, their team and their pets on every interval.</td>
+If true, the zone ends as soon as this ability is no longer enabled.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-/</td>
+false</td>
 </tr>
 <tr>
 <td>
@@ -15195,9 +15687,9 @@ false</td>
 <td>
 ally_damage_reduction</td>
 <td>
-Float</td>
+(Dynamic) Value</td>
 <td>
-The fraction from 0 to 1 of damage the user, their team and their pets do not take while inside.</td>
+The fraction from 0 to 1 of damage the user, their team and their pets do not take while inside. A Value read once when the zone is created, so it can scale with power age.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -15244,7 +15736,7 @@ true</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"argon:zone","radius":5,"damage":2}</pre>
+{"type":"argon:zone","radius":5,"damage":2,"ally_damage_reduction":0.0}</pre>
 </div>
 <hr>
 

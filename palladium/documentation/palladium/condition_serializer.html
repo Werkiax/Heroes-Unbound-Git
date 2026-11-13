@@ -395,6 +395,10 @@ Biome</a>
 Biome Swap Area</a>
 </li>
 <li>
+<a href="#argon:block_below">
+Block Below</a>
+</li>
+<li>
 <a href="#argon:carriable">
 Carriable</a>
 </li>
@@ -529,6 +533,10 @@ Perspective</a>
 <li>
 <a href="#argon:possessing">
 Possessing</a>
+</li>
+<li>
+<a href="#argon:power_age">
+Power Age</a>
 </li>
 <li>
 <a href="#argon:reacted">
@@ -1373,7 +1381,7 @@ fallback</td>
 <td>
 Boolean</td>
 <td>
-The value that is used if the data attachment is not present.</td>
+Used if the data attachment type doesn't exist, for example because it comes from a mod that isn't installed. Entities without a value for the attachment use its default value instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1548,7 +1556,7 @@ Examples:</h3>
 <h2 id="palladium:command_result">
 Command Result</h2>
 <p>
-Executes command(s) and compares the result to a number. If there are multiple commands, the result of the last one is used. Only works on the server.</p>
+Executes command(s) and compares the result to a number. If there are multiple commands, the result of the last one is used. Only works on the server. The commands run at the position of the context, which usually is the entity's position.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -1573,7 +1581,7 @@ log</td>
 <td>
 Boolean</td>
 <td>
-Whether or not the command result is being logged.</td>
+If true, the output of the commands is written to the addon pack log.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -3233,7 +3241,7 @@ fallback</td>
 <td>
 Double</td>
 <td>
-The value used when the entity has no value for the data attachment.</td>
+Used if the data attachment type doesn't exist, for example because it comes from a mod that isn't installed. Entities without a value for the attachment use its default value instead.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -4303,6 +4311,74 @@ false</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"argon:biome_swap_area","biome":"minecraft:desert"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:block_below">
+Block Below</h2>
+<p>
+Checks if the block directly beneath the user's feet matches "blocks". Fluids count as blocks, so "minecraft:water" is true while standing on water, for example with fluid walking.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+require_ground</td>
+<td>
+Boolean</td>
+<td>
+If true, the user also has to be on the ground (or on a fluid they can walk on).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+distance</td>
+<td>
+Double</td>
+<td>
+How many blocks below the feet are searched. 0.5 only checks the block the user is standing on, a larger value also passes while hovering above a matching block.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.5</td>
+</tr>
+<tr>
+<td>
+blocks</td>
+<td>
+Block ID(s) / Tag</td>
+<td>
+The block(s) to look for, as explicit block IDs, a tag ("#namespace:tag"), or a mix of both.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:block_below","require_ground":true,"blocks":["#minecraft:sand"]}</pre>
 </div>
 <hr>
 
@@ -6003,6 +6079,74 @@ Examples:</h3>
 {"type":"argon:possessing"}</pre>
 <pre class="json-snippet">
 {"type":"argon:possessing","ability":"example:power#possess"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:power_age">
+Power Age</h2>
+<p>
+True while the age counted by the referenced argon:time_growth ability, in days, is within min and max (inclusive).</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+min</td>
+<td>
+Double</td>
+<td>
+The lowest age in days that passes.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+max</td>
+<td>
+Double</td>
+<td>
+The highest age in days that passes. Unset means no upper limit.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+ability</td>
+<td>
+Ability Reference</td>
+<td>
+The argon:time_growth ability whose age to check.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:power_age","ability":"example:power#growth","min":10.0,"max":20.0}</pre>
 </div>
 <hr>
 
