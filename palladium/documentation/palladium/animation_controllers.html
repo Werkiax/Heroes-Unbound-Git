@@ -69,7 +69,7 @@ Fallback Value</th>
 <td>
 blend_transition</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 Ticks to blend when switching animations. 0 switches instantly.</td>
 <td style="background-color: lightcoral">
@@ -105,7 +105,7 @@ false</td>
 <td>
 animations</td>
 <td>
-Map<String, Identifier / Identifier[]></td>
+Map&lt;String, Identifier / Identifier[]&gt;</td>
 <td>
 Named animation shortcuts, referenced as "#name". A list picks a random entry each time.</td>
 <td style="background-color: lightcoral">
@@ -115,11 +115,115 @@ false</td>
 </tr>
 <tr>
 <td>
+first_person_blend_transition</td>
+<td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
+<td>
+Ticks to blend when switching animations while a first-person animation is playing. If not set, blend_transition is used.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
 states</td>
 <td>
-Map<String, State (animation, blend_transition, transitions)></td>
+Map&lt;String, Animation State&gt;</td>
 <td>
 States of this controller, keyed by name. Transitions are evaluated in order every tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+states.&lt;key&gt; (Animation State)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+animation</td>
+<td>
+Animation (ID or #key) | Animation (ID or #key)[]</td>
+<td>
+An animation ID, a #key from the animations map, or a list of either.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+palladium:empty</td>
+</tr>
+<tr>
+<td>
+first_person_animation</td>
+<td>
+Animation (ID or #key) | Animation (ID or #key)[]</td>
+<td>
+Animations used instead while the player is in first person. Their bones are applied to the first-person arm. If empty, the first-person arm isn't animated.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+animation_selection</td>
+<td>
+&quot;random&quot; | &quot;sequential&quot; | Integer / Value | MoLang</td>
+<td>
+Choose randomly, in sequence, or by a zero-based index. The index can be a dynamic value or MoLang expression.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+random</td>
+</tr>
+<tr>
+<td>
+blend_transition</td>
+<td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
+<td>
+Time spent blending into this state's animation.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+first_person_blend_transition</td>
+<td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
+<td>
+Same as blend_transition, but used while a first-person animation is playing.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+transitions</td>
+<td>
+Map&lt;String, Condition&gt;</td>
+<td>
+Destination state names mapped to the conditions that trigger each transition.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -157,7 +261,7 @@ Fallback Value</th>
 <td>
 blend_transition</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 Ticks to blend when switching animations. 0 switches instantly.</td>
 <td style="background-color: lightcoral">
@@ -181,7 +285,7 @@ false</td>
 <td>
 animations</td>
 <td>
-Map<String, Identifier / Identifier[]></td>
+Map&lt;String, Identifier / Identifier[]&gt;</td>
 <td>
 Named animation shortcuts, referenced as "#name". A list picks a random entry each time.</td>
 <td style="background-color: lightcoral">
@@ -191,9 +295,21 @@ false</td>
 </tr>
 <tr>
 <td>
+first_person_blend_transition</td>
+<td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
+<td>
+Ticks to blend when switching animations while a first-person animation is playing. If not set, blend_transition is used.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
 triggers</td>
 <td>
-Map<Animation (ID or #key), Condition></td>
+Map&lt;Animation (ID or #key), Condition&gt;</td>
 <td>
 Animations to play, keyed by animation ID or "#key" reference, with the condition that triggers them. Earlier entries win when several conditions are true at once.</td>
 <td style="background-color: lightcoral">

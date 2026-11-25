@@ -58,7 +58,7 @@ Forced Flight</a>
 <h2 id="palladium:flight">
 Default Flight</h2>
 <p>
-Default flying type. If the sprint speed is equal or less than the normal speed, this flight will be levitation-only.</p>
+Default flying type. Without a sprint speed this flight is levitation-only, with one the entity can sprint into propelled flight.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -95,7 +95,7 @@ sound</td>
 <td>
 Identifier</td>
 <td>
-Looping sound played constantly while flying. If propelled_sound is set as well, the two sounds fade between each other depending on whether the entity is in propelled flight.</td>
+Looping sound played constantly while flying, only heard by the flying player. If propelled_sound is set as well, the two sounds fade between each other depending on whether the entity is in propelled flight.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -107,7 +107,7 @@ sprint_speed</td>
 <td>
 Float</td>
 <td>
-The sprinting flight speed. If not set, it will be equal to the normal speed.</td>
+The flight speed while sprinting (propelled flight). If not set, there is no propelled flight.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -131,7 +131,7 @@ propelled_sound</td>
 <td>
 Identifier</td>
 <td>
-Looping sound played while the entity is fast-flying (sprinting). Volume scales with flight speed.</td>
+Looping sound played while the entity is fast-flying (sprinting), only heard by the flying player. Volume scales with flight speed.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -158,6 +158,186 @@ Identifier</td>
 Sound played once when the entity enters propelled flight.</td>
 <td style="background-color: lightcoral">
 false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+screen_shake (Screen Shake)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+intensity</td>
+<td>
+Float | Shake Intensity</td>
+<td>
+Camera rotation in degrees. A single number sets yaw and pitch and leaves roll at zero.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+frequency</td>
+<td>
+Float</td>
+<td>
+The number of shake cycles per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.3</td>
+</tr>
+<tr>
+<td>
+fade_in</td>
+<td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
+<td>
+How long the shake takes to reach full strength.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+fade_out</td>
+<td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
+<td>
+How long the shake takes to fade out.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+10</td>
+</tr>
+<tr>
+<td>
+easing</td>
+<td>
+&quot;linear&quot; | &quot;constant&quot; | &quot;in_sine&quot; | &quot;out_sine&quot; | &quot;in_out_sine&quot; | &quot;in_cubic&quot; | &quot;out_cubic&quot; | &quot;in_out_cubic&quot; | &quot;in_quad&quot; | &quot;out_quad&quot; | &quot;in_out_quad&quot; | &quot;in_quart&quot; | &quot;out_quart&quot; | &quot;in_out_quart&quot; | &quot;in_quint&quot; | &quot;out_quint&quot; | &quot;in_out_quint&quot; | &quot;in_expo&quot; | &quot;out_expo&quot; | &quot;in_out_expo&quot; | &quot;in_circ&quot; | &quot;out_circ&quot; | &quot;in_out_circ&quot; | &quot;in_back&quot; | &quot;out_back&quot; | &quot;in_out_back&quot; | &quot;in_elastic&quot; | &quot;out_elastic&quot; | &quot;in_out_elastic&quot; | &quot;in_bounce&quot; | &quot;out_bounce&quot; | &quot;in_out_bounce&quot; | Easing Pair</td>
+<td>
+One easing for both fades or a separate easing for each. Defaults to linear in and out_sine out.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+screen_shake.intensity (Shake Intensity)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+yaw</td>
+<td>
+Float</td>
+<td>
+Horizontal camera rotation in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+pitch</td>
+<td>
+Float</td>
+<td>
+Vertical camera rotation in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+roll</td>
+<td>
+Float</td>
+<td>
+Camera tilt in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+screen_shake.easing (Easing Pair)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+in</td>
+<td>
+&quot;linear&quot; | &quot;constant&quot; | &quot;in_sine&quot; | &quot;out_sine&quot; | &quot;in_out_sine&quot; | &quot;in_cubic&quot; | &quot;out_cubic&quot; | &quot;in_out_cubic&quot; | &quot;in_quad&quot; | &quot;out_quad&quot; | &quot;in_out_quad&quot; | &quot;in_quart&quot; | &quot;out_quart&quot; | &quot;in_out_quart&quot; | &quot;in_quint&quot; | &quot;out_quint&quot; | &quot;in_out_quint&quot; | &quot;in_expo&quot; | &quot;out_expo&quot; | &quot;in_out_expo&quot; | &quot;in_circ&quot; | &quot;out_circ&quot; | &quot;in_out_circ&quot; | &quot;in_back&quot; | &quot;out_back&quot; | &quot;in_out_back&quot; | &quot;in_elastic&quot; | &quot;out_elastic&quot; | &quot;in_out_elastic&quot; | &quot;in_bounce&quot; | &quot;out_bounce&quot; | &quot;in_out_bounce&quot;</td>
+<td>
+The easing used while the shake fades in.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+out</td>
+<td>
+&quot;linear&quot; | &quot;constant&quot; | &quot;in_sine&quot; | &quot;out_sine&quot; | &quot;in_out_sine&quot; | &quot;in_cubic&quot; | &quot;out_cubic&quot; | &quot;in_out_cubic&quot; | &quot;in_quad&quot; | &quot;out_quad&quot; | &quot;in_out_quad&quot; | &quot;in_quart&quot; | &quot;out_quart&quot; | &quot;in_out_quart&quot; | &quot;in_quint&quot; | &quot;out_quint&quot; | &quot;in_out_quint&quot; | &quot;in_expo&quot; | &quot;out_expo&quot; | &quot;in_out_expo&quot; | &quot;in_circ&quot; | &quot;out_circ&quot; | &quot;in_out_circ&quot; | &quot;in_back&quot; | &quot;out_back&quot; | &quot;in_out_back&quot; | &quot;in_elastic&quot; | &quot;out_elastic&quot; | &quot;in_out_elastic&quot; | &quot;in_bounce&quot; | &quot;out_bounce&quot; | &quot;in_out_bounce&quot;</td>
+<td>
+The easing used while the shake fades out.</td>
+<td style="background-color: lightgreen">
+true</td>
 <td>
 /</td>
 </tr>
@@ -221,7 +401,7 @@ false</td>
 <td>
 max_anchor_height_type</td>
 <td>
-"absolute" | "relative"</td>
+&quot;absolute&quot; | &quot;relative&quot;</td>
 <td>
 Determines if the maximum height for anchors are relative to the ground, or a fixed y-level.</td>
 <td style="background-color: lightcoral">
@@ -235,7 +415,7 @@ swing_sound</td>
 <td>
 Identifier</td>
 <td>
-Looping sound played while the entity is swinging on an anchor. Volume scales with movement speed.</td>
+Looping sound played while the entity is swinging on an anchor, only heard by the swinging player. Volume scales with movement speed.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -257,7 +437,7 @@ true</td>
 <td>
 swing_interval</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 The airborne gap (in ticks) between releasing one web and firing the next. The first web after starting the flight always fires at the apex of the launch boost.</td>
 <td style="background-color: lightcoral">
@@ -529,7 +709,7 @@ false</td>
 <td>
 profile</td>
 <td>
-"controlled" | "propelled" | "natural" | "gliding"</td>
+&quot;controlled&quot; | &quot;propelled&quot; | &quot;natural&quot; | &quot;gliding&quot;</td>
 <td>
 Presets every setting below: controlled is the balanced default, propelled has heavier momentum and sinks when no direction is held, natural turns and stops quickly with no gravity, gliding keeps momentum and sinks when slow.</td>
 <td style="background-color: lightcoral">
@@ -577,7 +757,7 @@ false</td>
 <td>
 camera_roll_mode</td>
 <td>
-"none" | "partial" | "full"</td>
+&quot;none&quot; | &quot;partial&quot; | &quot;full&quot;</td>
 <td>
 How much of the bank the camera follows.</td>
 <td style="background-color: lightcoral">
@@ -635,6 +815,18 @@ false</td>
 </tr>
 <tr>
 <td>
+flap_cooldown</td>
+<td>
+Integer</td>
+<td>
+Ticks before the next flap is possible.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+8</td>
+</tr>
+<tr>
+<td>
 hover_stabilization</td>
 <td>
 Float</td>
@@ -656,6 +848,18 @@ How hard a hit entity is knocked away.</td>
 false</td>
 <td>
 0.5</td>
+</tr>
+<tr>
+<td>
+flap_count</td>
+<td>
+Integer</td>
+<td>
+How many wing flaps are stored. Above 0, holding jump no longer climbs; each jump press is one flap that adds flap_impulse upward and flap_forward of top speed forward, and uses up one stored flap.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
 </tr>
 <tr>
 <td>
@@ -704,6 +908,18 @@ Whether the player's body leans into the direction of travel while flying.</td>
 false</td>
 <td>
 true</td>
+</tr>
+<tr>
+<td>
+flap_forward</td>
+<td>
+Float</td>
+<td>
+The forward speed one flap adds, as a fraction of top speed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.25</td>
 </tr>
 <tr>
 <td>
@@ -776,6 +992,18 @@ How quickly the bank returns to level each tick.</td>
 false</td>
 <td>
 0.12</td>
+</tr>
+<tr>
+<td>
+flap_impulse</td>
+<td>
+Float</td>
+<td>
+The upward speed, in blocks per tick, one flap adds.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.55</td>
 </tr>
 <tr>
 <td>
@@ -872,6 +1100,18 @@ How far down the player must look, in degrees (30 to 85), for a dive to start. I
 false</td>
 <td>
 45.0</td>
+</tr>
+<tr>
+<td>
+flap_regen_ticks</td>
+<td>
+Integer</td>
+<td>
+Ticks to recover one stored flap while flying.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+40</td>
 </tr>
 <tr>
 <td>

@@ -1,0 +1,30 @@
+{
+    "type": "argon:controlled_flight",
+    "profile": "controlled",
+    "speed": 1.5,
+    "sprint_speed": 4.0,
+    "enable_flight_banking": true,
+    "enable_body_rotation": true,
+    "enable_diving": true,
+    "dive_acceleration_multiplier": 1.8,
+    "enable_gravity_following": true,
+    "enable_superhero_landing": true,
+    "landing_damage_reduction": 1.0,
+    "enable_speed_fov": true,
+    "enable_third_person_framing": true,
+    "camera_roll_mode": "partial",
+    "screen_shake": {
+        "intensity": {
+            "yaw": 0.5,
+            "pitch": 0.5,
+            "roll": 0.15
+        },
+        "frequency": 0.35,
+        "fade_in": 12,
+        "fade_out": 15,
+        "easing": {
+            "in": "out_sine",
+            "out": "out_sine"
+        }
+    }
+}

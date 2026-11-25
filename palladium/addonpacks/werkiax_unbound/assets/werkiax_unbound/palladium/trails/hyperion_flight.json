@@ -1,0 +1,20 @@
+{
+    "spacing": 1,
+    "lifetime": 12,
+    "tick_delay": 1,
+    "requires_movement": true,
+    "renderer": {
+        "type": "argon:motion_blur",
+        "color": "#9fd8ff",
+        "edge_color": "#4aa3ff",
+        "highlight_color": "#ffffff",
+        "glow": true,
+        "opacity": 0.6,
+        "trail_start_width": 0.7,
+        "max_age": 8.0,
+        "speed": {
+            "minimum_trail_speed": 8,
+            "maximum_trail_speed": 40
+        }
+    }
+}

@@ -31,6 +31,10 @@ Overview</h2>
 Palladium</h3>
 <ul>
 <li>
+<a href="#palladium:add_effect">
+Add Effect</a>
+</li>
+<li>
 <a href="#palladium:add_random_superpower">
 Add Random Superpower</a>
 </li>
@@ -132,6 +136,86 @@ Ride</a>
 </li>
 </ul>
 </p>
+<hr>
+
+<div>
+<h2 id="palladium:add_effect">
+Add Effect</h2>
+<p>
+Gives the entity a mob effect.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+duration</td>
+<td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.) | (Dynamic) Value</td>
+<td>
+How long the effect lasts.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+effect</td>
+<td>
+Mob Effect ID</td>
+<td>
+The effect that is given.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+amplifier</td>
+<td>
+Integer / Value</td>
+<td>
+The level of the effect, starting at 0 for level I.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+show_particles</td>
+<td>
+Boolean</td>
+<td>
+Whether the effect shows particles and an icon on the HUD.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:add_effect","effect":"minecraft:speed","duration":200,"amplifier":1}</pre>
+</div>
 <hr>
 
 <div>
@@ -653,7 +737,7 @@ true</td>
 <td>
 operation</td>
 <td>
-"+" | "-" | "*" | "/" | "%"</td>
+&quot;+&quot; | &quot;-&quot; | &quot;*&quot; | &quot;/&quot; | &quot;%&quot;</td>
 <td>
 The arithmetic operation to apply.</td>
 <td style="background-color: lightgreen">
@@ -1039,7 +1123,7 @@ Fallback Value</th>
 <td>
 duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.) | (Dynamic) Value</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.) | (Dynamic) Value</td>
 <td>
 How long the entity will burn.</td>
 <td style="background-color: lightgreen">
@@ -1331,7 +1415,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-"ride_target" | "target_rides_player"</td>
+&quot;ride_target&quot; | &quot;target_rides_player&quot;</td>
 <td>
 Which way to mount: "ride_target" (user rides target) or "target_rides_player" (target rides user).</td>
 <td style="background-color: lightgreen">

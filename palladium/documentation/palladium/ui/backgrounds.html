@@ -35,6 +35,10 @@ Palladium</h3>
 Empty</a>
 </li>
 <li>
+<a href="#palladium:random_tiles">
+Random Tiles</a>
+</li>
+<li>
 <a href="#palladium:repeating_texture">
 Repeating Texture</a>
 </li>
@@ -55,6 +59,154 @@ Texture</a>
 Empty</h2>
 <p>
 Empty background. Renders nothing</p>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:random_tiles">
+Random Tiles</h2>
+<p>
+Fills the background with a random mix of tiles, like a floor of different blocks. It starts with the base texture everywhere, then every layer scatters patches of its own texture over it, in the order they are listed. The pattern is always the same for the same seed.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+seed</td>
+<td>
+Integer</td>
+<td>
+The seed of the random pattern.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+layers</td>
+<td>
+Layer[]</td>
+<td>
+Textures scattered over the base tile, in list order.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+tile_size</td>
+<td>
+Integer (&gt; 0)</td>
+<td>
+The size of a tile in pixels.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+16</td>
+</tr>
+<tr>
+<td>
+base</td>
+<td>
+Texture Reference | Dynamic Texture</td>
+<td>
+The texture that fills every tile at first. Either a texture, or an object with 'texture' and 'random_rotation'.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+layers[] (Layer)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+texture</td>
+<td>
+Texture Reference | Dynamic Texture</td>
+<td>
+The texture used for this layer.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+random_rotation</td>
+<td>
+Boolean</td>
+<td>
+Whether to rotate the texture randomly.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+chance</td>
+<td>
+Number (0.0 ~ 1.0)</td>
+<td>
+The chance for each tile to start a patch.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+size</td>
+<td>
+Integer (&gt; 0) | Object</td>
+<td>
+How many tiles a patch covers, as a positive integer or an integer provider. Use 1 for single tiles.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:random_tiles","base":{"texture":"minecraft:textures/block/dirt.png","random_rotation":true},"layers":[{"texture":"minecraft:textures/block/coarse_dirt.png","random_rotation":true,"chance":0.03,"size":{"min_inclusive":3,"max_inclusive":8,"type":"minecraft:uniform"}},{"texture":"minecraft:textures/block/gravel.png","chance":0.02}]}</pre>
 </div>
 <hr>
 
@@ -97,7 +249,7 @@ true</td>
 <td>
 width</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 Width of the texture file.</td>
 <td style="background-color: lightcoral">
@@ -109,7 +261,7 @@ false</td>
 <td>
 height</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 Height of the texture file.</td>
 <td style="background-color: lightcoral">
@@ -201,7 +353,7 @@ true</td>
 <td>
 width</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 Width of the texture file.</td>
 <td style="background-color: lightcoral">
@@ -213,7 +365,7 @@ false</td>
 <td>
 height</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 Height of the texture file.</td>
 <td style="background-color: lightcoral">

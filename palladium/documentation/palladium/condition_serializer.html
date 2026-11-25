@@ -95,6 +95,10 @@ As Target</a>
 Attribute</a>
 </li>
 <li>
+<a href="#palladium:block">
+Block</a>
+</li>
+<li>
 <a href="#palladium:boolean_data_attachment">
 Boolean Data Attachment</a>
 </li>
@@ -223,6 +227,14 @@ In Lava</a>
 In Rain</a>
 </li>
 <li>
+<a href="#palladium:in_snow">
+In Snow</a>
+</li>
+<li>
+<a href="#palladium:in_thunder">
+In Thunder</a>
+</li>
+<li>
 <a href="#palladium:in_water">
 In Water</a>
 </li>
@@ -271,6 +283,14 @@ Multi Jumping</a>
 Multi Jumps Remaining</a>
 </li>
 <li>
+<a href="#palladium:nearby_blocks">
+Nearby Blocks</a>
+</li>
+<li>
+<a href="#palladium:nearby_entities">
+Nearby Entities</a>
+</li>
+<li>
 <a href="#palladium:night">
 Night</a>
 </li>
@@ -303,6 +323,10 @@ On Ground</a>
 OR</a>
 </li>
 <li>
+<a href="#palladium:owned">
+Owned</a>
+</li>
+<li>
 <a href="#palladium:pose">
 Pose</a>
 </li>
@@ -327,12 +351,24 @@ Sprinting</a>
 String Comparison</a>
 </li>
 <li>
+<a href="#palladium:structure">
+Structure</a>
+</li>
+<li>
 <a href="#palladium:swimming">
 Swimming</a>
 </li>
 <li>
+<a href="#palladium:tamed">
+Tamed</a>
+</li>
+<li>
 <a href="#palladium:team">
 Team</a>
+</li>
+<li>
+<a href="#palladium:transformed">
+Transformed</a>
 </li>
 <li>
 <a href="#palladium:true">
@@ -503,12 +539,24 @@ Item Component</a>
 Jumping</a>
 </li>
 <li>
+<a href="#argon:karma_alignment">
+Karma Alignment</a>
+</li>
+<li>
+<a href="#argon:karma_range">
+Karma Range</a>
+</li>
+<li>
 <a href="#argon:key_press_on_block">
 Key Press On Block</a>
 </li>
 <li>
 <a href="#argon:main_hand">
 Main Hand</a>
+</li>
+<li>
+<a href="#argon:marked_target">
+Marked Target</a>
 </li>
 <li>
 <a href="#argon:movement_speed">
@@ -559,6 +607,10 @@ Sky Access</a>
 Targeted By Mob</a>
 </li>
 <li>
+<a href="#argon:throw_event">
+Throw Event</a>
+</li>
+<li>
 <a href="#argon:time_of_day">
 Time Of Day</a>
 </li>
@@ -569,6 +621,10 @@ Took Off</a>
 <li>
 <a href="#argon:wall_crawling_active">
 Wall Crawling Active</a>
+</li>
+<li>
+<a href="#argon:weather">
+Weather</a>
 </li>
 <li>
 <a href="#argon:y_level">
@@ -605,7 +661,7 @@ Fallback Value</th>
 <td>
 min</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 The minimum required value of the current animation timer value of the ability</td>
 <td style="background-color: lightcoral">
@@ -617,7 +673,7 @@ false</td>
 <td>
 max</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 The maximum required value of the current animation timer value of the ability</td>
 <td style="background-color: lightcoral">
@@ -849,7 +905,7 @@ Fallback Value</th>
 <td>
 min</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 The minimum required value of the current tick count of the ability.</td>
 <td style="background-color: lightcoral">
@@ -861,7 +917,7 @@ false</td>
 <td>
 max</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 The maximum required value of the current tick count of the ability.</td>
 <td style="background-color: lightcoral">
@@ -1311,7 +1367,7 @@ true</td>
 <td>
 operator</td>
 <td>
-"=" | "!=" | "<" | ">" | "<=" | ">="</td>
+&quot;=&quot; | &quot;!=&quot; | &quot;&lt;&quot; | &quot;&gt;&quot; | &quot;&lt;=&quot; | &quot;&gt;=&quot;</td>
 <td>
 Comparison operator being used</td>
 <td style="background-color: lightgreen">
@@ -1325,6 +1381,86 @@ true</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:attribute","attribute":"minecraft:armor","operator":">=","compare_to":10.0}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:block">
+Block</h2>
+<p>
+Checks the block at a position relative to the entity.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+offset</td>
+<td>
+Vector 3D</td>
+<td>
+Block offset that is added to the position.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[0, 0, 0]</td>
+</tr>
+<tr>
+<td>
+blocks</td>
+<td>
+Block ID(s) / Tag</td>
+<td>
+IDs or tags of the blocks that are accepted.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+position</td>
+<td>
+&quot;on&quot; | &quot;feet&quot; | &quot;eyes&quot; | &quot;above&quot;</td>
+<td>
+Which block is checked. 'on' is the block the entity stands on (this also works for slabs, carpets and fences), 'feet' the block at the entity's feet, 'eyes' the block at eye height and 'above' the first block above the entity's head.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+on</td>
+</tr>
+<tr>
+<td>
+state</td>
+<td>
+Block State Properties</td>
+<td>
+Block state properties the block must have, in the same format as vanilla's block predicates.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:block","blocks":"minecraft:grass_block"}</pre>
 </div>
 <hr>
 
@@ -1615,7 +1751,7 @@ false</td>
 <td>
 operator</td>
 <td>
-"=" | "!=" | "<" | ">" | "<=" | ">="</td>
+&quot;=&quot; | &quot;!=&quot; | &quot;&lt;&quot; | &quot;&gt;&quot; | &quot;&lt;=&quot; | &quot;&gt;=&quot;</td>
 <td>
 The used number operator.</td>
 <td style="background-color: lightgreen">
@@ -1739,7 +1875,7 @@ Fallback Value</th>
 <td>
 difficulty</td>
 <td>
-"peaceful" | "easy" | "normal" | "hard"</td>
+&quot;peaceful&quot; | &quot;easy&quot; | &quot;normal&quot; | &quot;hard&quot;</td>
 <td>
 Difficulty to check.</td>
 <td style="background-color: lightgreen">
@@ -1839,7 +1975,7 @@ Fallback Value</th>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 The slot that is being looked into.</td>
 <td style="background-color: lightgreen">
@@ -1883,7 +2019,7 @@ Fallback Value</th>
 <td>
 min</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 The minimum required value of the energy bar.</td>
 <td style="background-color: lightcoral">
@@ -1895,7 +2031,7 @@ false</td>
 <td>
 max</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 The maximum required value of the energy bar.</td>
 <td style="background-color: lightcoral">
@@ -1951,7 +2087,7 @@ Fallback Value</th>
 <td>
 min</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 The minimum required scale of the entity.</td>
 <td style="background-color: lightcoral">
@@ -1963,7 +2099,7 @@ false</td>
 <td>
 max</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 The maximum required scale of the entity.</td>
 <td style="background-color: lightcoral">
@@ -2053,11 +2189,55 @@ Fallback Value</th>
 <td>
 id</td>
 <td>
-ID Predicate</td>
+ID Predicate String | ID Predicate Object</td>
 <td>
-The event ID to match. A full ID matches exactly, a namespace on its own (e.g. "mypack") matches every event in that namespace.</td>
+Use a full ID to match one event, a namespace string to match events in that namespace, or an object to match by namespace and path independently.</td>
 <td style="background-color: lightgreen">
 true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+id (ID Predicate Object)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+namespace</td>
+<td>
+String</td>
+<td>
+Match only this namespace when provided.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+path</td>
+<td>
+String</td>
+<td>
+Match only this path when provided.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
 /</td>
 </tr>
@@ -2099,7 +2279,7 @@ Fallback Value</th>
 <td>
 min</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 The minimum distance in blocks.</td>
 <td style="background-color: lightcoral">
@@ -2111,7 +2291,7 @@ false</td>
 <td>
 max</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 The maximum distance in blocks.</td>
 <td style="background-color: lightcoral">
@@ -2179,7 +2359,7 @@ Fallback Value</th>
 <td>
 gamemode</td>
 <td>
-"survival" | "creative" | "adventure" | "spectator"</td>
+&quot;survival&quot; | &quot;creative&quot; | &quot;adventure&quot; | &quot;spectator&quot;</td>
 <td>
 Gamemode to check.</td>
 <td style="background-color: lightgreen">
@@ -2485,7 +2665,7 @@ Fallback Value</th>
 <td>
 min</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 The minimum required health of the entity.</td>
 <td style="background-color: lightcoral">
@@ -2497,7 +2677,7 @@ false</td>
 <td>
 max</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 The maximum required health of the entity.</td>
 <td style="background-color: lightcoral">
@@ -2535,6 +2715,30 @@ Checks if the entity is currently in rain.</p>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:in_rain"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:in_snow">
+In Snow</h2>
+<p>
+Checks if the entity is currently in snow.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:in_snow"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:in_thunder">
+In Thunder</h2>
+<p>
+Checks if the entity is currently in thunder.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:in_thunder"}</pre>
 </div>
 <hr>
 
@@ -2601,7 +2805,7 @@ true</td>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 The slot that is being looked into.</td>
 <td style="background-color: lightgreen">
@@ -2645,7 +2849,7 @@ Fallback Value</th>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Slot to check for. If none specified, it will use the slot from the current context (if given).</td>
 <td style="background-color: lightcoral">
@@ -2705,7 +2909,7 @@ true</td>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 The slot which is checked for the item upgrade. If empty it looks into the slot of the current context.</td>
 <td style="background-color: lightcoral">
@@ -2795,7 +2999,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-String</td>
+String | String[]</td>
 <td>
 A mode key, or a list of mode keys, any of which satisfies the condition.</td>
 <td style="background-color: lightgreen">
@@ -2907,9 +3111,9 @@ Fallback Value</th>
 <td>
 moon_phase</td>
 <td>
-"full_moon" | "waning_gibbous" | "third_quarter" | "waning_crescent" | "new_moon" | "waxing_crescent" | "first_quarter" | "waxing_gibbous"</td>
+&quot;full_moon&quot; | &quot;waning_gibbous&quot; | &quot;third_quarter&quot; | &quot;waning_crescent&quot; | &quot;new_moon&quot; | &quot;waxing_crescent&quot; | &quot;first_quarter&quot; | &quot;waxing_gibbous&quot; | &quot;full_moon&quot; | &quot;waning_gibbous&quot; | &quot;third_quarter&quot; | &quot;waning_crescent&quot; | &quot;new_moon&quot; | &quot;waxing_crescent&quot; | &quot;first_quarter&quot; | &quot;waxing_gibbous&quot;[]</td>
 <td>
-Moon phase(s) that is/are required</td>
+The moon phase or list of moon phases to match.</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>
@@ -3009,7 +3213,7 @@ Fallback Value</th>
 <td>
 min</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 The minimum amount of remaining jumps.</td>
 <td style="background-color: lightcoral">
@@ -3021,7 +3225,7 @@ false</td>
 <td>
 max</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 The maximum amount of remaining jumps.</td>
 <td style="background-color: lightcoral">
@@ -3047,6 +3251,166 @@ true</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:multi_jumps_remaining","ability":"example:power#multi_jump","min":0,"max":0}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:nearby_blocks">
+Nearby Blocks</h2>
+<p>
+Checks if there are blocks around the entity that match the given blocks. The radius is measured from the center of the entity's hitbox. Blocks in unloaded chunks are not counted.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+min</td>
+<td>
+Integer</td>
+<td>
+How many matching blocks have to be nearby. To check that there are none, put this condition into a "not" condition.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+blocks</td>
+<td>
+Block ID(s) / Tag</td>
+<td>
+IDs or tags of the blocks that are looked for.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+state</td>
+<td>
+Block State Properties</td>
+<td>
+Block state properties the blocks must have, in the same format as vanilla's block predicates.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+radius</td>
+<td>
+Float / Value</td>
+<td>
+The radius around the entity in which blocks are looked for. Can't be higher than 8.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+4.0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:nearby_blocks","radius":6.0,"blocks":"minecraft:emerald_block"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:nearby_entities">
+Nearby Entities</h2>
+<p>
+Checks if there are entities around the entity that fulfill the given conditions. The conditions are checked for each nearby entity, and the entity doing the check is their source, so "as_source" can be used to look back at it.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+min</td>
+<td>
+Integer</td>
+<td>
+How many nearby entities have to fulfill the conditions. To check that there are none, put this condition into a "not" condition.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+include_self</td>
+<td>
+Boolean</td>
+<td>
+If the entity itself counts as a nearby entity.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+radius</td>
+<td>
+Float / Value</td>
+<td>
+The radius around the entity in which entities are looked for. Can't be higher than 32.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+4.0</td>
+</tr>
+<tr>
+<td>
+conditions</td>
+<td>
+Condition | Condition[]</td>
+<td>
+The condition(s) a nearby entity has to fulfill.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:nearby_entities","radius":8.0,"conditions":{"type":"palladium:crouching"}}</pre>
 </div>
 <hr>
 
@@ -3157,7 +3521,7 @@ true</td>
 <td>
 operator</td>
 <td>
-"=" | "!=" | "<" | ">" | "<=" | ">="</td>
+&quot;=&quot; | &quot;!=&quot; | &quot;&lt;&quot; | &quot;&gt;&quot; | &quot;&lt;=&quot; | &quot;&gt;=&quot;</td>
 <td>
 The comparison operator being used</td>
 <td style="background-color: lightgreen">
@@ -3393,6 +3757,18 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="palladium:owned">
+Owned</h2>
+<p>
+Checks if the entity is owned.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:owned"}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="palladium:pose">
 Pose</h2>
 <p>
@@ -3419,9 +3795,9 @@ Fallback Value</th>
 <td>
 pose</td>
 <td>
-"standing" | "fall_flying" | "sleeping" | "swimming" | "spin_attack" | "crouching" | "long_jumping" | "dying" | "croaking" | "using_tongue" | "sitting" | "roaring" | "sniffing" | "emerging" | "digging" | "sliding" | "shooting" | "inhaling"</td>
+&quot;standing&quot; | &quot;fall_flying&quot; | &quot;sleeping&quot; | &quot;swimming&quot; | &quot;spin_attack&quot; | &quot;crouching&quot; | &quot;long_jumping&quot; | &quot;dying&quot; | &quot;croaking&quot; | &quot;using_tongue&quot; | &quot;sitting&quot; | &quot;roaring&quot; | &quot;sniffing&quot; | &quot;emerging&quot; | &quot;digging&quot; | &quot;sliding&quot; | &quot;shooting&quot; | &quot;inhaling&quot; | &quot;standing&quot; | &quot;fall_flying&quot; | &quot;sleeping&quot; | &quot;swimming&quot; | &quot;spin_attack&quot; | &quot;crouching&quot; | &quot;long_jumping&quot; | &quot;dying&quot; | &quot;croaking&quot; | &quot;using_tongue&quot; | &quot;sitting&quot; | &quot;roaring&quot; | &quot;sniffing&quot; | &quot;emerging&quot; | &quot;digging&quot; | &quot;sliding&quot; | &quot;shooting&quot; | &quot;inhaling&quot;[]</td>
 <td>
-The required pose(s).</td>
+The pose or list of poses to match.</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>
@@ -3477,7 +3853,7 @@ false</td>
 <td>
 min</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 The minimum required size (inclusive).</td>
 <td style="background-color: lightcoral">
@@ -3489,7 +3865,7 @@ false</td>
 <td>
 max</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 The maximum required size (inclusive).</td>
 <td style="background-color: lightcoral">
@@ -3627,7 +4003,7 @@ true</td>
 <td>
 operator</td>
 <td>
-"equals" | "equals_ignore_case" | "starts_with" | "ends_with" | "contains" | "contains_ignore_case"</td>
+&quot;equals&quot; | &quot;equals_ignore_case&quot; | &quot;starts_with&quot; | &quot;ends_with&quot; | &quot;contains&quot; | &quot;contains_ignore_case&quot;</td>
 <td>
 The comparison operator being used</td>
 <td style="background-color: lightgreen">
@@ -3647,6 +4023,64 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="palladium:structure">
+Structure</h2>
+<p>
+Checks if the entity is inside or near a generated structure. With a distance of 0 the entity has to stand inside one of the structure's pieces, otherwise it has to be within that many blocks of the structure's outer bounds. Structure data only exists on the server, so this condition is always false on the client.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+distance</td>
+<td>
+Integer (&gt;= 0)</td>
+<td>
+How many blocks away from the structure's bounds the entity can be. 0 means it has to be inside one of the structure's pieces.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+structures</td>
+<td>
+Structure ID(s) / Tag</td>
+<td>
+IDs or tags of the structures.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:structure","structures":"minecraft:ancient_city"}</pre>
+<pre class="json-snippet">
+{"type":"palladium:structure","structures":"#minecraft:village","distance":16}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="palladium:swimming">
 Swimming</h2>
 <p>
@@ -3655,6 +4089,18 @@ Checks if the entity is swimming.</p>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:swimming"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:tamed">
+Tamed</h2>
+<p>
+Checks if the entity is tamed.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:tamed"}</pre>
 </div>
 <hr>
 
@@ -3697,7 +4143,7 @@ false</td>
 <td>
 death_message_visibility</td>
 <td>
-"always" | "never" | "hideForOtherTeams" | "hideForOwnTeam"</td>
+&quot;always&quot; | &quot;never&quot; | &quot;hideForOtherTeams&quot; | &quot;hideForOwnTeam&quot;</td>
 <td>
 Checks the death message visibility rule of the team.</td>
 <td style="background-color: lightcoral">
@@ -3709,7 +4155,7 @@ false</td>
 <td>
 color</td>
 <td>
-"black" | "dark_blue" | "dark_green" | "dark_aqua" | "dark_red" | "dark_purple" | "gold" | "gray" | "dark_gray" | "blue" | "green" | "aqua" | "red" | "light_purple" | "yellow" | "white" | "obfuscated" | "bold" | "strikethrough" | "underline" | "italic" | "reset"</td>
+&quot;black&quot; | &quot;dark_blue&quot; | &quot;dark_green&quot; | &quot;dark_aqua&quot; | &quot;dark_red&quot; | &quot;dark_purple&quot; | &quot;gold&quot; | &quot;gray&quot; | &quot;dark_gray&quot; | &quot;blue&quot; | &quot;green&quot; | &quot;aqua&quot; | &quot;red&quot; | &quot;light_purple&quot; | &quot;yellow&quot; | &quot;white&quot; | &quot;obfuscated&quot; | &quot;bold&quot; | &quot;strikethrough&quot; | &quot;underline&quot; | &quot;italic&quot; | &quot;reset&quot;</td>
 <td>
 Checks the color of the team.</td>
 <td style="background-color: lightcoral">
@@ -3721,7 +4167,7 @@ false</td>
 <td>
 name_tag_visibility</td>
 <td>
-"always" | "never" | "hideForOtherTeams" | "hideForOwnTeam"</td>
+&quot;always&quot; | &quot;never&quot; | &quot;hideForOtherTeams&quot; | &quot;hideForOwnTeam&quot;</td>
 <td>
 Checks the nametag visibility rule of the team.</td>
 <td style="background-color: lightcoral">
@@ -3745,7 +4191,7 @@ false</td>
 <td>
 collision_rule</td>
 <td>
-"always" | "never" | "pushOtherTeams" | "pushOwnTeam"</td>
+&quot;always&quot; | &quot;never&quot; | &quot;pushOtherTeams&quot; | &quot;pushOwnTeam&quot;</td>
 <td>
 Checks the collision rule of the team.</td>
 <td style="background-color: lightcoral">
@@ -3771,6 +4217,52 @@ false</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:team","name":"Avengers","allow_friendly_fire":false,"see_friendly_invisibles":true,"name_tag_visibility":"always","death_message_visibility":"hideForOtherTeams","collision_rule":"pushOtherTeams","color":"aqua"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:transformed">
+Transformed</h2>
+<p>
+Checks if the entity is fully transformed. Not while it's still transforming or already turning back.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+transformation</td>
+<td>
+Identifier</td>
+<td>
+The ID of the transformation. If left out, any transformation counts.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:transformed"}</pre>
+<pre class="json-snippet">
+{"type":"palladium:transformed","transformation":"palladium:example"}</pre>
 </div>
 <hr>
 
@@ -3943,11 +4435,11 @@ ability_bar</td>
 <td>
 String</td>
 <td>
-The argon:ability_bar ability to check, e.g. "fsang:marvel/mutant/reality_warping#my_bar".</td>
-<td style="background-color: lightgreen">
-true</td>
+The argon:ability_bar ability to check, e.g. "fsang:marvel/mutant/reality_warping#my_bar". Left out, any bar of any power counts.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
-/</td>
+</td>
 </tr>
 </tbody>
 </table>
@@ -3987,11 +4479,11 @@ ability_bar</td>
 <td>
 String</td>
 <td>
-The argon:ability_bar ability to check, e.g. "fsang:marvel/mutant/reality_warping#my_bar".</td>
-<td style="background-color: lightgreen">
-true</td>
+The argon:ability_bar ability to check, e.g. "fsang:marvel/mutant/reality_warping#my_bar". Left out, any bar of any power counts.</td>
+<td style="background-color: lightcoral">
+false</td>
 <td>
-/</td>
+</td>
 </tr>
 </tbody>
 </table>
@@ -4029,7 +4521,7 @@ Fallback Value</th>
 <td>
 duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long this stays true after the referenced ability was last seen enabled.</td>
 <td style="background-color: lightgreen">
@@ -4085,7 +4577,7 @@ Fallback Value</th>
 <td>
 duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long this stays true after an ability of a matching type was last seen enabled.</td>
 <td style="background-color: lightgreen">
@@ -4185,7 +4677,7 @@ Fallback Value</th>
 <td>
 duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 If set, only true for this long after each shot instead of the whole time it shows.</td>
 <td style="background-color: lightcoral">
@@ -4209,7 +4701,7 @@ true</td>
 <td>
 lead</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long before the next shot of a multi-shot beam this turns true.</td>
 <td style="background-color: lightcoral">
@@ -4489,7 +4981,7 @@ Fallback Value</th>
 <td>
 duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long it stays true after the phrase is said.</td>
 <td style="background-color: lightcoral">
@@ -4501,7 +4993,7 @@ false</td>
 <td>
 cooldown</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 The cooldown the ability gets after a cast. It uses the ability's cooldown component, so cooldown control abilities and the cooldown condition work with it.</td>
 <td style="background-color: lightcoral">
@@ -4577,7 +5069,7 @@ false</td>
 <td>
 cooldown</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 Cooldown the ability gets once it turns off.</td>
 <td style="background-color: lightcoral">
@@ -4613,7 +5105,7 @@ false</td>
 <td>
 max_duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 Turns itself off after this long. 0 means it never does.</td>
 <td style="background-color: lightcoral">
@@ -4733,7 +5225,7 @@ true</td>
 <td>
 direction</td>
 <td>
-"forward" | "back" | "left" | "right"</td>
+&quot;forward&quot; | &quot;back&quot; | &quot;left&quot; | &quot;right&quot;</td>
 <td>
 The direction to check.</td>
 <td style="background-color: lightgreen">
@@ -4845,7 +5337,7 @@ false</td>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Which slot to check, e.g. an armor slot.</td>
 <td style="background-color: lightcoral">
@@ -4969,7 +5461,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-"block" | "entity" | "either"</td>
+&quot;block&quot; | &quot;entity&quot; | &quot;either&quot;</td>
 <td>
 Which kind of grapple to check for.</td>
 <td style="background-color: lightcoral">
@@ -5093,7 +5585,7 @@ false</td>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Which slot to look for the energy-storing item in.</td>
 <td style="background-color: lightcoral">
@@ -5161,7 +5653,7 @@ false</td>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Which slot to look for the fluid-storing item in.</td>
 <td style="background-color: lightcoral">
@@ -5261,7 +5753,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-"include" | "exclude"</td>
+&quot;include&quot; | &quot;exclude&quot;</td>
 <td>
 Whether a matching power must be present ("include") or absent ("exclude").</td>
 <td style="background-color: lightcoral">
@@ -5429,7 +5921,7 @@ false</td>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Check the item worn or held in this slot instead of a suit (for modules installed on a device item in the Modify tab).</td>
 <td style="background-color: lightcoral">
@@ -5577,7 +6069,7 @@ true</td>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 The slot whose item is checked.</td>
 <td style="background-color: lightgreen">
@@ -5615,6 +6107,106 @@ Checks if the user is in the air and moving upward, not standing on the ground o
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"argon:jumping"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:karma_alignment">
+Karma Alignment</h2>
+<p>
+True while the player's alignment is the given one. Use positive, neutral or negative for a whole side, or an alignment id such as hero or mastermind.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+alignment</td>
+<td>
+&quot;positive&quot; | &quot;neutral&quot; | &quot;negative&quot; | &quot;mastermind&quot; | &quot;villain&quot; | &quot;thug&quot; | &quot;lackey&quot; | &quot;neutral&quot; | &quot;vigilante&quot; | &quot;protector&quot; | &quot;hero&quot; | &quot;legend&quot;</td>
+<td>
+The alignment id or side to check.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:karma_alignment","alignment":"mastermind"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:karma_range">
+Karma Range</h2>
+<p>
+True while the player's karma is within the inclusive range. Karma goes from -5000 to 5000 by default. Use a maximum of -501 for "below -500".</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+maximum</td>
+<td>
+Integer</td>
+<td>
+The highest karma that passes, inclusive.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+2147483647</td>
+</tr>
+<tr>
+<td>
+minimum</td>
+<td>
+Integer</td>
+<td>
+The lowest karma that passes, inclusive.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+-2147483648</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:karma_range","minimum":-5000,"maximum":-501}</pre>
 </div>
 <hr>
 
@@ -5713,7 +6305,7 @@ Fallback Value</th>
 <td>
 hand</td>
 <td>
-"none" | "main_arm" | "off_arm" | "right_arm" | "left_arm" | "both"</td>
+&quot;none&quot; | &quot;main_arm&quot; | &quot;off_arm&quot; | &quot;right_arm&quot; | &quot;left_arm&quot; | &quot;both&quot;</td>
 <td>
 The main hand to check for.</td>
 <td style="background-color: lightgreen">
@@ -5727,6 +6319,62 @@ true</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"argon:main_hand","hand":"right"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:marked_target">
+Marked Target</h2>
+<p>
+Checks if the entity has a living, unexpired target mark from argon:target_mark.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+moving_toward</td>
+<td>
+Boolean</td>
+<td>
+If true, the entity must also be moving toward the marked target.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+max_distance</td>
+<td>
+Double</td>
+<td>
+If above 0, the marked target must be within this many blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:marked_target","moving_toward":true}</pre>
 </div>
 <hr>
 
@@ -5949,7 +6597,7 @@ Fallback Value</th>
 <td>
 entity_filter</td>
 <td>
-"living" | "non_living" | "all"</td>
+&quot;living&quot; | &quot;non_living&quot; | &quot;all&quot;</td>
 <td>
 Which kinds of entities count: 'living' for players/mobs, 'non_living' for everything else.</td>
 <td style="background-color: lightcoral">
@@ -6189,7 +6837,7 @@ false</td>
 <td>
 within</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How recently the reaction must have happened.</td>
 <td style="background-color: lightcoral">
@@ -6245,7 +6893,7 @@ Fallback Value</th>
 <td>
 within</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How recently the entity must have last attacked something for this to pass.</td>
 <td style="background-color: lightgreen">
@@ -6375,6 +7023,74 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="argon:throw_event">
+Throw Event</h2>
+<p>
+True for a short time after the entity threw, recalled or caught an item with an argon:throwable_item ability. It works on the client too, so animation controllers can use it to play a throw, recall or catch animation. The arm option restricts it to players whose main arm matches, so left-handed players can get a mirrored animation.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ticks</td>
+<td>
+Integer</td>
+<td>
+How many ticks the condition stays true after the event.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+10</td>
+</tr>
+<tr>
+<td>
+event</td>
+<td>
+&quot;throw&quot; | &quot;recall&quot; | &quot;catch&quot;</td>
+<td>
+Which event to look for.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+arm</td>
+<td>
+&quot;any&quot; | &quot;right&quot; | &quot;left&quot;</td>
+<td>
+any, right or left: only players with that main arm pass.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+any</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:throw_event","event":"catch","ticks":8,"arm":"right"}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="argon:time_of_day">
 Time Of Day</h2>
 <p>
@@ -6457,7 +7173,7 @@ Fallback Value</th>
 <td>
 within</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long after the launch this stays true.</td>
 <td style="background-color: lightcoral">
@@ -6483,6 +7199,50 @@ Checks if the user has an enabled argon:wall_crawling ability that is attached t
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"argon:wall_crawling_active"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:weather">
+Weather</h2>
+<p>
+Passes while the world the entity is in has the given weather. Only the real world weather counts; local storms made by abilities do not change it.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+weather</td>
+<td>
+&quot;clear&quot; | &quot;raining&quot; | &quot;thundering&quot;</td>
+<td>
+The weather to test for. Raining also passes during a thunderstorm.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+thundering</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:weather"}</pre>
 </div>
 <hr>
 

@@ -1,0 +1,17 @@
+{
+  "type": "palladium:item_tailoring",
+  "title": "Hyperion Suit",
+  "results": {
+    "chestplate": "werkiax_unbound:hyperion_suit_chestplate",
+    "leggings": "werkiax_unbound:hyperion_suit_leggings",
+    "boots": "werkiax_unbound:hyperion_suit_boots"
+  },
+  "ingredients": [
+    { "ingredient": "palladium:blue_fabric", "count": 8 },
+    { "ingredient": "minecraft:netherite_ingot", "count": 3 },
+    { "ingredient": "minecraft:diamond", "count": 20 }
+  ],
+  "tool": "#c:tools/shear",
+  "tool_icon": "palladium:container/slot/shears",
+  "requires_unlocking": false
+}

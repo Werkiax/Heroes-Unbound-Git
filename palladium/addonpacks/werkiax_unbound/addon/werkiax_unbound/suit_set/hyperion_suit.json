@@ -1,0 +1,26 @@
+{
+  "armor_material": {
+    "durability": 37,
+    "defense": { "chestplate": 8, "leggings": 6, "boots": 3 },
+    "enchantment_value": 15,
+    "equip_sound": "minecraft:item.armor.equip_netherite",
+    "toughness": 3.0,
+    "knockback_resistance": 0.1,
+    "repair_items": "#minecraft:repairs_netherite_armor"
+  },
+  "components": {
+    "minecraft:damage_resistant": { "types": "#minecraft:is_fire" }
+  },
+  "tab": "minecraft:combat",
+  "slots": {
+    "chestplate": {
+      "components": { "palladium:render_layers": { "chest": "werkiax_unbound:hyperion_chestplate" } }
+    },
+    "leggings": {
+      "components": { "palladium:render_layers": { "legs": "werkiax_unbound:hyperion_leggings" } }
+    },
+    "boots": {
+      "components": { "palladium:render_layers": { "feet": "werkiax_unbound:hyperion_boots" } }
+    }
+  }
+}

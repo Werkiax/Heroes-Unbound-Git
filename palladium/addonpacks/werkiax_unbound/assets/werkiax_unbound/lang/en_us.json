@@ -3,5 +3,9 @@
     "item.werkiax_unbound.mandalorian_chestplate": "Mandalorian Chestplate",
     "item.werkiax_unbound.mandalorian_leggings": "Mandalorian Leggings",
     "item.werkiax_unbound.mandalorian_boots": "Mandalorian Boots",
-    "palladium.suit_set.werkiax_unbound.mandalorian_armor": "Mandalorian Armor"
+    "palladium.suit_set.werkiax_unbound.mandalorian_armor": "Mandalorian Armor",
+    "item.werkiax_unbound.hyperion_suit_chestplate": "Hyperion Chestplate",
+    "item.werkiax_unbound.hyperion_suit_leggings": "Hyperion Leggings",
+    "item.werkiax_unbound.hyperion_suit_boots": "Hyperion Boots",
+    "palladium.suit_set.werkiax_unbound.hyperion_suit": "Hyperion Suit"
 }

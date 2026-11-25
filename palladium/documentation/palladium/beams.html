@@ -137,7 +137,7 @@ false</td>
 <td>
 render_type</td>
 <td>
-"minecraft:entity_translucent" | "minecraft:entity_cutout" | "palladium:glow" | "argon:glow" | "argon:additive" | "argon:glow_no_depth_write" | "argon:glow_emission" | "argon:additive_emission"</td>
+&quot;minecraft:entity_translucent&quot; | &quot;minecraft:entity_cutout&quot; | &quot;minecraft:entity_cutout_cull&quot; | &quot;palladium:entity_translucent_cull&quot; | &quot;palladium:glow&quot; | &quot;palladium:glow_cull&quot; | &quot;argon:glow&quot; | &quot;argon:additive&quot; | &quot;argon:glow_no_depth_write&quot; | &quot;argon:glow_emission&quot; | &quot;argon:additive_emission&quot;</td>
 <td>
 The render type to render the beam with.</td>
 <td style="background-color: lightcoral">
@@ -192,6 +192,222 @@ true</td>
 </tbody>
 </table>
 <h3>
+render_settings (Laser Renderer Settings)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+glow</td>
+<td>
+Color / Value | Laser Part</td>
+<td>
+The glow surrounding the core.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+core</td>
+<td>
+Color / Value | Laser Part</td>
+<td>
+The solid center of the effect.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+bloom</td>
+<td>
+Integer (0 ~ 10)</td>
+<td>
+The number of additional glow layers.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+2</td>
+</tr>
+<tr>
+<td>
+size</td>
+<td>
+Float (&gt;= 0.0) | Vector 2D</td>
+<td>
+The cross section in pixels. Use one number for a square or a pair for width and height.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+rotation</td>
+<td>
+Float (0.0 ~ 360.0)</td>
+<td>
+The starting rotation around the effect's axis, in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+rotation_speed</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+The rotation speed in degrees per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings.glow (Laser Part)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color</td>
+<td>
+Color / Value</td>
+<td>
+The color of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+opacity</td>
+<td>
+Float (0.0 ~ 1.0)</td>
+<td>
+The opacity of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+rainbow</td>
+<td>
+Float | Boolean</td>
+<td>
+Cycles through dye colors. A higher positive value cycles faster. True enables the fastest cycle and false disables it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+pulse</td>
+<td>
+Pulse</td>
+<td>
+Periodically changes the size of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+blending_mode</td>
+<td>
+&quot;additive&quot; | &quot;translucent&quot;</td>
+<td>
+How this part blends with the background.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+additive</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings.glow.pulse (Pulse)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+scale</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+How far the size varies from its base value.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+frequency</td>
+<td>
+Float (0.0 ~ 10.0)</td>
+<td>
+The pulse speed in radians per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+</tbody>
+</table>
+<h3>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:laser","render_settings":{"glow":"#0000ff","size":2.0}}</pre>
@@ -237,7 +453,7 @@ true</td>
 <td>
 interval</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 Time until the lightning changes its shape.</td>
 <td style="background-color: lightcoral">
@@ -268,6 +484,222 @@ The spread of the lightning fluctuation. It defines how "far" the lightning can 
 false</td>
 <td>
 5.0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings (Laser Renderer Settings)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+glow</td>
+<td>
+Color / Value | Laser Part</td>
+<td>
+The glow surrounding the core.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+core</td>
+<td>
+Color / Value | Laser Part</td>
+<td>
+The solid center of the effect.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+bloom</td>
+<td>
+Integer (0 ~ 10)</td>
+<td>
+The number of additional glow layers.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+size</td>
+<td>
+Float (&gt;= 0.0) | Vector 2D</td>
+<td>
+The cross section in pixels. Use one number for a square or a pair for width and height.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+rotation</td>
+<td>
+Float (0.0 ~ 360.0)</td>
+<td>
+The starting rotation around the effect's axis, in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+rotation_speed</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+The rotation speed in degrees per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings.glow (Laser Part)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color</td>
+<td>
+Color / Value</td>
+<td>
+The color of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+opacity</td>
+<td>
+Float (0.0 ~ 1.0)</td>
+<td>
+The opacity of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+rainbow</td>
+<td>
+Float | Boolean</td>
+<td>
+Cycles through dye colors. A higher positive value cycles faster. True enables the fastest cycle and false disables it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+pulse</td>
+<td>
+Pulse</td>
+<td>
+Periodically changes the size of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+blending_mode</td>
+<td>
+&quot;additive&quot; | &quot;translucent&quot;</td>
+<td>
+How this part blends with the background.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+additive</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings.glow.pulse (Pulse)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+scale</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+How far the size varies from its base value.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+frequency</td>
+<td>
+Float (0.0 ~ 10.0)</td>
+<td>
+The pulse speed in radians per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
 </tr>
 </tbody>
 </table>
@@ -365,7 +797,7 @@ false</td>
 <td>
 render_type</td>
 <td>
-"minecraft:entity_translucent" | "minecraft:entity_cutout" | "palladium:glow" | "argon:glow" | "argon:additive" | "argon:glow_no_depth_write" | "argon:glow_emission" | "argon:additive_emission"</td>
+&quot;minecraft:entity_translucent&quot; | &quot;minecraft:entity_cutout&quot; | &quot;minecraft:entity_cutout_cull&quot; | &quot;palladium:entity_translucent_cull&quot; | &quot;palladium:glow&quot; | &quot;palladium:glow_cull&quot; | &quot;argon:glow&quot; | &quot;argon:additive&quot; | &quot;argon:glow_no_depth_write&quot; | &quot;argon:glow_emission&quot; | &quot;argon:additive_emission&quot;</td>
 <td>
 The render type to render the beam with.</td>
 <td style="background-color: lightcoral">
@@ -421,7 +853,7 @@ false</td>
 <td>
 size</td>
 <td>
-Float (>= 0.0) | Vector 2D</td>
+Float (&gt;= 0.0) | Vector 2D</td>
 <td>
 The cross-section size of each box segment, in blocks.</td>
 <td style="background-color: lightcoral">
@@ -481,7 +913,7 @@ false</td>
 <td>
 render_type</td>
 <td>
-"minecraft:entity_translucent" | "minecraft:entity_cutout" | "palladium:glow" | "argon:glow" | "argon:additive" | "argon:glow_no_depth_write" | "argon:glow_emission" | "argon:additive_emission"</td>
+&quot;minecraft:entity_translucent&quot; | &quot;minecraft:entity_cutout&quot; | &quot;minecraft:entity_cutout_cull&quot; | &quot;palladium:entity_translucent_cull&quot; | &quot;palladium:glow&quot; | &quot;palladium:glow_cull&quot; | &quot;argon:glow&quot; | &quot;argon:additive&quot; | &quot;argon:glow_no_depth_write&quot; | &quot;argon:glow_emission&quot; | &quot;argon:additive_emission&quot;</td>
 <td>
 The render type to render the beam with.</td>
 <td style="background-color: lightcoral">
@@ -531,7 +963,7 @@ The brighter core inside the glow, set the same way.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-{ "color": "#FFFFFF", "opacity": 0.5, "scale": 0.45 }</td>
+{ &quot;color&quot;: &quot;#FFFFFF&quot;, &quot;opacity&quot;: 0.5, &quot;scale&quot;: 0.45 }</td>
 </tr>
 <tr>
 <td>
@@ -585,7 +1017,7 @@ false</td>
 <td>
 blend</td>
 <td>
-"additive" | "translucent"</td>
+&quot;additive&quot; | &quot;translucent&quot;</td>
 <td>
 How the cone is blended into the scene: additive glows brighter where layers overlap, translucent is a plain see-through surface.</td>
 <td style="background-color: lightcoral">
@@ -627,7 +1059,7 @@ The soft outer glow: its colour (hex), its opacity (0 turns it off) and its widt
 <td style="background-color: lightcoral">
 false</td>
 <td>
-{ "color": "#FFFFFF", "opacity": 0.35, "scale": 1.0 }</td>
+{ &quot;color&quot;: &quot;#FFFFFF&quot;, &quot;opacity&quot;: 0.35, &quot;scale&quot;: 1.0 }</td>
 </tr>
 <tr>
 <td>
@@ -769,7 +1201,7 @@ true</td>
 <td>
 blend</td>
 <td>
-"additive" | "translucent"</td>
+&quot;additive&quot; | &quot;translucent&quot;</td>
 <td>
 How the ring is blended into the scene.</td>
 <td style="background-color: lightcoral">
@@ -945,7 +1377,7 @@ Fallback Value</th>
 <td>
 sag_duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 Ticks for the beam to go from loose to taut after it starts being drawn for an entity. It starts loose again after a fresh attach (e.g. a new swing or grapple). Only matters when "sag_amplitude" is above 0.</td>
 <td style="background-color: lightcoral">
@@ -1005,7 +1437,7 @@ false</td>
 <td>
 render_type</td>
 <td>
-"minecraft:entity_translucent" | "minecraft:entity_cutout" | "palladium:glow" | "argon:glow" | "argon:additive" | "argon:glow_no_depth_write" | "argon:glow_emission" | "argon:additive_emission"</td>
+&quot;minecraft:entity_translucent&quot; | &quot;minecraft:entity_cutout&quot; | &quot;minecraft:entity_cutout_cull&quot; | &quot;palladium:entity_translucent_cull&quot; | &quot;palladium:glow&quot; | &quot;palladium:glow_cull&quot; | &quot;argon:glow&quot; | &quot;argon:additive&quot; | &quot;argon:glow_no_depth_write&quot; | &quot;argon:glow_emission&quot; | &quot;argon:additive_emission&quot;</td>
 <td>
 The render type to render the beam with.</td>
 <td style="background-color: lightcoral">

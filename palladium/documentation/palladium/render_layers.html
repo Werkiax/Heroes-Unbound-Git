@@ -113,7 +113,7 @@ true</td>
 <td>
 shrink_player_parts</td>
 <td>
-"cape" | "jacket" | "left_sleeve" | "right_sleeve" | "left_pants_leg" | "right_pants_leg" | "hat"</td>
+&quot;cape&quot; | &quot;jacket&quot; | &quot;left_sleeve&quot; | &quot;right_sleeve&quot; | &quot;left_pants_leg&quot; | &quot;right_pants_leg&quot; | &quot;hat&quot;</td>
 <td>
 Skin overlay part(s) that are scaled down slightly while this layer is visible, so they don't stick out of the layer's model. "cape" has no effect.</td>
 <td style="background-color: lightcoral">
@@ -181,7 +181,7 @@ true</td>
 <td>
 shrink_player_parts</td>
 <td>
-"cape" | "jacket" | "left_sleeve" | "right_sleeve" | "left_pants_leg" | "right_pants_leg" | "hat"</td>
+&quot;cape&quot; | &quot;jacket&quot; | &quot;left_sleeve&quot; | &quot;right_sleeve&quot; | &quot;left_pants_leg&quot; | &quot;right_pants_leg&quot; | &quot;hat&quot;</td>
 <td>
 Skin overlay part(s) that are scaled down slightly while this layer is visible, so they don't stick out of the layer's model. "cape" has no effect.</td>
 <td style="background-color: lightcoral">
@@ -269,7 +269,7 @@ false</td>
 <td>
 shrink_player_parts</td>
 <td>
-"cape" | "jacket" | "left_sleeve" | "right_sleeve" | "left_pants_leg" | "right_pants_leg" | "hat"</td>
+&quot;cape&quot; | &quot;jacket&quot; | &quot;left_sleeve&quot; | &quot;right_sleeve&quot; | &quot;left_pants_leg&quot; | &quot;right_pants_leg&quot; | &quot;hat&quot;</td>
 <td>
 Skin overlay part(s) that are scaled down slightly while this layer is visible, so they don't stick out of the layer's model. "cape" has no effect.</td>
 <td style="background-color: lightcoral">
@@ -300,6 +300,222 @@ The frequency of the sparks.</td>
 false</td>
 <td>
 0.5</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings (Laser Renderer Settings)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+glow</td>
+<td>
+Color / Value | Laser Part</td>
+<td>
+The glow surrounding the core.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+core</td>
+<td>
+Color / Value | Laser Part</td>
+<td>
+The solid center of the effect.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+bloom</td>
+<td>
+Integer (0 ~ 10)</td>
+<td>
+The number of additional glow layers.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+size</td>
+<td>
+Float (&gt;= 0.0) | Vector 2D</td>
+<td>
+The cross section in pixels. Use one number for a square or a pair for width and height.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+rotation</td>
+<td>
+Float (0.0 ~ 360.0)</td>
+<td>
+The starting rotation around the effect's axis, in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+rotation_speed</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+The rotation speed in degrees per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings.glow (Laser Part)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color</td>
+<td>
+Color / Value</td>
+<td>
+The color of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+opacity</td>
+<td>
+Float (0.0 ~ 1.0)</td>
+<td>
+The opacity of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+rainbow</td>
+<td>
+Float | Boolean</td>
+<td>
+Cycles through dye colors. A higher positive value cycles faster. True enables the fastest cycle and false disables it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+pulse</td>
+<td>
+Pulse</td>
+<td>
+Periodically changes the size of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+blending_mode</td>
+<td>
+&quot;additive&quot; | &quot;translucent&quot;</td>
+<td>
+How this part blends with the background.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+additive</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings.glow.pulse (Pulse)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+scale</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+How far the size varies from its base value.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+frequency</td>
+<td>
+Float (0.0 ~ 10.0)</td>
+<td>
+The pulse speed in radians per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
 </tr>
 </tbody>
 </table>
@@ -363,7 +579,7 @@ true</td>
 <td>
 shrink_player_parts</td>
 <td>
-"cape" | "jacket" | "left_sleeve" | "right_sleeve" | "left_pants_leg" | "right_pants_leg" | "hat"</td>
+&quot;cape&quot; | &quot;jacket&quot; | &quot;left_sleeve&quot; | &quot;right_sleeve&quot; | &quot;left_pants_leg&quot; | &quot;right_pants_leg&quot; | &quot;hat&quot;</td>
 <td>
 Skin overlay part(s) that are scaled down slightly while this layer is visible, so they don't stick out of the layer's model. "cape" has no effect.</td>
 <td style="background-color: lightcoral">
@@ -375,7 +591,7 @@ false</td>
 <td>
 overrides</td>
 <td>
-Map<String, Map<String, MoLang>></td>
+Map&lt;String, Map&lt;String, MoLang&gt;&gt;</td>
 <td>
 Changes the position, rotation or scale of model parts while rendering. Each key is a model part name like "head", a path like "body.cape", or "root" for the whole model. Each part takes a map from "x", "y", "z", "x_rot", "y_rot", "z_rot", "x_scale", "y_scale" or "z_scale" to a MoLang expression. The result replaces the value the part has after copying the pose of the player, and that value is available in the expression as "this". Rotations are in degrees.</td>
 <td style="background-color: lightcoral">
@@ -409,9 +625,21 @@ false</td>
 </tr>
 <tr>
 <td>
+tint</td>
+<td>
+Color / Value</td>
+<td>
+A color the texture is multiplied with. White leaves the texture unchanged.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
 render_type</td>
 <td>
-"minecraft:entity_translucent" | "minecraft:entity_cutout" | "palladium:glow" | "argon:glow" | "argon:additive" | "argon:glow_no_depth_write" | "argon:glow_emission" | "argon:additive_emission"</td>
+&quot;minecraft:entity_translucent&quot; | &quot;minecraft:entity_cutout&quot; | &quot;minecraft:entity_cutout_cull&quot; | &quot;palladium:entity_translucent_cull&quot; | &quot;palladium:glow&quot; | &quot;palladium:glow_cull&quot; | &quot;argon:glow&quot; | &quot;argon:additive&quot; | &quot;argon:glow_no_depth_write&quot; | &quot;argon:glow_emission&quot; | &quot;argon:additive_emission&quot;</td>
 <td>
 The render type to render the model with.</td>
 <td style="background-color: lightcoral">
@@ -479,7 +707,7 @@ false</td>
 <td>
 color</td>
 <td>
-Color</td>
+Color / Value</td>
 <td>
 The color of the thrusters.</td>
 <td style="background-color: lightgreen">
@@ -503,7 +731,7 @@ palladium:textures/entity/thruster.png</td>
 <td>
 bloom_color</td>
 <td>
-Color</td>
+Color / Value</td>
 <td>
 The color of the bloom.</td>
 <td style="background-color: lightcoral">
@@ -521,13 +749,13 @@ Scale for the thruster</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[I@1acfb04c</td>
+[1, 1, 1]</td>
 </tr>
 <tr>
 <td>
 shrink_player_parts</td>
 <td>
-"cape" | "jacket" | "left_sleeve" | "right_sleeve" | "left_pants_leg" | "right_pants_leg" | "hat"</td>
+&quot;cape&quot; | &quot;jacket&quot; | &quot;left_sleeve&quot; | &quot;right_sleeve&quot; | &quot;left_pants_leg&quot; | &quot;right_pants_leg&quot; | &quot;hat&quot;</td>
 <td>
 Skin overlay part(s) that are scaled down slightly while this layer is visible, so they don't stick out of the layer's model. "cape" has no effect.</td>
 <td style="background-color: lightcoral">
@@ -545,7 +773,7 @@ Bones of the player model where the thruster will be attached to</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[Ljava.lang.Object;@a683f92</td>
+[Ljava.lang.Object;@2c66be14</td>
 </tr>
 <tr>
 <td>
@@ -609,7 +837,7 @@ true</td>
 <td>
 shrink_player_parts</td>
 <td>
-"cape" | "jacket" | "left_sleeve" | "right_sleeve" | "left_pants_leg" | "right_pants_leg" | "hat"</td>
+&quot;cape&quot; | &quot;jacket&quot; | &quot;left_sleeve&quot; | &quot;right_sleeve&quot; | &quot;left_pants_leg&quot; | &quot;right_pants_leg&quot; | &quot;hat&quot;</td>
 <td>
 Skin overlay part(s) that are scaled down slightly while this layer is visible, so they don't stick out of the layer's model. "cape" has no effect.</td>
 <td style="background-color: lightcoral">
@@ -633,7 +861,7 @@ false</td>
 <td>
 fade_ticks</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 The time/ticks it needs for the vibration to fade in/out.</td>
 <td style="background-color: lightgreen">
@@ -707,13 +935,13 @@ Vector 3D</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[0.0, 0.0, 0.0]</td>
+[0.0,0.0,0.0]</td>
 </tr>
 <tr>
 <td>
 shrink_player_parts</td>
 <td>
-"cape" | "jacket" | "left_sleeve" | "right_sleeve" | "left_pants_leg" | "right_pants_leg" | "hat"</td>
+&quot;cape&quot; | &quot;jacket&quot; | &quot;left_sleeve&quot; | &quot;right_sleeve&quot; | &quot;left_pants_leg&quot; | &quot;right_pants_leg&quot; | &quot;hat&quot;</td>
 <td>
 Skin overlay part(s) that are scaled down slightly while this layer is visible, so they don't stick out of the layer's model. "cape" has no effect.</td>
 <td style="background-color: lightcoral">
@@ -841,7 +1069,7 @@ true</td>
 <td>
 shrink_player_parts</td>
 <td>
-"cape" | "jacket" | "left_sleeve" | "right_sleeve" | "left_pants_leg" | "right_pants_leg" | "hat"</td>
+&quot;cape&quot; | &quot;jacket&quot; | &quot;left_sleeve&quot; | &quot;right_sleeve&quot; | &quot;left_pants_leg&quot; | &quot;right_pants_leg&quot; | &quot;hat&quot;</td>
 <td>
 Skin overlay part(s) that are scaled down slightly while this layer is visible, so they don't stick out of the layer's model. "cape" has no effect.</td>
 <td style="background-color: lightcoral">
@@ -871,7 +1099,7 @@ Vector 2D</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[4, 8]</td>
+[4,8]</td>
 </tr>
 <tr>
 <td>
@@ -889,7 +1117,7 @@ false</td>
 <td>
 attachment</td>
 <td>
-"back" | "left_arm" | "right_arm" | "waist"</td>
+&quot;back&quot; | &quot;left_arm&quot; | &quot;right_arm&quot; | &quot;waist&quot;</td>
 <td>
 Which part of the cloth grid is pinned to the wearer: "back" (cape), "left_arm" or "right_arm" (draped along an arm), or "waist" (skirt or kilt, a box-shaped loop around the hips).</td>
 <td style="background-color: lightcoral">
@@ -919,7 +1147,7 @@ Vector 2D</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[1.8, 1.0]</td>
+[1.8,1.0]</td>
 </tr>
 <tr>
 <td>
@@ -931,7 +1159,7 @@ Vector 3D</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[0.0, 0.1, 0.4]</td>
+[0.0,0.1,0.4]</td>
 </tr>
 <tr>
 <td>
@@ -961,7 +1189,7 @@ false</td>
 <td>
 render_type</td>
 <td>
-"minecraft:entity_translucent" | "minecraft:entity_cutout" | "palladium:glow" | "argon:glow" | "argon:additive" | "argon:glow_no_depth_write" | "argon:glow_emission" | "argon:additive_emission"</td>
+&quot;minecraft:entity_translucent&quot; | &quot;minecraft:entity_cutout&quot; | &quot;minecraft:entity_cutout_cull&quot; | &quot;palladium:entity_translucent_cull&quot; | &quot;palladium:glow&quot; | &quot;palladium:glow_cull&quot; | &quot;argon:glow&quot; | &quot;argon:additive&quot; | &quot;argon:glow_no_depth_write&quot; | &quot;argon:glow_emission&quot; | &quot;argon:additive_emission&quot;</td>
 <td>
 The render type to draw the cloth with.</td>
 <td style="background-color: lightcoral">
@@ -1025,7 +1253,7 @@ Fallback Value</th>
 <td>
 shrink_player_parts</td>
 <td>
-"cape" | "jacket" | "left_sleeve" | "right_sleeve" | "left_pants_leg" | "right_pants_leg" | "hat"</td>
+&quot;cape&quot; | &quot;jacket&quot; | &quot;left_sleeve&quot; | &quot;right_sleeve&quot; | &quot;left_pants_leg&quot; | &quot;right_pants_leg&quot; | &quot;hat&quot;</td>
 <td>
 Skin overlay part(s) that are scaled down slightly while this layer is visible, so they don't stick out of the layer's model. "cape" has no effect.</td>
 <td style="background-color: lightcoral">

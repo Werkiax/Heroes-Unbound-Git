@@ -12,9 +12,13 @@
         },
         "down": {
             "animation": "werkiax_unbound:grundy_lying",
+            "first_person_animation": "werkiax_unbound:grundy_lying_fp",
             "transitions": {
                 "up": {
-                   "animation": "werkiax_unbound:grundy_test"
+                    "type": "palladium:not",
+                    "conditions": {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:solomon_grundy#stasis"
                     }
                 }
             }

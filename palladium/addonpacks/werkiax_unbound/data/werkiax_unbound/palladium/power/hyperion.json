@@ -1,0 +1,93 @@
+{
+    "name": "Hyperion",
+    "icon": "minecraft:nether_star",
+    "abilities": {
+        "flight": {
+            "type": "palladium:flight",
+            "flight_type": "werkiax_unbound:hyperion",
+            "speed_multiplier": {
+                "type": "palladium:convert_to_float",
+                "value": {
+                    "type": "palladium:integer_data_attachment",
+                    "attachment": "werkiax_unbound:flight_speed_level",
+                    "fallback": 0
+                },
+                "modify": "1 + this * 0.25"
+            },
+            "properties": {
+                "title": "Flight",
+                "description": "Double jump to fly, sprint to go faster. Scroll the mouse wheel while flying to change your speed.",
+                "icon": "minecraft:elytra",
+                "color": "light_blue"
+            }
+        },
+        "speed_up": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:flight_speed_level",
+                "operation": "+",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_bar": true,
+                "hidden_in_gui": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "key_bind": {
+                        "type": "palladium:mouse_scroll",
+                        "direction": "up",
+                        "cancel_scroll": true
+                    },
+                    "behaviour": "activation",
+                    "conditions": [
+                        {
+                            "type": "palladium:flying"
+                        },
+                        {
+                            "type": "palladium:number_data_attachment",
+                            "attachment": "werkiax_unbound:flight_speed_level",
+                            "max": 5
+                        }
+                    ]
+                }
+            }
+        },
+        "speed_down": {
+            "type": "palladium:action",
+            "action": {
+                "type": "palladium:modify_number_data_attachment",
+                "attachment": "werkiax_unbound:flight_speed_level",
+                "operation": "-",
+                "value": 1
+            },
+            "properties": {
+                "hidden_in_bar": true,
+                "hidden_in_gui": true
+            },
+            "state": {
+                "enabling": {
+                    "type": "palladium:key_bind",
+                    "key_bind": {
+                        "type": "palladium:mouse_scroll",
+                        "direction": "down",
+                        "cancel_scroll": true
+                    },
+                    "behaviour": "activation",
+                    "conditions": [
+                        {
+                            "type": "palladium:flying"
+                        },
+                        {
+                            "type": "palladium:number_data_attachment",
+                            "attachment": "werkiax_unbound:flight_speed_level",
+                            "min": -2
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

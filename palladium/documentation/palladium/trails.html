@@ -85,9 +85,9 @@ Fallback Value</th>
 <td>
 color</td>
 <td>
-Color</td>
+Color / Value</td>
 <td>
-Defines the color/tint of the after image</td>
+Defines the color/tint of the after image. Values are evaluated once for every new after image.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -191,7 +191,7 @@ Fallback Value</th>
 <td>
 orientation</td>
 <td>
-"horizontal" | "vertical"</td>
+&quot;horizontal&quot; | &quot;vertical&quot;</td>
 <td>
 Defines the orientation in relation to the entity in which the gradient will render</td>
 <td style="background-color: lightcoral">
@@ -203,9 +203,9 @@ VERTICAL</td>
 <td>
 color</td>
 <td>
-Color</td>
+Color / Value</td>
 <td>
-Defines the color of the gradient</td>
+Defines the color of the gradient. Values are evaluated once for every new part of the trail, so a changing color fades along the trail.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -306,6 +306,222 @@ true</td>
 </tbody>
 </table>
 <h3>
+render_settings (Laser Renderer Settings)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+glow</td>
+<td>
+Color / Value | Laser Part</td>
+<td>
+The glow surrounding the core.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+core</td>
+<td>
+Color / Value | Laser Part</td>
+<td>
+The solid center of the effect.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+bloom</td>
+<td>
+Integer (0 ~ 10)</td>
+<td>
+The number of additional glow layers.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+size</td>
+<td>
+Float (&gt;= 0.0) | Vector 2D</td>
+<td>
+The cross section in pixels. Use one number for a square or a pair for width and height.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+rotation</td>
+<td>
+Float (0.0 ~ 360.0)</td>
+<td>
+The starting rotation around the effect's axis, in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+rotation_speed</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+The rotation speed in degrees per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings.glow (Laser Part)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color</td>
+<td>
+Color / Value</td>
+<td>
+The color of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+opacity</td>
+<td>
+Float (0.0 ~ 1.0)</td>
+<td>
+The opacity of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+rainbow</td>
+<td>
+Float | Boolean</td>
+<td>
+Cycles through dye colors. A higher positive value cycles faster. True enables the fastest cycle and false disables it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+pulse</td>
+<td>
+Pulse</td>
+<td>
+Periodically changes the size of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+blending_mode</td>
+<td>
+&quot;additive&quot; | &quot;translucent&quot;</td>
+<td>
+How this part blends with the background.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+additive</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings.glow.pulse (Pulse)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+scale</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+How far the size varies from its base value.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+frequency</td>
+<td>
+Float (0.0 ~ 10.0)</td>
+<td>
+The pulse speed in radians per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+</tbody>
+</table>
+<h3>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:lightning","amount":7,"render_settings":{"glow":"#0000ff","size":2.0}}</pre>
@@ -363,13 +579,13 @@ true</td>
 <td>
 arc_settings</td>
 <td>
-Anything</td>
+Arc Settings</td>
 <td>
 Arc range, branch timing, jitter, and block-target search settings. Ranges, distances and jitter scale with the size of the entity.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-ArcSettings[idleRange=4.5, runningRange=8.0, sprintingRange=11.0, sideRangeMultiplier=0.7, rearRangeMultiplier=1.2, branchStartMin=0.22, branchStartMax=0.6, branchDelayMin=0.08, branchDelayMax=0.3, jitterAmount=0.055, jitterSpeed=0.27, searchDirections=64, minimumTargetDistance=0.75]</td>
+/</td>
 </tr>
 <tr>
 <td>
@@ -406,6 +622,398 @@ Segments in each arc</td>
 false</td>
 <td>
 5</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings (Laser Renderer Settings)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+glow</td>
+<td>
+Color / Value | Laser Part</td>
+<td>
+The glow surrounding the core.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+core</td>
+<td>
+Color / Value | Laser Part</td>
+<td>
+The solid center of the effect.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+bloom</td>
+<td>
+Integer (0 ~ 10)</td>
+<td>
+The number of additional glow layers.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+2</td>
+</tr>
+<tr>
+<td>
+size</td>
+<td>
+Float (&gt;= 0.0) | Vector 2D</td>
+<td>
+The cross section in pixels. Use one number for a square or a pair for width and height.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+rotation</td>
+<td>
+Float (0.0 ~ 360.0)</td>
+<td>
+The starting rotation around the effect's axis, in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+rotation_speed</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+The rotation speed in degrees per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings.glow (Laser Part)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color</td>
+<td>
+Color / Value</td>
+<td>
+The color of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#ffffff</td>
+</tr>
+<tr>
+<td>
+opacity</td>
+<td>
+Float (0.0 ~ 1.0)</td>
+<td>
+The opacity of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+rainbow</td>
+<td>
+Float | Boolean</td>
+<td>
+Cycles through dye colors. A higher positive value cycles faster. True enables the fastest cycle and false disables it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+pulse</td>
+<td>
+Pulse</td>
+<td>
+Periodically changes the size of this part.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+blending_mode</td>
+<td>
+&quot;additive&quot; | &quot;translucent&quot;</td>
+<td>
+How this part blends with the background.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+additive</td>
+</tr>
+</tbody>
+</table>
+<h3>
+render_settings.glow.pulse (Pulse)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+scale</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+How far the size varies from its base value.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+frequency</td>
+<td>
+Float (0.0 ~ 10.0)</td>
+<td>
+The pulse speed in radians per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+</tbody>
+</table>
+<h3>
+arc_settings (Arc Settings)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+idle_range</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+Target search distance while idle.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+4.5</td>
+</tr>
+<tr>
+<td>
+running_range</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+Target search distance while moving without sprinting.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+8.0</td>
+</tr>
+<tr>
+<td>
+sprinting_range</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+Target search distance while sprinting.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+11.0</td>
+</tr>
+<tr>
+<td>
+side_range_multiplier</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+Range multiplier for targets to either side.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.7</td>
+</tr>
+<tr>
+<td>
+rear_range_multiplier</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+Range multiplier for targets behind the entity.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1.2</td>
+</tr>
+<tr>
+<td>
+branch_start_min</td>
+<td>
+Number (0.0 ~ 1.0)</td>
+<td>
+Earliest point along the main arc where a branch can start.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.22</td>
+</tr>
+<tr>
+<td>
+branch_start_max</td>
+<td>
+Number (0.0 ~ 1.0)</td>
+<td>
+Latest point along the main arc where a branch can start.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.6</td>
+</tr>
+<tr>
+<td>
+branch_delay_min</td>
+<td>
+Number (0.0 ~ 1.0)</td>
+<td>
+Minimum delay before a branch grows, as a fraction of the arc's growth time.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.08</td>
+</tr>
+<tr>
+<td>
+branch_delay_max</td>
+<td>
+Number (0.0 ~ 1.0)</td>
+<td>
+Maximum delay before a branch grows, as a fraction of the arc's growth time.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.3</td>
+</tr>
+<tr>
+<td>
+jitter_amount</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+How far the arc moves away from its base path.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.055</td>
+</tr>
+<tr>
+<td>
+jitter_speed</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+How quickly the arc's jitter changes.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.27</td>
+</tr>
+<tr>
+<td>
+search_directions</td>
+<td>
+Integer (1 ~ 256)</td>
+<td>
+Number of directions sampled when looking for target blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+64</td>
+</tr>
+<tr>
+<td>
+minimum_target_distance</td>
+<td>
+Float (&gt;= 0.0)</td>
+<td>
+Minimum distance to a target block.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.75</td>
 </tr>
 </tbody>
 </table>

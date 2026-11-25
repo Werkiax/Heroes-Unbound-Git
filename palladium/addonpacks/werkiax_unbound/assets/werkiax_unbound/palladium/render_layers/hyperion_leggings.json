@@ -1,0 +1,4 @@
+{
+  "texture": "werkiax_unbound:textures/entity/hyperion/leggings.png",
+  "hidden_model_parts": ["left_pants", "right_pants"]
+}

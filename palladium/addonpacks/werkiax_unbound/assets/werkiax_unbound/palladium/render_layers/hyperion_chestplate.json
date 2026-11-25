@@ -1,0 +1,4 @@
+{
+  "texture": "werkiax_unbound:textures/entity/hyperion/chestplate.png",
+  "hidden_model_parts": ["jacket", "left_sleeve", "right_sleeve"]
+}

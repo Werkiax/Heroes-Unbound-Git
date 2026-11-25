@@ -1,0 +1,16 @@
+{
+    "trails": {
+        "werkiax_unbound:hyperion_flight": {
+            "type": "palladium:and",
+            "conditions": [
+                {
+                    "type": "palladium:using_flight_type"
+                },
+                {
+                    "type": "argon:movement_speed",
+                    "min": 8
+                }
+            ]
+        }
+    }
+}

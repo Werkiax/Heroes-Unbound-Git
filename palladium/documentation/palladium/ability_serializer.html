@@ -22,6 +22,10 @@ th,td.true,td.false,td.other{text-align:center;}pre{outline:1px solid #ccc;paddi
 <body>
 <h1>
 Abilities</h1>
+<p>
+<a href="#palladium:ability_properties">
+Shared ability properties</a>
+</p>
 <hr>
 
 <p>
@@ -183,12 +187,28 @@ Prevent Death</a>
 Prevent Effects</a>
 </li>
 <li>
+<a href="#palladium:prevent_entity_collision">
+Prevent Entity Collision</a>
+</li>
+<li>
+<a href="#palladium:prevent_entity_selection">
+Prevent Entity Selection</a>
+</li>
+<li>
 <a href="#palladium:prevent_gliding">
 Prevent Gliding</a>
 </li>
 <li>
 <a href="#palladium:prevent_healing">
 Prevent Healing</a>
+</li>
+<li>
+<a href="#palladium:prevent_movement">
+Prevent Movement</a>
+</li>
+<li>
+<a href="#palladium:prevent_rotation">
+Prevent Rotation</a>
 </li>
 <li>
 <a href="#palladium:prevent_sprinting">
@@ -252,7 +272,7 @@ Teleport</a>
 </li>
 <li>
 <a href="#palladium:transformation">
-</a>
+Transformation</a>
 </li>
 <li>
 <a href="#palladium:wall_climbing">
@@ -303,6 +323,10 @@ Tentacle Arms</a>
 Area Burst</a>
 </li>
 <li>
+<a href="#argon:attack_warning">
+palladium.ability.argon.attack_warning</a>
+</li>
+<li>
 <a href="#argon:auto_attack">
 Auto Attack</a>
 </li>
@@ -317,6 +341,10 @@ Blast Chain</a>
 <li>
 <a href="#argon:blink">
 Blink</a>
+</li>
+<li>
+<a href="#argon:block_energy">
+Block Energy</a>
 </li>
 <li>
 <a href="#argon:block_scan">
@@ -389,6 +417,10 @@ Danger Sense</a>
 <li>
 <a href="#argon:dispel">
 Dispel</a>
+</li>
+<li>
+<a href="#argon:dive">
+Dive</a>
 </li>
 <li>
 <a href="#argon:dodge">
@@ -515,12 +547,20 @@ Light Source</a>
 Lightning</a>
 </li>
 <li>
+<a href="#argon:lightning_strikes">
+palladium.ability.argon.lightning_strikes</a>
+</li>
+<li>
 <a href="#argon:lock_slots">
 Lock Slots</a>
 </li>
 <li>
 <a href="#argon:melee_armor_penetration">
 Melee Armor Penetration</a>
+</li>
+<li>
+<a href="#argon:melee_bonus_damage">
+palladium.ability.argon.melee_bonus_damage</a>
 </li>
 <li>
 <a href="#argon:modify_durability">
@@ -577,6 +617,10 @@ Push</a>
 <li>
 <a href="#argon:push_field">
 Push Field</a>
+</li>
+<li>
+<a href="#argon:quarry_sense">
+Quarry Sense</a>
 </li>
 <li>
 <a href="#argon:radar">
@@ -647,6 +691,10 @@ Structure Capture</a>
 Sweeping Edge</a>
 </li>
 <li>
+<a href="#argon:target_mark">
+Target Mark</a>
+</li>
+<li>
 <a href="#argon:taunt">
 Taunt</a>
 </li>
@@ -677,6 +725,18 @@ Text Overlay</a>
 <li>
 <a href="#argon:throw_blocks">
 Throw Blocks</a>
+</li>
+<li>
+<a href="#argon:throw_marker">
+palladium.ability.argon.throw_marker</a>
+</li>
+<li>
+<a href="#argon:throw_steer">
+palladium.ability.argon.throw_steer</a>
+</li>
+<li>
+<a href="#argon:throwable_item">
+palladium.ability.argon.throwable_item</a>
 </li>
 <li>
 <a href="#argon:time_control">
@@ -895,7 +955,7 @@ Fallback Value</th>
 <td>
 arm</td>
 <td>
-"none" | "main_arm" | "off_arm" | "right_arm" | "left_arm" | "both"</td>
+&quot;none&quot; | &quot;main_arm&quot; | &quot;off_arm&quot; | &quot;right_arm&quot; | &quot;left_arm&quot; | &quot;both&quot;</td>
 <td>
 The arm(s) that should point.</td>
 <td style="background-color: lightcoral">
@@ -1045,9 +1105,77 @@ Fallback Value</th>
 <td>
 modifiers</td>
 <td>
-Attribute Modifier (attribute*, amount*, operation*, id)</td>
+Attribute Modifier | Attribute Modifier[]</td>
 <td>
-The attribute modifier(s) that will be applied. If a modifier has an id, the power and ability are added to it, so the same id used in two different abilities does not clash.</td>
+One modifier or a list of modifiers to apply.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+modifiers (Attribute Modifier)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+attribute</td>
+<td>
+Attribute ID</td>
+<td>
+The attribute to modify.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+id</td>
+<td>
+Identifier</td>
+<td>
+The power and ability are included in this ID so that different abilities can reuse it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+amount</td>
+<td>
+Double / Value | MoLang</td>
+<td>
+The modifier amount, as a number, a MoLang expression, or a dynamic value.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+operation</td>
+<td>
+&quot;add_value&quot; | &quot;add_multiplied_base&quot; | &quot;add_multiplied_total&quot;</td>
+<td>
+How the amount is applied to the attribute.</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>
@@ -1129,7 +1257,7 @@ cause_fire</td>
 <td>
 Boolean</td>
 <td>
-If the beam should cause fire on blocks. Claim protection, spawn protection and the mobGriefing gamerule (for non-players) are respected</td>
+If the beam should cause fire on blocks. Claim protection, spawn protection, the power_griefing gamerule and the mobGriefing gamerule (for non-players) are respected</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1151,7 +1279,7 @@ false</td>
 <td>
 set_on_fire_ticks</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 The amount of ticks the hit entity is set on fire</td>
 <td style="background-color: lightcoral">
@@ -1165,7 +1293,7 @@ smelt_blocks</td>
 <td>
 Boolean</td>
 <td>
-If the beam should smelt hit blocks. Claim protection, spawn protection and the mobGriefing gamerule (for non-players) are respected</td>
+If the beam should smelt hit blocks. Claim protection, spawn protection, the power_griefing gamerule and the mobGriefing gamerule (for non-players) are respected</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1208,7 +1336,7 @@ Examples:</h3>
 <h2 id="palladium:blast">
 Blast</h2>
 <p>
-Shoots a piece of a beam into the direction the player is looking at. The blast keeps the direction it was fired in and only deals damage once it reached its target.</p>
+Shoots a piece of a beam into the direction the player is looking at. The blast keeps the direction it was fired in and hits the first entity or block it reaches on its way.</p>
 <h3>
 Settings:</h3>
 <table>
@@ -1269,7 +1397,7 @@ cause_fire</td>
 <td>
 Boolean</td>
 <td>
-If the blast should cause fire on blocks. Claim protection, spawn protection and the mobGriefing gamerule (for non-players) are respected</td>
+If the blast should cause fire on blocks. Claim protection, spawn protection, the power_griefing gamerule and the mobGriefing gamerule (for non-players) are respected</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1303,7 +1431,7 @@ false</td>
 <td>
 set_on_fire_ticks</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 The amount of ticks the hit entity is set on fire</td>
 <td style="background-color: lightcoral">
@@ -1317,7 +1445,7 @@ smelt_blocks</td>
 <td>
 Boolean</td>
 <td>
-If the blast should smelt hit blocks. Claim protection, spawn protection and the mobGriefing gamerule (for non-players) are respected</td>
+If the blast should smelt hit blocks. Claim protection, spawn protection, the power_griefing gamerule and the mobGriefing gamerule (for non-players) are respected</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1449,18 +1577,6 @@ Fallback Value</th>
 <tbody>
 <tr>
 <td>
-carry_distance</td>
-<td>
-Double</td>
-<td>
-How many blocks in front of the player the carried target is held. Defaults to 2.0.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-2.0</td>
-</tr>
-<tr>
-<td>
 throwable</td>
 <td>
 Boolean</td>
@@ -1497,22 +1613,22 @@ true</td>
 </tr>
 <tr>
 <td>
-carry_height_offset</td>
+carry_offset</td>
 <td>
-Double</td>
+Vector 3D</td>
 <td>
-Extra vertical offset applied to the carried target's held position. Defaults to 0.0.</td>
+Where the carried target is held, relative to the player's eyes, as [side, up, forward]. Forward follows the look direction, up is always straight up and positive side values move the target towards the player's main hand.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-0.0</td>
+[0, 0, 2]</td>
 </tr>
 </tbody>
 </table>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"palladium:carry","range":4.0,"throwable":true}</pre>
+{"type":"palladium:carry","range":4.0,"carry_offset":[0.5,0.0,1.5],"throwable":true}</pre>
 </div>
 <hr>
 
@@ -1567,7 +1683,7 @@ true</td>
 <td>
 reset_time</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 The amount of time, in ticks, the entity can go without attacking before the combo counter resets.</td>
 <td style="background-color: lightcoral">
@@ -1783,7 +1899,7 @@ true</td>
 <td>
 target</td>
 <td>
-"self" | "looked_at"</td>
+&quot;self&quot; | &quot;looked_at&quot;</td>
 <td>
 Who is drowned. "self" drowns the entity with the ability, "looked_at" drowns the living entity it looks at within the range. That entity stays the target until the ability is disabled or the target dies.</td>
 <td style="background-color: lightcoral">
@@ -1865,9 +1981,9 @@ self</td>
 <td>
 color</td>
 <td>
-Color</td>
+Color / Value</td>
 <td>
-Determines the color of the glow effect. If left empty, it will use the default team color.</td>
+Determines the color of the glow effect. If left empty, it will use the default team color. In the "others" mode, values are evaluated on the entity that glows.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -1877,7 +1993,7 @@ false</td>
 <td>
 distance</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 The distance at which the glow effect is visible. If 0, it will behave normally.</td>
 <td style="background-color: lightcoral">
@@ -1933,7 +2049,7 @@ Fallback Value</th>
 <td>
 time</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 The amount of time, in ticks, that the victim entity will be set on fire for</td>
 <td style="background-color: lightgreen">
@@ -1945,7 +2061,7 @@ true</td>
 <td>
 max_time</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 If "should_stack_time" is true, the victim's burn time (in ticks) will not exceed this value after being hit</td>
 <td style="background-color: lightcoral">
@@ -2101,7 +2217,7 @@ Fallback Value</th>
 <td>
 perspective</td>
 <td>
-"first_person" | "third_person_back" | "third_person_front"</td>
+&quot;first_person&quot; | &quot;third_person_back&quot; | &quot;third_person_front&quot;</td>
 <td>
 The perspective the camera is locked into.</td>
 <td style="background-color: lightgreen">
@@ -2157,7 +2273,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-"held" | "one_shot"</td>
+&quot;held&quot; | &quot;one_shot&quot;</td>
 <td>
 "held" keeps the grapple active only while the ability is enabled (released on disable); "one_shot" fires once and runs to completion on its own.</td>
 <td style="background-color: lightcoral">
@@ -2417,7 +2533,7 @@ true</td>
 <td>
 break_lockout</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long the guard stays broken after breaking. Using the palladium:guard_broken condition inside a not condition on this ability to enable this lockout.</td>
 <td style="background-color: lightcoral">
@@ -2503,7 +2619,7 @@ The scale of the texture.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@2e02cc02</td>
+net.minecraft.world.phys.Vec2@793af433</td>
 </tr>
 <tr>
 <td>
@@ -2521,7 +2637,7 @@ false</td>
 <td>
 alignment</td>
 <td>
-"top_left" | "top_center" | "top_right" | "middle_left" | "center" | "middle_right" | "bottom_left" | "bottom_center" | "bottom_right" | "stretch"</td>
+&quot;top_left&quot; | &quot;top_center&quot; | &quot;top_right&quot; | &quot;middle_left&quot; | &quot;center&quot; | &quot;middle_right&quot; | &quot;bottom_left&quot; | &quot;bottom_center&quot; | &quot;bottom_right&quot; | &quot;stretch&quot;</td>
 <td>
 Determines how the image is aligned on the screen. 'stretch' stretches it over the whole screen.</td>
 <td style="background-color: lightgreen">
@@ -2551,7 +2667,7 @@ The translation of the texture.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@48531d5</td>
+net.minecraft.world.phys.Vec2@13b666b4</td>
 </tr>
 </tbody>
 </table>
@@ -2601,7 +2717,7 @@ true</td>
 <td>
 interval</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 Time between two heals.</td>
 <td style="background-color: lightgreen">
@@ -2793,7 +2909,7 @@ false</td>
 <td>
 mob_visibility_modifier</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 A multiplier for how visible the player is to mobs. 0.0 means completely invisible, 1.0 means normal visibility.</td>
 <td style="background-color: lightcoral">
@@ -2805,7 +2921,7 @@ false</td>
 <td>
 opacity</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 The opacity the player will adapt</td>
 <td style="background-color: lightcoral">
@@ -2851,21 +2967,21 @@ Fallback Value</th>
 <td>
 confirm</td>
 <td>
-"release" | "left_click" | "right_click"</td>
+&quot;release&quot; | &quot;left_click&quot; | &quot;right_click&quot;</td>
 <td>
 Only used by the menu. "release" switches to the picked mode when the key is let go. "left_click" and "right_click" switch when clicking while the menu is open, and letting go of the key without clicking closes the menu without changing anything.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-RELEASE</td>
+release</td>
 </tr>
 <tr>
 <td>
 modes</td>
 <td>
-Anything</td>
+Map&lt;String, Mode&gt;</td>
 <td>
-A map of mode key -> mode (at least one). Each mode has a required "title" (a text component that can contain values), an optional "icon" texture, and optional "conditions" (a mode is only switchable-to while its conditions are met, and it is hidden from the menu otherwise). "on_selected" and "on_unselected" are optional actions, run on the server when the mode becomes the active one or stops being it. They only run on an actual change, so the first mode, which is active from the start, doesn't run "on_selected" until it is switched back to. The key is the unique id used by the mode condition and value.</td>
+Define at least one mode in this JSON object. Choose a key for each mode, such as "mode_a" or "mode_b", and use that key to refer to the mode in conditions and values.</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>
@@ -2875,13 +2991,13 @@ true</td>
 <td>
 selection</td>
 <td>
-"cycle" | "menu"</td>
+&quot;cycle&quot; | &quot;menu&quot;</td>
 <td>
 How a mode is picked. "cycle" switches to the next mode on every activation, "menu" opens a selection menu while the key is held. The menu needs a key that can be held, so it does not work with scroll or GUI button key binds.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-CYCLE</td>
+cycle</td>
 </tr>
 <tr>
 <td>
@@ -2894,6 +3010,86 @@ If the new mode is briefly shown in the middle of the screen after switching.</t
 false</td>
 <td>
 true</td>
+</tr>
+</tbody>
+</table>
+<h3>
+modes.&lt;key&gt; (Mode)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+title</td>
+<td>
+Text Component / Value</td>
+<td>
+The label shown for the mode. Use a plain string for a static title or a formatted value to display a dynamic value.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+icon</td>
+<td>
+Icon definition</td>
+<td>
+The icon shown for the mode.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+conditions</td>
+<td>
+Condition</td>
+<td>
+The mode can be selected and appears in the menu only while these conditions are met.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+on_selected</td>
+<td>
+Action | Action[]</td>
+<td>
+Server-side actions run when switching to this mode. They run only on a change, so the initially selected mode runs them when switched back to.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+on_unselected</td>
+<td>
+Action | Action[]</td>
+<td>
+Server-side actions run when switching away from this mode.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
 </tr>
 </tbody>
 </table>
@@ -2945,7 +3141,7 @@ false</td>
 <td>
 max_jumps</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 How many extra mid-air jumps the entity can perform before landing again.</td>
 <td style="background-color: lightgreen">
@@ -3399,6 +3595,94 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="palladium:prevent_entity_collision">
+Prevent Entity Collision</h2>
+<p>
+Prevents the entity from pushing other entities and from being pushed by them.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+target_conditions</td>
+<td>
+Condition | Condition[]</td>
+<td>
+Condition(s) that must be met for an entity to be affected by the ability. If no conditions are specified, then all entities will be affected. If multiple conditions are specified, then only entities that satisfy all conditions will be affected.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:prevent_entity_collision"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:prevent_entity_selection">
+Prevent Entity Selection</h2>
+<p>
+Prevents entities from being selected, allowing interactions to pass through them to other entities.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+target_conditions</td>
+<td>
+Condition | Condition[]</td>
+<td>
+Condition(s) that must be met for an entity to be affected by the ability. If no conditions are specified, then all entities will be affected. If multiple conditions are specified, then only entities that satisfy all conditions will be affected.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:prevent_entity_selection"}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="palladium:prevent_gliding">
 Prevent Gliding</h2>
 <p>
@@ -3451,6 +3735,74 @@ false</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:prevent_healing","full_prevention":true}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:prevent_movement">
+Prevent Movement</h2>
+<p>
+Prevents the entity from moving on its own. Walking, jumping and flying are blocked, but gravity and knockback still apply. To freeze other entities, give them the palladium:immobilized effect, for example with an area_action and the add_effect action.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:prevent_movement"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:prevent_rotation">
+Prevent Rotation</h2>
+<p>
+Prevents the entity from turning around. For players this locks the camera. Without yaw or pitch, the entity keeps the rotation it had when the ability got enabled.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+pitch</td>
+<td>
+Float / Value</td>
+<td>
+Forces the vertical rotation to this angle in degrees (-90 = straight up, 0 = straight ahead, 90 = straight down). If not set, the pitch from when the ability got enabled is kept.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+yaw</td>
+<td>
+Float / Value</td>
+<td>
+Forces the horizontal rotation to this angle in degrees (0 = south, 90 = west, 180 = north, -90 = east). If not set, the yaw from when the ability got enabled is kept.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:prevent_rotation","pitch":0.0}</pre>
 </div>
 <hr>
 
@@ -3517,7 +3869,7 @@ false</td>
 <td>
 inaccuracy</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 Inaccurary when shooting the projectile</td>
 <td style="background-color: lightcoral">
@@ -3529,7 +3881,7 @@ false</td>
 <td>
 swinging_arm</td>
 <td>
-"none" | "main_arm" | "off_arm" | "right_arm" | "left_arm" | "both"</td>
+&quot;none&quot; | &quot;main_arm&quot; | &quot;off_arm&quot; | &quot;right_arm&quot; | &quot;left_arm&quot; | &quot;both&quot;</td>
 <td>
 The arm which will swing when the projectile is being shot</td>
 <td style="background-color: lightcoral">
@@ -3553,7 +3905,7 @@ false</td>
 <td>
 velocity</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 Velocity with which the projectile is being shot</td>
 <td style="background-color: lightcoral">
@@ -3611,7 +3963,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-"vertical" | "horizontal"</td>
+&quot;vertical&quot; | &quot;horizontal&quot;</td>
 <td>
 Whether to push vertically (up/down) or horizontally (away from/toward the user).</td>
 <td style="background-color: lightgreen">
@@ -3679,7 +4031,7 @@ Fallback Value</th>
 <td>
 slots</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 The slots that should be restricted.</td>
 <td style="background-color: lightgreen">
@@ -3723,9 +4075,9 @@ Fallback Value</th>
 <td>
 intensity</td>
 <td>
-Float | Shake Intensity (yaw, pitch, roll)</td>
+Float | Shake Intensity</td>
 <td>
-How far the camera moves, in degrees. A single number shakes yaw and pitch by that amount, an object sets yaw, pitch and roll separately.</td>
+Camera rotation in degrees. A single number sets yaw and pitch and leaves roll at zero.</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>
@@ -3742,6 +4094,62 @@ How many shake cycles happen per tick. Higher values shake faster. Can be a dyna
 false</td>
 <td>
 0.3</td>
+</tr>
+</tbody>
+</table>
+<h3>
+intensity (Shake Intensity)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+yaw</td>
+<td>
+Float</td>
+<td>
+Horizontal camera rotation in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+pitch</td>
+<td>
+Float</td>
+<td>
+Vertical camera rotation in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
+roll</td>
+<td>
+Float</td>
+<td>
+Camera tilt in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
 </tr>
 </tbody>
 </table>
@@ -3915,9 +4323,9 @@ Fallback Value</th>
 <td>
 texture</td>
 <td>
-Texture Reference</td>
+Texture Reference | Skin-Typed Value</td>
 <td>
-The texture that should be used for the player's skin.</td>
+A shared skin texture or separate textures for the wide and slim player models.</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>
@@ -3927,7 +4335,7 @@ true</td>
 <td>
 model_type</td>
 <td>
-"slim" | "wide"</td>
+&quot;slim&quot; | &quot;wide&quot;</td>
 <td>
 Model type for the player. If left empty it will keep the player's model type. 'wide' = Wide-armed Steve model; 'slim' = Slim-armed Alex model;</td>
 <td style="background-color: lightcoral">
@@ -3946,6 +4354,50 @@ Priority for the skin (in case multiple skin changes are applied, the one with t
 false</td>
 <td>
 50</td>
+</tr>
+</tbody>
+</table>
+<h3>
+texture (Skin-Typed Value)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+wide</td>
+<td>
+Texture Reference</td>
+<td>
+The value for wide-armed player models.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+slim</td>
+<td>
+Texture Reference</td>
+<td>
+The value for slim-armed player models.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
 </tr>
 </tbody>
 </table>
@@ -3985,7 +4437,7 @@ Fallback Value</th>
 <td>
 duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long the slide lasts (speed decays linearly to 0 over this time).</td>
 <td style="background-color: lightgreen">
@@ -4237,6 +4689,8 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="palladium:transformation">
+Transformation</h2>
 <p>
 Transforms the entity into the given transformation while the ability is enabled. If several transformation abilities are enabled at once, the one from the power with the highest priority wins (items before suits before superpowers). If the priority is the same, the one enabled last wins.</p>
 <h3>
@@ -4271,6 +4725,10 @@ true</td>
 </tr>
 </tbody>
 </table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:transformation","transformation":"mypack:my_transformation"}</pre>
 </div>
 <hr>
 
@@ -4325,7 +4783,7 @@ true</td>
 <td>
 slots</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 How many ability bar slots to offer.</td>
 <td style="background-color: lightcoral">
@@ -4337,7 +4795,7 @@ false</td>
 <td>
 presets</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 How many switchable sets of slot assignments to offer, where 1 disables the preset-switching arrows.</td>
 <td style="background-color: lightcoral">
@@ -4567,7 +5025,7 @@ true</td>
 <td>
 attack_pattern</td>
 <td>
-"direct_strike" | "auto_nearest"</td>
+&quot;direct_strike&quot; | &quot;auto_nearest&quot;</td>
 <td>
 "direct_strike" (a random idle appendage strikes whatever the wearer looks at, once per activation) or "auto_nearest" (continuously, whichever idle appendage is nearest strikes the nearest target in range).</td>
 <td style="background-color: lightcoral">
@@ -5119,7 +5577,7 @@ false</td>
 <td>
 shape</td>
 <td>
-"sphere" | "cone"</td>
+&quot;sphere&quot; | &quot;cone&quot;</td>
 <td>
 "sphere" hits everything within the radius. "cone" only hits what is inside cone_angle of where the user looks.</td>
 <td style="background-color: lightcoral">
@@ -5191,7 +5649,7 @@ false</td>
 <td>
 projectiles</td>
 <td>
-"none" | "deflect" | "destroy"</td>
+&quot;none&quot; | &quot;deflect&quot; | &quot;destroy&quot;</td>
 <td>
 "deflect" sends projectiles in range away from the user. "destroy" removes them. The user's own projectiles are left alone.</td>
 <td style="background-color: lightcoral">
@@ -5203,7 +5661,7 @@ none</td>
 <td>
 push</td>
 <td>
-"radial" | "path_side"</td>
+&quot;radial&quot; | &quot;path_side&quot;</td>
 <td>
 "radial" pushes hit entities straight away from the user. "path_side" pushes them sideways, off the line the user is travelling along, towards the side they are already on.</td>
 <td style="background-color: lightcoral">
@@ -5301,6 +5759,62 @@ false</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"argon:area_burst","radius":6,"damage":8}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:attack_warning">
+palladium.ability.argon.attack_warning</h2>
+<p>
+Client only. While enabled, outlines (through walls, only for the holder) every non-allied creature within "radius" that is visibly preparing an attack: a creeper swelling, a ghast or blaze charging, a guardian locking its beam, an illager casting, a skeleton or pillager drawing a bow or crossbow, a warden roaring, a breeze about to shoot.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+color</td>
+<td>
+Color</td>
+<td>
+The outline color of a creature while it winds up.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#FF4A2A</td>
+</tr>
+<tr>
+<td>
+radius</td>
+<td>
+(Dynamic) Value</td>
+<td>
+How far to look for creatures preparing an attack, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+24.0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:attack_warning","radius":24.0,"properties":{}}</pre>
 </div>
 <hr>
 
@@ -5613,7 +6127,7 @@ false</td>
 <td>
 chain_count</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 The maximum number of additional jumps after the initial hit.</td>
 <td style="background-color: lightcoral">
@@ -5781,6 +6295,86 @@ Examples:</h3>
 {"type":"argon:blink","distance":20.0,"properties":{"title":"Blink"}}</pre>
 <pre class="json-snippet">
 {"type":"argon:blink","distance":10.0,"allow_see_through":false,"particles":[{"particle":{"type":"minecraft:portal"},"count":30},{"particle":{"type":"minecraft:cloud"},"count":30,"offset":[0.0,1.0,0.0]}],"properties":{"title":"Blink"}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:block_energy">
+Block Energy</h2>
+<p>
+While enabled, drains RF from or adds RF to the block you look at, every tick, as long as it is within range and exposes an energy storage. With an energy_bar the drained RF fills that bar and added RF is taken from it, otherwise the RF is simply removed from or created in the block.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+mode</td>
+<td>
+String</td>
+<td>
+"drain" pulls RF out of the block, "add" pushes RF into it, "toggle" adds while the user is sneaking and drains otherwise.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+drain</td>
+</tr>
+<tr>
+<td>
+rate</td>
+<td>
+(Dynamic) Value</td>
+<td>
+The most RF moved per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+100</td>
+</tr>
+<tr>
+<td>
+range</td>
+<td>
+(Dynamic) Value</td>
+<td>
+How far away, in blocks, the block can be.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+8</td>
+</tr>
+<tr>
+<td>
+energy_bar</td>
+<td>
+String</td>
+<td>
+An energy bar, as "power#bar_name". Drained RF fills it and added RF is spent from it. Left unset, no bar is used and the energy is unlimited.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:block_energy","mode":"drain","range":8,"rate":200,"energy_bar":"example:power#energy"}</pre>
 </div>
 <hr>
 
@@ -6007,7 +6601,7 @@ Fallback Value</th>
 <td>
 calm_duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long the calm effect lasts.</td>
 <td style="background-color: lightcoral">
@@ -6019,7 +6613,7 @@ false</td>
 <td>
 lockout_duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long the lockout lasts.</td>
 <td style="background-color: lightcoral">
@@ -6067,7 +6661,7 @@ false</td>
 <td>
 hold_time</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long the user has to keep looking at the same mob.</td>
 <td style="background-color: lightcoral">
@@ -6323,7 +6917,7 @@ true</td>
 <td>
 attachment</td>
 <td>
-Vector 3D | "right_shoulder" | "left_shoulder" | "right_hand" | "left_hand" | "chest" | "above_head" | "main_hand" | "off_hand" | "main_shoulder" | "off_shoulder"</td>
+Vector 3D | &quot;right_shoulder&quot; | &quot;left_shoulder&quot; | &quot;right_hand&quot; | &quot;left_hand&quot; | &quot;chest&quot; | &quot;above_head&quot; | &quot;main_hand&quot; | &quot;off_hand&quot; | &quot;main_shoulder&quot; | &quot;off_shoulder&quot;</td>
 <td>
 Where the carried entity is drawn toward, in the wearer's frame (x right, y up from the feet, z forward): an [x, y, z] offset, or right_shoulder, left_shoulder, right_hand, left_hand, chest, above_head, or main/off_hand and main/off_shoulder by the wearer's main arm.</td>
 <td style="background-color: lightcoral">
@@ -6439,7 +7033,7 @@ Fallback Value</th>
 <td>
 launch_direction</td>
 <td>
-"vertical" | "look_direction" | "hybrid"</td>
+&quot;vertical&quot; | &quot;look_direction&quot; | &quot;hybrid&quot;</td>
 <td>
 Which way the push goes: "vertical" (straight up), "look_direction" (where the player looks on release, same strength at any angle) or "hybrid" (up, bent toward the look direction by "directional_influence").</td>
 <td style="background-color: lightcoral">
@@ -6523,7 +7117,7 @@ true</td>
 <td>
 max_charge_time</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long a full charge takes. Holding longer adds nothing, they stay fully charged until release.</td>
 <td style="background-color: lightcoral">
@@ -6559,7 +7153,7 @@ false</td>
 <td>
 min_charge_time</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long the key must be held before releasing launches. Releasing sooner cancels, with no launch and no cooldown.</td>
 <td style="background-color: lightcoral">
@@ -6595,7 +7189,7 @@ false</td>
 <td>
 cooldown</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long after a launch before another can be charged. 0 for none. Cancelled charges don't start it.</td>
 <td style="background-color: lightcoral">
@@ -6631,7 +7225,7 @@ false</td>
 <td>
 charge_curve</td>
 <td>
-"linear" | "ease_in" | "ease_out" | "ease_in_out"</td>
+&quot;linear&quot; | &quot;ease_in&quot; | &quot;ease_out&quot; | &quot;ease_in_out&quot;</td>
 <td>
 How strength follows the charge: "linear", "ease_in" (weak early, much stronger near full), "ease_out" (strong early, small gains near full) or "ease_in_out".</td>
 <td style="background-color: lightcoral">
@@ -6839,7 +7433,7 @@ false</td>
 <td>
 order</td>
 <td>
-"sequential" | "nearest" | "furthest"</td>
+&quot;sequential&quot; | &quot;nearest&quot; | &quot;furthest&quot;</td>
 <td>
 Which clones go first: oldest summoned, closest to the user, or furthest from the user.</td>
 <td style="background-color: lightcoral">
@@ -7135,7 +7729,7 @@ false</td>
 <td>
 rate</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 How many ticks (20 per second) each fade from one color to the next takes.</td>
 <td style="background-color: lightcoral">
@@ -7645,9 +8239,21 @@ false</td>
 </tr>
 <tr>
 <td>
+projectile_range</td>
+<td>
+(Dynamic) Value</td>
+<td>
+How far to look for incoming projectiles when "warn_projectiles" is on.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+24.0</td>
+</tr>
+<tr>
+<td>
 attacker_memory_time</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long after being damaged a player who dealt that damage still counts as a detected danger.</td>
 <td style="background-color: lightgreen">
@@ -7666,6 +8272,18 @@ How far to search for hostile mobs, checked fresh every scan. Also the glow's fa
 true</td>
 <td>
 /</td>
+</tr>
+<tr>
+<td>
+warn_projectiles</td>
+<td>
+Boolean</td>
+<td>
+If true, projectiles flying toward the holder (arrows, fireballs, tridents and the like, never the holder's own) count as dangers too and light the screen border like a mob would. Needs "show_visual" to be seen.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
 </tr>
 <tr>
 <td>
@@ -7708,7 +8326,7 @@ false</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"argon:danger_sense","hostile_range":16.0,"attacker_memory_time":100,"show_visual":true,"properties":{"title":"Danger Sense"}}</pre>
+{"type":"argon:danger_sense","hostile_range":16.0,"attacker_memory_time":100,"show_visual":true,"projectile_range":24.0,"properties":{"title":"Danger Sense"}}</pre>
 </div>
 <hr>
 
@@ -7775,7 +8393,7 @@ true</td>
 <td>
 target</td>
 <td>
-"ally" | "enemy" | "ally_or_self"</td>
+&quot;ally&quot; | &quot;enemy&quot; | &quot;ally_or_self&quot;</td>
 <td>
 Who can be targeted: "ally" (teammates, pets), "enemy", or "ally_or_self".</td>
 <td style="background-color: lightcoral">
@@ -7789,6 +8407,62 @@ ally</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"argon:dispel","dispel":{"category":"harmful"}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:dive">
+Dive</h2>
+<p>
+While enabled, every tick sets the entity's downward speed to "speed" and keeps only part of its sideways speed, so it plunges toward the ground. Flight has to be ended by other conditions for this to take effect, and the landing impact and fall damage are handled by other abilities.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+horizontal_keep</td>
+<td>
+Double</td>
+<td>
+The fraction (0 to 1) of the sideways speed that is kept every tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.5</td>
+</tr>
+<tr>
+<td>
+speed</td>
+<td>
+(Dynamic) Value</td>
+<td>
+The downward speed, in blocks per tick.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+2.0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:dive","speed":2.0,"properties":{"title":"Dive"}}</pre>
 </div>
 <hr>
 
@@ -7935,7 +8609,7 @@ Fallback Value</th>
 <td>
 duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long the dome lasts.</td>
 <td style="background-color: lightcoral">
@@ -8161,7 +8835,7 @@ Who this ability forces to drown, each entry either {"type": "self"} or {"type":
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[Target[mode=SELF, range=net.threetag.palladium.logic.value.StaticValue@16be2c40]]</td>
+[&quot;Target[mode=SELF, range=net.threetag.palladium.logic.value.StaticValue@5fc4af25]&quot;]</td>
 </tr>
 </tbody>
 </table>
@@ -8351,7 +9025,7 @@ true</td>
 <td>
 blend</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long the bar takes to slide to this color (and, once this stops applying, back).</td>
 <td style="background-color: lightcoral">
@@ -8539,7 +9213,7 @@ false</td>
 <td>
 spread_count</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 Number of beams the spread effect bursts into when 'entity_reaction' is 'spread'.</td>
 <td style="background-color: lightcoral">
@@ -8563,7 +9237,7 @@ false</td>
 <td>
 max_bounces</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 Most times the beam can bounce off blocks or entities (a spread counts as one) before stopping at its next hit.</td>
 <td style="background-color: lightcoral">
@@ -8659,7 +9333,7 @@ false</td>
 <td>
 entity_reaction</td>
 <td>
-"none" | "redirect" | "spread"</td>
+&quot;none&quot; | &quot;redirect&quot; | &quot;spread&quot;</td>
 <td>
 What happens when the beam hits an entity matching 'entity_bounce_condition': continue, redirect, or spread into multiple beams.</td>
 <td style="background-color: lightcoral">
@@ -8695,7 +9369,7 @@ false</td>
 <td>
 pierce_limit</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 With pierce, the most entities the beam passes through: it ends at the last one. 0 is no limit.</td>
 <td style="background-color: lightcoral">
@@ -8843,7 +9517,7 @@ Fallback Value</th>
 <td>
 rate</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long to wait between modifications.</td>
 <td style="background-color: lightcoral">
@@ -8855,7 +9529,7 @@ false</td>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Which slot to modify the energy-storing item in.</td>
 <td style="background-color: lightcoral">
@@ -8867,7 +9541,7 @@ curios:hands</td>
 <td>
 operation</td>
 <td>
-"add" | "subtract" | "set"</td>
+&quot;add&quot; | &quot;subtract&quot; | &quot;set&quot;</td>
 <td>
 Whether "value" is added to the item's energy, subtracted from it, or set as its new energy outright.</td>
 <td style="background-color: lightcoral">
@@ -8927,7 +9601,7 @@ Fallback Value</th>
 <td>
 slots</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 The slots to equip into, matched by order to 'items'.</td>
 <td style="background-color: lightgreen">
@@ -8983,7 +9657,7 @@ Fallback Value</th>
 <td>
 amount</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 How much EXP to grant each interval.</td>
 <td style="background-color: lightcoral">
@@ -8995,7 +9669,7 @@ false</td>
 <td>
 interval</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 How many ticks between each EXP grant (20 ticks per second, so 1200 = one minute).</td>
 <td style="background-color: lightcoral">
@@ -9187,7 +9861,7 @@ Fallback Value</th>
 <td>
 rate</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long to wait between modifications.</td>
 <td style="background-color: lightcoral">
@@ -9199,7 +9873,7 @@ false</td>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Which slot to modify the fluid-storing item in.</td>
 <td style="background-color: lightcoral">
@@ -9211,7 +9885,7 @@ curios:hands</td>
 <td>
 operation</td>
 <td>
-"add" | "subtract" | "set"</td>
+&quot;add&quot; | &quot;subtract&quot; | &quot;set&quot;</td>
 <td>
 Whether "value" is added to the item's stored fluid amount, subtracted from it, or set as its new amount outright.</td>
 <td style="background-color: lightcoral">
@@ -9271,7 +9945,7 @@ Fallback Value</th>
 <td>
 rate</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long to wait between transfers.</td>
 <td style="background-color: lightcoral">
@@ -9295,7 +9969,7 @@ true</td>
 <td>
 from_slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Which slot to take the fluid-storing item to draw from.</td>
 <td style="background-color: lightgreen">
@@ -9319,7 +9993,7 @@ true</td>
 <td>
 to_slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Which slot to take the fluid-storing item to fill.</td>
 <td style="background-color: lightgreen">
@@ -9375,7 +10049,7 @@ true</td>
 <td>
 from_slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Which slot to take the fluid-storing item to draw from.</td>
 <td style="background-color: lightgreen">
@@ -9387,7 +10061,7 @@ true</td>
 <td>
 to_slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Which slot to take the fluid-storing item to fill.</td>
 <td style="background-color: lightgreen">
@@ -9535,7 +10209,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-"area" | "target"</td>
+&quot;area&quot; | &quot;target&quot;</td>
 <td>
 Whether this affects every qualifying entity within "range" of the user ("area") or only the single qualifying entity the user is currently looking at ("target").</td>
 <td style="background-color: lightcoral">
@@ -9607,7 +10281,7 @@ true</td>
 <td>
 damage_rate</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long, in ticks, to wait between damage applications.</td>
 <td style="background-color: lightcoral">
@@ -9677,7 +10351,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-"self" | "look_target" | "area_allies"</td>
+&quot;self&quot; | &quot;look_target&quot; | &quot;area_allies&quot;</td>
 <td>
 Who is healed: the user, the ally looked at (look_target), or every ally within range (area_allies).</td>
 <td style="background-color: lightcoral">
@@ -9803,18 +10477,6 @@ Fallback Value</th>
 <tbody>
 <tr>
 <td>
-duration</td>
-<td>
-Integer (1 ~ 12000)</td>
-<td>
-How long a sound's marker lasts before it is gone. It stays fully visible for the first 60% and fades over the rest.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-100</td>
-</tr>
-<tr>
-<td>
 muffle_footsteps</td>
 <td>
 Boolean</td>
@@ -9839,18 +10501,6 @@ false</td>
 </tr>
 <tr>
 <td>
-see_through</td>
-<td>
-Boolean</td>
-<td>
-Whether markers are visible through blocks.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-true</td>
-</tr>
-<tr>
-<td>
 color</td>
 <td>
 Color</td>
@@ -9863,39 +10513,15 @@ false</td>
 </tr>
 <tr>
 <td>
-exclude_sources</td>
+player_color</td>
 <td>
-string[]</td>
+Color</td>
 <td>
-Sound categories that are never shown: any of master, music, record, weather, block, hostile, neutral, player, ambient, voice, ui. Sounds not placed in the world (interface sounds) are always skipped.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-[master, music, record, ui]</td>
-</tr>
-<tr>
-<td>
-muffling_blocks</td>
-<td>
-Block ID(s) / Tag</td>
-<td>
-The blocks that muffle footsteps when "muffle_footsteps" is on, given as explicit block IDs, a tag ("#namespace:tag"), or a mix of both. Left unset, it is vanilla's "#minecraft:dampens_vibrations" tag, which is wool and carpets.</td>
+Text color for sounds made by players, instead of "color".</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
 /</td>
-</tr>
-<tr>
-<td>
-ignore_own</td>
-<td>
-Boolean</td>
-<td>
-Whether sounds made at the holder's own position (their footsteps, their hurt sound) are skipped.</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-true</td>
 </tr>
 <tr>
 <td>
@@ -9932,6 +10558,114 @@ Size multiplier for the marker text.</td>
 false</td>
 <td>
 1.0</td>
+</tr>
+<tr>
+<td>
+prioritize</td>
+<td>
+Boolean</td>
+<td>
+When more sounds are heard than "max_markers" allows, drop the least significant (ambient and block sounds first, then far-away ones) instead of the oldest. Hostile and player sounds rank highest.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+duration</td>
+<td>
+Integer (1 ~ 12000)</td>
+<td>
+How long a sound's marker lasts before it is gone. It stays fully visible for the first 60% and fades over the rest.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+100</td>
+</tr>
+<tr>
+<td>
+hostile_color</td>
+<td>
+Color</td>
+<td>
+Text color for sounds made by hostile mobs, instead of "color".</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+edge_arrows</td>
+<td>
+Boolean</td>
+<td>
+Shows a small pointer on the edge of the screen for every marker that is outside your view, pointing the way to the sound.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+see_through</td>
+<td>
+Boolean</td>
+<td>
+Whether markers are visible through blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+neutral_color</td>
+<td>
+Color</td>
+<td>
+Text color for sounds made by neutral and passive mobs, instead of "color".</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+exclude_sources</td>
+<td>
+string[]</td>
+<td>
+Sound categories that are never shown: any of master, music, record, weather, block, hostile, neutral, player, ambient, voice, ui. Sounds not placed in the world (interface sounds) are always skipped.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[&quot;master&quot;,&quot;music&quot;,&quot;record&quot;,&quot;ui&quot;]</td>
+</tr>
+<tr>
+<td>
+muffling_blocks</td>
+<td>
+Block ID(s) / Tag</td>
+<td>
+The blocks that muffle footsteps when "muffle_footsteps" is on, given as explicit block IDs, a tag ("#namespace:tag"), or a mix of both. Left unset, it is vanilla's "#minecraft:dampens_vibrations" tag, which is wool and carpets.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+ignore_own</td>
+<td>
+Boolean</td>
+<td>
+Whether sounds made at the holder's own position (their footsteps, their hurt sound) are skipped.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
 </tr>
 </tbody>
 </table>
@@ -10023,18 +10757,6 @@ Fallback Value</th>
 <tbody>
 <tr>
 <td>
-mode</td>
-<td>
-"self" | "others"</td>
-<td>
-Whether this ability highlights the entity itself or lets you see other entities (self, others). Seeing others also needs "highlight_entities".</td>
-<td style="background-color: lightcoral">
-false</td>
-<td>
-SELF</td>
-</tr>
-<tr>
-<td>
 color</td>
 <td>
 Color</td>
@@ -10059,11 +10781,11 @@ false</td>
 </tr>
 <tr>
 <td>
-entities</td>
+player_color</td>
 <td>
-Entity Type ID(s) / Tag</td>
+Color</td>
 <td>
-The entity types to highlight when "highlight_entities" is true, given as explicit entity type IDs, a tag ("#namespace:tag"), or a mix of both. Left unset, every living entity in range is highlighted.</td>
+Highlight color for players who are not allies.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -10076,6 +10798,54 @@ blocks</td>
 Block ID(s) / Tag</td>
 <td>
 The blocks to highlight when "highlight_blocks" is true, given as explicit block IDs, a tag ("#namespace:tag"), or a mix of both.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+mode</td>
+<td>
+&quot;self&quot; | &quot;others&quot;</td>
+<td>
+Whether this ability highlights the entity itself or lets you see other entities (self, others). Seeing others also needs "highlight_entities".</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+SELF</td>
+</tr>
+<tr>
+<td>
+hostile_color</td>
+<td>
+Color</td>
+<td>
+Highlight color for hostile mobs (and neutral ones targeting the holder). When any of the four category colors is set, each highlighted entity uses the color of its category instead of "color"; categories without a color fall back to "color".</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+neutral_color</td>
+<td>
+Color</td>
+<td>
+Highlight color for everything else that is not hostile, a player or an ally (animals, villagers, passive mobs).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+entities</td>
+<td>
+Entity Type ID(s) / Tag</td>
+<td>
+The entity types to highlight when "highlight_entities" is true, given as explicit entity type IDs, a tag ("#namespace:tag"), or a mix of both. Left unset, every living entity in range is highlighted.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -10121,13 +10891,25 @@ false</td>
 <td>
 style</td>
 <td>
-"tint" | "outline"</td>
+&quot;tint&quot; | &quot;outline&quot;</td>
 <td>
 How highlighted entities are drawn: tint fills the model with the color, outline draws the vanilla glow outline in the color (works on invisible entities too, and the opacity does not apply).</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
 TINT</td>
+</tr>
+<tr>
+<td>
+ally_color</td>
+<td>
+Color</td>
+<td>
+Highlight color for allies: the holder's team members, owned pets, and entities allied through vanilla teams.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
 </tr>
 <tr>
 <td>
@@ -10289,7 +11071,7 @@ false</td>
 <td>
 fade</td>
 <td>
-"default" | "energy"</td>
+&quot;default&quot; | &quot;energy&quot;</td>
 <td>
 How the invisibility transition is visualized. "default" matches Palladium's own fade exactly. "energy" spreads an irregular, glowing energy boundary across the model's surface as it fades in/out instead of a uniform opacity change.</td>
 <td style="background-color: lightcoral">
@@ -10325,7 +11107,7 @@ false</td>
 <td>
 mob_visibility_modifier</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 Multiplier fed into mob-sight/visibility checks once fully invisible.</td>
 <td style="background-color: lightcoral">
@@ -10337,7 +11119,7 @@ false</td>
 <td>
 opacity</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 Opacity for other players/observers once fully invisible (0 = fully invisible).</td>
 <td style="background-color: lightcoral">
@@ -10393,7 +11175,7 @@ true</td>
 <td>
 max_uses</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 Most items each database entry can create before it must be stored again to reset its count. Unlimited if unset.</td>
 <td style="background-color: lightcoral">
@@ -10461,7 +11243,7 @@ false</td>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 If set, items are stored on the item in this equipment or Curios slot instead of on the entity.</td>
 <td style="background-color: lightcoral">
@@ -10479,13 +11261,13 @@ Pixel offset of the slot strip from its default spot above the hotbar.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@48531d5</td>
+net.minecraft.world.phys.Vec2@13b666b4</td>
 </tr>
 <tr>
 <td>
 max_items</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 The total number of storable slots.</td>
 <td style="background-color: lightgreen">
@@ -10665,6 +11447,230 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="argon:lightning_strikes">
+palladium.ability.argon.lightning_strikes</h2>
+<p>
+When enabled, calls real lightning bolts (visual only, no fire or terrain damage unless ignite_blocks is on) down on a target point and damages enemies around each one. With an interval it keeps striking while enabled, so it can be a timed storm. Optional rain is drawn with particles and never changes the world's weather. Every strike also posts a LightningStrikeEvent so a pack can draw its own bolts.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+damage</td>
+<td>
+(Dynamic) Value</td>
+<td>
+Damage each bolt deals to the enemy nearest its impact, and to everything else inside the damage radius unless splash_damage is set.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+damage_type</td>
+<td>
+Damage Type ID</td>
+<td>
+The damage type used; the user's normal attack when left out.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+rain</td>
+<td>
+Boolean</td>
+<td>
+Draws rain falling over the area while enabled. Storm clouds are drawn by the pack, which can listen for the lightning strike event.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+look_range</td>
+<td>
+(Dynamic) Value</td>
+<td>
+For look, the maximum distance of the target spot.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+32</td>
+</tr>
+<tr>
+<td>
+hostile_only</td>
+<td>
+Boolean</td>
+<td>
+If true, only hostile mobs take damage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+damage_radius</td>
+<td>
+(Dynamic) Value</td>
+<td>
+How far from each bolt's impact entities take damage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+2.5</td>
+</tr>
+<tr>
+<td>
+target</td>
+<td>
+&quot;look&quot; | &quot;hostiles&quot; | &quot;area&quot; | &quot;self&quot; | &quot;look_area&quot; | &quot;look_hostiles&quot;</td>
+<td>
+Where the strikes land: "look" at the block or spot the user looks at, "hostiles" on random hostile mobs within radius, "area" at random spots within radius around the user, "self" exactly where the user stands, "look_area" at random spots within radius around the point the user looks at, "look_hostiles" on different hostile mobs within radius of the look point (random spots there when none).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+hostiles</td>
+</tr>
+<tr>
+<td>
+effects</td>
+<td>
+{ effect*, duration, amplifier, particles, size_tiers }[]</td>
+<td>
+Effects applied to every entity a bolt damages.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+rain_height</td>
+<td>
+Double</td>
+<td>
+How many blocks above the area the rain starts falling from.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+11.0</td>
+</tr>
+<tr>
+<td>
+strikes</td>
+<td>
+(Dynamic) Value</td>
+<td>
+How many bolts each volley calls down.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+1</td>
+</tr>
+<tr>
+<td>
+max_hits_per_target</td>
+<td>
+Integer</td>
+<td>
+The most strikes one entity can be damaged by during a single enabling of the ability. 0 means no limit.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+interval</td>
+<td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
+<td>
+0 fires one volley when the ability is enabled. Above 0, another volley every interval while it stays enabled.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+bolt</td>
+<td>
+Boolean</td>
+<td>
+Whether each strike spawns a vanilla visual-only lightning bolt. Turn it off when a pack draws its own bolts from the strike event.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+radius</td>
+<td>
+(Dynamic) Value</td>
+<td>
+For hostiles and area, how far from the user strikes can land. For look, how far strikes beyond the first are scattered around the target spot.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+splash_damage</td>
+<td>
+(Dynamic) Value</td>
+<td>
+Damage dealt to everything inside the damage radius except the entity nearest the impact point, which takes the full damage. Negative means the same as damage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+-1</td>
+</tr>
+<tr>
+<td>
+ignite_blocks</td>
+<td>
+Boolean</td>
+<td>
+If true, bolts are real lightning that can start fires and strike for vanilla damage.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:lightning_strikes","radius":16,"look_range":32,"strikes":1,"interval":30,"damage":4,"damage_radius":2.5,"splash_damage":-1,"hostile_only":true,"rain":true}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="argon:lock_slots">
 Lock Slots</h2>
 <p>
@@ -10691,7 +11697,7 @@ Fallback Value</th>
 <td>
 slots</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 The slots to lock in place.</td>
 <td style="background-color: lightgreen">
@@ -10753,6 +11759,86 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="argon:melee_bonus_damage">
+palladium.ability.argon.melee_bonus_damage</h2>
+<p>
+While enabled, every direct melee hit the user lands that deals damage also deals extra damage of another type (for example electrical) and can apply effects to the target.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+damage</td>
+<td>
+(Dynamic) Value</td>
+<td>
+The extra damage added to each melee hit.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+damage_type</td>
+<td>
+Damage Type ID</td>
+<td>
+The damage type of the extra damage; the user's normal attack when left out.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+effects</td>
+<td>
+{ effect*, duration, amplifier, particles, size_tiers }[]</td>
+<td>
+Effects applied to the target of each melee hit.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+sparks</td>
+<td>
+Boolean</td>
+<td>
+Whether electric sparks fly from the target on each hit.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:melee_bonus_damage","damage":3}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="argon:modify_durability">
 Modify Durability</h2>
 <p>
@@ -10779,13 +11865,13 @@ Fallback Value</th>
 <td>
 slots</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 The slot or slots whose items are changed. A slot with several items, like a curios slot, changes all of them.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[mainhand]</td>
+[&quot;mainhand&quot;]</td>
 </tr>
 <tr>
 <td>
@@ -10803,7 +11889,7 @@ false</td>
 <td>
 interval</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How often the change is applied while the ability is enabled.</td>
 <td style="background-color: lightcoral">
@@ -10815,7 +11901,7 @@ false</td>
 <td>
 operation</td>
 <td>
-"damage" | "repair"</td>
+&quot;damage&quot; | &quot;repair&quot;</td>
 <td>
 Whether to remove (damage) or add (repair) durability.</td>
 <td style="background-color: lightcoral">
@@ -10871,7 +11957,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-"movement" | "flight"</td>
+&quot;movement&quot; | &quot;flight&quot;</td>
 <td>
 Whether to reduce ground movement speed ("movement") or flight speed ("flight").</td>
 <td style="background-color: lightgreen">
@@ -11031,7 +12117,7 @@ false</td>
 <td>
 max_jumps</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 How many extra mid-air jumps the entity can perform before landing again.</td>
 <td style="background-color: lightgreen">
@@ -11075,7 +12161,7 @@ Fallback Value</th>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 The equipment or Curios slot whose item's variant gets cycled.</td>
 <td style="background-color: lightgreen">
@@ -11093,7 +12179,7 @@ Pixel offset of the icon and label from their default spot above the hotbar.</td
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@48531d5</td>
+net.minecraft.world.phys.Vec2@13b666b4</td>
 </tr>
 <tr>
 <td>
@@ -11155,7 +12241,7 @@ true</td>
 <td>
 inaccuracy</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 The inaccuracy applied when shooting the projectile.</td>
 <td style="background-color: lightcoral">
@@ -11167,7 +12253,7 @@ false</td>
 <td>
 swinging_arm</td>
 <td>
-"none" | "main_arm" | "off_arm" | "right_arm" | "left_arm" | "both"</td>
+&quot;none&quot; | &quot;main_arm&quot; | &quot;off_arm&quot; | &quot;right_arm&quot; | &quot;left_arm&quot; | &quot;both&quot;</td>
 <td>
 The arm that swings when the projectile is shot.</td>
 <td style="background-color: lightcoral">
@@ -11191,7 +12277,7 @@ false</td>
 <td>
 velocity</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 The velocity with which the projectile is shot.</td>
 <td style="background-color: lightcoral">
@@ -11283,7 +12369,7 @@ Fallback Value</th>
 <td>
 gui</td>
 <td>
-"argon:chemical_synthesizer" | "argon:dna_power" | "argon:dna_transfer" | "argon:tech_table" | "curios:curios_container" | "minecraft:anvil" | "minecraft:blast_furnace" | "minecraft:brewing_stand" | "minecraft:cartography_table" | "minecraft:crafter_3x3" | "minecraft:crafting" | "minecraft:enchantment" | "minecraft:furnace" | "minecraft:generic_3x3" | "minecraft:generic_9x1" | "minecraft:generic_9x2" | "minecraft:generic_9x3" | "minecraft:generic_9x4" | "minecraft:generic_9x5" | "minecraft:generic_9x6" | "minecraft:grindstone" | "minecraft:hopper" | "minecraft:loom" | "minecraft:shulker_box" | "minecraft:smithing" | "minecraft:smoker" | "minecraft:stonecutter" | "palladium:multiversal_iterator" | "palladium:multiversal_iterator_suit_stand" | "palladium:tailoring"</td>
+&quot;argon:chemical_synthesizer&quot; | &quot;argon:dna_power&quot; | &quot;argon:dna_transfer&quot; | &quot;argon:tech_table&quot; | &quot;curios:curios_container&quot; | &quot;minecraft:anvil&quot; | &quot;minecraft:blast_furnace&quot; | &quot;minecraft:brewing_stand&quot; | &quot;minecraft:cartography_table&quot; | &quot;minecraft:crafter_3x3&quot; | &quot;minecraft:crafting&quot; | &quot;minecraft:enchantment&quot; | &quot;minecraft:furnace&quot; | &quot;minecraft:generic_3x3&quot; | &quot;minecraft:generic_9x1&quot; | &quot;minecraft:generic_9x2&quot; | &quot;minecraft:generic_9x3&quot; | &quot;minecraft:generic_9x4&quot; | &quot;minecraft:generic_9x5&quot; | &quot;minecraft:generic_9x6&quot; | &quot;minecraft:grindstone&quot; | &quot;minecraft:hopper&quot; | &quot;minecraft:loom&quot; | &quot;minecraft:shulker_box&quot; | &quot;minecraft:smithing&quot; | &quot;minecraft:smoker&quot; | &quot;minecraft:stonecutter&quot; | &quot;palladium:multiversal_iterator&quot; | &quot;palladium:multiversal_iterator_suit_stand&quot; | &quot;palladium:tailoring&quot;</td>
 <td>
 The registered menu screen to open, as a resource ID (e.g. "minecraft:crafting").</td>
 <td style="background-color: lightgreen">
@@ -11369,7 +12455,7 @@ false</td>
 <td>
 target_priority</td>
 <td>
-"closest" | "hostile_first" | "projectiles_first"</td>
+&quot;closest&quot; | &quot;hostile_first&quot; | &quot;projectiles_first&quot;</td>
 <td>
 Which targets are kept when more than max_targets are in range and which come first: "closest" orders by distance, "hostile_first" puts hostile mobs before everything else, "projectiles_first" puts projectiles first. Within a group the closest come first.</td>
 <td style="background-color: lightcoral">
@@ -11567,7 +12653,7 @@ What is shown, mixing categories ("players", "hostile", "passive", "neutral", "p
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[players, hostile, neutral, projectiles]</td>
+[&quot;players&quot;,&quot;hostile&quot;,&quot;neutral&quot;,&quot;projectiles&quot;]</td>
 </tr>
 <tr>
 <td>
@@ -11653,7 +12739,7 @@ true</td>
 <td>
 jumps</td>
 <td>
-Integer (>= 0)</td>
+Integer (&gt;= 0)</td>
 <td>
 How many times the user can jump straight from one possessed target to another, or never if 0.</td>
 <td style="background-color: lightcoral">
@@ -11883,7 +12969,7 @@ false</td>
 <td>
 sprint_interrupt</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 If above 0, a living entity the projectile hits cannot sprint for this long.</td>
 <td style="background-color: lightcoral">
@@ -11919,7 +13005,7 @@ false</td>
 <td>
 swinging_arm</td>
 <td>
-"none" | "main_arm" | "off_arm" | "right_arm" | "left_arm" | "both"</td>
+&quot;none&quot; | &quot;main_arm&quot; | &quot;off_arm&quot; | &quot;right_arm&quot; | &quot;left_arm&quot; | &quot;both&quot;</td>
 <td>
 The arm which will swing when the projectile is being shot.</td>
 <td style="background-color: lightcoral">
@@ -11943,7 +13029,7 @@ false</td>
 <td>
 velocity</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 Velocity with which the projectile is being shot.</td>
 <td style="background-color: lightcoral">
@@ -12013,7 +13099,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-"vertical" | "horizontal"</td>
+&quot;vertical&quot; | &quot;horizontal&quot;</td>
 <td>
 Whether to push vertically (up/down) or horizontally (away from/toward the user).</td>
 <td style="background-color: lightgreen">
@@ -12081,7 +13167,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-"vertical" | "horizontal"</td>
+&quot;vertical&quot; | &quot;horizontal&quot;</td>
 <td>
 Whether to push vertically (up/down) or horizontally (away from/toward the user).</td>
 <td style="background-color: lightgreen">
@@ -12135,6 +13221,146 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="argon:quarry_sense">
+Quarry Sense</h2>
+<p>
+Client only. While enabled, outlines (through walls, only for the holder) every non-allied living entity within "radius", colored by how hurt it is: healthy, wounded and critical. Can hide healthy entities so only damaged ones show, can limit the sense to hostile mobs and players, and can leave a fading trail of dust where each outlined entity recently walked.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+wounded_color</td>
+<td>
+Color</td>
+<td>
+Outline color of an entity at or below wounded_below.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#FF8A3A</td>
+</tr>
+<tr>
+<td>
+wounded_below</td>
+<td>
+Double</td>
+<td>
+The health fraction (0 to 1) at or below which an entity counts as wounded. The default counts any missing health.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.999</td>
+</tr>
+<tr>
+<td>
+show_healthy</td>
+<td>
+Boolean</td>
+<td>
+If false, entities that are not wounded are not outlined at all.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+critical_below</td>
+<td>
+Double</td>
+<td>
+The health fraction (0 to 1) at or below which an entity counts as critical.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.3</td>
+</tr>
+<tr>
+<td>
+healthy_color</td>
+<td>
+Color</td>
+<td>
+Outline color of an entity above wounded_below.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#B8C8E0</td>
+</tr>
+<tr>
+<td>
+hostile_only</td>
+<td>
+Boolean</td>
+<td>
+If true, only hostile mobs (and neutral ones targeting the holder) and non-allied players are sensed.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+critical_color</td>
+<td>
+Color</td>
+<td>
+Outline color of an entity at or below critical_below.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#FF2A2A</td>
+</tr>
+<tr>
+<td>
+trails</td>
+<td>
+Boolean</td>
+<td>
+If true, a fading trail of dust marks where each sensed entity recently walked.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+radius</td>
+<td>
+(Dynamic) Value</td>
+<td>
+How far the sense reaches, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+32</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:quarry_sense","radius":32.0,"properties":{"title":"Quarry Sense"}}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="argon:radar">
 Radar</h2>
 <p>
@@ -12173,7 +13399,7 @@ Border[color=java.awt.Color[r=170,g=170,b=170], thickness=2]</td>
 <td>
 shape</td>
 <td>
-"square" | "circle"</td>
+&quot;square&quot; | &quot;circle&quot;</td>
 <td>
 The shape of the radar's background and border, either square or circle.</td>
 <td style="background-color: lightcoral">
@@ -12215,7 +13441,7 @@ Whether the radar should rotate with the player, or be static.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-Rotation[mode=LOOK_DIRECTION, staticAngle=net.threetag.palladium.logic.value.StaticValue@16be2c40]</td>
+Rotation[mode=LOOK_DIRECTION, staticAngle=net.threetag.palladium.logic.value.StaticValue@5fc4af25]</td>
 </tr>
 <tr>
 <td>
@@ -12227,7 +13453,7 @@ The radius, in blocks, within which entities are detected and shown on the radar
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.threetag.palladium.logic.value.StaticValue@72e259ca</td>
+net.threetag.palladium.logic.value.StaticValue@6d03404e</td>
 </tr>
 <tr>
 <td>
@@ -12239,7 +13465,7 @@ The X/Y onscreen position of the radar relative to the alignment.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-Translate[x=net.threetag.palladium.logic.value.StaticValue@16be2c40, y=net.threetag.palladium.logic.value.StaticValue@16be2c40]</td>
+Translate[x=net.threetag.palladium.logic.value.StaticValue@5fc4af25, y=net.threetag.palladium.logic.value.StaticValue@5fc4af25]</td>
 </tr>
 <tr>
 <td>
@@ -12281,7 +13507,7 @@ false</td>
 <td>
 alignment</td>
 <td>
-"top_left" | "top_center" | "top_right" | "middle_left" | "center" | "middle_right" | "bottom_left" | "bottom_center" | "bottom_right"</td>
+&quot;top_left&quot; | &quot;top_center&quot; | &quot;top_right&quot; | &quot;middle_left&quot; | &quot;center&quot; | &quot;middle_right&quot; | &quot;bottom_left&quot; | &quot;bottom_center&quot; | &quot;bottom_right&quot;</td>
 <td>
 Determines where on the screen the radar is anchored.</td>
 <td style="background-color: lightcoral">
@@ -12363,7 +13589,7 @@ true</td>
 <td>
 interval</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long to wait between rolls.</td>
 <td style="background-color: lightcoral">
@@ -12415,7 +13641,7 @@ Fallback Value</th>
 <td>
 reconstructions</td>
 <td>
-Reconstruction Entry List or "recipe"</td>
+Reconstruction Entry List or &quot;recipe&quot;</td>
 <td>
 Either the ordered list of input-to-result conversions this ability can perform (each entry has "input" (an item/tag ingredient), "input_amount" (default 1), "result" (the output item stack), an optional "result_amount" override, and an optional "priority" (default 0, higher checked first)), or the literal string "recipe" to instead browse crafting-table recipes using the held item, ignoring every other ingredient in those recipes and only consuming the held item.</td>
 <td style="background-color: lightgreen">
@@ -12427,7 +13653,7 @@ true</td>
 <td>
 overflow_behavior</td>
 <td>
-"fail" | "drop"</td>
+&quot;fail&quot; | &quot;drop&quot;</td>
 <td>
 FAIL cancels the whole conversion if the result can't fully fit in the inventory. DROP inserts what fits and drops the rest at the user's feet.</td>
 <td style="background-color: lightcoral">
@@ -12439,7 +13665,7 @@ FAIL</td>
 <td>
 fixed_amount</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 How many times to apply the recipe when conversion_mode is FIXED. Ignored in recipe mode.</td>
 <td style="background-color: lightcoral">
@@ -12451,7 +13677,7 @@ false</td>
 <td>
 target_slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Which slot's item is checked and consumed; defaults to the main hand.</td>
 <td style="background-color: lightcoral">
@@ -12463,7 +13689,7 @@ mainhand</td>
 <td>
 component_policy</td>
 <td>
-"result_only" | "copy_safe" | "copy_all"</td>
+&quot;result_only&quot; | &quot;copy_safe&quot; | &quot;copy_all&quot;</td>
 <td>
 RESULT_ONLY uses exactly the result's components. COPY_SAFE also copies cosmetic ones (name, lore, dye color, custom model data) from the input. COPY_ALL copies every component that differs from the item's defaults.</td>
 <td style="background-color: lightcoral">
@@ -12475,7 +13701,7 @@ RESULT_ONLY</td>
 <td>
 conversion_mode</td>
 <td>
-"single" | "maximum" | "fixed"</td>
+&quot;single&quot; | &quot;maximum&quot; | &quot;fixed&quot;</td>
 <td>
 SINGLE applies the matched recipe once, MAXIMUM as many times as the input allows, FIXED up to "fixed_amount" times. Ignored in recipe mode.</td>
 <td style="background-color: lightcoral">
@@ -12601,7 +13827,7 @@ false</td>
 <td>
 entities</td>
 <td>
-"living" | "all"</td>
+&quot;living&quot; | &quot;all&quot;</td>
 <td>
 Which entities to reveal, either living entities only (excluding armor stands) or all entities, including non-living ones which only show a name.</td>
 <td style="background-color: lightcoral">
@@ -12977,9 +14203,9 @@ false</td>
 <td>
 aim</td>
 <td>
-"look" | "nearest"</td>
+&quot;look&quot; | &quot;nearest&quot; | &quot;marked&quot;</td>
 <td>
-"look" picks the entity under the crosshair first, otherwise the nearest one inside cone_angle. "nearest" starts from the entity closest to the user.</td>
+"look" picks the entity under the crosshair first, otherwise the nearest one inside cone_angle. "nearest" starts from the entity closest to the user. "marked" only goes for the user's argon:target_mark target (hostile_only is ignored, and nothing happens without a mark).</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
@@ -13008,6 +14234,30 @@ The full opening angle of the look cone, in degrees.</td>
 false</td>
 <td>
 90.0</td>
+</tr>
+<tr>
+<td>
+execute_bonus</td>
+<td>
+(Dynamic) Value</td>
+<td>
+The extra damage dealt to a target under execute_threshold.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+exit_speed</td>
+<td>
+Double</td>
+<td>
+Speed in blocks per tick the user keeps along the last movement direction when the rush ends, instead of stopping dead.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
 </tr>
 <tr>
 <td>
@@ -13083,6 +14333,18 @@ false</td>
 </tr>
 <tr>
 <td>
+consume_mark</td>
+<td>
+Boolean</td>
+<td>
+If true, a hit on the user's marked target ends the mark.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
 hit_visuals</td>
 <td>
 { shape*, anchor, orientation, particle*, count, radius, step, pitch, strands, arc, height, rings, speed, spread }[]</td>
@@ -13107,6 +14369,18 @@ false</td>
 </tr>
 <tr>
 <td>
+execute_threshold</td>
+<td>
+Double</td>
+<td>
+A target at or below this health fraction (0 to 1) takes execute_bonus extra damage. 0 disables it.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0.0</td>
+</tr>
+<tr>
+<td>
 end_effects</td>
 <td>
 { effect*, duration*, amplifier, max_amplifier, particles } | { effect*, duration*, amplifier, max_amplifier, particles }[]</td>
@@ -13116,6 +14390,30 @@ Effects applied to the user after the last hit, for example a short slowdown.</t
 false</td>
 <td>
 []</td>
+</tr>
+<tr>
+<td>
+hit_effects</td>
+<td>
+{ effect*, duration*, amplifier, max_amplifier, particles } | { effect*, duration*, amplifier, max_amplifier, particles }[]</td>
+<td>
+Effects applied to every target that is hit, for example a short slowdown that interrupts its movement.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+[]</td>
+</tr>
+<tr>
+<td>
+dash</td>
+<td>
+Boolean</td>
+<td>
+If true and no target was chosen, the user dashes straight along the look direction for up to range blocks (stopping at walls) and strikes the first valid entity it touches. Not used with aim marked.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
 </tr>
 <tr>
 <td>
@@ -13134,7 +14432,7 @@ false</td>
 <h3>
 Examples:</h3>
 <pre class="json-snippet">
-{"type":"argon:seek_strike","range":10.0,"max_targets":1.0,"damage":8.0,"knockback":0.8,"lift":0.2,"properties":{"title":"Seek Strike"}}</pre>
+{"type":"argon:seek_strike","range":10.0,"max_targets":1.0,"damage":8.0,"knockback":0.8,"lift":0.2,"execute_bonus":0.0,"properties":{"title":"Seek Strike"}}</pre>
 </div>
 <hr>
 
@@ -13365,7 +14663,7 @@ false</td>
 <td>
 range</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 The maximum distance, in blocks, the raycast can reach.</td>
 <td style="background-color: lightcoral">
@@ -13459,7 +14757,7 @@ Fallback Value</th>
 <td>
 slots</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 The slots whose items should be stored and cleared.</td>
 <td style="background-color: lightgreen">
@@ -13527,7 +14825,7 @@ false</td>
 <td>
 range</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 The maximum distance, in blocks, the look-target raycast can reach.</td>
 <td style="background-color: lightcoral">
@@ -13539,7 +14837,7 @@ false</td>
 <td>
 max_size</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 The maximum size of the captured area along each axis, measured from the block first looked at.</td>
 <td style="background-color: lightcoral">
@@ -13619,7 +14917,7 @@ false</td>
 <td>
 radius</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 How far, in blocks, beyond the target's own hitbox to search for other entities to sweep.</td>
 <td style="background-color: lightcoral">
@@ -13631,7 +14929,7 @@ false</td>
 <td>
 max_distance</td>
 <td>
-Float (>= 0.0)</td>
+Float (&gt;= 0.0)</td>
 <td>
 Maximum distance, in blocks, from the attacker itself that a swept entity can be.</td>
 <td style="background-color: lightcoral">
@@ -13645,6 +14943,110 @@ false</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"argon:sweeping_edge"}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:target_mark">
+Target Mark</h2>
+<p>
+On activation, marks the living entity under the crosshair (or the closest one inside the cone) as the user's prey. Only one mark exists per user and a new mark replaces the old one. While marked, the target is outlined through walls for the user, an edge arrow points at it when it is off screen, and every hit the user lands on it deals extra damage. The mark ends when the duration runs out, the target dies, or something consumes it (see argon:seek_strike). Use the argon:marked_target condition to build abilities that need a mark. All Values are read once on activation.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+duration</td>
+<td>
+(Dynamic) Value</td>
+<td>
+How long the mark lasts, in ticks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+300</td>
+</tr>
+<tr>
+<td>
+pointer</td>
+<td>
+Boolean</td>
+<td>
+Whether an arrow at the screen edge points at the marked target when it is off screen.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+color</td>
+<td>
+Color</td>
+<td>
+The outline and arrow color of the mark.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+#F2C451</td>
+</tr>
+<tr>
+<td>
+cone_angle</td>
+<td>
+Double</td>
+<td>
+The full opening angle of the fallback cone used when no entity is directly under the crosshair, in degrees.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+24.0</td>
+</tr>
+<tr>
+<td>
+range</td>
+<td>
+(Dynamic) Value</td>
+<td>
+How far away a target can be marked, in blocks.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+32</td>
+</tr>
+<tr>
+<td>
+damage_bonus</td>
+<td>
+(Dynamic) Value</td>
+<td>
+Extra damage the user deals to the marked target, in percent.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+10</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:target_mark","range":32.0,"duration":300.0,"damage_bonus":10.0,"properties":{"title":"Target Mark"}}</pre>
 </div>
 <hr>
 
@@ -13867,7 +15269,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-"coordinates" | "saved_locations" | "both"</td>
+&quot;coordinates&quot; | &quot;saved_locations&quot; | &quot;both&quot;</td>
 <td>
 Which teleport method(s) the menu offers: coordinates (default), saved_locations, or both.</td>
 <td style="background-color: lightcoral">
@@ -14081,7 +15483,7 @@ The [x, y] scale of the text.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@2e02cc02</td>
+net.minecraft.world.phys.Vec2@793af433</td>
 </tr>
 <tr>
 <td>
@@ -14099,7 +15501,7 @@ true</td>
 <td>
 alignment</td>
 <td>
-"top_left" | "top_center" | "top_right" | "middle_left" | "center" | "middle_right" | "bottom_left" | "bottom_center" | "bottom_right"</td>
+&quot;top_left&quot; | &quot;top_center&quot; | &quot;top_right&quot; | &quot;middle_left&quot; | &quot;center&quot; | &quot;middle_right&quot; | &quot;bottom_left&quot; | &quot;bottom_center&quot; | &quot;bottom_right&quot;</td>
 <td>
 Determines how the text is aligned on the screen.</td>
 <td style="background-color: lightgreen">
@@ -14117,7 +15519,7 @@ A [x, y] pixel offset applied to the text's position.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-net.minecraft.world.phys.Vec2@48531d5</td>
+net.minecraft.world.phys.Vec2@13b666b4</td>
 </tr>
 </tbody>
 </table>
@@ -14167,7 +15569,7 @@ true</td>
 <td>
 amount</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 How many blocks to throw per activation.</td>
 <td style="background-color: lightgreen">
@@ -14191,7 +15593,7 @@ false</td>
 <td>
 lift_time</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long each block hovers, rising 2 blocks, before being thrown. 0 throws immediately without lifting.</td>
 <td style="background-color: lightcoral">
@@ -14203,7 +15605,7 @@ false</td>
 <td>
 radius</td>
 <td>
-Integer (> 0)</td>
+Integer (&gt; 0)</td>
 <td>
 Horizontal search radius (in blocks) around the user to pick candidate ground-surface blocks from.</td>
 <td style="background-color: lightgreen">
@@ -14253,6 +15655,310 @@ false</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"argon:throw_blocks","amount":5,"radius":6,"damage":4.0}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:throw_marker">
+palladium.ability.argon.throw_marker</h2>
+<p>
+On its first tick marks the living entity the holder is looking at (or unmarks it if it is already marked). Marks are kept per player, shown only to that player as small sparks above the target, and used in the order they were made by the next argon:throwable_item with targeting_mode marked or hybrid, which then uses them up. Marks are cleared when the holder logs out.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+maximum_marked_targets</td>
+<td>
+(Dynamic) Value</td>
+<td>
+The most targets that can be marked at once.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+3.0</td>
+</tr>
+<tr>
+<td>
+range</td>
+<td>
+(Dynamic) Value</td>
+<td>
+How far, in blocks, a target can be marked.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+40.0</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:throw_marker","range":40.0,"maximum_marked_targets":3.0,"properties":{}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:throw_steer">
+palladium.ability.argon.throw_steer</h2>
+<p>
+While this ability is enabled (give it a held key bind) the holder steers every flying argon:throwable_item projectile they own whose flight_control_mode is look_direction or projectile_camera, toward where they look. Releasing the key hands the projectile back to its normal flight, or returns it if the throwable has manual_return_on_release.</p>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:throw_steer","properties":{}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="argon:throwable_item">
+palladium.ability.argon.throwable_item</h2>
+<p>
+Throws the configured item from the holder's hand as a physical projectile that looks like the item, keeping its exact ItemStack (components, enchantments, durability) in a saved server record so it can never be duplicated or lost. Activating the ability again while the item is out recalls it (when recall_enabled). The projectile can bounce or embed in blocks, damage and pass through entities, return on its own after configured triggers, hit things on the way back, and be caught by its owner. Almost every number is a Value, so power progression can change it between throws. Values are read when the item is thrown, except the return_* settings and catch_radius, which are read again when the item is recalled. The item is restored to its original slot (or the inventory, or the ground) when caught, picked up, or when the owner logs out, dies or changes dimension.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+perfect_catch</td>
+<td>
+Anything</td>
+<td>
+Object. enabled (false), window (8 ticks before arrival), damage_bonus (1.5, multiplier on the next throw), bonus_duration (100 ticks).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+item</td>
+<td>
+Anything</td>
+<td>
+The item, items or #tag the ability can throw, e.g. "fsang:mjolnir" or ["minecraft:diamond_sword"].</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+block_impact</td>
+<td>
+Anything</td>
+<td>
+Object. mode (bounce, embed, return, drop, stop), restitution (0.6), friction (0.85), maximum_bounces (3), embed_depth (0.3), embed_duration (0 = until recalled or picked up).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+pickup</td>
+<td>
+Anything</td>
+<td>
+Object. on_touch (true): the owner picks the item up by walking near it while it is embedded or resting. radius (1.5, a Value): how close that is.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+steering</td>
+<td>
+Anything</td>
+<td>
+Object. mode (none, look_direction, projectile_camera), turn_rate (10), strength (1), maximum_speed (0 = the throw speed), acceleration (0.08), return_on_release (false), owner_control (normal, limited, immobile). Steering happens while an argon:throw_steer ability is held.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+combat</td>
+<td>
+Anything</td>
+<td>
+Object. damage (6), knockback (0.6), damage_type, maximum_targets (1, 0 = unlimited), entity_impact (continue, bounce, return, stop or embed: lodge in the mob and follow it until recalled), allow_repeat_targets (false), rehit_cooldown (10 ticks).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+targeting</td>
+<td>
+Anything</td>
+<td>
+Object. mode (none, automatic, marked, hybrid), accuracy (0-100: chance of each acquisition attempt succeeding), detection_range (16), cone (90), line_of_sight (true), filter (hostile, living, players, non_players), entity_types, priority (nearest, look_direction, lowest_health, random).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+deflection</td>
+<td>
+Anything</td>
+<td>
+Object. enabled (false), radius (1.6), strength (1, speed multiplier of deflected projectiles), target_filter (optional entity types or #tags).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+pin</td>
+<td>
+Anything</td>
+<td>
+Object. enabled (false), duration (60 ticks; 0 = until the owner recalls the item), distance (4 blocks to the wall behind the target). Players and bosses are never pinned.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+sounds</td>
+<td>
+Anything</td>
+<td>
+Object of plain sound ids from sounds.json, all optional: throw, entity_hit, block_hit, recall, return, catch, flight (loops while flying).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+throw</td>
+<td>
+Anything</td>
+<td>
+Object. speed (1.8), windup (0, ticks before release so an animation can play), gravity_mode (none, vanilla, scaled), gravity (1, multiplier for scaled), drag (0.99), inaccuracy (0), inherit_owner_velocity (0.35), maximum_time (200 ticks), maximum_distance (96), maximum_owner_distance (128), out_of_range (return, recover or drop; the item is never deleted).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+ricochet</td>
+<td>
+Anything</td>
+<td>
+Object. enabled (false), maximum (0 = one fewer than maximum_targets), target_range (10), speed (2.6), turn_rate (40), damage_multiplier (1).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+homing</td>
+<td>
+Anything</td>
+<td>
+Object. accuracy (0-100: how precisely it steers, independent of acquisition), turn_rate (14 degrees per tick), acceleration (0), max_speed (0 = no limit), prediction (0, lead on moving targets), target_offset (0.5, height on the body), lost_target (continue, reacquire, return).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+camera</td>
+<td>
+Anything</td>
+<td>
+Object, used when steering mode is projectile_camera. distance (5 blocks behind, 0 = from the item), fov (0 = unchanged), smoothing (0.35), roll (0).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+render</td>
+<td>
+Anything</td>
+<td>
+Object. scale (1), rotation_mode (none, spin, tumble), rotation_speed (36 degrees per tick), rotation_axis (x, y, z), rotation_offset ([x, y, z] degrees), face_velocity (true), embed_spin_angle (0), embed_shift (0, blocks the model is moved along the throw direction while embedded in a block; negative pulls it back out of the surface).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+return</td>
+<td>
+Anything</td>
+<td>
+Object. triggers (list of none, after_hit, after_block_impact, after_timeout, after_distance, always), timeout (60), distance (32), speed (2.4), acceleration (0.3), turn_rate (30), accuracy (0-100: steering precision), maximum_duration (200, safety limit), block_collision (pass_through or stop), damage_enabled (false), damage_multiplier (1), maximum_damage_targets (0 = unlimited), catch_radius (1.25), recall (false: activating the ability again while the item is out recalls it).</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+hand</td>
+<td>
+&quot;main_hand&quot; | &quot;off_hand&quot; | &quot;either&quot;</td>
+<td>
+Which hand to take the item from.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+main_hand</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:throwable_item","item":[],"pickup":{"radius":1.5},"properties":{}}</pre>
 </div>
 <hr>
 
@@ -14579,7 +16285,7 @@ Fallback Value</th>
 <td>
 mode</td>
 <td>
-"whitelist" | "blacklist"</td>
+&quot;whitelist&quot; | &quot;blacklist&quot;</td>
 <td>
 How "mobs" is read: "whitelist" (only these can't target the user) or "blacklist" (everything except these can't target the user). Doesn't matter while "mobs" is unset.</td>
 <td style="background-color: lightgreen">
@@ -14635,7 +16341,7 @@ Fallback Value</th>
 <td>
 suspend</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 For this long after forming, entities small enough hover inside the vortex instead of falling. 0 for none.</td>
 <td style="background-color: lightcoral">
@@ -14695,7 +16401,7 @@ false</td>
 <td>
 duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long the vortex lasts.</td>
 <td style="background-color: lightcoral">
@@ -14767,7 +16473,7 @@ false</td>
 <td>
 pulse_interval</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How often damage is dealt.</td>
 <td style="background-color: lightcoral">
@@ -15191,7 +16897,7 @@ Fallback Value</th>
 <td>
 duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long the ward lasts.</td>
 <td style="background-color: lightcoral">
@@ -15215,7 +16921,7 @@ true</td>
 <td>
 regen_lock</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 If above 0, stops healing for this long after casting.</td>
 <td style="background-color: lightcoral">
@@ -15343,7 +17049,7 @@ false</td>
 <td>
 attach_to</td>
 <td>
-"block" | "entity" | "both"</td>
+&quot;block&quot; | &quot;entity&quot; | &quot;both&quot;</td>
 <td>
 Which kind of raycast hit can be attached to: a fixed "block" anchor, a "entity" living entity that becomes a moving anchor followed for the rest of the swing, or "both" (whichever the raycast hits first).</td>
 <td style="background-color: lightcoral">
@@ -15511,7 +17217,7 @@ false</td>
 <td>
 hand</td>
 <td>
-"right" | "left"</td>
+&quot;right&quot; | &quot;left&quot;</td>
 <td>
 Which hand the web comes from (drives left/right animation mirroring). Defaults to left if the beam_renderer id ends in "left", otherwise right.</td>
 <td style="background-color: lightcoral">
@@ -15603,7 +17309,7 @@ false</td>
 <td>
 duration</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How long the zone lasts.</td>
 <td style="background-color: lightcoral">
@@ -15675,7 +17381,7 @@ false</td>
 <td>
 interval</td>
 <td>
-Integer | Time String ("40s", "2m", etc.)</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
 <td>
 How often damage and effects are applied.</td>
 <td style="background-color: lightcoral">
@@ -15865,6 +17571,254 @@ false</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"argon:zoom","zoom":4.0,"rate":8.0,"reset_on_disable":true,"properties":{"title":"Zoom"}}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:ability_properties">
+Ability Properties</h2>
+<p>
+Common settings inside an ability's "properties" object.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+hidden_in_gui</td>
+<td>
+Boolean</td>
+<td>
+Hide the ability from the power's GUI.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+color</td>
+<td>
+&quot;white&quot; | &quot;orange&quot; | &quot;magenta&quot; | &quot;light_blue&quot; | &quot;yellow&quot; | &quot;lime&quot; | &quot;pink&quot; | &quot;gray&quot; | &quot;light_gray&quot; | &quot;cyan&quot; | &quot;purple&quot; | &quot;blue&quot; | &quot;brown&quot; | &quot;green&quot; | &quot;red&quot; | &quot;black&quot;</td>
+<td>
+The display color for the ability.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+gray</td>
+</tr>
+<tr>
+<td>
+icon</td>
+<td>
+Icon definition</td>
+<td>
+The ability's icon. Defaults to a barrier item icon.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+hidden_in_bar</td>
+<td>
+Boolean</td>
+<td>
+Hide the ability from the ability bar.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+<tr>
+<td>
+description</td>
+<td>
+Text Component / Value | Locked and Unlocked Descriptions</td>
+<td>
+A shared description or separate descriptions for the locked and unlocked states.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+animation_timer</td>
+<td>
+Integer | Animation Timer</td>
+<td>
+The timer used by effects such as Screen Shake. A single integer is the maximum in ticks and uses the default behaviour and easing.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+allow_dampening</td>
+<td>
+Boolean</td>
+<td>
+Whether power dampening can suppress the ability.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+<tr>
+<td>
+title</td>
+<td>
+Text Component / Value</td>
+<td>
+The display title for the ability.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+list_index</td>
+<td>
+Integer / Value | MoLang</td>
+<td>
+The ability's position in the ability list. Use -1 for the default ordering.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+-1</td>
+</tr>
+</tbody>
+</table>
+<h3>
+description (Locked and Unlocked Descriptions)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+locked</td>
+<td>
+Text Component / Value</td>
+<td>
+The description shown while the ability is locked.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+unlocked</td>
+<td>
+Text Component / Value</td>
+<td>
+The description shown while the ability is unlocked.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+animation_timer (Animation Timer)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+min</td>
+<td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
+<td>
+The timer's starting value.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+0</td>
+</tr>
+<tr>
+<td>
+max</td>
+<td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.)</td>
+<td>
+The value the timer counts up to.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+behaviour</td>
+<td>
+&quot;follow&quot; | &quot;loop&quot; | &quot;reset&quot; | &quot;once&quot;</td>
+<td>
+Follow counts up while enabled and down while disabled. Loop repeats while enabled. Reset counts up once and resets when disabled. The legacy value "once" also selects loop.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+follow</td>
+</tr>
+<tr>
+<td>
+easing</td>
+<td>
+&quot;linear&quot; | &quot;constant&quot; | &quot;in_sine&quot; | &quot;out_sine&quot; | &quot;in_out_sine&quot; | &quot;in_cubic&quot; | &quot;out_cubic&quot; | &quot;in_out_cubic&quot; | &quot;in_quad&quot; | &quot;out_quad&quot; | &quot;in_out_quad&quot; | &quot;in_quart&quot; | &quot;out_quart&quot; | &quot;in_out_quart&quot; | &quot;in_quint&quot; | &quot;out_quint&quot; | &quot;in_out_quint&quot; | &quot;in_expo&quot; | &quot;out_expo&quot; | &quot;in_out_expo&quot; | &quot;in_circ&quot; | &quot;out_circ&quot; | &quot;in_out_circ&quot; | &quot;in_back&quot; | &quot;out_back&quot; | &quot;in_out_back&quot; | &quot;in_elastic&quot; | &quot;out_elastic&quot; | &quot;in_out_elastic&quot; | &quot;in_bounce&quot; | &quot;out_bounce&quot; | &quot;in_out_bounce&quot;</td>
+<td>
+The curve applied to the timer's progress.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+linear</td>
+</tr>
+</tbody>
+</table>
 </div>
 <script>
 function syntaxHighlight(json) {

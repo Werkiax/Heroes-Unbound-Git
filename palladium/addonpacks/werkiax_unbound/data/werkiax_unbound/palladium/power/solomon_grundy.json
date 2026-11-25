@@ -707,7 +707,6 @@
                 "minecraft:fall",
                 "minecraft:starve",
                 "minecraft:in_wall",
-                "minecraft:drown",
                 "minecraft:falling_block",
                 "minecraft:falling_anvil",
                 "minecraft:falling_stalactite"
@@ -1588,7 +1587,7 @@
             "interval": 20,
             "properties": {
                 "title": "Swamp Affinity",
-                "description": "Regenerate significantly faster while standing in a swamp. Also grants increased movement speed in swamps.",
+                "description": "Regenerate significantly faster and move faster while standing in a swamp, and swim faster through swamp water. Also lets you hold your breath for up to 10 minutes anywhere.",
                 "icon": {
                     "type": "palladium:texture",
                     "texture": "werkiax_unbound:textures/icons/solomon_grundy_icon.png"
@@ -1643,6 +1642,57 @@
                         "minecraft:swamp",
                         "minecraft:mangrove_swamp"
                     ]
+                }
+            }
+        },
+        "grundy_swim_boost": {
+            "type": "palladium:attribute_modifier",
+            "modifiers": {
+                "attribute": "minecraft:water_movement_efficiency",
+                "amount": 0.5,
+                "operation": "add_value"
+            },
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:conditional",
+                    "conditions": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:solomon_grundy#swamp_affinity"
+                    }
+                },
+                "enabling": [
+                    {
+                        "type": "argon:biome",
+                        "biomes": [
+                            "minecraft:swamp",
+                            "minecraft:mangrove_swamp"
+                        ]
+                    },
+                    {
+                        "type": "palladium:in_water"
+                    }
+                ]
+            }
+        },
+        "grundy_bog_lungs": {
+            "type": "palladium:breath",
+            "max_air_percentage": 4000.0,
+            "refill_percentage": 400.0,
+            "properties": {
+                "hidden_in_gui": true,
+                "hidden_in_bar": true
+            },
+            "state": {
+                "unlocking": {
+                    "type": "palladium:conditional",
+                    "conditions": {
+                        "type": "palladium:ability_unlocked",
+                        "ability": "werkiax_unbound:solomon_grundy#swamp_affinity"
+                    }
                 }
             }
         }

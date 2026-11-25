@@ -1,23 +1,43 @@
 {
-    "type": "palladium:triggered",
-    "animations": {
-        "slam": "werkiax_unbound:gravebreaker_slam",
-        "slam_fp": "werkiax_unbound:gravebreaker_slam_fp"
-    },
-    "triggers": {
-        "#slam_fp": [
-            {
-                "type": "palladium:ability_enabled",
-                "ability": "werkiax_unbound:solomon_grundy#gravebreaker"
-            },
-            "query.is_first_person"
-        ],
-        "#slam": [
-            {
-                "type": "palladium:ability_enabled",
-                "ability": "werkiax_unbound:solomon_grundy#gravebreaker"
-            },
-            "!query.is_first_person"
-        ]
+    "initial_state": "idle",
+    "blend_transition": 4,
+    "states": {
+        "idle": {
+            "transitions": {
+                "lying": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:solomon_grundy#stasis"
+                },
+                "slam": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:solomon_grundy#gravebreaker"
+                }
+            }
+        },
+        "slam": {
+            "animation": "werkiax_unbound:gravebreaker_slam",
+            "first_person_animation": "werkiax_unbound:gravebreaker_slam_fp",
+            "transitions": {
+                "lying": {
+                    "type": "palladium:ability_enabled",
+                    "ability": "werkiax_unbound:solomon_grundy#stasis"
+                },
+                "idle": "palladium.any_animation_finished()"
+            }
+        },
+        "lying": {
+            "animation": "werkiax_unbound:grundy_lying",
+            "first_person_animation": "werkiax_unbound:grundy_lying_fp",
+            "blend_transition": 5,
+            "transitions": {
+                "idle": {
+                    "type": "palladium:not",
+                    "conditions": {
+                        "type": "palladium:ability_enabled",
+                        "ability": "werkiax_unbound:solomon_grundy#stasis"
+                    }
+                }
+            }
+        }
     }
 }

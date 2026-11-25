@@ -115,7 +115,7 @@ Fallback Value</th>
 <td>
 cooldown</td>
 <td>
-Integer | Time String ("40s", "2m", etc.) | (Dynamic) Value</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.) | (Dynamic) Value</td>
 <td>
 Time the player has to wait before the ability can be used again. For 'activation' the cooldown starts right when the key is pressed, for 'toggle' and 'held' it starts once the ability turns off. 0 means no cooldown.</td>
 <td style="background-color: lightcoral">
@@ -127,7 +127,7 @@ false</td>
 <td>
 behaviour</td>
 <td>
-"activation" | "toggle" | "held"</td>
+&quot;activation&quot; | &quot;toggle&quot; | &quot;held&quot;</td>
 <td>
 How the ability reacts to the key. 'activation' turns it on for a set time after a single press, 'toggle' switches it on and off with each press, and 'held' keeps it on for as long as the key is held down.</td>
 <td style="background-color: lightcoral">
@@ -139,19 +139,19 @@ activation</td>
 <td>
 key_bind</td>
 <td>
-Key Bind Type</td>
+Ability Key | Jump | Mouse Click | GUI Button | Mouse Scroll</td>
 <td>
-The key that is used for the ability. By default this is the ability key matching the ability's slot in the ability bar.</td>
+The input that controls the ability. The ability key uses the key assigned to the ability's slot in the ability bar. GUI buttons support activation and toggle.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-palladium:ability_key</td>
+{&quot;type&quot;:&quot;palladium:ability_key&quot;}</td>
 </tr>
 <tr>
 <td>
 time</td>
 <td>
-Integer | Time String ("40s", "2m", etc.) | (Dynamic) Value</td>
+Integer | Time String (&quot;40s&quot;, &quot;2m&quot;, etc.) | (Dynamic) Value</td>
 <td>
 Depends on the behaviour. For 'activation' it's how long the ability stays on after pressing the key (at least 1 tick). For 'toggle' and 'held' it's the maximum time the ability can stay on before it turns off by itself, 0 means there is no limit.</td>
 <td style="background-color: lightcoral">
@@ -161,15 +161,259 @@ false</td>
 </tr>
 <tr>
 <td>
+when_unavailable</td>
+<td>
+&quot;pause&quot; | &quot;cancel&quot;</td>
+<td>
+What happens to a running ability when the conditions stop being fulfilled. 'pause' turns it off only until they are fulfilled again, so a toggled or held ability turns back on by itself, and timers keep counting down in the meantime. 'cancel' turns it off for good, like pressing or releasing the key would, which also starts the cooldown. The key has to be pressed again afterwards.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+pause</td>
+</tr>
+<tr>
+<td>
 conditions</td>
 <td>
 Condition | Condition[]</td>
 <td>
-Condition(s) that need to be fulfilled to use the key. While they are not fulfilled, key presses are ignored and the ability pauses, so a toggled ability turns back on once they are fulfilled again. Timers keep counting down in the meantime. Unlike unlocking conditions, the ability does not show a lock in the ability bar, its icon is just dimmed.</td>
+Condition(s) that need to be fulfilled to use the key. While they are not fulfilled, key presses are ignored and the ability is turned off as set in 'when_unavailable'. Unlike unlocking conditions, the ability does not show a lock in the ability bar, its icon is just dimmed.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
 /</td>
+</tr>
+</tbody>
+</table>
+<h3>
+key_bind (Ability Key)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+type</td>
+<td>
+&quot;palladium:ability_key&quot;</td>
+<td>
+The type ID for this object.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+key_bind (Jump)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+type</td>
+<td>
+&quot;palladium:jump&quot;</td>
+<td>
+The type ID for this object.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+cancel_jump</td>
+<td>
+Boolean</td>
+<td>
+Prevents the normal jump when the key activates the ability.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+</tbody>
+</table>
+<h3>
+key_bind (Mouse Click)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+type</td>
+<td>
+&quot;palladium:mouse_click&quot;</td>
+<td>
+The type ID for this object.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+click_type</td>
+<td>
+&quot;left_click&quot; | &quot;right_click&quot; | &quot;middle_click&quot;</td>
+<td>
+The mouse button that activates the ability.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+cancel_interaction</td>
+<td>
+Boolean</td>
+<td>
+Prevents the normal mouse action when the click activates the ability.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
+</tr>
+</tbody>
+</table>
+<h3>
+key_bind (GUI Button)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+type</td>
+<td>
+&quot;palladium:gui_button&quot;</td>
+<td>
+The type ID for this object.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+needs_confirmation</td>
+<td>
+Boolean</td>
+<td>
+Asks the player to confirm before activating the ability.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+true</td>
+</tr>
+</tbody>
+</table>
+<h3>
+key_bind (Mouse Scroll)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+type</td>
+<td>
+&quot;palladium:mouse_scroll&quot;</td>
+<td>
+The type ID for this object.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+direction</td>
+<td>
+&quot;up&quot; | &quot;down&quot;</td>
+<td>
+The scroll direction that activates the ability.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+cancel_scroll</td>
+<td>
+Boolean</td>
+<td>
+Prevents the normal scroll action when scrolling activates the ability.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+false</td>
 </tr>
 </tbody>
 </table>
@@ -182,7 +426,7 @@ Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:key_bind","key_bind":{"type":"palladium:jump","cancel_jump":true},"behaviour":"held","cooldown":40}</pre>
 <pre class="json-snippet">
-{"type":"palladium:key_bind","behaviour":"toggle","conditions":{"type":"palladium:on_ground"}}</pre>
+{"type":"palladium:key_bind","behaviour":"toggle","conditions":{"type":"palladium:on_ground"},"when_unavailable":"cancel"}</pre>
 </div>
 <script>
 function syntaxHighlight(json) {

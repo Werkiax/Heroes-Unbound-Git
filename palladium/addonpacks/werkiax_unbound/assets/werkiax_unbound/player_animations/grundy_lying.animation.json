@@ -1,11 +1,11 @@
 {
     "format_version": "1.8.0",
     "animations": {
-        "grundy_lying": {
+        "grundy_lying_fp": {
             "loop": "hold_on_last_frame",
             "animation_length": 0.5,
             "bones": {
-                "body": {
+                "right_arm": {
                     "rotation": {
                         "0.0": [
                             0,
@@ -13,9 +13,9 @@
                             0
                         ],
                         "0.5": [
-                            -90,
+                            -10,
                             0,
-                            0
+                            8
                         ]
                     },
                     "position": {
@@ -26,36 +26,8 @@
                         ],
                         "0.5": [
                             0,
-                            -10,
-                            10
-                        ]
-                    }
-                },
-                "head": {
-                    "rotation": {
-                        "0.0": [
-                            0,
-                            0,
+                            -2,
                             0
-                        ],
-                        "0.5": [
-                            10,
-                            0,
-                            0
-                        ]
-                    }
-                },
-                "right_arm": {
-                    "rotation": {
-                        "0.0": [
-                            0,
-                            0,
-                            0
-                        ],
-                        "0.5": [
-                            0,
-                            0,
-                            8
                         ]
                     }
                 },
@@ -67,14 +39,12 @@
                             0
                         ],
                         "0.5": [
-                            0,
+                            -10,
                             0,
                             -8
                         ]
-                    }
-                },
-                "right_leg": {
-                    "rotation": {
+                    },
+                    "position": {
                         "0.0": [
                             0,
                             0,
@@ -82,55 +52,7 @@
                         ],
                         "0.5": [
                             0,
-                            0,
-                            3
-                        ]
-                    }
-                },
-                "left_leg": {
-                    "rotation": {
-                        "0.0": [
-                            0,
-                            0,
-                            0
-                        ],
-                        "0.5": [
-                            0,
-                            0,
-                            -3
-                        ]
-                    }
-                }
-            }
-        },
-        "grundy_test": {
-            "loop": "hold_on_last_frame",
-            "animation_length": 0.5,
-            "bones": {
-                "right_arm": {
-                    "rotation": {
-                        "0.0": [
-                            0,
-                            0,
-                            0
-                        ],
-                        "0.5": [
-                            -90,
-                            0,
-                            0
-                        ]
-                    }
-                },
-                "left_arm": {
-                    "rotation": {
-                        "0.0": [
-                            0,
-                            0,
-                            0
-                        ],
-                        "0.5": [
-                            -90,
-                            0,
+                            -2,
                             0
                         ]
                     }

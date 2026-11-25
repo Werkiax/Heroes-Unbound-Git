@@ -109,7 +109,7 @@ false</td>
 <td>
 variables</td>
 <td>
-Map<String, Path Variable></td>
+Map&lt;String, Path Variable&gt;</td>
 <td>
 A map of variables that can be used in the texture path.</td>
 <td style="background-color: lightcoral">
@@ -123,11 +123,11 @@ transformers</td>
 <td>
 Texture Transformer | Texture Transformer[]</td>
 <td>
-Texture transformers applied to the base image, in the order they are listed.</td>
+One transformer or an array of transformers applied to the base image in order.</td>
 <td style="background-color: lightcoral">
 false</td>
 <td>
-/</td>
+[]</td>
 </tr>
 <tr>
 <td>
@@ -136,6 +136,38 @@ base</td>
 Identifier</td>
 <td>
 The base texture, as a full texture path including "textures/" and ".png". Can use variables.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+transformers (Texture Transformer)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+type</td>
+<td>
+Identifier</td>
+<td>
+The transformer type ID. See Texture Transformers for the settings specific to that type.</td>
 <td style="background-color: lightgreen">
 true</td>
 <td>
@@ -185,7 +217,7 @@ false</td>
 <td>
 variables</td>
 <td>
-Map<String, Path Variable></td>
+Map&lt;String, Path Variable&gt;</td>
 <td>
 A map of variables that can be used in the output path and transformer paths.</td>
 <td style="background-color: lightcoral">
@@ -199,9 +231,41 @@ transformers</td>
 <td>
 Texture Transformer | Texture Transformer[]</td>
 <td>
-Texture transformers applied to the entity texture, in the order they are listed.</td>
+One transformer or an array of transformers applied to the entity texture in order.</td>
 <td style="background-color: lightcoral">
 false</td>
+<td>
+[]</td>
+</tr>
+</tbody>
+</table>
+<h3>
+transformers (Texture Transformer)</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+type</td>
+<td>
+Identifier</td>
+<td>
+The transformer type ID. See Texture Transformers for the settings specific to that type.</td>
+<td style="background-color: lightgreen">
+true</td>
 <td>
 /</td>
 </tr>
@@ -241,7 +305,7 @@ Fallback Value</th>
 <td>
 color</td>
 <td>
-Color</td>
+Color / Value</td>
 <td>
 The color the selected pixels are drawn in.</td>
 <td style="background-color: lightcoral">
@@ -335,7 +399,7 @@ The areas of the texture sheet to check, each as [u, v, width, height] in pixels
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[[40, 48, 4, 4]]</td>
+[[40,48,4,4]]</td>
 </tr>
 <tr>
 <td>
@@ -359,7 +423,7 @@ The model layer names that count as a suit, like "suit_chestplate" in "palladium
 <td style="background-color: lightcoral">
 false</td>
 <td>
-[suit_chestplate]</td>
+[&quot;suit_chestplate&quot;]</td>
 </tr>
 </tbody>
 </table>

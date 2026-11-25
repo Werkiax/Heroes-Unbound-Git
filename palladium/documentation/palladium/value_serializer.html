@@ -87,6 +87,10 @@ Event Data</a>
 Float Data Attachment</a>
 </li>
 <li>
+<a href="#palladium:format_time">
+Format Time</a>
+</li>
+<li>
 <a href="#palladium:gliding_tick_count">
 Gliding Tick Count</a>
 </li>
@@ -109,6 +113,10 @@ Max Number</a>
 <li>
 <a href="#palladium:min_number">
 Min Number</a>
+</li>
+<li>
+<a href="#palladium:mob_effect_duration">
+Mob Effect Duration</a>
 </li>
 <li>
 <a href="#palladium:molang_float">
@@ -162,6 +170,10 @@ Wide Player Model</a>
 <h3>
 Argon</h3>
 <ul>
+<li>
+<a href="#argon:ability_bar_slot">
+Ability Bar Slot</a>
+</li>
 <li>
 <a href="#argon:beam_charge">
 Beam Charge</a>
@@ -983,6 +995,64 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="palladium:format_time">
+Format Time<span class="type-badge" title="Returns String">
+String</span>
+</h2>
+<p>
+Formats an amount of ticks from another value as a time, like "02:14" or "01:02:14". Negative amounts count as infinite and show "∞".</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+modify</td>
+<td>
+MoLang</td>
+<td>
+MoLang function to modify the value.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+value</td>
+<td>
+(Dynamic) Value</td>
+<td>
+The value with the amount of ticks.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:format_time","value":{"type":"palladium:mob_effect_duration","effect":"minecraft:regeneration"}}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="palladium:gliding_tick_count">
 Gliding Tick Count<span class="type-badge" title="Returns Integer">
 Integer</span>
@@ -1155,7 +1225,7 @@ false</td>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Slot to check for. If none specified, it will use the slot from the current context (if given).</td>
 <td style="background-color: lightcoral">
@@ -1217,7 +1287,7 @@ false</td>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 Slot to check for. If none specified, it will use the slot from the current context (if given).</td>
 <td style="background-color: lightcoral">
@@ -1279,7 +1349,7 @@ true</td>
 <td>
 number_type</td>
 <td>
-"integer" | "float" | "double"</td>
+&quot;integer&quot; | &quot;float&quot; | &quot;double&quot;</td>
 <td>
 The required number type the result should be formatted as</td>
 <td style="background-color: lightcoral">
@@ -1337,7 +1407,7 @@ true</td>
 <td>
 number_type</td>
 <td>
-"integer" | "float" | "double"</td>
+&quot;integer&quot; | &quot;float&quot; | &quot;double&quot;</td>
 <td>
 The required number type the result should be formatted as</td>
 <td style="background-color: lightcoral">
@@ -1351,6 +1421,64 @@ false</td>
 Examples:</h3>
 <pre class="json-snippet">
 {"type":"palladium:min_number","values":[{"type":"palladium:moon_phase"},5]}</pre>
+</div>
+<hr>
+
+<div>
+<h2 id="palladium:mob_effect_duration">
+Mob Effect Duration<span class="type-badge" title="Returns Integer">
+Integer</span>
+</h2>
+<p>
+Returns the remaining duration of a mob effect on the entity, in ticks. 0 if the effect isn't active, -1 if it lasts forever.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+modify</td>
+<td>
+MoLang</td>
+<td>
+MoLang function to modify the value.</td>
+<td style="background-color: lightcoral">
+false</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+effect</td>
+<td>
+Identifier</td>
+<td>
+The ID of the mob effect.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"palladium:mob_effect_duration","effect":"minecraft:regeneration"}</pre>
 </div>
 <hr>
 
@@ -2009,6 +2137,64 @@ Examples:</h3>
 <hr>
 
 <div>
+<h2 id="argon:ability_bar_slot">
+Ability Bar Slot<span class="type-badge" title="Returns Double">
+Double</span>
+</h2>
+<p>
+The slot, counting from 0, that the player has put the given ability in on the given ability bar (in the current preset, normal or crouch), or -1 if it is not assigned. Use it as an ability's list_index so assigned abilities sit together on one page of the ability list in the order of their slots, however many abilities the pool holds.</p>
+<h3>
+Settings:</h3>
+<table>
+<thead>
+<tr>
+<th>
+Setting</th>
+<th>
+Type</th>
+<th>
+Description</th>
+<th>
+Required</th>
+<th>
+Fallback Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ability_bar</td>
+<td>
+Ability Reference</td>
+<td>
+The argon:ability_bar ability.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+<tr>
+<td>
+ability</td>
+<td>
+Ability Reference</td>
+<td>
+The pooled ability to look up.</td>
+<td style="background-color: lightgreen">
+true</td>
+<td>
+/</td>
+</tr>
+</tbody>
+</table>
+<h3>
+Examples:</h3>
+<pre class="json-snippet">
+{"type":"argon:ability_bar_slot","ability_bar":"example:power#bar","ability":"example:power#ability"}</pre>
+</div>
+<hr>
+
+<div>
 <h2 id="argon:beam_charge">
 Beam Charge<span class="type-badge" title="Returns Double">
 Double</span>
@@ -2165,7 +2351,7 @@ Fallback Value</th>
 <td>
 slot</td>
 <td>
-"mainhand" | "offhand" | "head" | "chest" | "legs" | "feet" | "body" | "curios:head" | "curios:necklace"</td>
+&quot;mainhand&quot; | &quot;offhand&quot; | &quot;head&quot; | &quot;chest&quot; | &quot;legs&quot; | &quot;feet&quot; | &quot;body&quot; | &quot;curios:head&quot; | &quot;curios:necklace&quot;</td>
 <td>
 The slot whose item to read, e.g. an armor slot or a curios slot.</td>
 <td style="background-color: lightgreen">
